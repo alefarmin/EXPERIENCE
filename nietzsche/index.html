@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nietzsche: La Filosofia del Martell</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blood-red: #8B0000;
+            --gold: #D4AF37;
+            --deep-black: #0a0a0a;
+            --ivory: #FFFFF0;
+            --accent: #FF4500;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--deep-black);
+            color: var(--ivory);
+            overflow-x: hidden;
+        }
+        
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-bebas { font-family: 'Bebas Neue', sans-serif; }
+        
+        /* Animations */
+        @keyframes hammer-strike {
+            0% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(0deg) scale(1.1); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); }
+        }
+        
+        @keyframes text-shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        .hammer-icon {
+            animation: hammer-strike 3s ease-in-out infinite;
+            transform-origin: bottom left;
+        }
+        
+        .float-anim { animation: float 6s ease-in-out infinite; }
+        
+        .shimmer-text {
+            background: linear-gradient(90deg, var(--ivory) 0%, var(--gold) 50%, var(--ivory) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: text-shimmer 3s linear infinite;
+        }
+        
+        /* Scroll Progress */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blood-red), var(--gold));
+            z-index: 1000;
+            transition: width 0.1s;
+        }
+        
+        /* Section Styling */
+        .section-dark {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-light {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+        
+        /* Cards */
+        .concept-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .concept-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.3);
+        }
+        
+        /* Quote styling */
+        .nietzsche-quote {
+            border-left: 4px solid var(--blood-red);
+            background: linear-gradient(90deg, rgba(139, 0, 0, 0.1) 0%, transparent 100%);
+            font-style: italic;
+        }
+        
+        /* Interactive elements */
+        .tab-btn {
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-btn.active {
+            border-bottom-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        .content-panel {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .content-panel.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Dionysian vs Apollonian toggle */
+        .duality-container {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        
+        .duality-half {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        
+        .apollonian-side {
+            left: 0;
+            background: linear-gradient(135deg, #FFD70020, #FFF8DC40);
+            border-right: 2px solid var(--gold);
+        }
+        
+        .dionysian-side {
+            right: 0;
+            background: linear-gradient(135deg, #8B000020, #4B008240);
+            border-left: 2px solid var(--blood-red);
+        }
+        
+        /* Timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--deep-black);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--blood-red);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .duality-half { width: 100% !important; position: relative; height: 200px; }
+            .duality-container { height: auto; }
+        }
+        .hero-img {
+    object-fit: cover;
+
+    /* 🎛️ CONTROLS QUE POTS MODIFICAR */
+    object-position: 50% 30%;  /* mou la imatge */
+    transform: scale(1,8);     /* zoom */
+}
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-black/80 backdrop-blur-md z-50 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <svg class="w-8 h-8 text-red-700 hammer-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/>
+                    </svg>
+                    <span class="font-cinzel text-xl font-bold text-yellow-500">NIETZSCHE</span>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="../index.html" class="home-experience-btn">
+                        ← Inici EXPERIENCE
+                    </a>
+    
+                    <!-- DROPDOWN INTRODUCCIÓ -->
+<div class="relative group">
+    <a href="#biografia" class="hover:text-yellow-500 transition flex items-center gap-1">
+        Introducció
+        <span class="text-xs">▼</span>
+    </a>
+
+    <!-- Submenú -->
+    <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+
+        <a href="#biografia" class="block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">
+            Biografia i context
+        </a>
+
+        <a href="#estil" class="block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">
+            Estil aforístic
+        </a>
+
+        <a href="#mètode" class="block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">
+            Mètode genealògic
+        </a>
+
+    </div>
+</div>
+                
+                    <!-- DROPDOWN MARTELL -->
+                    <div class="relative group">
+                        <a href="#martell" class="hover:text-yellow-500 transition flex items-center gap-1">
+                            Filosofia del Martell
+                            <span class="text-xs">▼</span>
+                        </a>
+                
+                        <!-- Submenú -->
+                        <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+                
+                            <a href="#coneixement" class="block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">
+                                Coneixement i Veritat
+                            </a>
+                
+                            <a href="#realitat" class="block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">
+                                Realitat i Ésser
+                            </a>
+                
+                            <a href="#moral" class="block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">
+                                Moral i Valors
+                            </a>
+                
+                        </div>
+                    </div>
+                
+                    <a href="#proposta" class="hover:text-yellow-500 transition">La Proposta</a>
+                    <a href="#etern" class="hover:text-yellow-500 transition">Etern Retorn</a>
+                
+                </div>
+            </div>
+        </div>
+    </nav>
+
+   <!-- Hero Section -->
+<section class="relative min-h-screen flex items-center section-dark pt-16">
+
+    <!-- Imatge -->
+    <div class="absolute inset-0 opacity-40">
+        <img src="nietzsche.jpg"
+             alt="Friedrich Nietzsche"
+             class="hero-img w-full h-full grayscale contrast-125">
+    </div>
+
+    <!-- Overlay (igual estil, però lleugerament lateralitzat) -->
+    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/30"></div>
+    
+    <!-- Contingut DESPLAÇAT A L'ESQUERRA -->
+    <div class="relative z-10 max-w-5xl mx-auto px-6 w-full transform -translate-x-42 md:-translate-x-44 -translate-y-20">
+        
+        <div class="max-w-3xl text-left">
+            
+            <div class="mb-6 inline-block">
+                <span class="text-red-500 text-4xl border border-red-500/60 px-6 py-2 rounded-full">
+                    Sííí!!!
+                </span>
+            </div>
+
+            <!-- NOU: NIETZSCHE -->
+            <h2 class="font-cinzel text-3xl md:text-4xl text-yellow-500 tracking-[0.2em] mb-4">
+                NIETZSCHE
+            </h2>
+
+            <!-- Títol original intacte -->
+            <h1 class="font-cinzel text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight shimmer-text">
+                LA FILOSOFIA<br>DEL MARTELL
+            </h1>
+
+            <p class="font-playfair text-xl md:text-2xl text-gray-300 mb-8 italic">
+                Una crítica radical a la cultura occidental que desmunta els fonaments de la veritat, la moral i la metafísica, per obrir pas a una nova afirmació de la vida.
+            </p>
+
+            <div class="flex flex-wrap gap-4 text-sm md:text-base text-yellow-500/80 font-cinzel tracking-wider">
+                <span>• APOL·LÍNI</span>
+                <span>• DIONISÍAC</span>
+                <span>• VOLUNTAT DE PODER</span>
+                <span>• SUPERHOME</span>
+                <span>• NIHILISME</span>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- Scroll -->
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 float-anim">
+        <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+    </div>
+   
+    <!-- Imatge petita decorativa -->
+<div class="absolute right-16 bottom-10 opacity-70">
+    <img src="nietzsche1.jpg"
+         alt="Nietzsche detall"
+         class="w-40 md:w-52 rounded-lg shadow-2xl border border-yellow-500/30 opacity-60 backdrop-blur-sm bg-black/30 p-1">
+</div>
+<!-- Frase al costat de Nietzsche -->
+<div class="absolute right-72 bottom-40 max-w-sm text-right">
+    <p class="font-playfair text-lg md:text-xl italic text-gray-200 leading-relaxed">
+        “La raó, quan es creu superior a la vida, acaba generant el contrari del que volia: un món sense sentit. Un món on tot és explicat, però res és pròpiament viscut”.
+    </p>
+    <div class="mt-2 h-[2px] bg-gradient-to-l from-yellow-500 via-red-500 to-transparent"></div>
+</div>
+</section>
+
+    <!-- Biography Section -->
+    <section id="biografia" class="py-20 section-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="font-cinzel text-4xl font-bold mb-6 text-yellow-500">Breus Dades Biogràfiques</h2>
+                    <div class="space-y-4 text-gray-300 leading-relaxed">
+                        <p>Friedrich Wilhelm Nietzsche va néixer a <span class="text-yellow-500 font-semibold">Röcken</span>, ciutat pròxima a Leipzig (Alemanya), en un ambient profundament religiós. Els seus avis i el seu pare —que va morir quan ell tenia quatre anys— havien estat pastors protestants.</p>
+                        
+                        <p>Va fer el batxillerat a l'internat de <span class="text-yellow-500 font-semibold">Pforta</span>, una escola d'elit per a joves aristòcrates, gràcies a una beca. Malgrat que no tenia gaire clar si volia seguir la tradició familiar, va iniciar els estudis de teologia a la Universitat de Bonn.</p>
+                        
+                        <div class="nietzsche-quote p-4 rounded-r-lg my-6">
+                            <p class="text-lg">"Influenciat pel seu professor Ritschl, es va apassionar per la filologia clàssica i va abandonar la idea de fer-se pastor protestant."</p>
+                        </div>
+                        
+                        <p>Amb vint-i-quatre anys, i gràcies al suport de Ritschl, va ser nomenat —sense tenir encara el doctorat— <span class="text-red-500 font-semibold">catedràtic extraordinari de llengua i literatura gregues</span> a la Universitat de Basilea.</p>
+                        
+                        <p>Durant quasi deu anys es va dedicar a l'ensenyament, però a causa dels problemes constants de salut es va veure obligat a abandonar-la. La universitat li va concedir una pensió modesta, de la qual va viure els anys següents (1879-1889), en què va viatjar per Europa (Itàlia i el sud de França, principalment).</p>
+                        
+                        <p class="text-red-400 font-semibold">Malgrat que estava greument malalt, aquest va ser el seu període més productiu.</p>
+                        
+                        <p>El 1889 va començar a manifestar símptomes de demència i va ser ingressat en un hospital psiquiàtric de Basilea després que li diagnostiquessin una paràlisi progressiva. La seva mare, i un cop morta aquesta la seva germana, es van ocupar d'ell fins a la seva mort.</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="concept-card p-6 rounded-xl">
+                        <h3 class="font-cinzel text-xl font-bold text-yellow-500 mb-4">Context Històric i Filosòfic</h3>
+                        <p class="text-gray-100 text-lg font-semibold italic mb-4">
+                            Nietzsche és un filòsof singular tant en el seu estil de fer filosofia com en les idees que proposa. 
+                        </p>
+                        </p>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2">▸</span>
+                                <span><strong>Vitalisme:</strong> Reacció contra l'optimisme exagerat en les possibilitats de la raó (Hegel, Marx, Comte). El fet clau és <strong>la vida</strong>, i l'element essencialment <strong>irracional</strong> que la defineix.
+                                Considerar la raó superior als sentiments i la passió ha empobrit la vida </span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2">▸</span>
+                                <span><strong>Heràclit d'Efes:</strong> Referent per l'estil aforístic i la idea de <strong>l'Ésser com a esdevenir</strong></span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2">▸</span>
+                                <span><strong>Arthur Schopenhauer:</strong> La idea de la <strong> voluntat </strong>com a fons originari, un impuls cec, irracional i 
+                                    constant que es manifesta en tots els éssers vius. Tanmateix, Nietzsche rebutja el pessimisme vital de Schopenhauer i transforma aquesta idea en una afirmació de la vida. 
+                                    També assumeix la prevalença dels instints sobre la raó</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2">▸</span>
+                                <span><strong>Richard Wagner:</strong> La música com l'obra d'art total capaç de comprendre la vida</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2">▸</span>
+                                <span><strong>Charles Darwin:</strong> Evolucionisme que inspira la idea del superhome</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="concept-card p-6 rounded-xl border-red-500/30">
+                        <h3 class="font-cinzel text-xl font-bold text-red-500 mb-4">Els Filosof de la Sospita</h3>
+                        <p class="text-sm text-gray-300 mb-3">Paul Ricoeur va integrar Nietzsche amb Marx i Freud en aquest corrent que analitza de manera crítica el rerefons 
+                            i les intencions que s'amaguen darrere de les propostes filosòfiques:</p>
+                        <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                            <div class="bg-red-900/30 p-2 rounded">Marx<br><span class="text-gray-400"> Darrera la ideologa burgesa s'amaguen els interessos de la classe dominant  capitalista</span></div>
+                            <div class="bg-red-900/30 p-2 rounded">Freud<br><span class="text-gray-400">Sota de la conducta racional conscient s'amaguen pulsions inconscients</span></div>
+                            <div class="bg-red-900/30 p-2 rounded">Nietzsche<br><span class="text-gray-400">Darrera els valors judeocristians s'amaga el ressentiment del feble incapaç de viure la vida</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- ESTIL AFORÍSTIC -->
+     <section id="estil" class="py-20 section-light">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-cinzel text-4xl font-bold text-yellow-500 mb-4">L'ESTIL AFORÍSTIC</h2>
+                <p class="text-gray-400">Contra el sistema filosòfic tradicional</p>
+            </div>
+            <div class="max-w-4xl mx-auto mb-12 text-center relative">
+                <div class="absolute left-0 top-0 h-full w-1 bg-yellow-500 rounded-full opacity-70"></div>
+                <p class="text-gray-300 text-lg leading-relaxed pl-4">
+                    La filosofia de Nietzsche no és un sistema ordenat ni deductiu. És una filosofia 
+                    <span class="text-red-400 font-semibold">crítica, provocadora i destructiva</span>, 
+                    que busca posar en qüestió els fonaments de la cultura occidental. 
+                    La seva escriptura no pretén demostrar sinó 
+                    <span class="text-yellow-500 font-semibold">sacsejar el lector</span> i fer-lo pensar per si mateix.
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto mb-12 text-center relative">
+                <p class="text-gray-300 text-xl font-playfair italic leading-relaxed">
+                    “La filosofia no ha de demostrar: ha de sacsejar. 
+                    No construeix sistemes — destrueix certeses.”
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-gray-300">L'aforisme és una frase o paràgraf curt en el qual s'exposa una idea aparentment contradictòria. La intenció <span class="text-red-400 font-bold">no és formular explícitament una idea</span>, sinó provocar un efecte en el lector.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-yellow-500 text-xl">⚡</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Provocació</h4>
+                                <p class="text-sm text-gray-400">Transmet una intuïció a través d'una metàfora que desafia el lector i el fa pensar.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-red-500 text-xl">🎯</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Interpretació</h4>
+                                <p class="text-sm text-gray-400">Correspon al lector donar la interpretació i el sentit que es pugui donar a la intuïció.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-purple-500 text-xl">🎭</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Analogia i Polaritat</h4>
+                                <p class="text-sm text-gray-400">Les categories lògiques (identitat / contradicció) es substitueixen per analogia i polaritat.
+                                    Expressa una idea a través de la tensió entre dos pols contraris.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-red-500/20 blur-3xl"></div>
+                    <div class="relative space-y-4">
+                        <div class="concept-card p-6 rounded-xl border-l-4 border-yellow-500 transform hover:translate-x-2 transition duration-300">
+                            <p class="text-lg font-playfair italic text-gray-200">"Allò que no em mata em fa més fort"</p>
+                            <p class="text-xs text-gray-500 mt-2">— Crepuscle dels ídols</p>
+                        </div>
+                        
+                        <div class="concept-card p-6 rounded-xl border-l-4 border-red-500 transform hover:translate-x-2 transition duration-300">
+                            <p class="text-lg font-playfair italic text-gray-200">"Déu ha mort: ara volem que visqui el superhome"</p>
+                            <p class="text-xs text-gray-500 mt-2">— Així parlà Zaratustra</p>
+                        </div>
+                        
+                        <div class="concept-card p-6 rounded-xl border-l-4 border-purple-500 transform hover:translate-x-2 transition duration-300">
+                            <p class="text-lg font-playfair italic text-gray-200">"Hi ha interpretacions, no fets"</p>
+                            <p class="text-xs text-gray-500 mt-2">— Més enllà del Bé i del Mal</p>
+                        </div>
+
+                        <div class="concept-card p-6 rounded-xl border-l-4 border-orange-500 transform hover:translate-x-2 transition duration-300">
+                            <p class="text-lg font-playfair italic text-gray-200">"La felicitat és igual als instints en tota vida ascendent"</p>
+                            <p class="text-xs text-gray-500 mt-2">— Anticrist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MÈTODE GENEALÒGIC INTERACTIU -->
+    <section id="mètode" class="py-20 section-dark relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="font-cinzel text-5xl font-black mb-4 text-red-600">EL MÈTODE GENEALÒGIC</h2>
+                <p class="text-xl text-gray-400 font-playfair">Investigació de l'origen i evolució de les idees filosòfiques</p>
+            </div>
+            <div class="max-w-4xl mx-auto mb-12 text-center">
+                <p class="text-gray-300 text-lg leading-relaxed max-w-none">
+                    La genealogia busca 
+                    <span class="text-red-400 font-semibold">desemmascarar les forces ocultes</span> 
+                    que han donat lloc als valors i a les idees.
+                    Allà on la filosofia tradicional cercava fonaments, Nietzsche hi troba 
+                    <span class="text-yellow-500 font-semibold">història, lluita i voluntat</span>.
+                </p>
+            </div>
+            <div class="max-w-4xl mx-auto mb-12 text-center">
+                <p class="text-xl font-playfair italic text-gray-200 leading-relaxed">
+                    “No hi ha veritats innocents: tota idea té una història,  
+                    i tota història amaga una voluntat.”
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                <div class="lg:col-span-2 space-y-6">
+                    <p class="text-gray-300 leading-relaxed">La genealogia investiga l'origen i l'evolució de les idees filosòfiques en el seu context històric i cultural. Analitza les raons psicològiques i les pulsions ocultes que van moure els diferents filòsofs.</p>
+                    
+                    <div class="bg-red-900/20 border border-red-500/30 p-6 rounded-xl">
+                        <h3 class="font-cinzel text-xl font-bold text-red-400 mb-4">El Resultat és Demolidor</h3>
+                        <p class="text-gray-300 mb-4">Darrere dels diferents conceptes filosòfics sempre s'amaga <span class="text-yellow-500 font-bold">el contrari</span> d'allò que diuen pretenen expressar:</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="flex items-center space-x-3 bg-black/40 p-3 rounded">
+                                <span class="text-2xl">📜</span>
+                                <div>
+                                    <p class="text-sm text-gray-400">Rere la idea de <span class="text-white">veritat</span></p>
+                                    <p class="text-red-400 font-bold">→ El desig de mentir</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 bg-black/40 p-3 rounded">
+                                <span class="text-2xl">⚖️</span>
+                                <div>
+                                    <p class="text-sm text-gray-400">Rere la idea de <span class="text-white">justícia</span></p>
+                                    <p class="text-red-400 font-bold">→ Voler imposar la pròpia voluntat</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h4 class="font-cinzel text-lg font-bold text-yellow-500">Aplicació: La Genealogia de la Moral</h4>
+                        <div class="timeline-item pb-8">
+                            <h5 class="text-white font-bold mb-2">1. Aristocràcia Grega</h5>
+                            <p class="text-sm text-gray-400"><strong>"Bo"</strong> = trets de l'home noble (fort, poderós).<strong> "Dolent"</strong> = dèbil, vulgar.</p>
+                        </div>
+                        <div class="timeline-item pb-8">
+                            <h5 class="text-white font-bold mb-2">2. Sacerdots / Judaisme</h5>
+                            <p class="text-sm text-gray-400"><strong>Inversió</strong> dels valors per ressentiment. <strong>"Bo"</strong> = humil, obedient. <strong>"Malvat"</strong> = fort, noble.</p>
+                        </div>
+                        <div class="timeline-item pb-8">
+                            <h5 class="text-white font-bold mb-2">3. Cristianisme</h5>
+                            <p class="text-sm text-gray-400">Consuma la transvaloració. La renúncia i la resignació que el caracteritzen són el triomf de<strong> la moral del ramat.</strong></p>
+                        </div>
+                        <div class="timeline-item">
+                            <h5 class="text-white font-bold mb-2">4. Modernitat</h5>
+                            <p class="text-sm text-gray-400">La Il·lustració i moviments socials mantenen els valors del cristianime secularitzats.</p>
+                            <p class="text-sm text-gray-400">La democràcia, el socialisme, la igualtat i la compassió, responen a la mateixa "moral de l'esclau", però sense Déu.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="concept-card p-6 rounded-xl bg-gradient-to-b from-yellow-900/20 to-transparent">
+                        <h4 class="font-cinzel text-lg font-bold text-yellow-500 mb-4">Característiques</h4>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start">
+                                <span class="text-yellow-500 mr-2 text-lg">🔍</span>
+                                <span>No busca l'origen "pur" sinó el procés històric concret de construccio i evolució</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-500 mr-2 text-lg">🧠</span>
+                                <span>Atenció a les pulsions psicològiques soterrades (darrera la moral hi trobarem ressentiment)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-500 mr-2 text-lg">⚡</span>
+                                <span>Desvela contradiccions entre el que es diu i el que s'amaga</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-500 mr-2 text-lg">🎭</span>
+                                <span>Contextualització cultural (no veritats eternes)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-card p-6 rounded-xl border-red-500/30">
+                        <h4 class="font-cinzel text-lg font-bold text-red-400 mb-4">Una crítica a l'Essencialisme</h4>
+                        <p class="text-sm text-gray-400 mb-3">La genealogia també serveix per anar contra la idea que hi ha "essències" immutables i "veritats":</p>
+                        <div class="bg-black/50 p-3 rounded text-xs text-gray-500 font-mono">
+                            "Els conceptes són inventats pels humans → però amb el temps s'oblida que el seu origen és convencional → s'objectiven (es fixen) → es consideren eterns
+                            → es converteixen en 'Veritat' "
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- The Hammer Philosophy Section -->
+    <section id="martell" class="py-20 section-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-cinzel text-5xl font-black mb-4 text-red-600">LA FILOSOFIA DEL MARTELL</h2>
+                <p class="text-xl text-gray-400 font-playfair italic">"Destruir els fonaments sobre els quals s'ha edificat la cultura occidental"</p>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="flex flex-wrap justify-center gap-8 mb-12 border-b border-white/10 pb-4">
+                <button class="tab-btn active text-lg font-cinzel px-4 py-2" onclick="switchTab('coneixement')">Coneixement i Veritat</button>
+                <button class="tab-btn text-lg font-cinzel px-4 py-2" onclick="switchTab('realitat')">Realitat i Ésser</button>
+                <button class="tab-btn text-lg font-cinzel px-4 py-2" onclick="switchTab('moral')">Moral i Valors</button>
+            </div>
+
+            <!-- Tab Content: Knowledge -->
+            <div id="coneixement" class="content-panel active">
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <h3 class="font-cinzel text-3xl font-bold text-yellow-500">La Concepció del Coneixement</h3>
+                        
+                        <div class="nietzsche-quote p-6 rounded-r-lg">
+                            <div class="flex items-center gap-2 text-xs text-gray-400 uppercase tracking-widest">
+                                <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                                Més endavant veurem com Nietzsche opta pel <strong>perspectivisme</strong>
+                            </div>
+                            <p class="text-xl">"No hi ha 'fets', només interpretacions."</p>
+                        </div>
+
+                        <p class="text-gray-300 leading-relaxed">Vegem primer com Nietzsche, inspirant-se en la cultura tràgica de l’antiga Grècia, que parteix de la intuïció plantejada pel Silè, busca comprendre quina és la manera més autèntica de captar i expressar la vida.
+                             Per fer-ho contraposa dues actituds fonamentals: l'<span class="text-yellow-500 font-bold">home artístic</span> (intuïtiu) i l'<span class="text-red-400 font-bold">home teòric</span> (racional).</p>
+                          
+                        <!-- SILÈ (FORMAT LLEUGER I INTEGRAT) -->
+                        <div class="mt-6 mb-4 border-l-2 border-purple-500/30 pl-4 space-y-2">
+
+                            <p class="text-sm italic text-gray-300 leading-relaxed">
+                                "El millor de tot és absolutament inabastable per a tu: no haver nascut. 
+                                I el segon millor és morir aviat."
+                            </p>
+                            
+                            <p class="text-[11px] text-gray-500">— Saviesa de Silè</p>
+                        
+                            <p class="text-xs text-gray-400 leading-relaxed">
+                                Aquesta intuïció fundacional de l’esperit grec revela el caràcter terrible de l’existència. 
+                                Davant d’aquest abisme, només hi ha dues respostes: 
+                                <span class="text-yellow-400">afirmar la vida tràgicament</span> o 
+                                <span class="text-red-400">negar-la refugiant-se en la raó</span>.
+                            </p>
+                        
+                        </div>   
+                           
+
+                        <div class="grid md:grid-cols-2 gap-4 mt-6">
+                            <div class="concept-card p-4 rounded-lg border-yellow-500/30">
+                                <h4 class="font-cinzel text-yellow-500 font-bold mb-2">🎭 Home Artístic</h4>
+                                <ul class="text-sm text-gray-300 space-y-2">
+                                    <li>• Preocupat de <strong>VIURE</strong>, encara que sigui a costa de la supervivència, té seguretat instintiva</li>
+                                    <li>• Busca la plenitud vital</li>
+                                    <li>• Accepta el dolor i la mort com a part de la vida, essencialment efímera</li>
+                                    <li>• Dionisíac: pura contingència, instint i originalitat</li>
+                                    <li>• Fa de la pròpia vida una obra d'art, acceptant el dolor i la mort com a part també de la vida </li>
+                                    <li>•No vol controlar-ho tot ni entendre-ho racionalment, sinó viure-ho (!!)</li>                            
+                                    <li>• Crea bellesa (apol.lini), però partint de l'aceptació del fons dionisíac, tot afirmant la vida tal com és</li>
+                                    <li class="bg-yellow-900/20 border-l-4 border-yellow-500 px-3 py-2 rounded">
+                                        ✦ Utilitza <span class="text-yellow-300 font-semibold">intuïcions i metàfores</span> per captar la singularitat de la vida i fer-la valer en tota la seva intensitat
+                                        <span class="text-xs text-gray-400 block mt-1">→ visió dionisíaca de la vida</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="concept-card p-4 rounded-lg border-red-500/30">
+                                <h4 class="font-cinzel text-red-500 font-bold mb-2">📐 Home Teòric</h4>
+                                <ul class="text-sm text-gray-300 space-y-2">
+                                    <li>• Preocupat per <strong>SOBREVIURE</strong> a costa de no viure realment</li>
+                                    <li>• Falta evident de seguretat instintiva</li>
+                                    <li>• Por al dolor, a la mort, al desconegut</li>
+                                    <li>• Atent a les regularitats, prudent, no arriscat</li>
+                                    <li>• Prioritza la seguretat i la supervivència a la vivència autèntica</li>
+                                    <li>• El seu coneixement «conjura la seva desgràcia», però no n'obté cap felicitat</li>
+                                    <li>• Prima l'element apol.lini (raó) i nega el fons dionisíac com si fos un error, una anomalia que es pot corregir, controlar etc.</li>
+                                    <li class="bg-red-900/20 border-l-4 border-red-500 px-3 py-2 rounded">
+                                        ✦ Utilitza <span class="text-red-300 font-semibold">conceptes i abstraccions</span> per reduir la realitat a regularitats que li proporcionin seguretat 
+                                        <span class="text-xs text-gray-400 block mt-1">→ domini apol·lini de la raó</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 p-4 bg-red-900/20 rounded-lg border border-red-500/30">
+                            <p class="text-sm text-gray-300"><strong class="text-red-400">El problema del llenguatge:</strong> L'home racional (teòric) utilitza el llenguatge conceptual. 
+                                El concepte és el resultat d'abstreure i generalitzar —seleccionant uns trets i descartant uns altres. És subjectiu, parcial i arbitrari. Designa una part de la realitat i oblida la resta.
+                                Per Nietzsche, el concepte és una expressió pobra de la realitat (vida), separada de tot el que té de singular i concret, per tant, d'allò realment <strong>VIU</strong>. </p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <p class="text-gray-300 leading-relaxed border-l-4 border-yellow-500/40 pl-4 italic">
+                            En la Grècia antiga, Nietzsche troba en <strong>la tragèdia</strong> un model de cultura que, fonamentada en la intuïció del Silè, comprèn i accepta la vida sense negar-la. 
+                            Neix de la tensió entre dos impulsos estètics que li serviran per explicar la realitat i la vida:
+                        </p>
+                        <div class="duality-container">
+                            <div class="duality-half apollonian-side p-6 flex flex-col justify-center" onclick="expandSide('apollonian')">
+                                <h4 class="font-cinzel text-2xl font-bold text-yellow-300 mb-2">APOL·LINI</h4>
+                                <p class="text-sm text-white/100 font-semibold">Ordre • Mesura • Llum • Forma • Individualització • Racionalitat</p>
+                            </div>
+                            <div class="duality-half dionysian-side p-6 flex flex-col justify-center items-end text-right" onclick="expandSide('dionysian')">
+                                <h4 class="font-cinzel text-2xl font-bold text-red-400 mb-2">DIONISÍAC</h4>
+                                <p class="text-sm text-white/100 font-semibold">Caos • Desmesura • Foscor • Fusió • Embriaguesa • Instint • Passió</p>
+                            </div>
+                        </div>
+
+                        <div class="concept-card p-6 rounded-xl">
+                            <h4 class="font-cinzel text-xl font-bold text-yellow-500 mb-4">La Tragèdia Grega: La Síntesi Perfecta</h4>
+                            <img src="https://kimi-web-img.moonshot.cn/img/helenmcveigh.co.uk/9ceab6fcd419197846f6b3bcc12e50cb54cdf69f.jpg" alt="Greek Tragedy" class="w-full h-48 object-cover rounded-lg mb-4 opacity-80">
+                            <p class="text-sm text-gray-300">La tragèdia grega neix de la tensió i la síntesi d'aquests dos impulsos, sense negar-ne cap.<strong> Expressa i accepta incondicionalment la vida.</strong>
+                                Submergint-se en el més profund de l'existència, l'apol·líni dóna forma a l'experiència de base caòtica del dionisíac, convertint-la en art i bellesa. 
+                            L'espectador contempla i sent(!), i així experimenta la <strong> "catarsi"</strong> a través de la força creadora que li permet enfrontar-se al caos i al dolor de l'existència afirmant-la amb passió.</strong></p>
+                        </div>
+
+                        <div class="timeline-item pb-6">
+                            <h5 class="font-bold text-red-400">La Decadència amb Sòcrates</h5> "La malaltia de la raó"
+                            <p class="text-sm text-gray-400 mt-2">Amb l'aparició de Sòcrates, la saviesa tràgica es perd, i trionfa l'home teòric sobre l'artístic. 
+                                La raó suplanta la intuïció. La tragèdia es converteix en "drama racional" amb diàlegs lògics, debat d'idees i finals morals, perdent tota la seva profunditat metafísica.
+                                La raó substitueix la vivència estètica. Nietzsche anomena a això <strong>la malaltia de la raó</strong>: ja no es tracta de <strong>sentir</strong>, sinó primer que tot de pensar i valorar, en base a conceptes pre-establerts, què és correcte etc.
+                                Es creu que es pot fer intel·ligible i raonable la vida a costa de negar tot allò que no és capaç de comprendre, els seus aspectes obscurs i terribles, els irracionals.
+                                El fet és que a partir d'aquest moment, eliminant el dionisíac, occident entra en decadència cultural.
+                                El preu que es pagarà serà la no acceptació de la vida tal com és, un  error que conduirà la història fins al buit del <strong>nihilisme </strong> contemporani
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="concept-card p-8 rounded-xl border-yellow-500/30 mb-10 space-y-6">
+
+                    <!-- TÍTOL -->
+<h3 class="font-cinzel text-2xl text-yellow-400">
+    💬 <strong>La teoria del coneixement: intuïció vs concepte</strong> 
+</h3>
+
+<!-- DEFINICIÓ -->
+<p class="text-gray-300 leading-relaxed">
+    <span class="text-yellow-400 font-semibold">PERSPECTIVISME:</span> 
+    El coneixement humà té el seu fonament en la manera de ser al món dels individus, 
+    amb els seus instints, pulsions i interessos. 
+    Per Nietzsche, el coneixement no és una representació neutral de la realitat, 
+    sinó el resultat de perspectives.
+</p>
+
+<!-- EXPLICACIÓ / CONNEXIÓ -->
+<p class="text-gray-400 text-sm leading-relaxed">
+    Abans hem vist dues maneres fonamentals d’estar al món:
+    <span class="text-yellow-300 font-semibold">l’home artístic</span> i 
+    <span class="text-red-400 font-semibold">l’home teòric</span>.
+</p>
+
+<p class="text-gray-400 text-sm leading-relaxed -mt-2">
+    Ara veurem com d’aquestes dues actituds 
+    <span class="text-yellow-300 font-semibold">se’n deriven també dues maneres de conèixer</span> 
+    la realitat.
+</p>
+
+<!-- AFORISME DESTACAT (SUBORDINAT) -->
+<div class="nietzsche-quote mt-4 ml-6 p-4 rounded-r-lg border-l-2 border-red-500/50 opacity-90">
+    <p class="text-xs text-red-400 mb-1 font-semibold">→ expressió del perspectivisme</p>
+    <p class="text-lg text-red-300 font-semibold italic">
+        "No hi ha fets, només interpretacions."
+    </p>
+</div>
+                
+                    <!-- MATÍS CLAU -->
+                    <div class="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+                
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            ⚠️ <span class="text-purple-300 font-semibold">No és relativisme:</span> 
+                            Nietzsche no defensa que totes les interpretacions siguin iguals. 
+                            Afirma una pluralitat de perspectives, però 
+                            <span class="text-yellow-300 font-semibold">valora aquelles que afirmen la vida</span> 
+                            enfront de les que la neguen i la degraden. <strong>En aquest sentit, la perspectiva de l'home artístic és superior.</strong>
+                        </p>
+                
+                    </div>
+                
+                    <!-- COMPARACIÓ VISUAL -->
+                    <div class="text-center mt-10 mb-4">
+
+                        <h4 class="text-lg font-semibold text-gray-200">
+                            Dos usos del llenguatge, dues maneres de comprendre la realitat
+                        </h4>
+                    
+                        <p class="text-sm text-gray-400 mt-2 max-w-2xl mx-auto">
+                            Nietzsche contraposa dues formes d’expressar i captar la vida: 
+                            la intuïció, que preserva la singularitat de l’experiència, 
+                            i el concepte, que la redueix a abstraccions.
+                        </p>
+                    
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6 mt-6">
+                
+                        <!-- INTUÏCIÓ -->
+                        <div class="p-6 rounded-lg bg-yellow-900/20 border border-yellow-500/30 space-y-3">
+                            <h4 class="font-cinzel text-yellow-400 text-lg font-bold">INTUÏCIÓ (Metàfora)</h4>
+                
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li>• Evoca una experiència única i intensa</li>
+                                <li>• Captura la singularitat de la vida</li>
+                                <li>• Expressa la realitat amb tot el seu contingut</li>
+                                <li>• Valor comprensiu per a qui ho ha viscut</li>
+                                <li>• Art, vivència directa, capta allò que la raó no pot expressar. </li>
+                                <li>• 👉 No vol controlar: vol viure</li>
+                                <li class="bg-red-900/20 border-l-4 border-red-500 px-3 py-2 rounded">
+                                    ✦ <span class="text-red-300 font-semibold"></span>intuïció → vida → art → <strong>afirmació</strong>
+                                    <span class="text-xs text-gray-400 block mt-1">→ domini DIONISÍAC</span> (home artístic)
+                                </li>
+                            </ul>
+                        </div>
+                
+                        <!-- CONCEPTE -->
+                        <div class="p-6 rounded-lg bg-purple-900/20 border border-purple-500/30 space-y-3">
+                            <h4 class="font-cinzel text-purple-400 text-lg font-bold">CONCEPTE (Abstracció)</h4>
+                
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li>• Resultat d’abstreure i generalitzar</li>
+                                <li>• Selecciona trets i descarta la resta</li>
+                                <li>• Subjectiu, parcial i arbitrari</li>
+                                <li>• Paraula universal per coses diferents</li>
+                                <li>• Oblida les diferències reals</li>
+                                <li>• 👉 Prioritza seguretat sobre vida</li>
+                                <li class="bg-red-900/20 border-l-4 border-red-500 px-3 py-2 rounded">
+                                    ✦ <span class="text-red-300 font-semibold"></span>concepte → abstracció → seguretat → <strong>negació</strong>
+                                    <span class="text-xs text-gray-400 block mt-1">→ domini APOL·LINI</span> (home teòric)
+                                </li>
+                            </ul>
+                        </div>
+                
+                    </div>
+                
+                </div>
+                <div class="text-center my-6">
+
+                    <p class="text-gray-400 text-sm italic">
+                        I si tot coneixement és interpretació, llavors…
+                    </p>
+                
+                    <p class="text-yellow-400 font-semibold mt-2">
+                        👉 la veritat no es descobreix: es construeix
+                    </p>
+                
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 mt-8">
+
+                    <!-- COLUMNA ESQUERRA -->
+                    <div class="space-y-6">
+                
+                        <div class="concept-card p-6 rounded-xl border-yellow-500/30">
+                            <h3 class="font-cinzel text-xl text-yellow-400 mb-4">CONSEQUÜÈNCIA: Desmuntatge de la "veritat"</h3>
+                        
+                            <p class="text-gray-300 mb-4">
+                                Nietzsche no es limita a dir que la veritat no existeix. Explica com la construïm i per què ens la creiem.
+                                La seqüència és la següent:
+                            </p>
+                        
+                            <ol class="space-y-2 text-sm text-gray-300">
+                                <li><b>1. Experiència singular:</b> vivim una realitat única i irrepetible.</li>
+                                <li><b>2. Abstracció:</b> seleccionem només alguns trets.</li>
+                                <li><b>3. Generalització:</b> creem un concepte.</li>
+                                <li><b>4. Convenció:</b> es crea un acord social per utilitzar-lo i entendre's dins el grup.</li>
+                                <li><b>5. Oblit:</b> finalment oblidem que l’hem creat → creiem que és veritat.</li>
+                            </ol>
+                        
+                            <div class="nietzsche-quote p-4 mt-4">
+                                "La veritat és un exèrcit mòbil de metàfores, i
+                                ser veraç és només mentir d’acord amb les normes acceptades”
+                            </div>
+                        </div>
+                
+                        <div class="concept-card p-6 rounded-xl border-purple-500/30">
+                            <h3 class="font-cinzel text-xl text-purple-400 mb-4">Crítica al llenguatge</h3>
+                        
+                            <p class="text-gray-300 mb-4">
+                                Les paraules no reflecteixen la realitat. Són metàfores que simplifiquen i deformen l’experiència.
+                            </p>
+                        
+                            <ul class="space-y-2 text-sm text-gray-300">
+                                <li>• No capten la singularitat de les coses</li>
+                                <li>• Són generalitzacions arbitràries</li>
+                                <li>• Depenen dels interessos humans</li>
+                            </ul>
+                        
+                            <div class="bg-purple-900/20 p-4 rounded mt-4 text-sm">
+                                <b>Exemple:</b> dir "fulla" implica ignorar totes les diferències entre fulles reals.
+                            </div>
+                        
+                            <p class="text-yellow-400 font-bold mt-4">
+                                👉 El llenguatge no revela la realitat: la construeix.
+                            </p>
+                        </div>
+                
+                    </div>
+                
+                    <!-- COLUMNA DRETA (FINESTRA DESTACADA) -->
+                    <div class="concept-card p-8 rounded-xl border-red-500/40 flex flex-col justify-center bg-gradient-to-br from-black/40 to-red-900/20 space-y-8">
+
+                        <h3 class="font-cinzel text-2xl text-red-400">
+                            La veritat segons Nietzsche
+                        </h3>
+                    
+                        <p class="text-gray-300 leading-relaxed">
+                            En definitiva, el que anomenem "veritat" no és més que una construcció humana, una xarxa convencional de metàfores que hem acabat prenent per realitat.
+                        </p>
+                    
+                        <!-- AFORISME (NUCLI) -->
+                        <div class="text-xl text-red-300 italic font-semibold leading-relaxed border-l-4 border-red-500 pl-4">
+                            “No hi ha fets, només interpretacions.”
+                        </div>
+                    
+                        <!-- CONSEQÜÈNCIA -->
+                        <p class="text-gray-400 text-sm">
+                            👉 La realitat no se’ns dona: la creem a través del llenguatge, la cultura i la perspectiva.
+                        </p>
+                    
+                        <!-- SEPARADOR VISUAL -->
+                        <div class="border-t border-red-500/20"></div>
+                    
+                        <!-- DESENVOLUPAMENT FILOSÒFIC -->
+                        <div class="space-y-4">
+                            <h4 class="text-red-300 font-semibold tracking-wide">
+                                Origen del problema: l'home teòric
+                            </h4>
+                    
+                            <p class="text-gray-300 leading-relaxed">
+                                <span class="text-yellow-400 font-semibold">Sòcrates</span>, paradigma de l'home racional, des d'una falta de seguretat per acceptar la vida tal com és, 
+                                intenta controlar-la i comença a considerar com a real només allò que les coses tenen en comú i que es pot definir amb conceptes.
+                                Substitueix la forma intuïtiva de comprensió (tragèdia grega) per la conceptual (discurs racional). Les paraules deixen de significar amb plenitud 
+                                la singularitat de l'experiència i de la vida.
+                            </p>
+                    
+                            <p class="text-gray-300 leading-relaxed">
+                                <span class="text-purple-400 font-semibold">Plató</span> ho porta tot més enllà, oblida que aquests conceptes són creacions humanes i els converteix 
+                                en essències independents: les Idees.
+                            </p>
+                    
+                            <div class="bg-red-900/20 p-4 rounded-lg border border-red-500/20 text-sm text-gray-300">
+                                👉 Així neix el <span class="text-red-300 font-semibold">"transmón"</span>: una realitat abstracta que es considera més real que la vida mateixa.
+                            </div>
+                            <div class="nietzsche-quote p-4 rounded-r-lg">
+                    
+                            <p class="text-gray-400 text-sm italic">
+                                Aquesta separació degrada el món concret i viscut, subordinant-lo a una realitat fictícia.
+                            </p>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>  
+            </div>   
+            <!-- Tab Content: Reality -->
+            <div id="realitat" class="content-panel">
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-cinzel text-3xl font-bold text-yellow-500 mb-6">La Concepció de la Realitat</h3>
+                        
+                        <div class="space-y-4 text-gray-300">
+                            <p>Quin ha estat el vici fonamental de la metafísica tradicional? <span class="text-red-400 font-bold">Ha estat la duplicació de la realitat</span>, en distingir entre un món vertader i un món aparent.</p>
+                            
+                            <p class="text-gray-400 text-sm mt-4 leading-relaxed">
+                                Però, segons Nietzsche, aquesta distinció és un error: el suposat 
+                                <span class="text-red-400 font-semibold">“món vertader”</span> no és més que una 
+                                <span class="text-red-300 font-semibold">ficció construïda per la raó</span>, 
+                                que acaba desvalorant el món real, aquell en què té lloc la vida. Aquesta actitud neix del rebuig al canvi, al sofriment i a la incertesa que caracteritzen la vida.
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4 my-6">
+
+                                <!-- MÓN VERTADER -->
+                                <div class="p-4 bg-white/5 rounded-lg border border-white/10 flex flex-col">
+                                    <h4 class="font-cinzel text-red-400 font-bold mb-2">Món "Vertader" (Metafísica)</h4>
+                            
+                                    <ul class="text-sm space-y-1 text-gray-400">
+                                        <li>• Ésser: únic, immutable</li>
+                                        <li>• Etern i intemporal</li>
+                                        <li>• Essències accessibles a la raó</li>
+                                        <li>• Expressat amb conceptes</li>
+                                        <li>• Perfecte</li>
+                                        <li>• 👎 <strong>Filosofia de l'Ésser</strong></li>
+                                    </ul>
+                            
+                                    <!-- CONCLUSIÓ BAIXADA -->
+                                    <div class="mt-8 pt-4 border-t border-red-500/20">
+                                        <p class="text-red-400 text-sm font-semibold leading-relaxed">
+                                            ⚠️ Ficció racional que suplanta la vida
+                                        </p>
+                                    </div>
+                                </div>
+                            
+                                <!-- MÓN NIETZSCHE -->
+                                <div class="p-4 bg-yellow-900/20 rounded-lg border border-yellow-500/30 flex flex-col">
+                                    <h4 class="font-cinzel text-yellow-500 font-bold mb-2">Món Aparent (Nietzsche)</h4>
+                            
+                                    <ul class="text-sm space-y-1 text-gray-400">
+                                        <li>• Esdevenir: múltiple, canviant</li>
+                                        <li>• Transitori i espaciotemporal</li>
+                                        <li>• Fenòmens experimentats pels sentits</li>
+                                        <li>• Expressat amb intuïcions</li>
+                                        <li>• 👍 <strong>Filosofia de l'Esdevenir</strong></li>
+                                    </ul>
+                            
+                                    <!-- CONCLUSIÓ BAIXADA -->
+                                    <div class="mt-8 pt-4 border-t border-yellow-500/20">
+                                        <p class="text-yellow-300 text-sm font-semibold leading-relaxed">
+                                            ✔ L’única realitat: la vida en el seu esdevenir
+                                        </p>
+                                    </div>
+                                </div>
+                            
+                            </div>
+
+                           
+
+                            <h4 class="font-cinzel text-xl font-bold text-yellow-500 mt-6 mb-3">Genealogia de la "Filosofia de l'Ésser"</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="timeline-item">
+                                    <strong class="text-red-400">Sòcrates:</strong> Introdueix l'equació "raó = virtut = felicitat". La racionalitat suplanta la seguretat instintiva. Primer signe de decadència.
+                                </div>
+                                <div class="timeline-item">
+                                    <strong class="text-red-400">Plató:</strong> Afegeix desconfiança dels sentits, negació del temps, duplicació de la realitat amb el Món de les Idees. Finalment inverteix
+                                    la jerarquia de l'ésser, destacant com a més real aquelles Idees que tenen una generalitat més gran. 
+                                    👉 <strong>Tota una «catedral de conceptes» edificada sobre el no-res!</strong>
+                                
+                                    <!-- CITA SUBORDINADA -->
+                                    <div class="nietzsche-quote mt-4 ml-6 p-4 rounded-r-lg border-l-2 border-red-500/50 opacity-90">
+                                        <p class="text-xs text-red-400 mb-1 font-semibold">→ conseqüència del platonisme</p>
+                                        <p class="text-sm italic text-gray-300">
+                                            "El Bé, Déu, l'Absolut, el que és incondicionat... no són més que fum, metàfores buides i sense sentit."
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <strong class="text-red-400">Cristianisme:</strong> "Platonisme per al poble", una simple vulgarització de "la metafísica de l'ésser" de Plató. 
+                                    La vida es  desvaloritza: s'entén només com una prova, un trànsit de dolor per aconseguir la vida vertadera (cel).
+                                    També s'aguditza l'hostilitat cap als sentits, les passions i el cos. 
+
+                                </div>
+                                <div class="timeline-item">
+                                    <strong class="text-red-400">Il·lustració/Positivisme:</strong> Noves invencions d'una raó que jutja negativament la vida.
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="concept-card p-6 rounded-xl">
+                            <h4 class="font-cinzel text-xl font-bold text-yellow-500 mb-4">El Problema de la Veritat</h4>
+                            <p class="text-gray-300 mb-4">Allò que anomenem "veritat" no és més que una convenció. Un acord tàcit entre humans que han decidit posar nom a les coses, classificar-les, crear conceptes... per poder entendre's entre ells.</p>
+                            
+                            <div class="bg-black/40 p-4 rounded-lg">
+                                <p class="text-red-400 font-bold mb-2">"Ser veraç és només mentir d'acord amb les normes acceptades"</p>
+                                <p class="text-xs text-gray-500">La majoria de persones no volen descobrir la veritat, volen encaixar, no desentonar, ser reconeguts repetint les mateixes "veritats" que els altres. Insegurs de mena, la manca de creativitat, d'orgull i d'amor propi els converteix en simple "ramat".</p>
+                            </div>
+                        </div>
+
+                        <div class="concept-card p-6 rounded-xl border-red-500/30">
+                            <h4 class="font-cinzel text-lg font-bold text-red-400 mb-3">Conseqüències del Socratisme</h4>
+                            <ul class="space-y-2 text-sm text-gray-300">
+                                <li class="flex items-start"><span class="text-red-500 mr-2">⚡</span> Sòcrates considera com a real només el que les coses tenen en comú (conceptes)</li>
+                                <li class="flex items-start"><span class="text-red-500 mr-2">⚡</span> Plató objectiva els conceptes i els converteix en essències (Món de les Idees)</li>
+                                <li class="flex items-start"><span class="text-red-500 mr-2">⚡</span> Aquesta realitat separada (transmón) degrada la nostra existència concreta</li>
+                                <li class="flex items-start"><span class="text-red-500 mr-2">⚡</span> Es crea una "catedral de conceptes" cada vegada més buida</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
+
+                            <p class="text-sm text-gray-300 leading-relaxed">
+                                👉 La tasca de Nietzsche és 
+                                <span class="text-red-300 font-semibold">invertir aquesta jerarquia</span> 
+                                arrelant-se de nou a la terra, destruint el “món vertader” com a ficció i 
+                                <span class="text-yellow-300 font-semibold">reafirmant el valor del món sensible</span>, 
+                                l’únic on la vida es desplega realment.
+                            </p>
+                        
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12 max-w-4xl mx-auto">
+                    <div class="border-l-4 border-red-500 pl-6 space-y-4">
+                        
+                        <p class="text-gray-300 leading-relaxed">
+                            EN CONCLUSIÓ: Nietzsche considera que la tradició filosòfica —des de Plató fins al cristianisme— ha construït una visió del món que 
+                            <span class="text-red-400 font-semibold">nega la vida.</span> Aquesta negació es manifesta en la recerca d’un món vertader, 
+                            en la moral del sacrifici i en la confiança en una veritat absoluta.
+                        </p>
+                
+                        <p class="text-gray-300 leading-relaxed">
+                            La seva tasca consisteix a 
+                            <span class="text-yellow-500 font-semibold">desemmascarar aquests ideals</span> i mostrar que són construccions humanes nascudes de la por, 
+                            la debilitat o la necessitat de seguretat.
+                        </p>
+                
+                        <p class="text-lg font-semibold text-yellow-500">
+                            IDEA CLAU: Nietzsche no proposa una nova veritat sinó la destrucció de la idea mateixa de veritat absoluta.
+                        </p>
+                
+                    </div>
+                </div>
+
+
+                <div class="mt-10 p-8 rounded-3xl bg-gradient-to-b from-black/60 to-gray-900/40 border border-red-500/30 shadow-2xl space-y-8">
+
+                    <!-- Títol central amb icona -->
+                    <div class="flex items-center justify-center space-x-4">
+                        <div class="w-10 h-10 bg-red-400 rounded-full flex items-center justify-center text-black font-bold text-xl">☠</div>
+                        <h2 class="font-cinzel text-xl md:text-2xl font-bold text-red-400 drop-shadow-lg text-center">
+                            NIHILISME
+                        </h2>
+                    </div>
+                
+                    <!-- Bloc explicatiu -->
+                    <div class="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed bg-white/5 p-4 rounded-lg">
+                        <p><strong>El resultat final d’aquest procés és el nihilisme:</strong> l'home modern, incapaç de continuar sostenint el simulacre 
+                        d'uns valors suprems tradicionals que han perdut el seu fonament, veu com allò que es considerava veritat es revela com una construcció buida, i cau en la desorientació i l'alienació</p>
+                        <p>La cultura occidental es troba de cara el no-res, sense aquelles referències de sempre a les quals agafar-se, sense sentit ni direcció. L’ésser humà, angoixat i ofegat en la seva impotència, ja no creu en res.</p>
+                    </div>
+                
+                    <!-- Separador visual -->
+                    <div class="flex justify-center my-4">
+                        <div class="w-20 h-1 bg-red-400 rounded-full animate-pulse"></div>
+                    </div>
+                
+                    <!-- Cita destacada amb icona de cita -->
+                    <div class="relative text-red-300 italic font-semibold text-sm md:text-base border-l-4 border-red-500 pl-6 py-4 bg-red-900/20 rounded-l-xl">
+                        <div class="absolute -top-2 -left-4 w-6 h-6 bg-red-400 rounded-full flex items-center justify-center text-black font-bold">❝</div>
+                        <p>Nietzsche anomena <strong>“l’últim home”</strong> aquell que, suspès definitivament en el buit, cedint a una passivitat i a un desig d’evitar la responsabilitat de definir el seu propi camí,
+                             ja no aspira a res més enllà de la comoditat: ha renunciat a crear valors.</p>
+                    </div>
+                
+                    <!-- Bloc superhome / oportunitat amb icona i contrast -->
+                    <div class="p-6 bg-yellow-900/30 rounded-2xl border-l-4 border-yellow-400 flex items-start space-x-4">
+                        <div class="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-black font-bold text-lg">⚡</div>
+                        <p class="text-yellow-400 text-sm md:text-base font-semibold">
+                            👉 Però per Nietzsche, el nihilisme en mans del <strong>superhome</strong> no és el final, sinó el punt de partida i una gran oportunitat: cal destruir per poder tornar a crear.
+                        </p>
+                    </div>
+                    <!-- DUALITAT DEL NIHILISME -->
+<div class="mt-10 space-y-6">
+
+    <h4 class="font-cinzel text-xl text-center text-gray-300">
+        Dues respostes al nihilisme
+    </h4>
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- NIHILISME PASSIU -->
+        <div class="p-6 rounded-xl bg-red-900/20 border border-red-500/30 space-y-4">
+            <h5 class="font-cinzel text-lg font-bold text-red-400">Nihilisme passiu</h5>
+
+            <p class="text-sm text-gray-300">
+                Davant la caiguda dels valors, l’individu mediocre queda desorientat i impotent.
+                Incapaç de crear, es refugia en la comoditat i la seguretat.
+            </p>
+
+            <ul class="text-sm text-gray-400 space-y-1">
+                <li>• Pèrdua de sentit</li>
+                <li>• Resignació i cansament</li>
+                <li>• Fugida del risc i del conflicte</li>
+                <li>• Voluntat debilitada</li>
+            </ul>
+
+            <div class="text-red-300 text-sm border-l-4 border-red-500 pl-3">
+                → Figura: <strong>“l’últim home”</strong><br>
+                <span class="text-xs text-gray-400">ja no crea, només consumeix i sobreviu</span>
+            </div>
+        </div>
+
+        <!-- NIHILISME ACTIU -->
+        <div class="p-6 rounded-xl bg-yellow-900/20 border border-yellow-500/30 space-y-4">
+            <h5 class="font-cinzel text-lg font-bold text-yellow-400">Nihilisme actiu</h5>
+
+            <p class="text-sm text-gray-300">
+                La destrucció dels valors es converteix en una oportunitat.
+                Alliberat de tota imposició, l’individu té a les seves mans el privilegi de crear nous valors.
+            </p>
+
+            <ul class="text-sm text-gray-400 space-y-1">
+                <li>• Absència de fonament → llibertat</li>
+                <li>• Voluntat de crear</li>
+                <li>• Afirmació de la vida, arrelat a la Terra</li>
+                <li>• Capacitat de risc i transformació</li>
+            </ul>
+
+            <div class="text-yellow-300 text-sm border-l-4 border-yellow-400 pl-3">
+                → Figura: <strong>superhome</strong><br>
+                <span class="text-xs text-gray-400">com un artista de la vida crea valors nous des de la vida mateixa</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FRASE SÍNTESI -->
+    <div class="text-center mt-6">
+        <p class="text-gray-400 text-sm italic max-w-2xl mx-auto">
+            El nihilisme no és només una crisi: és una prova. 
+            O bé l’ésser humà s’enfonsa en la seva pròpia buidor, 
+            o bé assumeix la tasca de crear sentit.
+        </p>
+    </div>
+
+</div>
+                
+                </div>
+            </div>
+
+            <!-- Tab Content: Morality -->
+            <div id="moral" class="content-panel">
+                <div class="max-w-6xl mx-auto px-4">
+                    <h3 class="font-cinzel text-3xl font-bold text-center text-yellow-500 mb-8">La Concepció de la Moral</h3>
+                    
+                    De la mateixa manera que abans s'ha posat en qüestió l'objectivitat dels conceptes de la metafísica, 
+                    Nietzsche ara posa en qüestió l'objectivitat dels valors de la moral judeocristianaa través de <span class="text-red-400 font-bold">l'anàlisi genealògica</span>
+                    <div class="nietzsche-quote p-4 rounded-r-lg my-4">
+                                <p>"Es tracta d'analitzar el sentit original del que es considerava «bo» i «dolent» per veure com va evolucionar fins a convertir-se en «bo» i «malvat» amb el cristianisme."</p>
+                            </div>
+
+                    <div class="bg-purple-900/20 border border-purple-500/30 rounded-xl p-6 mb-10 space-y-4">
+
+                        <h4 class="text-purple-300 font-semibold uppercase tracking-wide text-sm">
+                            Principi bàsic
+                        </h4>
+                    
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Tot sistema de valors és un reflex dels instints que dominen la vida de qui els formula.
+                        </p>
+                    
+                        <div class="space-y-2 text-sm">
+                            <p class="text-green-400">
+                                ❤️ Instints plens i poderosos → <span class="font-semibold">moral de vida ascendent</span>
+                            </p>
+                            <p class="text-red-400">
+                                💀 Instints dèbils i atrofiats → <span class="font-semibold">moral de vida descendent</span>
+                            </p>
+                        </div>
+                    
+                    </div>
+                    <div class="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-6 mb-10 space-y-4">
+
+                        <h4 class="text-yellow-300 font-semibold uppercase tracking-wide text-sm">
+                            Origen dels valors morals (Genealogia de la moral)
+                        </h4>
+                    
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Per entendre la moral, Nietzsche no pregunta què és el bé, sinó 
+                            <span class="text-yellow-400 font-semibold">quin era el seu sentit original</span>.
+                            El seu punt de referència és l'antiga aristocràcia grega.
+                        </p>
+                    
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Inicialment, el terme <span class="text-yellow-400 font-semibold">«bo»</span> designava <strong>l'home noble</strong>:
+                            fort, ple de vida, segur de si mateix, dotat de lideratge, capaç d'afirmar l'existència en tota la seva dimensió, 
+                            fins i tot en el seu caràcter tràgic.
+                        </p>
+                    
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            En canvi, el <span class="text-red-400 font-semibold">«dolent»</span> era simplement <strong>el dèbil</strong>,
+                            el vulgar, el mediocre, el mancat de força vital, finalment incapaç d'assumir la vida tal com és.
+                        </p>
+                    
+                        <div class="border-t border-yellow-500/20 pt-4">
+                            <p class="text-gray-300 text-sm leading-relaxed">
+                                👉 D’aquestes dues maneres de ser al món neixen dos sistemes de valors radicalment diferents:
+                            </p>
+                    
+                            <p class="text-yellow-400 font-semibold text-sm mt-2">
+                                la moral del senyor i la moral de l’esclau.
+                            </p>
+                        </div>
+                    
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8 mb-12">
+                        <!-- MORAL DEL SENYOR -->
+                        <div class="concept-card p-6 rounded-xl border-yellow-500/30 bg-gradient-to-br from-yellow-900/20 to-black transform hover:scale-105 transition">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center mr-4">
+                                    <span class="text-2xl">👑</span>
+                                </div>
+                                <h4 class="font-cinzel text-xl font-bold text-yellow-500">Moral del Senyor</h4>
+                            </div>
+                            <p class="text-xs text-yellow-600 mb-3 font-bold tracking-wider">Vida Ascendent 👍</p>
+                            <ul class="space-y-2 text-sm text-gray-300">
+                                <li>• Sorgeix de l'autodisciplina d'una voluntat audaç</li>
+                                <li>• Fort, dominador, individualista, veraç</li>
+                                <li>• Sentit de la plenitud, afirma la jerarquia</li>
+                                <li>• Considera "bo" tot el que eleva l'individu</li>
+                                <li>• <strong>Valors:</strong> Arrogància, activitat desbordant, fe en si mateix, falta de compassió</li>
+                                <li>• <strong>Origen:</strong> Autodeterminació, instints poderosos</li>
+                            </ul>
+                    
+                            <div class="mt-6 p-4 bg-yellow-500/10 rounded-lg border border-yellow-500/30">
+                                <p class="text-xs text-yellow-200 italic">
+                                    "El senyor es valora a si mateix de manera afirmativa, creant el seu propi sistema de valors."
+                                </p>
+                            </div>
+                        </div>
+                    
+                        <!-- MORAL DE L'ESCLAU -->
+                        <div class="concept-card p-6 rounded-xl border-red-500/30 bg-gradient-to-br from-red-900/20 to-black transform hover:scale-105 transition">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mr-4">
+                                    <span class="text-2xl">⛓️</span>
+                                </div>
+                                <h4 class="font-cinzel text-xl font-bold text-red-400">Moral de l'Esclau</h4>
+                            </div>
+                            <p class="text-xs text-red-500 mb-3 font-bold tracking-wider">Vida Descendent 👎</p>
+                            <ul class="space-y-2 text-sm text-gray-300">
+                                <li>• Sorgeix del temor i el RESSENTIMENT vers tot el que és superior</li>
+                                <li>• Dèbil, vulgar, malaltís, gregari</li>
+                                <li>• Busca seguretat, evita la lluita</li>
+                                <li>• Considera "bo" el que fa suportable la vida</li>
+                                <li>• Moral reactiva, no pas activa, tot des de l'odi, la venjança, la por</li>
+                                <li>• <strong>Valors:</strong> Compassió, humilitat, resignació</li>
+                                <li>• <strong>Origen:</strong> Ressentiment</li>
+                            </ul>
+                    
+                            <div class="mt-6 p-4 bg-red-500/10 rounded-lg border border-red-500/30">
+                                <p class="text-xs text-red-200 italic">
+                                    "L'esclau defineix el bé per negació del senyor. El seu plantejament no hi ha tant una afirmació com una simple reacció "
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- COMPARATIVA FINAL (AMPLADA REAL) -->
+<div class="mt-8 bg-black/70 p-10 border border-white/10 rounded-2xl">
+
+    <div class="grid md:grid-cols-3 gap-10 text-center">
+
+        <div>
+            <h4 class="font-cinzel text-yellow-500 font-bold mb-3">Actitud davant la vida</h4>
+            <div class="flex justify-center space-x-4 text-base">
+                <span class="text-yellow-400">Afirmació</span>
+                <span class="text-gray-600">vs</span>
+                <span class="text-red-400">Negació</span>
+            </div>
+        </div>
+
+        <div>
+            <h4 class="font-cinzel text-purple-400 font-bold mb-3">Mecanisme psicològic</h4>
+            <div class="flex justify-center space-x-4 text-base">
+                <span class="text-yellow-400 whitespace-nowrap">Seguretat instintiva</span>
+                <span class="text-gray-600">vs</span>
+                <span class="text-red-400">Ressentiment</span>
+            </div>
+        </div>
+
+        <div>
+            <h4 class="font-cinzel text-green-400 font-bold mb-3">Efecte sobre la cultura</h4>
+            <div class="flex justify-center space-x-4 text-base">
+                <span class="text-yellow-400">Enriquiment vital</span>
+                <span class="text-gray-600">vs</span>
+                <span class="text-red-400">Decadència</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+                    
+                    <!-- FRASE INTRODUCTÒRIA SEPARADA -->
+<div class="mt-12 mb-6 text-center">
+    <p class="text-gray-500 text-sm max-w-3xl mx-auto leading-relaxed">
+        La història de la cultura occidental és la història del triomf progressiu 
+        de la moral de l'esclau sobre la moral del senyor, des de Sòcrates i Plató, passant pel cristianisme, fins a la modernitat democràtica i socialista.
+    </p>
+</div>
+
+<!-- REBEL·LIÓ DELS ESCLAUS -->
+<div class="bg-gradient-to-r from-red-900/30 to-yellow-900/30 p-8 rounded-2xl border border-white/10 mb-8">
+    <h4 class="font-cinzel text-2xl font-bold text-center mb-6">La Rebel·lió dels Esclaus en la Moral</h4>
+    <div class="space-y-4 text-gray-300">
+        <p>El corrent moral que domina Europa busca afeblir i anul·lar l'individu. Considera bo només allò que beneficia la col·lectivitat — expressió de la <span class="text-red-400">moral de l'esclau</span>, una malaltia de la vida.</p>
+        
+        <div class="nietzsche-quote p-4 rounded-r-lg my-4">
+            <p>"El judaisme representa el geni del rancor, capaç d'aprofitar les seves últimes forces per crear un nou ideal que inverteix els valors de la moral del senyor."</p>
+        </div>
+
+        <p>El cristianisme hereta i consuma aquesta transvaloració. 
+
+        <div class="mt-6 p-4 bg-black/40 rounded-lg">
+            <h5 class="font-bold text-yellow-500 mb-2">La Solució: Transvaloració de Tots els Valors</h5>
+            <p class="text-sm">Els valors morals actuals representen un impediment per assolir les potencialitats vitals. Són ideals hostils a la vida. La solució és retornar a la situació original i crear una nova moral que afirmi la vida en la seva plenitud.</p>
+        </div>
+    </div>
+</div>
+
+<!-- TIMELINE DEGENERACIÓ MORAL -->
+<div class="relative mt-12 mb-12 max-w-4xl mx-auto">
+    <h4 class="font-cinzel text-2xl font-bold text-center mb-8">Progrés de la degeneració moral</h4>
+
+    <div class="relative border-l-2 border-white/20 ml-6">
+        <!-- SACERDOTS -->
+        <div class="mb-12 ml-6 relative">
+            <div class="absolute -left-6 w-4 h-4 bg-yellow-400 rounded-full border-2 border-white/20"></div>
+            <div class="bg-yellow-900/20 p-4 rounded-lg">
+                <h5 class="font-semibold text-yellow-400 mb-2">SACERDOTS</h5>
+                <p>Degeneració de la casta dels senyors. Incuben ressentiment, odi i venjança. Lideren els esclaus contra els senyors inventant una nova moral: l’esperit contra el cos.</p>
+            </div>
+        </div>
+
+        <!-- JUDAISME -->
+        <div class="mb-12 ml-6 relative">
+            <div class="absolute -left-6 w-4 h-4 bg-red-400 rounded-full border-2 border-white/20"></div>
+            <div class="bg-red-900/20 p-4 rounded-lg">
+                <h5 class="font-semibold text-red-400 mb-2">JUDAISME</h5>
+                <p>El geni del rancor: inverteix els valors nobles. Les misèries dels dèbils apareixen com a virtuts (“obediència”, “renúncia”, “humilitat”).</p>
+            </div>
+        </div>
+
+        <!-- CRISTIANISME -->
+        <div class="mb-12 ml-6 relative">
+            <div class="absolute -left-6 w-4 h-4 bg-red-700 rounded-full border-2 border-white/20"></div>
+            <div class="bg-red-700/20 p-4 rounded-lg">
+                <h5 class="font-semibold text-red-400 mb-2">CRISTIANISME</h5>
+                <p>Hereta i consuma la transvaloració jueva. No és la religió de l’amor, sinó de l’odi més profund contra tot el que és bo: els nobles, els poderosos, els forts.</p>
+            </div>
+        </div>
+
+        <!-- IL·LUSTRACIÓ I MOVIMENTS SOCIALS -->
+        <div class="ml-6 relative">
+            <div class="absolute -left-6 w-4 h-4 bg-gray-200 rounded-full border-2 border-white/20"></div>
+            <div class="bg-gray-800/20 p-4 rounded-lg">
+                <h5 class="font-semibold text-gray-200 mb-2">IL·LUSTRACIÓ I MOVIMENTS SOCIALS</h5>
+                <p>Manté els valors cristians secularitzats: democràcia, socialisme, anarquisme, comunisme. Defensen igualtat i compassió (moral de l’esclau sense Déu).</p>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+    <!-- The Proposal Section -->
+    <section id="proposta" class="py-20 section-light relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-yellow-900/10 to-transparent pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-500">LA PROPOSTA NIETZSCHEANA</h2>
+                <p class="text-xl text-gray-400">De la destrucció a la creació: el camí cap al Superhome</p>
+            </div>
+            <!-- INTRODUCCIÓ MANIFEST -->
+<div class="max-w-5xl mx-auto mb-20 px-6 text-center">
+
+    <!-- Línia superior -->
+    <div class="w-24 h-[2px] bg-yellow-500/50 mx-auto mb-6"></div>
+
+    <!-- Frase principal -->
+    <p class="text-xl md:text-2xl text-gray-200 leading-relaxed font-playfair italic">
+        Després de la destrucció dels valors tradicionals, Nietzsche proposa una nova manera de viure basada en 
+        <span class="text-yellow-400 font-semibold not-italic">l’afirmació de la vida</span>.
+    </p>
+
+    <!-- Desenvolupament -->
+    <p class="mt-6 text-gray-400 leading-relaxed max-w-3xl mx-auto">
+        Aquesta proposta inclou conceptes com la 
+        <span class="text-yellow-400 font-semibold">voluntat de poder</span>, 
+        el <span class="text-yellow-400 font-semibold">superhome</span> 
+        i l’<span class="text-yellow-400 font-semibold">etern retorn</span>.
+    </p>
+
+    <!-- IDEA CLAU -->
+    <p class="mt-8 text-lg font-semibold text-yellow-500 tracking-wide">
+        IDEA CLAU: crear nous valors que afirmin la vida en totes les seves dimensions
+    </p>
+
+    <!-- Línia inferior -->
+    <div class="w-24 h-[2px] bg-yellow-500/50 mx-auto mt-6"></div>
+
+</div>
+
+            <div class="grid lg:grid-cols-3 gap-8 mb-12">
+
+                <!-- 1. MORT DE DÉU -->
+                <div class="concept-card no-anim p-8 rounded-2xl border-red-500/30 hover:border-red-500 transition-all duration-500">
+                    <div class="text-4xl mb-4">⚰️</div>
+                    <h3 class="font-cinzel text-2xl font-bold text-red-400 mb-4">La Mort de Déu</h3>
+            
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        Simbolitza el final de "la metafísica de ser". No es tracta, doncs, només de la desaparició d’un Déu religiós, sinó de la caiguda de tots els fonaments absoluts
+                        que durant segles han guiat la cultura occidental:
+                        la veritat, l’ésser, el bé. Tot allò que fixava i garantia un sentit a les coses i a la vida s’esfondra.
+                    </p>
+            
+                    <div class="bg-red-900/20 p-3 rounded-lg text-xs text-gray-400">
+                        <strong>Conseqüència:</strong> el món queda sense fonament. 
+                        S’obre una bifurcació: o bé la caiguda en el nihilisme passiu, o bé la possibilitat de crear nous valors.
+                    </div>
+                </div>
+            
+                <!-- 2. TRANSFORMACIONS -->
+                <div class="concept-card p-8 rounded-2xl border-yellow-500/30 hover:border-yellow-500 transition-all duration-500">
+                    <div class="text-4xl mb-4">🦁</div>
+                    <h3 class="font-cinzel text-2xl font-bold text-yellow-500 mb-4">Les Tres Transformacions</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">Per superar el nihilisme, l’individu ha de passar per una sèrie de transformacions simbòliques</p>
+            
+                    <div class="space-y-4 text-sm text-gray-300">
+            
+                        <div>
+                            <span class="text-xl mr-2">🐪</span>
+                            <strong class="text-yellow-600">Camell:</strong> 
+                            assumeix el pes dels valors tradicionals (deure, culpa, sacrifici). 
+                            Representa la submissió a una moral que nega la vida.
+                        </div>
+            
+                        <div>
+                            <span class="text-xl mr-2">🦁</span>
+                            <strong class="text-yellow-600">Lleó:</strong> 
+                            es rebel·la i destrueix aquests valors. 
+                            Conquereix la llibertat dient “no” — però encara no sap crear. Li falta l'acció.
+                        </div>
+            
+                        <div>
+                            <span class="text-xl mr-2">👶</span>
+                            <strong class="text-yellow-600">Nen:</strong> 
+                            simbolitza finalment la innocència creadora. 
+                            És el punt on l’esperit diu “sí” a la vida i crea nous valors, sense càrregues ni pre-judicis.
+                        </div>
+            
+                    </div>
+                </div>
+            
+                <!-- 3. SUPERHOME -->
+                <div class="concept-card p-8 rounded-2xl border-yellow-500/50 hover:border-yellow-400 transition-all duration-500 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl"></div>
+            
+                    <div class="text-4xl mb-4 relative z-10">☀️</div>
+                    <h3 class="font-cinzel text-2xl font-bold text-yellow-400 mb-4 relative z-10">El Superhome</h3>
+            
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4 relative z-10">
+                        És l’ésser capaç d’assumir plenament la mort de Déu i el buit del nihilisme, 
+                        transformant-los en força creadora. No busca un sentit: el crea.
+                    </p>
+            
+                    <ul class="text-xs text-gray-400 space-y-2 relative z-10">
+                        <li>• Afirmació radical de la vida</li>
+                        <li>• Acceptació del temps i de la finitud</li>
+                        <li>• Capacitat de crear valors nous</li>
+                        <li>• Vida entesa com a obra d’art</li>
+                    </ul>
+            
+                    <p class="text-gray-300 text-sm leading-relaxed mt-4 relative z-10">
+                        No fuig del devenir: el vol, el recrea i s’hi projecta constantment.
+                        Cada nova creació implica destruir el que és per obrir pas al que encara no és.
+                    </p>
+            
+                </div>
+            
+            </div>
+            
+            <!-- FRASE FINAL REFORMULADA (PONT SUAU) -->
+<div class="mt-12 mb-16 text-center max-w-3xl mx-auto">
+    <p class="text-lg text-gray-300 leading-relaxed">
+        Des d’aquesta capacitat radical de crear sentit en un món sense fonament, 
+        el <span class="text-yellow-400 font-semibold">superhome</span> 
+        expressa la seva essència més profunda. Nietzsche l'anomena: 
+        <span class="text-yellow-500 font-semibold">la voluntat de poder</span>.
+    </p>
+</div>
+
+
+            <!-- Will to Power Detail -->
+<div class="grid md:grid-cols-2 gap-12 items-center">
+    <div>
+        <h3 class="font-cinzel text-3xl font-bold text-yellow-500 mb-6">La Voluntat de Poder</h3>
+
+        <p class="text-gray-300 mb-4">
+            El superhome, buscant constantment la seva pròpia expressió i creació,
+            exerceix la voluntat de poder creant i copsant les diferents possibles perspectives 
+            i seleccionant aquelles que intensifiquen i porten la vida a la seva plenitud.
+        </p>
+
+        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+            Però la voluntat de poder no és només una facultat del superhome: és el principi fonamental de tota vida. 
+            Tot allò que viu tendeix a expandir-se, a superar-se, a imposar una forma, a interpretar el món des de la seva pròpia força.
+        </p>
+
+        <!-- Definició clara -->
+        <div class="p-4 bg-yellow-900/20 rounded-lg border border-yellow-500/30 mb-6">
+            <p class="text-yellow-300 text-sm font-semibold">
+                💪 La voluntat de poder no és voluntat de domini extern, 
+                sinó la tendència de tota vida a créixer, intensificar-se i superar-se a si mateixa.
+            </p>
+        </div>
+
+        <p class="text-gray-400 text-sm mb-4">
+            Per comprendre això, cal recordar com Nietzsche entén el coneixement:
+        </p>
+        
+        <div class="space-y-4">
+            <div class="p-4 bg-white/5 rounded-lg border-l-4 border-yellow-500">
+                <h4 class="font-bold text-yellow-500 mb-2">Perspectivisme</h4>
+                <p class="text-sm text-gray-400">
+                    L'ésser és sempre interpretació (valoració) que es fa des dels instints que dominen l'individu 
+                    en el moment que contempla un fet. No hi ha fets, només interpretacions.
+                </p>
+            </div>
+
+            <div class="p-4 bg-white/5 rounded-lg border-l-4 border-red-500">
+                <h4 class="font-bold text-red-400 mb-2">Veritat com a Perspectiva</h4>
+                <p class="text-sm text-gray-400">
+                    La veritat consisteix a saber que tota perspectiva és parcial i subjectiva. 
+                    No és relativisme simple: les perspectives es valoren segons si potencien la vida o la neguen.
+                </p>
+            </div>
+        </div>
+
+        <!-- Tancament conceptual -->
+        <div class="mt-6 text-sm text-gray-400 leading-relaxed">
+            Així, la realitat no és un conjunt de fets fixos, sinó un camp d'interpretacions en lluita. 
+            Exercir la voluntat de poder significa saber crear, sostenir i afirmar aquelles perspectives 
+            que fan la vida més intensa, més rica i més elevada.
+        </div>
+    </div>
+
+    <div class="relative">
+        <img src="https://kimi-web-img.moonshot.cn/img/i.audiomack.com/5dfb35a44a82dacf517fd653ac08f7f740fb6ce4.webp" alt="Übermensch Mountain" class="rounded-2xl shadow-2xl opacity-80 hover:opacity-100 transition duration-500">
+        
+        <div class="absolute -bottom-6 -left-6 bg-black/80 p-4 rounded-lg border border-yellow-500/30 backdrop-blur-md">
+            <p class="font-cinzel text-yellow-500 text-sm">
+                "L'home és quelcom que ha de ser superat"
+            </p>
+        </div>
+    </div>
+</div>
+        </div>
+    </section>
+
+    <!-- Eternal Return Section -->
+    <section id="etern" class="py-20 section-dark relative min-h-screen flex items-center">
+        <div class="absolute inset-0 opacity-30">
+            <img src="https://kimi-web-img.moonshot.cn/img/img.freepik.com/d4452bff88e3363a210d020194ddf73d764a7bc2.jpg" alt="Eternal Return Cosmic" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/60"></div>
+        
+        <div class="max-w-5xl mx-auto px-4 relative z-10 text-center">
+            <h2 class="font-cinzel text-5xl md:text-6xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+                L'ETERN RETORN
+            </h2>
+            
+            <p class="text-xl md:text-2xl text-gray-300 mb-12 font-playfair italic max-w-3xl mx-auto">
+                "En cada cosa finita i única brilla l'eternitat de l'univers"
+            </p>
+            <!-- INTRODUCCIÓ ETERN RETORN AMB GRADIENT -->
+<div class="max-w-4xl mx-auto mb-12 px-6 text-center relative z-10">
+    <!-- Línia superior fina amb glow -->
+    <div class="w-24 h-[2px] mx-auto mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-full opacity-60"></div>
+
+    <!-- Frase principal amb gradient i lleu shadow -->
+    <p class="text-lg md:text-2xl font-playfair italic bg-clip-text text-transparent 
+              bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 drop-shadow-lg leading-relaxed">
+        Després d’assumir la mort de Déu i la creació de nous valors, l’home afronta la repetició infinita de la vida: 
+        <span class="font-semibold not-italic">l’Etern Retorn</span>.
+    </p>
+
+    <!-- Desenvolupament -->
+    <p class="mt-4 text-gray-300 leading-relaxed max-w-2xl mx-auto">
+        Cada acció, cada elecció i cada instant es projecta infinitament, convertint el present en un mirall etern de tot el que és i serà.
+    </p>
+
+    <!-- IDEA CLAU -->
+    <p class="mt-6 text-purple-400 font-semibold tracking-wide text-sm md:text-base">
+        IDEA CLAU: viure com si cada instant es repetís per sempre desafia l’individu a viure de manera tan autèntica i plena que pugui acceptar la repetició eterna de les seves accions i experiències,
+         reafirafirmant-se en la seva vida sense reserves
+    </p>
+
+    <!-- Línia inferior fina amb glow -->
+    <div class="w-24 h-[2px] mx-auto mt-6 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-full opacity-60"></div>
+</div>
+
+            <div class="grid md:grid-cols-2 gap-8 text-left mb-12">
+                <div class="concept-card no-anim p-6 rounded-xl bg-black/60 backdrop-blur-md">
+                    <h3 class="font-cinzel text-xl font-bold text-purple-400 mb-4">El Problema del Temps</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">La concepció tradicional del temps lineal posa límits a l'acte de creació del superhome:</p>
+                    <ul class="mt-4 space-y-2 text-sm text-gray-400">
+                        <li>• <strong>Passat:</strong> Immutable, no es pot canviar</li>
+                        <li>• <strong>Futur com a promesa buida de plenitud: </strong>sempre per venir, mai present</li>
+                        
+                        <li>• <strong>L'abisme del temps:</strong> Tots els projectes caduquen, tota grandesa esdevé petita</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card p-6 rounded-xl bg-black/60 backdrop-blur-md border-purple-500/30">
+                    <h3 class="font-cinzel text-xl font-bold text-pink-400 mb-4">La Concepció Circular</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">Nietzsche proposa una concepció circular del temps en la qual tot ja ha existit i tot es repeteix de manera infinita.</p>
+                    <p class="text-gray-400 text-sm leading-relaxed">• Aquesta idea implica que cada instant, per més efímer que sigui, té una importància infinita, ja que es tornarà a viure exactament de la mateixa manera.</p>
+
+                    <div class="mt-4 p-3 bg-purple-900/30 rounded-lg border border-purple-500/30">
+                        <p class="text-xs text-purple-300"><strong>La paradoxa:</strong> si tot torna, no només torna la grandesa, sinó també la misèria. LLavors, aquell que viu i desitja la plenitud amb tanta força que diu sí també al sofriment
+                             -sabent que és el preu de tota bellesa i de tota elevació- pot afirmar la vida sencera i acceptar el dolor com a condició necessària de la creació i la grandesa.
+                             Només qui viu com un artista de si mateix pot suportar aquesta idea: un sol instant de plenitud i de bellesa justifica tot el dolor etern que pugui comportar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-3xl mx-auto bg-gradient-to-r from-purple-900/40 via-pink-900/40 to-red-900/40 p-8 rounded-2xl border border-white/10 backdrop-blur-md">
+    
+                <h3 class="font-cinzel text-2xl font-bold text-white mb-4">L'Amor Fati</h3>
+                
+                <p class="text-gray-200 leading-relaxed mb-6">
+                    Si comprenem que en <span class="text-yellow-400 font-bold">l'instant</span> rau el centre de gravetat de l'existència, 
+                    llavors cada instant deixa la seva empremta en un temps que es repeteix eternament.
+                </p>
+                
+                <!-- FRASE DESTACADA -->
+                <p class="text-gray-400 text-sm leading-relaxed border-l-2 border-yellow-500/40 pl-4 mb-8">
+                    • Això comporta una invitació a valorar cada decisió, cada experiència, com a única i insubstituïble, 
+                    creant un sentiment profund de responsabilitat personal i d’amor per la pròpia existència ("amor fati").
+                </p>
+            
+                <div class="grid md:grid-cols-3 gap-4 text-center">
+                    <div class="p-4 bg-black/40 rounded-lg">
+                        <div class="text-3xl mb-2">⚡</div>
+                        <p class="text-sm text-gray-400">Configura el temps en cada instant</p>
+                    </div>
+                    <div class="p-4 bg-black/40 rounded-lg">
+                        <div class="text-3xl mb-2">🌍</div>
+                        <p class="text-sm text-gray-400">Fermament arrelat a la Terra</p>
+                    </div>
+                    <div class="p-4 bg-black/40 rounded-lg">
+                        <div class="text-3xl mb-2">❤️</div>
+                        <p class="text-sm text-gray-400">Estima la vida sense voler que res sigui diferent</p>
+                    </div>
+                </div>
+            
+            </div>
+            <!-- Prova existencial de l'etern retorn -->
+<div class="mt-10 max-w-3xl mx-auto p-6 bg-black/50 rounded-xl border border-purple-500/20 backdrop-blur-md">
+    <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+        L’etern retorn no és només una teoria sobre el temps, sinó una prova existencial radical:
+    </p>
+
+    <p class="mt-4 text-lg text-purple-300 font-semibold italic text-center">
+        “Voldries viure aquesta mateixa vida, exactament igual, una i altra vegada, per tota l’eternitat?”
+    </p>
+
+    <p class="mt-4 text-gray-400 text-sm leading-relaxed text-center">
+        Només qui pot respondre afirmativament a aquesta pregunta 
+        afirma la vida sense reserves. 
+        Aquesta és la forma més alta de fidelitat a la Terra.
+    </p>
+</div>
+
+            <div class="mt-12 text-white-500 text-sm">
+                <p>El superhome, exercitant la voluntat de poder, viu la vida de manera profunda i decidida, vivint cada instant com si hagués
+                    de voler-ho eternament<br> sempre disposat a tornar a viure la vida de la mateixa manera, afirmant-la sense reseves, sense desitjar que res sigui diferent.</p>
+            </div>
+        </div>
+        
+    </section>
+
+    <!-- Footer -->
+<footer class="bg-gradient-to-b from-black via-purple-950 to-black/80 border-t border-purple-700/20 py-16">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+        <!-- Signatura -->
+<div class="flex flex-col items-center mb-8">
+    <div class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center mb-2">
+        <svg class="w-4 h-4 text-red-400" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/>
+        </svg>
+    </div>
+    <span class="font-cinzel text-yellow-500 text-lg tracking-widest font-bold">
+        I fins aquí NIETZSCHE
+    </span>
+    <span class="font-cinzel text-yellow-500/90 text-lg tracking-widest font-bold italic block mt-6 ml-2">
+        "Un document fet per a tothom i per a ningú"
+    </span>
+</div>
+
+        <p class="text-gray-500 text-xs uppercase tracking-wider mb-10">
+            Filosofia del martell · Voluntat · Afirmació de la vida
+        </p>
+
+        <!-- FRASE FINAL -->
+        <div class="nietzsche-quote p-8 rounded-xl text-center max-w-5xl mx-auto">
+            <p class="text-xl font-playfair italic text-gray-200 mb-4">
+                "He estat un filòsof del martell: no sé què és més gran, 
+                si el meu goig en destruir o el meu goig en crear"
+            </p>
+            <p class="text-sm text-gray-500">— Friedrich Nietzsche</p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Tab switching
+        function switchTab(tabId) {
+            // Hide all panels
+            document.querySelectorAll('.content-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected panel
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Duality expand (mobile friendly)
+        function expandSide(side) {
+            if (window.innerWidth <= 768) {
+                alert(side === 'apollonian' ? 
+                    'APOL·LÍNI: Ordre, mesura, llum, individualització, forma, racionalitat' : 
+                    'DIONISÍAC: Caos, desmesura, foscor, fusió, instint, passió, èxtasi');
+            }
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0,
+            rootMargin: '0px 0px 0px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.concept-card:not(.no-anim)').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(2px)';
+            el.style.transition = `all 1s ease ${index * 0.05}s`;
+            observer.observe(el);
+        });
+    </script>
+
+    <!-- PREGUNTES PER REFLEXIONAR (DIRECTE AMB FLETXA) -->
+<section class="py-20 section-dark">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="font-cinzel text-4xl font-bold text-white mb-4">PREGUNTES PER REPASSAR</h2>
+            <p class="text-gray-400">Nietzsche ens convida a pensar</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Column 1: Epistemology -->
+            <div class="space-y-4">
+                <h3 class="font-cinzel text-xl font-bold text-yellow-500 border-b border-yellow-500/30 pb-2 mb-4">Teoria del Coneixement</h3>
+                
+                <div class="concept-card p-4 rounded-lg bg-white/5">
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-300 font-semibold">Quina és millor: transmissió explícita o aforisme?</p>
+                        <span class="text-yellow-500">▼</span>
+                    </div>
+                    <p class="mt-3 text-xs text-gray-400 border-t border-white/10 pt-2">
+                        Nietzsche defensa l'aforisme perquè obliga a pensar, mentre que el discurs explícit transmet "veritats" acabades que no es qüestionen.
+                    </p>
+                </div>
+
+                <div class="concept-card p-4 rounded-lg bg-white/5">
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-300 font-semibold">La veritat és una manera de mentir?</p>
+                        <span class="text-yellow-500">▼</span>
+                    </div>
+                    <p class="mt-3 text-xs text-gray-400 border-t border-white/10 pt-2">
+                        Sí, si entenem que les veritats són ficcions útils (conceptes) que hem oblidat que són ficcions, i que "ser veraç" és mentir segons normes establertes pel costum.
+                    </p>
+                </div>
+
+                <div class="concept-card p-4 rounded-lg bg-white/5">
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-300 font-semibold">Vivim en una societat apol·línia o dionisíaca?</p>
+                        <span class="text-yellow-500">▼</span>
+                    </div>
+                    <p class="mt-3 text-xs text-gray-400 border-t border-white/10 pt-2">
+                        Nietzsche diria que vivim en una societat "socràtica": racionalista, ingenuament optimista, que creu que tot pot ser explicat, allunyada de la saviesa tràgica.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Column 2: Ètica -->
+            <div class="space-y-4">
+                <h3 class="font-cinzel text-xl font-bold text-red-500 border-b border-red-500/30 pb-2 mb-4">Ètica i Valors</h3>
+                
+                <div class="concept-card p-4 rounded-lg bg-white/5">
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-300 font-semibold">Els valors de la moral de l'esclau són tots negatius?</p>
+                        <span class="text-red-500">▼</span>
+                    </div>
+                    <p class="mt-3 text-xs text-gray-400 border-t border-white/10 pt-2">
+                        Nietzsche critica l'origen (ressentiment) i els efectes (afebliment de la vida), però no necessàriament tots els valors individuals. El problema és la inversió que nega la vida forta.
+                    </p>
+                </div>
+
+                <div class="concept-card p-4 rounded-lg bg-white/5">
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-300 font-semibold">Podem ser tots superhomes?</p>
+                        <span class="text-red-500">▼</span>
+                    </div>
+                    <p class="mt-3 text-xs text-gray-400 border-t border-white/10 pt-2">
+                        No és una categoria democràtica. El superhome representa un ideal de superació contínua, no un estat que tothom pot assolir igual. Implica jerarquia natural, no igualtat.
+                    </p>
+                </div>
+
+                <div class="concept-card p-4 rounded-lg bg-white/5">
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-300 font-semibold">És millor ser nihilista o creure en un ordre moral?</p>
+                        <span class="text-red-500">▼</span>
+                    </div>
+                    <p class="mt-3 text-xs text-gray-400 border-t border-white/10 pt-2">
+                        Nietzsche prefereix el nihilisme actiu (destructiu, però creatiu) al cristianisme decadent. Però el superhome supera el nihilisme creant nous valors.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Column 3: Metafísica -->
+            <div class="space-y-4">
+                <h3 class="font-cinzel text-xl font-bold text-purple-500 border-b border-purple-500/30 pb-2 mb-4">Metafísica</h3>
+                
+                <div class="concept-card p-4 rounded-lg bg-white/5">
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-300 font-semibold">Existeix alguna cosa eterna i immutable?</p>
+                        <span class="text-purple-500">▼</span>
+                    </div>
+                    <p class="mt-3 text-xs text-gray-400 border-t border-white/10 pt-2">
+                        Per Nietzsche, no. Tot és esdevenir, canvi, flux. Les "essències" eternes són ficcions de la raó que nega el temps per por a la caducitat.
+                    </p>
+                </div>
+
+                <div class="concept-card p-4 rounded-lg bg-white/5">
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-300 font-semibold">El temps és lineal o circular?</p>
+                        <span class="text-purple-500">▼</span>
+                    </div>
+                    <p class="mt-3 text-xs text-gray-400 border-t border-white/10 pt-2">
+                        Nietzsche proposa el temps circular (etern retorn) contra la concepció lineal judeocristiana. Però és una prova existencial més que una tesi científica: ¿estàs disposat a repetir la teva vida eternament?
+                    </p>
+                </div>
+            </div>
+
+            <!-- Column 4: Vida i Societat -->
+            <div class="space-y-4">
+                <h3 class="font-cinzel text-xl font-bold text-green-500 border-b border-green-500/30 pb-2 mb-4">Vida i Societat</h3>
+                
+                <div class="concept-card p-4 rounded-lg bg-white/5">
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-300 font-semibold">És possible actuar lliurement sense concessions als convencionalismes?</p>
+                        <span class="text-green-500">▼</span>
+                    </div>
+                    <p class="mt-3 text-xs text-gray-400 border-t border-white/10 pt-2">
+                        Això és el que proposa el superhome: autonomia creadora de valors. Però Nietzsche és conscient que això és excepcional, no la norma. La majoria prefereix la seguretat del "ramat".
+                    </p>
+                </div>
+
+                <div class="concept-card p-4 rounded-lg bg-white/5">
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-300 font-semibold">Hauria estat millor no haver nascut?</p>
+                        <span class="text-green-500">▼</span>
+                    </div>
+                    <p class="mt-3 text-xs text-gray-400 border-t border-white/10 pt-2">
+                        Aquesta és la saviesa de Silè. Els grecs la van superar amb la tragèdia, una mostra de grandesa, lucidesa, creativitat i valentia. Nietzsche diu que tenim l'oportunitat de fer que la vida valgui la pena si l'afirmem artísticament, també amb tot el seu dolor.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        <!-- TEXTOS CLAU DE LES PAU -->
+        <section id="textos" class="py-20 section-light">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-500">TEXTOS CLAU</h2>
+                    <p class="text-xl text-gray-400">Guia de lectura de les obres fonamentals per la SELECTIVITAT</p>
+                </div>
+    
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Naixement de la Tragèdia -->
+                    <div class="concept-card p-8 rounded-2xl border-red-500/30 group hover:bg-red-900/10 transition-all duration-500">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="text-xs text-red-500 font-bold tracking-wider">1871</span>
+                                <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-red-400 transition">El Naixement de la Tragèdia</h3>
+                            </div>
+                            <span class="text-4xl opacity-50 group-hover:opacity-100 transition">🎭</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4">Primera obra important. Explora l'origen i significat de la tragèdia grega i la seva rellevància per entendre la decadència de la cultura moderna.</p>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-2">
+                                <span class="text-yellow-500 mt-1">◆</span>
+                                <p class="text-sm text-gray-400">Introducció dels conceptes clau: <span class="text-yellow-500">Apol·lini</span> i <span class="text-red-400">Dionisíac</span></p>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <span class="text-yellow-500 mt-1">◆</span>
+                                <p class="text-sm text-gray-400">Crítica a <span class="text-red-400">Sòcrates</span> com a iniciador de la decadència</p>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <span class="text-yellow-500 mt-1">◆</span>
+                                <p class="text-sm text-gray-400">La saviesa de Silè: "El millor és no haver nascut..."</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-3 bg-black/40 rounded border-l-2 border-red-500">
+                            <p class="text-xs italic text-gray-500">"La tragèdia era la manera lúcida i valenta de confrontar el dolor i l'absurditat de la vida sense negar-la, creant bellesa"</p>
+                        </div>
+                    </div>
+
+                    <!-- La Genealogia de la Moral -->
+<div class="concept-card p-8 rounded-2xl border-red-600/30 group hover:bg-red-900/10 transition-all duration-500">
+    <div class="flex justify-between items-start mb-4">
+        <div>
+            <span class="text-xs text-red-500 font-bold tracking-wider">1887</span>
+            <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-red-400 transition">La genealogia de la moral</h3>
+        </div>
+        <span class="text-4xl opacity-50 group-hover:opacity-100 transition">🩸</span>
+    </div>
+    <p class="text-gray-300 text-sm mb-4">
+        Anàlisi de l’origen dels valors morals. Nietzsche mostra que la moral no és universal ni objectiva, sinó el resultat d’una lluita de forces: la moral del senyor i la moral de l’esclau.
+    </p>
+    
+    <div class="space-y-3">
+        <div class="flex items-start space-x-2">
+            <span class="text-yellow-500 mt-1">◆</span>
+            <p class="text-sm text-gray-400">Distinció entre <span class="text-yellow-500">bo/dolent</span> (senyors) i <span class="text-red-400">bo/malvat</span> (esclaus)</p>
+        </div>
+        <div class="flex items-start space-x-2">
+            <span class="text-yellow-500 mt-1">◆</span>
+            <p class="text-sm text-gray-400">El <span class="text-red-400">ressentiment</span> com a origen de la moral</p>
+        </div>
+        <div class="flex items-start space-x-2">
+            <span class="text-yellow-500 mt-1">◆</span>
+            <p class="text-sm text-gray-400">La <span class="text-purple-400">mala consciència</span> com a interiorització de la violència</p>
+        </div>
+    </div>
+
+    <div class="mt-6 p-3 bg-black/40 rounded border-l-2 border-red-500">
+        <p class="text-xs italic text-gray-500">"El ressentiment dels impotents és creatiu: crea valors"</p>
+    </div>
+</div>
+
+<!-- Aurora -->
+<div class="concept-card p-8 rounded-2xl border-green-500/30 group hover:bg-green-900/10 transition-all duration-500">
+    <div class="flex justify-between items-start mb-4">
+        <div>
+            <span class="text-xs text-green-400 font-bold tracking-wider">1881</span>
+            <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-green-400 transition">Aurora</h3>
+        </div>
+        <span class="text-4xl opacity-50 group-hover:opacity-100 transition">🌅</span>
+    </div>
+    <p class="text-gray-300 text-sm mb-4">
+        Obra de transició cap a la maduresa. Nietzsche inicia la crítica sistemàtica de la moral i prepara el terreny per a la seva destrucció.
+    </p>
+    
+    <div class="space-y-3">
+        <div class="flex items-start space-x-2">
+            <span class="text-yellow-500 mt-1">▸</span>
+            <p class="text-sm text-gray-400">Crítica dels <span class="text-red-400">prejudicis morals</span></p>
+        </div>
+        <div class="flex items-start space-x-2">
+            <span class="text-yellow-500 mt-1">▸</span>
+            <p class="text-sm text-gray-400">Desemmascarament de la moral com a <span class="text-purple-400">construcció històrica</span></p>
+        </div>
+        <div class="flex items-start space-x-2">
+            <span class="text-yellow-500 mt-1">▸</span>
+            <p class="text-sm text-gray-400">Inici del camí cap a la <span class="text-green-400">transvaloració</span></p>
+        </div>
+    </div>
+
+    <div class="mt-6 p-3 bg-black/40 rounded border-l-2 border-green-500">
+        <p class="text-xs italic text-gray-500">"Som experimentadors: cal posar a prova els valors"</p>
+    </div>
+</div>
+    
+                    <!-- Així parlà Zaratustra -->
+                    <div class="concept-card p-8 rounded-2xl border-yellow-500/30 group hover:bg-yellow-900/10 transition-all duration-500">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="text-xs text-yellow-500 font-bold tracking-wider">1883-1885</span>
+                                <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-yellow-400 transition">Així parlà Zaratustra</h3>
+                            </div>
+                            <span class="text-4xl opacity-50 group-hover:opacity-100 transition">🦅</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4">Obra poètica-filosòfica on presenta les idees segons l'ordre de la seva importància i accessibilitat.</p>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-2">
+                                <span class="text-red-500 mt-1">▸</span>
+                                <p class="text-sm text-gray-400"><strong>Discurs a tothom:</strong> El Superhome</p>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <span class="text-red-500 mt-1">▸</span>
+                                <p class="text-sm text-gray-400"><strong>Discurs a uns quants:</strong> La Mort de Déu i la Voluntat de Poder</p>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <span class="text-red-500 mt-1">▸</span>
+                                <p class="text-sm text-gray-400"><strong>Discurs només a ell:</strong> L'Etern Retorn</p>
+                            </div>
+                        </div>
+    
+                        <div class="mt-6 p-3 bg-black/40 rounded border-l-2 border-yellow-500">
+                            <p class="text-xs italic text-gray-500">"Déu ha mort i nosaltres hem estat els seus assassins"</p>
+                        </div>
+                    </div>
+    
+                    <!-- La Gaia Ciència -->
+                    <div class="concept-card p-8 rounded-2xl border-purple-500/30 group hover:bg-purple-900/10 transition-all duration-500">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="text-xs text-purple-400 font-bold tracking-wider">1882</span>
+                                <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-purple-400 transition">La Gaia Ciència</h3>
+                            </div>
+                            <span class="text-4xl opacity-50 group-hover:opacity-100 transition">🔬</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4">On apareix explícitament la paràbola de la Mort de Déu (el boig que cerca Déu al mercat).</p>
+                        
+                        <div class="mt-4 p-4 bg-purple-900/20 rounded-lg">
+                            <h4 class="text-purple-400 font-bold text-sm mb-2">El Boig</h4>
+                            <p class="text-xs text-gray-400 italic">"¿On és Déu? —va cridar—. Us ho diré! Nosaltres l'hem assassinat, vosaltres i jo! Tots nosaltres som els seus assassins!"</p>
+                        </div>
+                    </div>
+    
+                    <!-- Més enllà del Bé i del Mal -->
+                    <div class="concept-card p-8 rounded-2xl border-orange-500/30 group hover:bg-orange-900/10 transition-all duration-500">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="text-xs text-orange-400 font-bold tracking-wider">1886</span>
+                                <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-orange-400 transition">Més enllà del Bé i del Mal</h3>
+                            </div>
+                            <span class="text-4xl opacity-50 group-hover:opacity-100 transition">⚖️</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4">Preludi a una filosofia del futur. Crítica radicals als prejudicis filosòfics i anàlisi de la moral.</p>
+                        
+                        <ul class="space-y-2 text-sm text-gray-400 mt-4">
+                            <li>• Crítica al "ressentiment" com a origen de la moral judeocristiana</li>
+                            <li>• Distinció entre moral de l'amo i moral del ressentiment</li>
+                            <li>• El perspectivisme: "Hi ha interpretacions, no fets"</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <!-- Sobre veritat i mentida -->
+                <div class="mt-12 concept-card p-8 rounded-2xl border-white/20 max-w-4xl mx-auto">
+                    <h3 class="font-cinzel text-2xl font-bold text-center mb-6 text-white">Sobre veritat i mentida en sentit extramoral</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <p class="text-gray-300 text-sm mb-4">Text fonamental per comprendre la teoria del coneixement de Nietzsche. Analitza els usos del llenguatge i el valor de les paraules.</p>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                                    <span class="text-gray-400">La veritat com a ficció útil</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                                    <span class="text-gray-400">El concepte com a metàfora buida</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                    <span class="text-gray-400">L'intuitiu vs. el conceptual</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-black/40 p-4 rounded-lg border-l-4 border-white/50">
+                            <p class="text-sm italic text-gray-400 mb-2">"Les veritats són il·lusions de les quals s'ha oblidat que ho són"</p>
+                            <p class="text-xs text-gray-600">— Nietzsche sobre les veritats metafísiques</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+    
+        <!-- COMPARATIVA VISUAL FINAL -->
+        <section class="py-20 section-light">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="font-cinzel text-4xl font-bold text-white mb-4">RECORDANT LES DUES MORALS EN CONFRONTACIÓ</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-yellow-500 to-red-500 mx-auto"></div>
+                </div>
+    
+                <div class="overflow-hidden rounded-2xl border border-white/10">
+                    <div class="grid md:grid-cols-2">
+                        <!-- Left: Master Morality -->
+                        <div class="bg-gradient-to-br from-yellow-900/40 to-black p-8 border-r border-white/10">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="font-cinzel text-2xl font-bold text-yellow-500">MORAL DEL SENYOR</h3>
+                                <span class="text-3xl">👑</span>
+                            </div>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span class="text-gray-400">Origen</span>
+                                    <span class="text-yellow-400 font-semibold">Autodeterminació</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span class="text-gray-400">Actitud</span>
+                                    <span class="text-yellow-400 font-semibold">Activa / Creadora</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span class="text-gray-400">Referent</span>
+                                    <span class="text-yellow-400 font-semibold">Si mateix</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-400">Temps</span>
+                                <span class="text-yellow-400 font-semibold">Present / Esdevenir</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-400">Valors</span>
+                                <span class="text-yellow-400 font-semibold">Fortalesa, noblesa, veritat</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-400">Emocions</span>
+                                <span class="text-yellow-400 font-semibold">Alegria, plenitud</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-400">Relació amb l'altre</span>
+                                <span class="text-yellow-400 font-semibold">Jerarquia, distància</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 p-4 bg-yellow-500/10 rounded-lg border border-yellow-500/30">
+                            <p class="text-xs text-yellow-200 italic">"El senyor es valora a si mateix de manera afirmativa, creant el seu propi sistema de valors des de la plenitud vital."</p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Slave Morality -->
+                    <div class="bg-gradient-to-bl from-red-900/40 to-black p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="font-cinzel text-2xl font-bold text-red-500">MORAL DE L'ESCLAU</h3>
+                            <span class="text-3xl">⛓️</span>
+                        </div>
+                        
+                        <div class="space-y-4 text-sm">
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-400">Origen</span>
+                                <span class="text-red-400 font-semibold">Ressentiment</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-400">Actitud</span>
+                                <span class="text-red-400 font-semibold">Reactiva / Negativa</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-400">Referent</span>
+                                <span class="text-red-400 font-semibold">L'altre (el senyor)</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-400">Temps</span>
+                                <span class="text-red-400 font-semibold">Futur (redempció)</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-400">Valors</span>
+                                <span class="text-red-400 font-semibold">Humilitat, compassió, igualtat</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-400">Emocions</span>
+                                <span class="text-red-400 font-semibold">Odi, venjança, por</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-400">Relació amb l'altre</span>
+                                <span class="text-red-400 font-semibold">Igualitarisme, ramat</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 p-4 bg-red-500/10 rounded-lg border border-red-500/30">
+                            <p class="text-xs text-red-200 italic">"L'esclau defineix el bé per negació del que és el senyor. La seva moral és una reacció contra el poder, no una afirmació de la vida."</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SÍNTESI FINAL -->
+    <section class="py-20 section-dark relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-red-900/10 to-transparent pointer-events-none"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="font-cinzel text-4xl font-bold text-white mb-8">SÍNTESI FINAL</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="concept-card p-6 rounded-xl border-red-500/30">
+                    <div class="text-3xl mb-3">🔨</div>
+                    <h3 class="font-cinzel text-lg font-bold text-red-400 mb-2">Crítica</h3>
+                    <p class="text-xs text-gray-400">Deconstrucció de la metafísica, la moral tradicional i la concepció racionalista del coneixement</p>
+                </div>
+                
+                <div class="concept-card p-6 rounded-xl border-yellow-500/30">
+                    <div class="text-3xl mb-3">🔥</div>
+                    <h3 class="font-cinzel text-lg font-bold text-yellow-400 mb-2">Transvaloració</h3>
+                    <p class="text-xs text-gray-400">Inversió de tots els valors, retornant als valors de la vida contra una moral del ressentiment que havia fet de la feblesa una virtut</p>
+                </div>
+                
+                <div class="concept-card p-6 rounded-xl border-purple-500/30">
+                    <div class="text-3xl mb-3">☀️</div>
+                    <h3 class="font-cinzel text-lg font-bold text-purple-400 mb-2">Proposta</h3>
+                    <p class="text-xs text-gray-400">L'afirmació de la vida tal com és, la voluntat de poder i l'etern retorn com a prova existencial</p>
+                </div>
+            </div>
+            <p class="font-playfair italic text-gray-400 mb-10">
+                Destruir, invertir, afirmar: el recorregut d’una filosofia que vol tornar a fer que la vida valgui la pena ser viscuda
+                </p>
+        </div>
+    </section>
+
+    <!-- Footer ampliat -->
+    <footer class="bg-black border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <svg class="w-8 h-8 text-red-700 hammer-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/>
+                        </svg>
+                        <span class="font-cinzel font-bold text-yellow-500 text-center block">
+                            <span class="text-2xl">NIETZSCHE</span><br>
+                            <span class="text-red-500 text-3xl">Síííí!!!</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Filosofia del Martell • Pensament Aforístic • Vitalisme<br>
+                        
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-cinzel text-yellow-500 font-bold mb-4">Conceptes Clau</h4>
+                    <ul class="space-y-2 text-xs text-gray-500">
+                        <li>• Apol·lini / Dionisíac</li>
+                        <li>• Perspectivisme</li>
+                        <li>• Genealogia / Transvaloració</li>
+                        <li>• Metafísica de l'ésser / Tramsmon</li>
+                        <li>• Nihilisme / Mort de Déu</li>
+                        <li>• Superhome</li>
+                        <li>• Voluntat de Poder</li>
+                        <li>• Etern Retorn</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-cinzel text-yellow-500 font-bold mb-4">Obres Fonamentals</h4>
+                    <ul class="space-y-2 text-xs text-gray-500">
+                        <li>• El Naixement de la Tragèdia (1871)</li>
+                        <li>• Aurora (1881)</li>
+                        <li>• La Gaia ciència (1883)</li>
+                        <li>• Així parlà Zaratustra (1883-85)</li>
+                        <li>• Més enllà del Bé i del Mal (1886)</li>
+                        <li>• Sobre veritat i mentida...</li>
+                        <li>• La Genealogia de la Moral (1887)</li>
+                        
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </footer>
+
+    <script>
+        // Afegir funció per les preguntes interactives
+        function toggleQuestion(element) {
+            const answer = element.querySelector('.hidden, .block');
+            const arrow = element.querySelector('span.transform');
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                answer.classList.add('block');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                answer.classList.remove('block');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener("click", function(e) {
+                const targetId = this.getAttribute("href").substring(1);
+                const targetPanel = document.getElementById(targetId);
+                const martellSection = document.getElementById("martell");
+        
+                if (targetId === "portada") {
+    // Desactivar tabs del martell
+    document.querySelectorAll(".content-panel").forEach(panel => {
+        panel.classList.remove("active");
+    });
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    return; // deixa que el link faci el scroll normal
+}
+
+if (targetPanel && targetPanel.classList.contains("content-panel")) {
+                    e.preventDefault();
+        
+                    // 1. Activar pestanya
+                    document.querySelectorAll(".content-panel").forEach(panel => {
+                        panel.classList.remove("active");
+                    });
+                    targetPanel.classList.add("active");
+
+                    // 1b. Activar botó corresponent (tab)
+document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.classList.remove("active");
+});
+
+const matchingBtn = document.querySelector(`.tab-btn[onclick="switchTab('${targetId}')"]`);
+if (matchingBtn) {
+    matchingBtn.classList.add("active");
+}
+        
+                    // 2. Scroll a l'inici del bloc "martell"
+                    const offset = 90;
+                    const y = martellSection.getBoundingClientRect().top + window.pageYOffset - offset;
+        
+                    window.scrollTo({ top: y, behavior: "smooth" });
+                }
+            });
+        });
+        </script>
+        
+        <script>
+            document.querySelector('a[href="#martell"]').addEventListener("click", function () {
+                
+                const defaultPanel = document.getElementById("coneixement");
+            
+                // Activar el primer subapartat
+                if (defaultPanel) {
+                    document.querySelectorAll(".content-panel").forEach(panel => {
+                        panel.classList.remove("active");
+                    });
+                    defaultPanel.classList.add("active");
+                }
+            
+                // Activar també el botó corresponent
+                document.querySelectorAll(".tab-btn").forEach(btn => {
+                    btn.classList.remove("active");
+                });
+            
+                const firstBtn = document.querySelector(`.tab-btn[onclick="switchTab('coneixement')"]`);
+                if (firstBtn) {
+                    firstBtn.classList.add("active");
+                }
+            });
+            </script> 
+   <style>
+    .home-experience-btn{
+        margin-left: 12px;
+        padding: 6px 10px;
+        font-size: 12px;
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 8px;
+        color: #facc15;
+        text-decoration: none;
+        background: rgba(0,0,0,0.3);
+        backdrop-filter: blur(6px);
+        transition: all 0.2s ease;
+    }
+    
+    .home-experience-btn:hover{
+        background: rgba(250,204,21,0.1);
+        border-color: rgba(250,204,21,0.4);
+        transform: translateY(-1px);
+    }
+    </style>              
+</body>
+</html>

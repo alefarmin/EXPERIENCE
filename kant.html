@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kant: Fonamentació de la Metafísica dels Costums</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --kant-blue: #1e3a5f;
+            --kant-gold: #d4af37;
+            --kant-light: #f8f9fa;
+            --kant-accent: #2c5282;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            overflow-x: hidden;
+        }
+        
+        .serif {
+            font-family: 'Crimson Text', serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 50%, #1e3a5f 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(30, 58, 95, 0.15);
+        }
+        
+        .philosophical-quote {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 4px solid var(--kant-gold);
+        }
+        
+        .imperative-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .imperative-card.categorical {
+            border-color: var(--kant-gold);
+            background: linear-gradient(135deg, #fffef7 0%, #fff9e6 100%);
+        }
+        
+        .imperative-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .timeline-item {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideIn 0.6s forwards;
+        }
+        
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .floating-icon {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .section-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .maxim-test {
+            background: repeating-linear-gradient(
+                45deg,
+                #f8f9fa,
+                #f8f9fa 10px,
+                #e9ecef 10px,
+                #e9ecef 20px
+            );
+        }
+        
+        .duty-badge {
+            background: linear-gradient(135deg, var(--kant-gold) 0%, #b8941f 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--kant-gold);
+            z-index: 50;
+            transition: width 0.1s;
+        }
+        
+        .interactive-diagram {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .interactive-diagram:hover {
+            filter: brightness(1.1);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 58, 95, 0.9);
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .formula-box::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 120px;
+            opacity: 0.1;
+            font-family: 'Crimson Text', serif;
+        }
+        
+        .comparison-table tr {
+            transition: background 0.3s;
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+        
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .nav-dot.active {
+            background: var(--kant-gold);
+            transform: scale(1.3);
+        }
+        
+        .postulate-card {
+            background: white;
+            border-top: 4px solid var(--kant-blue);
+            transition: all 0.3s;
+        }
+        
+        .postulate-card:hover {
+            border-top-color: var(--kant-gold);
+            transform: translateY(-5px);
+        }
+        
+        .index-floating-btn{
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+
+    background: rgba(30, 58, 95, 0.85);
+    color: #facc15;
+
+    padding: 8px 14px;
+    border-radius: 12px;
+
+    font-weight: 600;
+    font-size: 14px;
+
+    text-decoration: none;
+
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2);
+
+    transition: all 0.25s ease;
+}
+
+.index-floating-btn:hover{
+    background: rgba(30, 58, 95, 1);
+    transform: translateY(-2px);
+}
+
+.kant-quote {
+    position: absolute;
+    top: 420px;
+    right: 90px;
+    width: 260px;
+
+    font-family: 'Crimson Text', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+
+    color: rgba(255,255,255,0.9);
+
+    line-height: 1.6;
+
+    /* fora caixa */
+    background: none;
+    padding: 0;
+
+    /* només una línia elegant */
+    border-left: 2px solid rgba(250,204,21,0.7);
+    padding-left: 14px;
+}
+
+
+.kant-quote {
+    opacity: 0.85;
+    letter-spacing: 0.02em;
+}
+
+.kant-title {
+    font-family: 'Playfair Display', serif;
+
+    font-size: 5rem;
+    font-weight: 700;
+
+    color: white;
+
+    letter-spacing: 0.02em;
+
+    text-shadow:
+      0 2px 10px rgba(0,0,0,0.5),
+      0 10px 40px rgba(0,0,0,0.6);
+}
+
+.kant-title span {
+    display: block;
+    font-size: 2rem;
+    margin-top: 12px;
+    color: #facc15;
+}
+
+    </style>
+
+</head>
+<body class="text-gray-800">
+    <a href="./index.html" class="index-floating-btn">
+        ← Inici EXPERIENCE
+    </a>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-indicator" id="scrollBar"></div>
+
+    <!-- Navigation Dots -->
+    <div class="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 space-y-4 hidden md:block">
+        <div class="nav-dot active" onclick="scrollToSection('hero')"></div>
+        <div class="nav-dot" onclick="scrollToSection('context')"></div>
+        <div class="nav-dot" onclick="scrollToSection('project')"></div>
+        <div class="nav-dot" onclick="scrollToSection('critique')"></div>
+        <div class="nav-dot" onclick="scrollToSection('goodwill')"></div>
+        <div class="nav-dot" onclick="scrollToSection('imperative')"></div>
+        <div class="nav-dot" onclick="scrollToSection('examples')"></div>
+        <div class="nav-dot" onclick="scrollToSection('postulates')"></div>
+    </div>
+
+                         <!-- HERO SECTION -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- Imatge de fons ben visible -->
+        <div class="absolute inset-0 z-0"> <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Immanuel_Kant_%28painted_portrait%29.jpg" 
+            alt="Immanuel Kant" style="width: 100%; height: 100%; object-fit: cover; object-position: center 60%; opacity: 0.7; filter: grayscale(20%) contrast(1.1);" 
+            onerror="this.style.display='none'"> </div>
+        
+        <!-- Overlay degradat més lleuger -->
+        <div class="absolute inset-0 z-0" style="background: linear-gradient(135deg, rgba(30,58,95,0.5) 0%, rgba(44,82,130,0.4) 50%, rgba(30,58,95,0.6) 100%);"></div>
+        
+        <!-- Cercles decoratius simples -->
+        <div class="absolute inset-0 pointer-events-none z-0">
+            <div class="absolute top-20 right-20 w-80 h-80 rounded-full overflow-hidden border-4 border-yellow-400 shadow-xl">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Immanuel_Kant_%28painted_portrait%29.jpg"
+                     class="w-full h-full object-cover">
+            </div>
+            <div class="kant-quote">
+                Actua només segons aquella màxima que puguis voler que esdevingui 
+                <span>llei universal</span>.
+              </div>
+            
+        </div>
+        
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="mb-8 inline-block p-4 rounded-full bg-blue-900/40 backdrop-blur-sm border border-white/30">
+                <i data-lucide="brain" class="w-12 h-12 text-yellow-400"></i>
+            </div>
+            <h1 class="kant-title">
+                Immanuel Kant
+                <span>1724-1804</span>
+              </h1>
+            <p class="text-xl md:text-2xl text-white mb-8 max-w-5xl mx-auto serif italic drop-shadow-md" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                "Sapere aude! <br> Atreveix-te a pensar! <br> Tingues el coratge de servir-te del teu propi enteniment! "
+            </p>
+            <div class="bg-blue-900/40 backdrop-blur-md rounded-2xl p-8 max-w-4xl mx-auto border border-white/30 shadow-2xl">
+                <h2 class="text-2xl font-bold text-yellow-400 mb-4 serif drop-shadow-md">Fonamentació de la Metafísica dels Costums</h2>
+                <p class="text-white text-lg drop-shadow-md">Una ètica universal basada en la raó pura pràctica</p>
+            </div>
+            <div class="mt-12 animate-bounce">
+                <i data-lucide="chevron-down" class="w-8 h-8 text-white mx-auto drop-shadow-lg"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTEXT SECTION -->
+    <section id="context" class="py-20 bg-white section-reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-blue-800 font-semibold tracking-wider uppercase text-sm">Context</span>
+                <h2 class="serif text-4xl md:text-5xl font-bold text-gray-900 mt-2">La Il·lustració Alemanya</h2>
+                <div class="w-24 h-1 bg-yellow-500 mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div class="space-y-6">
+                    <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-800">
+                        <h3 class="font-bold text-xl text-blue-900 mb-2 flex items-center gap-2">
+                            <i data-lucide="user" class="w-5 h-5"></i>
+                            Biografia
+                        </h3>
+                        <p class="text-gray-700">Nascut a Königsberg (Prússia Oriental) en una família humil i pietista. Va viure tota la vida a la mateixa ciutat, seguint una rutina tan regular que els veïns deien que podien ajustar els rellotges quan el veien passejar.</p>
+                    </div>
+                    
+                    <div class="bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-600">
+                        <h3 class="font-bold text-xl text-yellow-900 mb-2 flex items-center gap-2">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            Formació
+                        </h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-yellow-600 mt-1"></i>
+                                <span>Metafísica racionalista (Christian Wolff, deixeble de Leibniz)</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-yellow-600 mt-1"></i>
+                                <span>Matemàtiques i física newtoniana</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-yellow-600 mt-1"></i>
+                                <span>Contacte amb il·lustrats francesos i anglesos</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-yellow-600 mt-1"></i>
+                                <span>Hume el va fer "despertar del somni dogmàtic"</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="bg-gradient-to-br from-blue-900 to-blue-700 rounded-2xl p-8 text-white shadow-2xl">
+                        <i data-lucide="lightbulb" class="w-16 h-16 text-yellow-400 mb-4"></i>
+                        <h3 class="serif text-2xl font-bold mb-4">Conceptes Clau de la Il·lustració</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <div class="bg-white/20 p-2 rounded-lg">
+                                    <i data-lucide="door-open" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-yellow-400">Sortida de la minoria d'edat</h4>
+                                    <p class="text-sm text-gray-300">L'ésser humà ha de decidir per si mateix, sense dependre d'autoritats externes</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="bg-white/20 p-2 rounded-lg">
+                                    <i data-lucide="scale" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-yellow-400">Autonomia de l'individu</h4>
+                                    <p class="text-sm text-gray-300">Llibertat de pensament i accés a l'educació</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="bg-white/20 p-2 rounded-lg">
+                                    <i data-lucide="shield" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-yellow-400">Superar l'irracional</h4>
+                                    <p class="text-sm text-gray-300">Superstició, dogmatisme i fanatisme han dificultat el progrés</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THREE QUESTIONS SECTION -->
+    <section id="project" class="py-20 bg-gray-50 section-reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-blue-800 font-semibold tracking-wider uppercase text-sm">El Projecte Filosòfic</span>
+                <h2 class="serif text-4xl md:text-5xl font-bold text-gray-900 mt-2">Les Tres Preguntes Fonamentals</h2>
+                <p class="text-gray-600 mt-4 text-lg">Kant busca comprendre què és l'ésser humà responent tres preguntes essencials</p>
+                <div class="w-24 h-1 bg-yellow-500 mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Question 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover border-t-4 border-blue-600">
+                    <div class="p-8">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                            <i data-lucide="eye" class="w-8 h-8 text-blue-600"></i>
+                        </div>
+                        <h3 class="serif text-2xl font-bold text-gray-900 mb-2">Què puc saber?</h3>
+                        <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full mb-4">Teoria del coneixement</span>
+                        <p class="text-gray-600 mb-4">Condicions que fan possible el coneixement. Determinar-ne els límits.</p>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-sm font-semibold text-gray-700">Obra:</p>
+                            <p class="text-sm text-gray-600 italic">Crítica de la raó pura</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover border-t-4 border-yellow-500 transform md:-translate-y-4">
+                    <div class="p-8">
+                        <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
+                            <i data-lucide="compass" class="w-8 h-8 text-yellow-600"></i>
+                        </div>
+                        <h3 class="serif text-2xl font-bold text-gray-900 mb-2">Què he de fer?</h3>
+                        <span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full mb-4">Ètica</span>
+                        <p class="text-gray-600 mb-4">Establir i justificar els principis de l'acció moral. Condicions de la llibertat.</p>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-sm font-semibold text-gray-700">Obra:</p>
+                            <p class="text-sm text-gray-600 italic">Fonamentació de la metafísica dels costums</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover border-t-4 border-purple-600">
+                    <div class="p-8">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                            <i data-lucide="star" class="w-8 h-8 text-purple-600"></i>
+                        </div>
+                        <h3 class="serif text-2xl font-bold text-gray-900 mb-2">Què puc esperar?</h3>
+                        <span class="inline-block bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full mb-4">Història i religió</span>
+                        <p class="text-gray-600 mb-4">Condicions de realització de l'ésser humà. Projectar el seu destí.</p>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-sm font-semibold text-gray-700">Obra:</p>
+                            <p class="text-sm text-gray-600 italic">La religió dins dels límits de la raó</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Uses of Reason -->
+            <div class="mt-16 bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                <h3 class="serif text-3xl font-bold text-center mb-12">Els Dos Usos de la Raó</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-blue-50 rounded-xl p-8 border-2 border-blue-200">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                                <i data-lucide="microscope" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-blue-900">Raó Teòrica o Pura</h4>
+                        </div>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="arrow-right" class="w-4 h-4 text-blue-500 mt-1"></i>
+                                <span>S'ocupa de l'àmbit de la <strong>NATURA</strong></span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="arrow-right" class="w-4 h-4 text-blue-500 mt-1"></i>
+                                <span>Coneixement de fets mitjançant judicis</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="arrow-right" class="w-4 h-4 text-blue-500 mt-1"></i>
+                                <span>Síntesi entre impressions sensibles i formes a priori (espai, temps, categories)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-green-50 rounded-xl p-8 border-2 border-green-200">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                                <i data-lucide="activity" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-green-900">Raó Pràctica</h4>
+                        </div>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="arrow-right" class="w-4 h-4 text-green-500 mt-1"></i>
+                                <span>S'ocupa de l'àmbit de l'<strong>ACCIÓ HUMANA</strong></span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="arrow-right" class="w-4 h-4 text-green-500 mt-1"></i>
+                                <span>Determina com hem d'obrar</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="arrow-right" class="w-4 h-4 text-green-500 mt-1"></i>
+                                <span>Estableix principis a priori per a l'acció moral</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- CRITIQUE SECTION -->
+        <section id="critique" class="py-20 bg-white section-reveal">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <span class="text-red-800 font-semibold tracking-wider uppercase text-sm">Crítica</span>
+                    <h2 class="serif text-4xl md:text-5xl font-bold text-gray-900 mt-2">Crítica a les Ètiques Teleològiques</h2>
+                    <p class="text-gray-600 mt-4 text-lg max-w-3xl mx-auto">Kant rebutja les ètiques anteriors perquè no compleixen els requisits d'universalitat i autonomia moral</p>
+                    <div class="w-24 h-1 bg-yellow-500 mx-auto mt-4"></div>
+                </div>
+    
+                <div class="max-w-4xl mx-auto mb-12">
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-xl mb-8">
+                        <h3 class="font-bold text-xl text-red-900 mb-3">Què són les ètiques teleològiques?</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500 font-bold">1.</span>
+                                <span>Defineixen primer un <strong>bé suprem</strong> (felicitat, plaer, utilitat...)</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500 font-bold">2.</span>
+                                <span>Aquest bé es converteix en el <strong>fi últim</strong> a perseguir</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500 font-bold">3.</span>
+                                <span>Els imperatius morals deriven d'aquest fi i són <strong>mitjans</strong> per assolir-lo</span>
+                            </li>
+                        </ul>
+                        <p class="mt-4 text-red-800 font-semibold">Són ètiques MATERIALS, HETERÒNOMES i A POSTERIORI</p>
+                    </div>
+                </div>
+    
+                <!-- Examples Table -->
+                <div class="overflow-x-auto mb-12">
+                    <table class="w-full comparison-table">
+                        <thead>
+                            <tr class="bg-gray-900 text-white">
+                                <th class="p-4 text-left rounded-tl-lg">Filòsof</th>
+                                <th class="p-4 text-left">Bé Suprem</th>
+                                <th class="p-4 text-left rounded-tr-lg">Imperatiu Hipotètic</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                            <tr class="border-b">
+                                <td class="p-4 font-bold text-blue-900">Aristòtil</td>
+                                <td class="p-4">Felicitat (eudaimonia)</td>
+                                <td class="p-4 italic">"Si vols ser feliç, practica la virtut"</td>
+                            </tr>
+                            <tr class="border-b bg-gray-50">
+                                <td class="p-4 font-bold text-blue-900">Epicur</td>
+                                <td class="p-4">Plaer (ataràxia)</td>
+                                <td class="p-4 italic">"Si vols ser feliç, gaudeix dels plaers naturals"</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-4 font-bold text-blue-900">Mill</td>
+                                <td class="p-4">Utilitat</td>
+                                <td class="p-4 italic">"Si vols ser feliç, maximitza la utilitat"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+    
+                <!-- Problems -->
+                <div class="grid md:grid-cols-3 gap-6 mb-12">
+                    <div class="bg-orange-50 p-6 rounded-xl border-t-4 border-orange-500">
+                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                            <span class="text-2xl font-bold text-orange-600">1</span>
+                        </div>
+                        <h4 class="font-bold text-lg text-orange-900 mb-2">Imperatius hipotètics</h4>
+                        <p class="text-gray-700 text-sm">Només garanteixen el bé si el fi proposat és correcte. Són condicionats: "Si vols X, fes Y"</p>
+                    </div>
+                    <div class="bg-orange-50 p-6 rounded-xl border-t-4 border-orange-500">
+                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                            <span class="text-2xl font-bold text-orange-600">2</span>
+                        </div>
+                        <h4 class="font-bold text-lg text-orange-900 mb-2">Manca d'universalitat</h4>
+                        <p class="text-gray-700 text-sm">El bé suprem s'estableix a posteriori (per experiència). Diferents propostes no coincideixen.</p>
+                    </div>
+                    <div class="bg-orange-50 p-6 rounded-xl border-t-4 border-orange-500">
+                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                            <span class="text-2xl font-bold text-orange-600">3</span>
+                        </div>
+                        <h4 class="font-bold text-lg text-orange-900 mb-2">Heteronomia moral</h4>
+                        <p class="text-gray-700 text-sm">L'individu no es dóna a si mateix l'imperatiu. Li ve donat pel bé suprem establert externament.</p>
+                    </div>
+                </div>
+    
+                <!-- Kant's Solution -->
+                <div class="bg-gradient-to-r from-blue-900 to-blue-700 rounded-2xl p-8 text-white shadow-2xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center">
+                            <i data-lucide="check-circle" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="serif text-3xl font-bold">La Proposta de Kant: Ètica Formal</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <p class="text-lg mb-4 text-blue-100">Els imperatius no ens han de dir <strong>QUÈ</strong> hem de fer (contingut), sinó <strong>COM</strong> hem d'actuar (forma).</p>
+                            <p class="text-lg text-blue-100">El més important no és el que fem, sinó <span class="text-yellow-400 font-bold">com ho fem: la intenció o motivació</span>.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 bg-white/10 p-3 rounded-lg">
+                                <i data-lucide="check" class="w-5 h-5 text-yellow-400"></i>
+                                <span><strong>Autònoma:</strong> L'individu és el seu propi legislador</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-white/10 p-3 rounded-lg">
+                                <i data-lucide="check" class="w-5 h-5 text-yellow-400"></i>
+                                <span><strong>Formal:</strong> No estableix cap bé o finalitat concreta</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-white/10 p-3 rounded-lg">
+                                <i data-lucide="check" class="w-5 h-5 text-yellow-400"></i>
+                                <span><strong>A priori:</strong> Universal i necessària</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-white/10 p-3 rounded-lg">
+                                <i data-lucide="check" class="w-5 h-5 text-yellow-400"></i>
+                                <span><strong>Imperatius categòrics:</strong> Incondicionats, vàlids per a tots</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- GOOD WILL SECTION -->
+        <section id="goodwill" class="py-20 bg-gray-50 section-reveal">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <span class="text-blue-800 font-semibold tracking-wider uppercase text-sm">Concepte Central</span>
+                    <h2 class="serif text-4xl md:text-5xl font-bold text-gray-900 mt-2">Bona Voluntat, Deure i Valor Moral</h2>
+                    <div class="w-24 h-1 bg-yellow-500 mx-auto mt-4"></div>
+                </div>
+    
+                <!-- The Good Will -->
+                <div class="max-w-4xl mx-auto mb-16">
+                    <div class="formula-box rounded-2xl p-8 md:p-12 shadow-2xl text-center">
+                        <i data-lucide="gem" class="w-16 h-16 text-yellow-400 mx-auto mb-6"></i>
+                        <h3 class="serif text-3xl md:text-4xl font-bold mb-6">"Només la bona voluntat és bona en si mateixa"</h3>
+                        <p class="text-xl text-blue-100 leading-relaxed">
+                            Cap altra cosa (utilitat, satisfacció, plaer, intel·ligència, coratge...) no és bona en si mateixa. 
+                            Les qualitats humanes poden afavorir la bona voluntat, però també es poden posar al servei de fins dolents.
+                        </p>
+                    </div>
+                </div>
+    
+                <!-- Three Types of Action -->
+                <div class="mb-16">
+                    <h3 class="serif text-3xl font-bold text-center mb-8">Les Tres Formes d'Actuar respecte al Deure</h3>
+                    <p class="text-center text-gray-600 mb-8">Exemple: Un comerciant que ha de posar preus justos</p>
+                    
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Against Duty -->
+                        <div class="bg-red-100 rounded-xl p-6 border-2 border-red-300 opacity-75">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">❌ CONTRA EL DEURE</span>
+                            </div>
+                            <p class="text-gray-800 mb-4">Posa preus excessius i desproporcionats per maximitzar beneficis</p>
+                            <div class="bg-white/50 p-4 rounded-lg">
+                                <p class="text-sm font-semibold text-red-800">Valor moral:</p>
+                                <p class="text-2xl font-bold text-red-600">Cap</p>
+                            </div>
+                        </div>
+    
+                        <!-- According to Duty -->
+                        <div class="bg-yellow-100 rounded-xl p-6 border-2 border-yellow-300">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-bold">⚠️ CONFORME AL DEURE</span>
+                            </div>
+                            <p class="text-gray-800 mb-4">Posa preus justos per <strong>conservar clients</strong> (interès propi)</p>
+                            <div class="bg-white/50 p-4 rounded-lg">
+                                <p class="text-sm font-semibold text-yellow-800">Valor moral:</p>
+                                <p class="text-2xl font-bold text-yellow-600">Sense contingut</p>
+                                <p class="text-xs text-gray-600 mt-1">Legalitat, no moralitat</p>
+                            </div>
+                        </div>
+    
+                        <!-- For Duty -->
+                        <div class="bg-green-100 rounded-xl p-6 border-2 border-green-400 shadow-xl transform scale-105">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="duty-badge px-3 py-1 rounded-full text-sm font-bold">✅ PER DEURE</span>
+                            </div>
+                            <p class="text-gray-800 mb-4">Posa preus justos perquè <strong>és el seu deure</strong>, sense altra motivació</p>
+                            <div class="bg-white/50 p-4 rounded-lg">
+                                <p class="text-sm font-semibold text-green-800">Valor moral:</p>
+                                <p class="text-2xl font-bold text-green-600">Positiu ★</p>
+                                <p class="text-xs text-gray-600 mt-1">Autèntica moralitat</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Key Conclusion -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 border-l-4 border-blue-800">
+                    <h4 class="serif text-2xl font-bold text-blue-900 mb-4 flex items-center gap-2">
+                        <i data-lucide="key" class="w-6 h-6"></i>
+                        Conclusió Essencial
+                    </h4>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        La bona voluntat és aquella que tria només allò que la raó reconeix com a bo, 
+                        <span class="bg-yellow-200 px-2 py-1 rounded">independentment de la inclinació</span>. 
+                        Únicament quan la raó determina per si sola la voluntat, aquesta acció té un veritable valor moral.
+                    </p>
+                </div>
+            </div>
+        </section>
+            <!-- IMPERATIVE SECTION -->
+<section id="imperative" class="py-20 bg-white section-reveal">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <span class="text-yellow-600 font-semibold tracking-wider uppercase text-sm">El Cor de l'Ètica</span>
+            <h2 class="serif text-4xl md:text-5xl font-bold text-gray-900 mt-2">L'Imperatiu Categòric</h2>
+            <p class="text-gray-600 mt-4 text-lg">Principi formal universal de la moralitat</p>
+            <div class="w-24 h-1 bg-yellow-500 mx-auto mt-4"></div>
+        </div>
+
+        <!-- Definitions -->
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-blue-50 p-6 rounded-xl">
+                <h4 class="font-bold text-blue-900 mb-2">Mandat (Llei pràctica)</h4>
+                <p class="text-sm text-gray-700">Principi objectiu de la Raó que val per tot ésser racional. Constreny la voluntat imperfecta.</p>
+            </div>
+            <div class="bg-yellow-50 p-6 rounded-xl border-2 border-yellow-400">
+                <h4 class="font-bold text-yellow-900 mb-2">Imperatiu</h4>
+                <p class="text-sm text-gray-700">Fórmula que expressa el mandat com a obligació. Descriu la relació entre lleis objectives i la imperfecció de la nostra voluntat.</p>
+            </div>
+            <div class="bg-green-50 p-6 rounded-xl">
+                <h4 class="font-bold text-green-900 mb-2">Màxima</h4>
+                <p class="text-sm text-gray-700">Principi subjectiu que guia l'acció individual. La regla que el subjecte adopta per actuar.</p>
+            </div>
+        </div>
+
+        <!-- Types of Imperatives -->
+        <div class="mb-16">
+            <h3 class="serif text-3xl font-bold text-center mb-4">Tipus d'Imperatius</h3>
+            <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Kant estableix una doble classificació: per <strong>naturalesa</strong> (hipotètics vs categòrics) i per <strong>àmbit</strong> (habilitat, pragmàtic, moral)</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Hypothetical -->
+                <div class="imperative-card rounded-2xl p-8 shadow-lg border-l-4 border-gray-400">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center">
+                            <i data-lucide="git-branch" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-gray-700">Imperatius Hipotètics</h4>
+                    </div>
+                    <ul class="space-y-3 text-gray-600 mb-6">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-gray-400 mt-1"></i>
+                            <span>Indiquen una acció bona <strong>com a mitjà</strong></span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-gray-400 mt-1"></i>
+                            <span>Condicionats a aconseguir un fi</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-gray-400 mt-1"></i>
+                            <span><strong>A posteriori</strong> (basats en l'experiència)</span>
+                        </li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-gray-700">Estructura:</p>
+                        <p class="text-gray-600 italic">"Si vols X, has de fer Y"</p>
+                    </div>
+                </div>
+
+                <!-- Categorical -->
+                <div class="imperative-card categorical rounded-2xl p-8 shadow-xl border-l-4 border-yellow-500">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
+                            <i data-lucide="star" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-yellow-900">Imperatius Categòrics ★</h4>
+                    </div>
+                    <ul class="space-y-3 text-gray-700 mb-6">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-yellow-600 mt-1"></i>
+                            <span>Indiquen una acció <strong>necessària en si mateixa</strong></span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-yellow-600 mt-1"></i>
+                            <span><strong>Incondicionats</strong>: bons en si</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-yellow-600 mt-1"></i>
+                            <span><strong>A priori</strong> (universals i necessaris)</span>
+                        </li>
+                    </ul>
+                    <div class="bg-yellow-100 p-4 rounded-lg border border-yellow-300">
+                        <p class="text-sm font-semibold text-yellow-800">Estructura:</p>
+                        <p class="text-gray-700 italic">"Has de fer Y" (sense condició)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classification by Scope -->
+            <div class="bg-gradient-to-br from-slate-50 to-slate-100 rounded-3xl p-8 md:p-12">
+                <h3 class="serif text-2xl font-bold text-center mb-8 text-slate-800">Classificació segons l'àmbit</h3>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Imperatius d'habilitat -->
+                    <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow border-t-4 border-blue-400">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="wrench" class="w-5 h-5 text-blue-600"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800">1. Imperatius d'habilitat</h4>
+                        </div>
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-blue-50 p-2 rounded">
+                                <span class="font-semibold text-blue-900">Àmbit:</span>
+                                <span class="text-slate-700">Ciències i arts pràctiques</span>
+                            </div>
+                            <div class="bg-blue-50 p-2 rounded">
+                                <span class="font-semibold text-blue-900">Raó:</span>
+                                <span class="text-slate-700">Instrumental (només estableix una relació de mitjans a fins, sense més consideració. Per això no hi ha qüestió moral)</span>
+                            </div>
+                            <div class="mt-4 p-3 bg-gray-50 rounded-lg border-l-2 border-blue-400">
+                                <p class="text-xs font-semibold text-gray-500 uppercase mb-1">Exemple</p>
+                                <p class="text-slate-700 italic">"Si vols cuinar un pastís, segueix aquesta recepta"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imperatius pragmàtics -->
+                    <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow border-t-4 border-purple-400">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="smile" class="w-5 h-5 text-purple-600"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800">2. Imperatius pragmàtics</h4>
+                        </div>
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-purple-50 p-2 rounded">
+                                <span class="font-semibold text-purple-900">Àmbit:</span>
+                                <span class="text-slate-700">Elecció de mitjans per a la pròpia felicitat</span>
+                            </div>
+                            <div class="bg-purple-50 p-2 rounded">
+                                <span class="font-semibold text-purple-900">Raó:</span>
+                                <span class="text-slate-700">Prudencial</span>
+                            </div>
+                            <div class="mt-4 p-3 bg-gray-50 rounded-lg border-l-2 border-purple-400">
+                                <p class="text-xs font-semibold text-gray-500 uppercase mb-1">Exemple</p>
+                                <p class="text-slate-700 italic">"Estudia per tenir una bona feina i ser feliç"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imperatius morals -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-yellow-500 ring-2 ring-yellow-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="scale" class="w-5 h-5 text-yellow-600"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800">3. Imperatius morals ★</h4>
+                        </div>
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-yellow-50 p-2 rounded">
+                                <span class="font-semibold text-yellow-900">Àmbit:</span>
+                                <span class="text-slate-700">Lleis morals</span>
+                            </div>
+                            <div class="bg-yellow-50 p-2 rounded">
+                                <span class="font-semibold text-yellow-900">Caràcter:</span>
+                                <span class="text-slate-700">Obliguen incondicionalment</span>
+                            </div>
+                            <div class="mt-4 p-3 bg-yellow-50 rounded-lg border-l-2 border-yellow-500">
+                                <p class="text-xs font-semibold text-yellow-700 uppercase mb-1">Exemple</p>
+                                <p class="text-slate-800 italic font-medium">"Estudia perquè és el teu deure com a estudiant"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual indicator of progression -->
+                <div class="mt-8 flex items-center justify-center gap-2 text-sm text-gray-500">
+                    <span>Tècnic</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    <span>Prudencial</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    <span class="font-semibold text-yellow-600">Moral</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <!-- Three Formulations -->
+            <div class="bg-gradient-to-br from-blue-900 to-blue-800 rounded-3xl p-8 md:p-12 text-white shadow-2xl max-w-7xl mx-auto">
+                <h3 class="serif text-3xl font-bold text-center mb-12">Les Tres Formulacions de l'Imperatiu Categòric</h3>
+                
+                <div class="space-y-8">
+                    <!-- Formulation I -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-xl font-bold text-white">I</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-yellow-400 mb-2">Llei Universal</h4>
+                                <p class="text-lg text-blue-100 italic serif">"Obra només segons aquella màxima per la qual puguis voler que al mateix temps esdevingui una llei universal"</p>
+                                <div class="mt-3 pl-3 border-l-2 border-yellow-400/40">
+                                    <p class="text-sm text-yellow-200 leading-relaxed">
+                                        → Ressalta la manca de contradicció quan pensem la màxima universalitzada
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulation II -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-xl font-bold text-white">II</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-yellow-400 mb-2">Llei de la Natura</h4>
+                                <p class="text-lg text-blue-100 italic serif">"Obra com si la màxima de la teva acció pogués esdevenir per la teva voluntat una llei universal de la natura"</p>
+                                <div class="mt-3 pl-3 border-l-2 border-yellow-400/40">
+                                    <p class="text-sm text-yellow-200 leading-relaxed">
+                                        → Fa apareixer el paral·lelisme amb la universalitat de les lleis naturals, com ara la "llei de la gravetat", però en l'àmbit pràctic
+                                    </p>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulation III -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border-2 border-yellow-400 shadow-xl transform scale-102">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                                <span class="text-xl font-bold text-white">III</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-yellow-400 mb-2">Fi en si mateix ★</h4>
+                                <p class="text-lg text-blue-100 italic serif">"Obra de tal manera que facis servir la humanitat, tant en la teva persona com en la persona de qualsevol altre, sempre alhora com a fi i mai simplement com a mitjà"</p>
+                                <div class="mt-4 bg-yellow-500/20 p-4 rounded-lg">
+                                    <p class="text-sm text-yellow-200 font-semibold">💡 Idea Central: L'ésser humà NO és una cosa que puguem utilitzar simplement com un mitjà. Instrumentalitzar-lo seria NO reconèixer la seva igual condició de LEGISLADOR RACIONAL</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXAMPLES SECTION -->
+    <section id="examples" class="py-20 bg-gray-50 section-reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-blue-800 font-semibold tracking-wider uppercase text-sm">Aplicació Pràctica</span>
+                <h2 class="serif text-4xl md:text-5xl font-bold text-gray-900 mt-2">Exemples d'Aplicació</h2>
+                <p class="text-gray-600 mt-4">Prova d'universalització de màximes</p>
+                <div class="w-24 h-1 bg-yellow-500 mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Example 1: Suicide -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="bg-red-100 p-4 border-l-4 border-red-500">
+                        <h3 class="font-bold text-lg text-red-900 flex items-center gap-2">
+                            <i data-lucide="alert-circle" class="w-5 h-5"></i>
+                            Deure perfecte vers un mateix: El Suïcidi
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="maxim-test p-4 rounded-lg mb-4">
+                            <p class="text-sm font-semibold text-gray-700 mb-1">MÀXIMA:</p>
+                            <p class="text-gray-800 italic">"Escurço la vida quan em doni més desgràcies que plaers"</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                            <p class="text-sm font-semibold text-gray-700 mb-1">PROVA:</p>
+                            <p class="text-gray-600">Una natura amb aquesta llei es contradiu (destrucció de la vida com a sistema natural)</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-red-600 font-bold">
+                            <i data-lucide="x-circle" class="w-5 h-5"></i>
+                            <span>Contradiu el deure perfecte vers un mateix</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 2: False Promise -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="bg-red-100 p-4 border-l-4 border-red-500">
+                        <h3 class="font-bold text-lg text-red-900 flex items-center gap-2">
+                            <i data-lucide="alert-circle" class="w-5 h-5"></i>
+                            Deure perfecte vers els altres: La Promesa Falsa
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="maxim-test p-4 rounded-lg mb-4">
+                            <p class="text-sm font-semibold text-gray-700 mb-1">MÀXIMA:</p>
+                            <p class="text-gray-800 italic">"Prometre retornar diners encara que sàpiga que no ho faré"</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                            <p class="text-sm font-semibold text-gray-700 mb-1">PROVA:</p>
+                            <p class="text-gray-600">Si tothom mentís, la promesa seria impossible (contradicció conceptual)</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-red-600 font-bold">
+                            <i data-lucide="x-circle" class="w-5 h-5"></i>
+                            <span>Contradiu el deure perfecte vers els altres</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 3: Talents -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="bg-yellow-100 p-4 border-l-4 border-yellow-500">
+                        <h3 class="font-bold text-lg text-yellow-900 flex items-center gap-2">
+                            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                            Deure imperfecte vers un mateix: Desenvolupament de Talents
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="maxim-test p-4 rounded-lg mb-4">
+                            <p class="text-sm font-semibold text-gray-700 mb-1">MÀXIMA:</p>
+                            <p class="text-gray-800 italic">"No conrearé les meves disposicions naturals"</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                            <p class="text-sm font-semibold text-gray-700 mb-1">PROVA:</p>
+                            <p class="text-gray-600">La natura podria subsistir, però no es pot voler universalment (irracional)</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-yellow-600 font-bold">
+                            <i data-lucide="minus-circle" class="w-5 h-5"></i>
+                            <span>Contradiu el deure imperfecte vers un mateix</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 4: Helping Others -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="bg-yellow-100 p-4 border-l-4 border-yellow-500">
+                        <h3 class="font-bold text-lg text-yellow-900 flex items-center gap-2">
+                            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                            Deure imperfecte vers els altres: Ajuda als altres
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="maxim-test p-4 rounded-lg mb-4">
+                            <p class="text-sm font-semibold text-gray-700 mb-1">MÀXIMA:</p>
+                            <p class="text-gray-800 italic">"No contribuiré al benestar dels altres"</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                            <p class="text-sm font-semibold text-gray-700 mb-1">PROVA:</p>
+                            <p class="text-gray-600">Podria necessitar ajuda un mateix (contradicció de la voluntat, no del concepte)</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-yellow-600 font-bold">
+                            <i data-lucide="minus-circle" class="w-5 h-5"></i>
+                            <span>Contradiu el deure imperfecte vers els altres</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-blue-50 p-6 rounded-xl border-l-4 border-blue-600">
+                <h4 class="font-bold text-blue-900 mb-2 flex items-center gap-2">
+                    <i data-lucide="key" class="w-5 h-5"></i>
+                    Clau per recordar
+                </h4>
+                <p class="text-gray-700"><strong>Deures perfectes:</strong> El món universalitzat és impossible (contradicció lògica)</p>
+                <p class="text-gray-700"><strong>Deures imperfectes:</strong> El món és possible, però no el podem voler (contradicció de la voluntat)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- POSTULATES SECTION -->
+    <section id="postulates" class="py-20 bg-white section-reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-purple-800 font-semibold tracking-wider uppercase text-sm">Metafísica Pràctica</span>
+                <h2 class="serif text-4xl md:text-5xl font-bold text-gray-900 mt-2">Els Postulats de la Raó Pràctica</h2>
+                <p class="text-gray-600 mt-4 text-lg">Idees que la raó pura no podia conèixer però que la raó pràctica postula per donar sentit a l'esforç moral</p>
+                <div class="w-24 h-1 bg-yellow-500 mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Freedom -->
+                <div class="postulate-card rounded-2xl shadow-lg p-8 text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="unlock" class="w-10 h-10 text-blue-600"></i>
+                    </div>
+                    <h3 class="serif text-2xl font-bold text-gray-900 mb-4">Llibertat</h3>
+                    <p class="text-gray-600 mb-4">Sense llibertat és impossible donar valor moral a les accions. La voluntat ha de poder triar entre actuar per deure o per inclinació.</p>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <p class="text-sm text-blue-800 font-semibold">Condició de possibilitat de l'imperatiu categòric</p>
+                    </div>
+                </div>
+
+                <!-- Immortality -->
+                <div class="postulate-card rounded-2xl shadow-lg p-8 text-center">
+                    <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="infinity" class="w-10 h-10 text-purple-600"></i>
+                    </div>
+                    <h3 class="serif text-2xl font-bold text-gray-900 mb-4">Immortalitat de l'Ànima</h3>
+                    <p class="text-gray-600 mb-4">Actuar amb virtut sempre és inassolible en un temps finit. Pensar en la immortalitat facilita pensar en un progrés de perfeccionament infinit.</p>
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <p class="text-sm text-purple-800 font-semibold">Possibilitat de realitzar el sumum bonum</p>
+                    </div>
+                </div>
+
+                <!-- God -->
+                <div class="postulate-card rounded-2xl shadow-lg p-8 text-center">
+                    <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="sun" class="w-10 h-10 text-yellow-600"></i>
+                    </div>
+                    <h3 class="serif text-2xl font-bold text-gray-900 mb-4">Existència de Déu</h3>
+                    <p class="text-gray-600 mb-4">Déu és la màxima bondat, amb una total identificació entre voluntat i llei moral. Ens dóna l'esperança de poder arribar a un estat de màxima beatitud.</p>
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <p class="text-sm text-yellow-800 font-semibold">Garantia de la realització del bé suprem</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-gray-100 rounded-2xl p-8 text-center">
+                <p class="text-lg text-gray-700 serif italic">
+                    "Dos coses omplen l'ànima d'admiració i veneració sempre noves i creixents: 
+                    <span class="text-blue-800 font-bold">el cel estrellat damunt meu</span> i 
+                    <span class="text-yellow-700 font-bold">la llei moral dins meu</span>."
+                </p>
+                <p class="text-sm text-gray-500 mt-4">— Kant, Crítica de la raó pràctica</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="graduation-cap" class="w-8 h-8 text-gray-900"></i>
+            </div>
+            <h3 class="serif text-2xl font-bold mb-4">Tenir clar per a l'Examen</h3>
+            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left mb-8">
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <h4 class="text-yellow-400 font-bold mb-2">✅ Recorda:</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>• L'ètica kantiana és autònoma, formal, a priori</li>
+                        <li>• La bona voluntat és l'única cosa bona en si mateixa</li>
+                        <li>• Actuar per deure ≠ Actuar conforme al deure</li>
+                        <li>• Actuar per deure = Actuar racionalment</li>
+                        <li>• Actuar autonomament=Llibertat</li>
+                        <li>• L'imperatiu categòric es presenta en tres formulacions</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <h4 class="text-red-400 font-bold mb-2">❌ No confonguis:</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>• Imperatius hipotètics amb categòrics</li>
+                        <li>• Actuar conforme al deure (interès) amb per deure (moral)</li>
+                        <li>• Actuar amb llibertat amb "fer el que vulguis"</li>
+                        <li>• Ètica material (contingut) amb formal (intenció)</li>
+                        <li>• Deures perfectes (impossibilitat lògica) amb imperfectes (contradicció en voler-ho)</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-gray-500 text-sm">Presentació didàctica basada en la "Fonamentació de la Metafísica dels Costums" d'Immanuel Kant</p>
+        </div>
+    </footer>
+
+    <!-- MODAL for interactions -->
+    <div id="infoModal" class="modal items-center justify-center p-4" onclick="closeModal()">
+        <div class="bg-white rounded-2xl p-8 max-w-2xl w-full shadow-2xl transform scale-100 transition-transform" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h3 id="modalTitle" class="serif text-2xl font-bold text-gray-900"></h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div id="modalContent" class="text-gray-700"></div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollBar').style.width = scrolled + '%';
+            
+            // Update nav dots
+            updateNavDots();
+            
+            // Reveal sections
+            revealSections();
+        });
+
+        // Navigation
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updateNavDots() {
+            const sections = ['hero', 'context', 'project', 'critique', 'goodwill', 'imperative', 'examples', 'postulates'];
+            const scrollPos = window.scrollY + 100;
+            
+            sections.forEach((section, index) => {
+                const element = document.getElementById(section);
+                const dot = document.querySelectorAll('.nav-dot')[index];
+                
+                if (element.offsetTop <= scrollPos && (element.offsetTop + element.offsetHeight) > scrollPos) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Section reveal animation
+        function revealSections() {
+            const sections = document.querySelectorAll('.section-reveal');
+            sections.forEach(section => {
+                const windowHeight = window.innerHeight;
+                const elementTop = section.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        // Modal functions
+        function openModal(title, content) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('infoModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('infoModal').classList.remove('active');
+        }
+
+        // Initialize
+        revealSections();
+        updateNavDots();
+    </script>
+</body>
+</html>

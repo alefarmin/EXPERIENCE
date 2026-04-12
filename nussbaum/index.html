@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nussbaum: Justícia i Capacitats</title>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-blue': '#0f172a',
+                        'academic-blue': '#1e293b',
+                        'bronze': '#cd7f32',
+                        'bronze-light': '#d4a574',
+                        'coral': '#e07a5f',
+                        'coral-dark': '#c46a52',
+                        'ivory': '#f5f5dc',
+                        'slate-warm': '#475569'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Estils personalitzats -->
+    <style>
+        :root {
+            --deep-blue: #0f172a;
+            --academic-blue: #1e293b;
+            --bronze: #cd7f32;
+            --bronze-light: #d4a574;
+            --coral: #e07a5f;
+            --ivory: #f5f5dc;
+        }
+
+        /* Cos de la pàgina */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--deep-blue);
+            color: var(--ivory);
+            overflow-x: hidden;
+        }
+
+        /* Fonts per seccions específiques */
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+
+        /* Animacions */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes text-shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .float-anim { animation: float 6s ease-in-out infinite; }
+        
+        .shimmer-text {
+            background: linear-gradient(90deg, var(--ivory) 0%, var(--bronze) 50%, var(--ivory) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: text-shimmer 3s linear infinite;
+        }
+
+        /* Scroll Progress */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--coral), var(--bronze));
+            z-index: 1000;
+            transition: width 0.1s;
+        }
+
+        /* Seccions */
+        .section-dark {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--academic-blue) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .section-light {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+
+        /* Cards */
+        .concept-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(205, 127, 50, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .concept-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--bronze);
+            box-shadow: 0 20px 40px rgba(205, 127, 50, 0.2);
+        }
+
+        /* Quotes */
+        .nussbaum-quote {
+            border-left: 4px solid var(--coral);
+            background: linear-gradient(90deg, rgba(224, 122, 95, 0.1) 0%, transparent 100%);
+            font-style: italic;
+        }
+
+        /* Timeline */
+        .timeline-item { 
+            position: relative; 
+            padding-left: 2rem; 
+            border-left: 2px solid rgba(205, 127, 50, 0.3); 
+        }
+        .timeline-item::before { 
+            content: ''; 
+            position: absolute; 
+            left: -6px; 
+            top: 0; 
+            width: 10px; 
+            height: 10px; 
+            background: var(--bronze); 
+            border-radius: 50%; 
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--deep-blue); }
+        ::-webkit-scrollbar-thumb { background: var(--coral); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--bronze); }
+
+        /* Capability Number Badges */
+        .capability-number {
+            background: linear-gradient(135deg, var(--bronze) 0%, var(--coral) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+        }
+
+        /* Interactive Elements */
+        .tab-btn {
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .tab-btn.active {
+            border-bottom-color: var(--bronze);
+            color: var(--bronze);
+        }
+        .content-panel { display: none; animation: fadeIn 0.5s; }
+        .content-panel.active { display: block; }
+
+        /* Hover effects for capability cards */
+        .capability-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(205, 127, 50, 0.15);
+            transition: all 0.4s ease;
+        }
+        .capability-card:hover {
+            border-color: var(--coral);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(224, 122, 95, 0.15);
+        }
+
+        .home-experience-btn{
+        margin-left: 12px;
+        padding: 6px 10px;
+        font-size: 12px;
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 8px;
+        color: #facc15;
+        text-decoration: none;
+        background: rgba(0,0,0,0.3);
+        backdrop-filter: blur(6px);
+        transition: all 0.2s ease;
+    }
+    
+    .home-experience-btn:hover{
+        background: rgba(250,204,21,0.1);
+        border-color: rgba(250,204,21,0.4);
+        transform: translateY(-1px);
+    }
+
+    .tab-menu-item.active {
+    background: rgba(205, 127, 50, 0.15);
+    color: #cd7f32 !important;
+    border-left: 2px solid #cd7f32;
+    padding-left: 14px;
+    font-weight: 600;
+}
+.tab-menu-item.active {
+    color: #cd7f32;
+    font-weight: 700;
+    background: rgba(205, 127, 50, 0.08);
+    border-left: 3px solid #cd7f32;
+    padding-left: 0.75rem;
+}
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-[#0f172a]/90 backdrop-blur-md z-50 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <span class="font-cinzel text-xl font-bold text-[#cd7f32]">NUSSBAUM</span>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="../index.html" class="home-experience-btn">
+                        ← Inici EXPERIENCE
+                    </a>
+
+                <div class="hidden md:flex space-x-8 items-center">
+                    <div class="relative group">
+                        <a href="#biografia" class="hover:text-[#cd7f32] transition flex items-center gap-1">
+                            Introducció
+                            <span class="text-xs">▼</span>
+                        </a>
+                    
+                        <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-[#0f172a]/95 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+                    
+                            <a href="#biografia"
+                               class="tab-menu-item block px-4 py-2 text-sm text-gray-300 hover:bg-[#cd7f32]/10 hover:text-[#cd7f32] transition"
+                               onclick="switchTab('biografia', this); return false;">
+                                Biografia
+                            </a>
+                    
+                            <a href="#context"
+                               class="tab-menu-item block px-4 py-2 text-sm text-gray-300 hover:bg-[#cd7f32]/10 hover:text-[#cd7f32] transition"
+                               onclick="switchTab('context', this); return false;">
+                                Context històric
+                            </a>
+                    
+                        </div>
+                    </div>
+                
+                    <div class="relative group">
+                        <a href="#enfocament" class="hover:text-[#cd7f32] transition flex items-center gap-1">
+                            Les Capacitats
+                            <span class="text-xs">▼</span>
+                        </a>
+                    
+                        <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-[#0f172a]/95 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+                    
+                            <a href="#enfocament"
+                               class="tab-menu-item block px-4 py-2 text-sm text-gray-300 hover:bg-[#cd7f32]/10 hover:text-[#cd7f32] transition"
+                               onclick="switchTab('enfocament', this); return false;">
+                                L'enfocament
+                            </a>
+                    
+                            <a href="#deu-capacitats"
+                               class="tab-menu-item block px-4 py-2 text-sm text-gray-300 hover:bg-[#cd7f32]/10 hover:text-[#cd7f32] transition"
+                               onclick="switchTab('deu-capacitats', this); return false;">
+                                Les 10 Capacitats
+                            </a>
+                    
+                            <a href="#fonamentacio"
+                               class="tab-menu-item block px-4 py-2 text-sm text-gray-300 hover:bg-[#cd7f32]/10 hover:text-[#cd7f32] transition"
+                               onclick="switchTab('fonamentacio', this); return false;">
+                                Fonamentació ètica
+                            </a>
+                    
+                        </div>
+                    </div>
+                
+                    <div class="relative group">
+
+                        <!-- BOTÓ PRINCIPAL (ARA FUNCIONA) -->
+                        <a href="#critiques"
+                           onclick="openCritiques(); return false;"
+                           class="hover:text-[#cd7f32] transition flex items-center gap-1">
+                            Crítiques
+                            <span class="text-xs">▼</span>
+                        </a>
+                    
+                        <!-- SUBMENÚ -->
+                        <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-[#0f172a]/95 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+                    
+                            <a href="#critiques"
+                               class="tab-menu-item block px-4 py-2 text-sm text-gray-300 hover:bg-[#cd7f32]/10 hover:text-[#cd7f32] transition"
+                               onclick="switchTab('utilitarisme', this); return false;">
+                                Utilitarisme
+                            </a>
+                    
+                            <a href="#critiques"
+                               class="tab-menu-item block px-4 py-2 text-sm text-gray-300 hover:bg-[#cd7f32]/10 hover:text-[#cd7f32] transition"
+                               onclick="switchTab('recursos', this); return false;">
+                                Recursos (Rawls)
+                            </a>
+                    
+                            <a href="#critiques"
+                               class="tab-menu-item block px-4 py-2 text-sm text-gray-300 hover:bg-[#cd7f32]/10 hover:text-[#cd7f32] transition"
+                               onclick="switchTab('drets', this); return false;">
+                                Drets Humans
+                            </a>
+                    
+                        </div>
+                    </div>
+                    <a href="#educacio" class="hover:text-[#cd7f32] transition">Educació</a>
+                    <a href="#textos" class="hover:text-[#cd7f32] transition">Textos Clau</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center section-dark pt-16">
+        <div class="absolute inset-0 z-0">
+            <img src="img/nussbaum2.jpg" 
+                 alt="Martha Nussbaum"
+                 class="w-full h-full object-cover"
+                 style="object-position: center 30%; opacity: 1; filter: contrast(1.1) brightness(0.9);">
+        </div>
+
+        <div class="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-[#0f172a]/70 to-[#0f172a]/50"></div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto px-6 md:px-12 w-full">
+            <div class="max-w-3xl text-left space-y-6">
+                
+                <div class="mb-6 inline-block">
+                    <span class="font-playfair text-[#e07a5f] text-2xl border border-[#e07a5f]/60 px-6 py-2 rounded-full">
+                        Dignitat Humana
+                    </span>
+                </div>
+
+                <h2 class="font-cinzel text-3xl md:text-4xl text-[#cd7f32] tracking-[0.2em] mb-4">
+                    MARTHA C. NUSSBAUM
+                </h2>
+
+                <h1 class="font-cinzel text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight shimmer-text">
+                    LA JUSTÍCIA<br>DE LES CAPACITATS
+                </h1>
+
+                <p class="font-playfair text-xl md:text-2xl text-gray-300 mb-8 italic">
+                    Una proposta per al desenvolupament humà que posa la dignitat, l'empatia i les oportunitats reals de cada persona al centre de les polítiques públiques.
+                </p>
+
+                <div class="flex flex-wrap gap-4 text-sm md:text-base text-[#cd7f32]/80 font-cinzel tracking-wider">
+                    <span>• DIGNITAT</span>
+                    <span>• CAPACITATS</span>
+                    <span>• EMPATIA</span>
+                    <span>• JUSTÍCIA SOCIAL</span>
+                    <span>• LLIBERTAT POSITIVA</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 float-anim">
+            <svg class="w-6 h-6 text-[#cd7f32]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+
+        <!-- Decoració dreta -->
+        <div class="absolute right-16 bottom-10 opacity-40 hidden lg:block">
+            <div class="w-40 h-40 rounded-full border-2 border-[#cd7f32]/30 flex items-center justify-center">
+                <div class="w-32 h-32 rounded-full border border-[#e07a5f]/20"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Biography Section -->
+    <section id="biografia" class="py-20 section-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="font-cinzel text-4xl font-bold mb-6 text-[#cd7f32]">Breus Dades Biogràfiques</h2>
+                    <div class="space-y-4 text-gray-300 leading-relaxed">
+                        <p><span class="text-[#e07a5f] font-semibold">Martha Craven Nussbaum</span> va néixer l'any 1947 a Nova York. Va estudiar teatre i llenguatges clàssics a la Universitat de Nova York, i l'any 1975 es va doctorar en Filologia Clàssica a Harvard.</p>
+                        
+                        <div class="nussbaum-quote p-4 rounded-r-lg my-6">
+                            <p class="text-lg">"Ha estat professora de Filosofia i Llenguatges Clàssiques a les universitats de Harvard, Brown, Oxford i Chicago."</p>
+                        </div>
+                        
+                        <p>La seva obra rep influències de la filosofia ètica i política dels principals pensadors grecs i romans (Sòcrates, Plató, Aristòtil, Epicur i Lucreci), de Kant, de Marx i del liberalisme clàssic (Adam Smith, John Stuart Mill i John Rawls).</p>
+                        
+                        <p class="text-[#e07a5f] font-semibold">Col·laboració amb Amartya Sen:</p>
+                        <p>En els anys vuitanta va començar a treballar conjuntament amb l'economista indi <span class="text-[#cd7f32] font-bold">Amartya Sen</span> (Premi Nobel d'Economia 1998), amb qui va formular el concepte de les capacitats aplicat al desenvolupament humà.</p>
+                        
+                        <p>A través d'aquest economista va entrar en contacte amb el pensament de Tagore, Ambedkar i Gandhi.</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="concept-card p-6 rounded-xl">
+                        <h3 class="font-cinzel text-xl font-bold text-[#cd7f32] mb-4">Reconeixements Internacionals</h3>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start">
+                                <span class="text-[#e07a5f] mr-2">🏆</span>
+                                <span><strong>2012:</strong> Premi Princesa d'Astúries de Ciències Socials</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#e07a5f] mr-2">🏆</span>
+                                <span><strong>2016:</strong> Premi Kyoto d'Arts i Filosofia</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#e07a5f] mr-2">🏆</span>
+                                <span><strong>2018:</strong> Premi Berggruen</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#e07a5f] mr-2">🏆</span>
+                                <span><strong>2021:</strong> Premi Holberg</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#e07a5f] mr-2">🏆</span>
+                                <span><strong>2021:</strong> Premi Balzan</span>
+                            </li>
+                        </ul>
+                        <p class="text-xs text-gray-500 mt-4 italic">Ha estat nomenada doctora honoris causa per més de seixanta-nou universitats arreu del món.</p>
+                    </div>
+                    
+                    <div class="concept-card p-6 rounded-xl border-[#e07a5f]/30">
+                        <h3 class="font-cinzel text-xl font-bold text-[#e07a5f] mb-4">Àmbits de Recerca</h3>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-400">
+                            <div class="bg-[#e07a5f]/10 p-2 rounded text-center">Ètica i Política</div>
+                            <div class="bg-[#e07a5f]/10 p-2 rounded text-center">Justícia Social</div>
+                            <div class="bg-[#e07a5f]/10 p-2 rounded text-center">Drets de les Dones</div>
+                            <div class="bg-[#e07a5f]/10 p-2 rounded text-center">Drets Animals</div>
+                            <div class="bg-[#e07a5f]/10 p-2 rounded text-center">Multiculturalisme</div>
+                            <div class="bg-[#e07a5f]/10 p-2 rounded text-center">Educació</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Context Històric -->
+    <section id="context" class="py-20 section-dark relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="font-cinzel text-5xl font-black mb-4 text-[#e07a5f]">CONTEXTE HISTÒRIC I FILOSÒFIC</h2>
+                <p class="text-xl text-gray-400 font-playfair">L'últim terç del segle XX i inicis del XXI</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <div class="space-y-6">
+                    <div class="concept-card p-6 rounded-xl">
+                        <h3 class="font-cinzel text-2xl font-bold text-[#cd7f32] mb-4">Transformacions Polítiques</h3>
+                        <div class="space-y-4 text-gray-300">
+                            <p><span class="text-[#e07a5f] font-bold">1989:</span> Caiguda del mur de Berlín i fi de la Guerra Freda. Desaparició de la Unió Soviètica i buit ideològic ocupat per un <strong>neoliberalisme econòmic global</strong> de caràcter conservador.</p>
+                            
+                            <div class="nussbaum-quote p-4 rounded-r-lg my-4">
+                                <p class="text-sm">"Reducció de l'Estat a la seva expressió mínima, desregulació dels mercats i defensa d'un individualisme radical."</p>
+                            </div>
+
+                            <p>Conseqüències: <span class="text-[#e07a5f]">augment de la desigualtat</span> entre pobres i rics, precarització laboral i afebliment de l'estat del benestar.</p>
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-6 rounded-xl border-[#cd7f32]/30">
+                        <h3 class="font-cinzel text-2xl font-bold text-[#cd7f32] mb-4">Era Digital i Globalització</h3>
+                        <p class="text-gray-300 mb-4">Desenvolupament intensiu de les noves tecnologies de la informació i la comunicació (NTIC):</p>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li class="flex items-start">
+                                <span class="text-[#e07a5f] mr-2">▸</span>
+                                <span>Internet, telefonia mòbil i xarxes globals</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#e07a5f] mr-2">▸</span>
+                                <span>Nova economia i precarització laboral</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#e07a5f] mr-2">▸</span>
+                                <span>Xarxes socials: difusió de notícies falses i manipulació política</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="concept-card p-6 rounded-xl">
+                        <h3 class="font-cinzel text-2xl font-bold text-[#e07a5f] mb-4">Corrents Filosòfics</h3>
+                        <p class="text-gray-300 mb-4">Continuen amb força:</p>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3 bg-black/20 p-3 rounded">
+                                <span class="text-[#cd7f32]">◆</span>
+                                <span class="text-sm text-gray-300">Estructuralisme</span>
+                            </div>
+                            <div class="flex items-center space-x-3 bg-black/20 p-3 rounded">
+                                <span class="text-[#cd7f32]">◆</span>
+                                <span class="text-sm text-gray-300">Filosofia analítica</span>
+                            </div>
+                            <div class="flex items-center space-x-3 bg-black/20 p-3 rounded">
+                                <span class="text-[#cd7f32]">◆</span>
+                                <span class="text-sm text-gray-300">Teoria crítica de l'Escola de Frankfurt</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-6 rounded-xl bg-gradient-to-br from-[#cd7f32]/10 to-transparent border-[#cd7f32]/30">
+                        <h3 class="font-cinzel text-xl font-bold text-[#cd7f32] mb-4">Nous Enfocaments</h3>
+                        <p class="text-gray-300 text-sm mb-4">Repensar el món des de perspectives no dominants:</p>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li>• <span class="text-[#e07a5f]">Feminisme</span> i perspectiva de gènere</li>
+                            <li>• <span class="text-[#e07a5f]">Pensament postcolonial</span></li>
+                            <li>• <span class="text-[#e07a5f]">Ecologisme</span> i justícia ambiental</li>
+                            <li>• <span class="text-[#e07a5f]">Inclusió de la diversitat</span> (cultural, funcional, generacional, afectiva)</li>
+                            <li>• <span class="text-[#e07a5f]">Reducció de desigualtats</span> econòmiques</li>
+                        </ul>
+                        <p class="text-xs text-gray-500 mt-4 italic border-t border-white/10 pt-2">El pensament de Nussbaum recull totes aquestes sensibilitats en una teoria coherent de la justícia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- L'ENFOCAMENT DE LES CAPACITATS -->
+        <section id="enfocament" class="py-20 section-light">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="font-cinzel text-5xl font-black mb-4 text-[#cd7f32]">L'ENFOCAMENT DE LES CAPACITATS</h2>
+                    <p class="text-xl text-gray-400 font-playfair italic">"Què són, realment capaces de fer i de ser, les persones?"</p>
+                </div>
+    
+                <!-- CRÍTICA AL PIB -->
+                <div class="max-w-4xl mx-auto mb-16">
+                    <div class="concept-card p-8 rounded-2xl border-[#e07a5f]/30 bg-gradient-to-br from-[#e07a5f]/5 to-transparent">
+                        <h3 class="font-cinzel text-2xl font-bold text-[#e07a5f] mb-6 text-center">El Problema del Creixement Econòmic</h3>
+                        
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            L'enfocament actual concentra tots els esforços en el <span class="text-[#cd7f32] font-bold">creixement econòmic</span> i l'identifica amb el progrés social. Això parteix d'un error fonamental: considerar que la qualitat de vida millora automàticament quan s'incrementa el PIB.
+                        </p>
+    
+                        <div class="nussbaum-quote p-6 rounded-r-lg my-6 bg-[#0f172a]/50">
+                            <p class="text-lg text-gray-200 italic">"L'estadística del pollastre: Si en una família de quatre persones s'han menjat un pollastre sencer, podem concloure que cada membre s'ha menjat un quart?"</p>
+                            <p class="text-sm text-[#cd7f32] mt-2">— Exemple il·lustratiu de Nussbaum</p>
+                        </div>
+    
+                        <div class="grid md:grid-cols-2 gap-6 mt-8">
+                            <div class="bg-red-900/20 p-4 rounded-lg border-l-4 border-red-500">
+                                <h4 class="font-bold text-red-400 mb-2">Problemes del PIB</h4>
+                                <ul class="text-sm text-gray-400 space-y-2">
+                                    <li>• Indicador massa genèric</li>
+                                    <li>• Ignora la distribució real de rendes</li>
+                                    <li>• Les elits s'emporten el creixement</li>
+                                    <li>• No reflecteix desigualtats</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-900/20 p-4 rounded-lg border-l-4 border-green-500">
+                                <h4 class="font-bold text-green-400 mb-2">La Proposta</h4>
+                                <ul class="text-sm text-gray-400 space-y-2">
+                                    <li>• Proporcionar qualitat de vida apropiada</li>
+                                    <li>• Atendre contextos concrets</li>
+                                    <li>• Resoldre problemes socials específics</li>
+                                    <li>• Empoderar les persones</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- DEFINICIONS BÀSIQUES -->
+                <div class="grid md:grid-cols-3 gap-8 mb-16">
+                    <div class="concept-card p-6 rounded-xl text-center group">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition">🌱</div>
+                        <h3 class="font-cinzel text-xl font-bold text-[#cd7f32] mb-3">Capacitats Bàsiques</h3>
+                        <p class="text-sm text-gray-400">Facultats innates que constitueixen l'equipament biològic de cada persona. Poden ser potenciades o no segons les circumstàncies.</p>
+                        <p class="text-xs text-[#e07a5f] mt-2">Dimensió biològica</p>
+                    </div>
+    
+                    <div class="concept-card p-6 rounded-xl text-center group">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition">🧠</div>
+                        <h3 class="font-cinzel text-xl font-bold text-[#cd7f32] mb-3">Capacitats Internes</h3>
+                        <p class="text-sm text-gray-400">Característiques desenvolupades: personalitat, intel·ligència, habilitats. Aptituds entrenades en interacció amb l'entorn.</p>
+                        <p class="text-xs text-[#e07a5f] mt-2">Àmbit de l'aprenentatge</p>
+                    </div>
+    
+                    <div class="concept-card p-6 rounded-xl text-center group">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition">⚡</div>
+                        <h3 class="font-cinzel text-xl font-bold text-[#cd7f32] mb-3">Capacitats Combinades</h3>
+                        <p class="text-sm text-gray-400">Totalitat d'oportunitats disponibles. Combinació de capacitats internes i condicions socials, polítiques i econòmiques.</p>
+                        <p class="text-xs text-[#e07a5f] mt-2">Àmbit social i desenvolupament</p>
+                    </div>
+                </div>
+    
+                <!-- DIFERÈNCIA CLAU -->
+                <div class="concept-card p-8 rounded-2xl mb-16">
+                    <h3 class="font-cinzel text-2xl font-bold text-[#cd7f32] mb-6 text-center">Capacitat vs. Funcionament</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-[#cd7f32]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-[#cd7f32] text-xl">🚪</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-1">Capacitat</h4>
+                                    <p class="text-sm text-gray-400">És l'oportunitat o la llibertat de poder escollir. Representa un àmbit de llibertat.</p>
+                                    <p class="text-xs text-[#e07a5f] mt-1">Ex: Tens accés a aliments suficients</p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-[#e07a5f]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-[#e07a5f] text-xl">✓</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-1">Funcionament</h4>
+                                    <p class="text-sm text-gray-400">És la realització activa, la materialització d'una capacitat.</p>
+                                    <p class="text-xs text-[#e07a5f] mt-1">Ex: Ets ben nutrit (o dejunes per elecció)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="mt-6 p-4 bg-[#0f172a]/50 rounded-lg border border-[#cd7f32]/20">
+                        <p class="text-sm text-gray-300 italic">"Dues persones poden mostrar el mateix funcionament (dejuni) però tenir capacitats diferents: una perquè no pot nodrir-se, l'altra per elecció voluntària."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- LES 10 CAPACITATS CENTRALS -->
+        <section id="deu-capacitats" class="py-20 section-dark relative">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#0f172a] via-[#1e293b] to-[#0f172a]"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="font-cinzel text-5xl font-black mb-4 text-[#e07a5f]">LES 10 CAPACITATS CENTRALS</h2>
+                    <p class="text-xl text-gray-400 mb-4">El Llindar Mínim de Dignitat Humana</p>
+                    <p class="text-sm text-gray-500 max-w-3xl mx-auto">Perquè la vida d'una persona estigui a l'altura de la dignitat humana, ha de superar un nivell de llindar suficient en aquestes deu capacitats:</p>
+                </div>
+    
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Capacitat 1 -->
+                    <div class="capability-card p-6 rounded-xl relative overflow-hidden group">
+                        <div class="absolute top-2 right-2 capability-number text-4xl opacity-30">01</div>
+                        <div class="relative z-10">
+                            <div class="text-3xl mb-3">🕊️</div>
+                            <h3 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-2">Vida</h3>
+                            <p class="text-sm text-gray-400">Poder tenir una esperança de vida normal; no morir abans que la pròpia vida es vegi tan reduïda que no valgui la pena de viure.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Capacitat 2 -->
+                    <div class="capability-card p-6 rounded-xl relative overflow-hidden group">
+                        <div class="absolute top-2 right-2 capability-number text-4xl opacity-30">02</div>
+                        <div class="relative z-10">
+                            <div class="text-3xl mb-3">🏥</div>
+                            <h3 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-2">Salut Física</h3>
+                            <p class="text-sm text-gray-400">Poder mantenir una bona salut, rebre una alimentació adequada i disposar d'un lloc apropiat per allotjar-se.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Capacitat 3 -->
+                    <div class="capability-card p-6 rounded-xl relative overflow-hidden group">
+                        <div class="absolute top-2 right-2 capability-number text-4xl opacity-30">03</div>
+                        <div class="relative z-10">
+                            <div class="text-3xl mb-3">🛡️</div>
+                            <h3 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-2">Integritat Física</h3>
+                            <p class="text-sm text-gray-400">Poder moure's lliurement; estar protegit d'atacs violents, agressions sexuals i violència domèstica; tenir oportunitats per a la satisfacció sexual.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Capacitat 4 -->
+                    <div class="capability-card p-6 rounded-xl relative overflow-hidden group">
+                        <div class="absolute top-2 right-2 capability-number text-4xl opacity-30">04</div>
+                        <div class="relative z-10">
+                            <div class="text-3xl mb-3">🎨</div>
+                            <h3 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-2">Sentits, Imaginació i Pensament</h3>
+                            <p class="text-sm text-gray-400">Poder-ne fer ús de manera "veritablement humana", cultivada per educació adequada (alfabetització, formació científica), protegida per la llibertat d'expressió.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Capacitat 5 -->
+                    <div class="capability-card p-6 rounded-xl relative overflow-hidden group">
+                        <div class="absolute top-2 right-2 capability-number text-4xl opacity-30">05</div>
+                        <div class="relative z-10">
+                            <div class="text-3xl mb-3">💝</div>
+                            <h3 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-2">Emocions</h3>
+                            <p class="text-sm text-gray-400">Poder sentir estima per coses i persones, estimar a qui ens estima, sentir dol, gratitud i indignació justificada. No patir por i ansietat destructiva.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Capacitat 6 -->
+                    <div class="capability-card p-6 rounded-xl relative overflow-hidden group">
+                        <div class="absolute top-2 right-2 capability-number text-4xl opacity-30">06</div>
+                        <div class="relative z-10">
+                            <div class="text-3xl mb-3">🤔</div>
+                            <h3 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-2">Raó Pràctica</h3>
+                            <p class="text-sm text-gray-400">Poder formar-se una idea del bé i reflexionar críticament sobre la planificació de la pròpia vida. Central per organitzar les altres capacitats.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Capacitat 7 -->
+                    <div class="capability-card p-6 rounded-xl relative overflow-hidden group lg:col-span-1">
+                        <div class="absolute top-2 right-2 capability-number text-4xl opacity-30">07</div>
+                        <div class="relative z-10">
+                            <div class="text-3xl mb-3">🤝</div>
+                            <h3 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-2">Afiliació</h3>
+                            <p class="text-sm text-gray-400">Poder viure amb i per als altres, reconèixer i mostrar interès per altres éssers humans (empatia). Ser tractat com a ésser digne i d'igual valor.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Capacitat 8 -->
+                    <div class="capability-card p-6 rounded-xl relative overflow-hidden group">
+                        <div class="absolute top-2 right-2 capability-number text-4xl opacity-30">08</div>
+                        <div class="relative z-10">
+                            <div class="text-3xl mb-3">🌿</div>
+                            <h3 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-2">Altres Espècies</h3>
+                            <p class="text-sm text-gray-400">Poder viure una relació propera i respectuosa amb els animals, les plantes i el món de la natura.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Capacitat 9 -->
+                    <div class="capability-card p-6 rounded-xl relative overflow-hidden group">
+                        <div class="absolute top-2 right-2 capability-number text-4xl opacity-30">09</div>
+                        <div class="relative z-10">
+                            <div class="text-3xl mb-3">🎭</div>
+                            <h3 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-2">Joc</h3>
+                            <p class="text-sm text-gray-400">Poder riure, jugar i gaudir d'activitats recreatives.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Capacitat 10 - Ocupa més espai -->
+                    <div class="capability-card p-6 rounded-xl relative overflow-hidden group md:col-span-2 lg:col-span-3 bg-gradient-to-r from-[#cd7f32]/10 to-[#e07a5f]/10 border-[#cd7f32]/40">
+                        <div class="absolute top-2 right-2 capability-number text-5xl opacity-20">10</div>
+                        <div class="relative z-10 grid md:grid-cols-2 gap-6">
+                            <div>
+                                <div class="text-3xl mb-3">⚖️</div>
+                                <h3 class="font-cinzel text-xl font-bold text-[#cd7f32] mb-3">Control sobre l'Entorn</h3>
+                                <p class="text-sm text-gray-400 mb-2"><span class="text-[#e07a5f] font-bold">a) Polític:</span> Poder participar efectivament en les decisions polítiques que governen la nostra vida.</p>
+                                <p class="text-sm text-gray-400"><span class="text-[#e07a5f] font-bold">b) Material:</span> Poder ostentar drets de propietat en igualtat de condicions; estar protegits legalment.</p>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="nussbaum-quote p-4 rounded-r-lg w-full">
+                                    <p class="text-sm text-gray-300">"A l'entorn laboral, ser capaços de treballar com a éssers humans, exercint la raó pràctica i mantenint relacions valuoses de reconeixement mutu."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Notes importants -->
+                <div class="mt-12 grid md:grid-cols-2 gap-8">
+                    <div class="concept-card p-6 rounded-xl border-l-4 border-[#e07a5f]">
+                        <h4 class="font-cinzel text-lg font-bold text-[#e07a5f] mb-3">Capacitats Organitzadores</h4>
+                        <p class="text-sm text-gray-300"><span class="text-[#cd7f32] font-bold">Raó pràctica</span> i <span class="text-[#cd7f32] font-bold">afiliació</span> tenen un paper destacat ja que organitzen i tenen presència dominant sobre la resta.</p>
+                    </div>
+                    <div class="concept-card p-6 rounded-xl border-l-4 border-[#cd7f32]">
+                        <h4 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-3">No-comensurabilitat</h4>
+                        <p class="text-sm text-gray-300">Les capacitats són heterogènies. Cap país pot corregir la manca d'una amb l'oferta d'una altra. Totes han de ser garantides igualment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- FONAMENTACIÓ ÈTICA -->
+        <section id="fonamentacio" class="py-20 section-light">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="font-cinzel text-5xl font-black mb-4 text-[#cd7f32]">FONAMENTACIÓ ÈTICA</h2>
+                    <p class="text-xl text-gray-400">Dignitat, Llibertat i Respecte</p>
+                </div>
+    
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+                    <div class="space-y-8">
+                        <div class="concept-card p-8 rounded-2xl">
+                            <h3 class="font-cinzel text-2xl font-bold text-[#e07a5f] mb-4">La Dignitat Humana</h3>
+                            <p class="text-gray-300 leading-relaxed mb-4">
+                                L'enfocament està fonamentat en el concepte de <span class="text-[#cd7f32] font-bold">dignitat humana</span> o vida humana digna. És una noció intuïtiva que distingeix entre condicions de vida dignes i indignes.
+                            </p>
+                            
+                            <div class="nussbaum-quote p-4 rounded-r-lg my-4">
+                                <p class="text-gray-300 italic">"La idea rectora és aplicar polítiques que protegeixin i donin suport a la capacitat d'acció de les persones (agència), que les empoderin i enforteixin la seva autonomia."</p>
+                            </div>
+    
+                            <p class="text-gray-400 text-sm">Les polítiques no han de tractar les persones com a receptores passives, sinó com a agents capaços de controlar i planificar les seves vides.</p>
+                        </div>
+    
+                        <div class="concept-card p-8 rounded-2xl border-[#cd7f32]/30">
+                            <h3 class="font-cinzel text-xl font-bold text-[#cd7f32] mb-4">Influcies Filosòfiques</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-3">
+                                    <span class="text-[#e07a5f] text-xl">📐</span>
+                                    <div>
+                                        <h4 class="font-bold text-white text-sm">Kant</h4>
+                                        <p class="text-xs text-gray-400">Cada persona com a fi en si mateix, no com a mitjà. Respecte a la humanitat.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <span class="text-[#e07a5f] text-xl">⚖️</span>
+                                    <div>
+                                        <h4 class="font-bold text-white text-sm">Liberalisme Polític</h4>
+                                        <p class="text-xs text-gray-400">La llibertat com a bé crucial. Promoure oportunitats (llibertats substancials).</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <span class="text-[#e07a5f] text-xl">🏛️</span>
+                                    <div>
+                                        <h4 class="font-bold text-white text-sm">Aristòtil</h4>
+                                        <p class="text-xs text-gray-400">L'ètic sobre el que és necessari per una vida humana plena (bene vivere).</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="space-y-8">
+                        <div class="concept-card p-8 rounded-2xl bg-gradient-to-br from-[#0f172a] to-[#1e293b] border-[#e07a5f]/30">
+                            <h3 class="font-cinzel text-2xl font-bold text-[#e07a5f] mb-6">Llibertat Positiva vs. Negativa</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="border-l-4 border-gray-600 pl-4">
+                                    <h4 class="font-bold text-gray-400 mb-2">Llibertat Negativa (Tradicional)</h4>
+                                    <p class="text-sm text-gray-500">N'hi ha prou amb que el govern no interfereixi. Els drets són garantits per l'abstenció.</p>
+                                    <p class="text-xs text-red-400 mt-1">Nussbaum ho considera insuficient</p>
+                                </div>
+    
+                                <div class="border-l-4 border-[#e07a5f] pl-4 bg-[#e07a5f]/5 p-4 rounded-r-lg">
+                                    <h4 class="font-bold text-[#e07a5f] mb-2">Llibertat Positiva (Nussbaum)</h4>
+                                    <p class="text-sm text-gray-300">Tots els drets suposen una acció positiva per part del govern. Cal donar suport activament a les capacitats, no només abstreure's de posar entrebancs.</p>
+                                    <p class="text-xs text-[#cd7f32] mt-2 font-bold">"Els drets fonamentals no són més que paraules en un paper fins que l'acció de l'Estat els converteix en reals"</p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="concept-card p-6 rounded-xl">
+                            <h3 class="font-cinzel text-xl font-bold text-[#cd7f32] mb-4">Justícia Equitativa</h3>
+                            <p class="text-gray-300 text-sm mb-4">
+                                Rebutjant la meritocràcia, Nussbaum defensa que qui més ajuda necessiti per superar el llindar de dignitat, més ajuda ha de rebre.
+                            </p>
+                            <div class="bg-[#0f172a]/50 p-4 rounded border border-[#cd7f32]/20">
+                                <p class="text-xs text-gray-400 italic">"Els drets polítics i socials no han de ser proporcionals a la intel·ligència o habilitats innates."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Objectiu polític -->
+                <div class="mt-12 concept-card p-8 rounded-2xl text-center max-w-4xl mx-auto bg-gradient-to-r from-[#cd7f32]/10 via-[#e07a5f]/10 to-[#cd7f32]/10">
+                    <h3 class="font-cinzel text-2xl font-bold text-[#cd7f32] mb-4">Objectiu Últim</h3>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Proporcionar aquestes deu capacitats per a tothom és una <span class="text-[#e07a5f] font-bold">condició necessària</span> per a la justícia social, tot i que això no exclou aprofundir en una justícia social més gran.
+                    </p>
+                    <p class="text-sm text-gray-500 mt-4">
+                        Cada país ha de fixar aquest llindar amb precisió segons la seva història i tradicions, evitant nivells utòpics inassolibles i establint nivells aspiracionals que permetin la millora progressiva.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+            <!-- CRÍTIQUES A ALTRES ENFOCAMENTS -->
+    <section id="critiques" class="py-20 section-dark relative">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="font-cinzel text-5xl font-black mb-4 text-[#e07a5f]">CRÍTIQUES A ALTRES ENFOCAMENTS</h2>
+                <p class="text-xl text-gray-400">Per què l'enfocament de les capacitats és necessari?</p>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="flex flex-wrap justify-center gap-8 mb-12 border-b border-white/10 pb-4">
+                <button class="tab-btn active text-lg font-cinzel px-4 py-2" onclick="switchTab('utilitarisme')">Utilitarisme</button>
+                <button class="tab-btn text-lg font-cinzel px-4 py-2" onclick="switchTab('recursos')">Recursos (Rawls)</button>
+                <button class="tab-btn text-lg font-cinzel px-4 py-2" onclick="switchTab('drets')">Drets Humans</button>
+            </div>
+
+            <!-- Tab Content: Utilitarisme -->
+            <div id="utilitarisme" class="content-panel active">
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <h3 class="font-cinzel text-3xl font-bold text-[#cd7f32]">L'Enfocament Utilitarista</h3>
+                        <p class="text-gray-300 leading-relaxed">Recordem que l'utilitarisme (Bentham, Mill) propugna <span class="text-[#e07a5f] font-bold">"la màxima felicitat possible per al màxim nombre de persones"</span>, mesurant la utilitat quantitativament en termes de plaer/dolor.</p>
+                        
+                        <div class="nussbaum-quote p-6 rounded-r-lg">
+                            <p class="text-lg">"Una acció política és correcta sempre que maximitzi el bé (plaer) i minimitzi el dolor."</p>
+                        </div>
+
+                        <h4 class="font-cinzel text-xl text-[#e07a5f]">Els quatre problemes fonamentals:</h4>
+                        
+                        <div class="space-y-4">
+                            <div class="timeline-item pb-6">
+                                <h5 class="text-white font-bold mb-2">1. Indicador Agregatiu</h5>
+                                <p class="text-sm text-gray-400">Igual que el PIB, la utilitat total amaga desigualtats. Una utilitat total elevada és compatible amb grans marges de pobresa.</p>
+                            </div>
+                            <div class="timeline-item pb-6">
+                                <h5 class="text-white font-bold mb-2">2. Reduccionisme</h5>
+                                <p class="text-sm text-gray-400">Redueix tota la vida a una única dimensió quantificable. Paradoxa: podria ser més "útil" un linxament públic (molta gent, molta intensitat) que un concert de cambra.</p>
+                            </div>
+                            <div class="timeline-item pb-6">
+                                <h5 class="text-white font-bold mb-2">3. Preferències Adaptatives <span class="text-[#e07a5f]">(Elster/Sen)</span></h5>
+                                <p class="text-sm text-gray-400">Les persones aprenen a no voler allò que la societat ha posat fora del seu abast. Exemple: dones que renuncien a la independència perquè han interioritzat que no és "adient" per a elles.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h5 class="text-white font-bold mb-2">4. Satisfacció vs. Activitat</h5>
+                                <p class="text-sm text-gray-400">La satisfacció és un estat passiu, sovint aconseguit sense fer res. Menysprea la llibertat com a fi en si mateixa, només la valora instrumentalment.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="concept-card p-6 rounded-xl border-red-500/30">
+                            <h4 class="font-cinzel text-xl font-bold text-red-400 mb-4">Conseqüència</h4>
+                            <p class="text-gray-300 text-sm">L'utilitarisme tendeix a <span class="text-red-400">consolidar la situació actual</span>, que sovint és injusta per a col·lectius marginats, en definir l'objectiu com la satisfacció de preferències adaptades.</p>
+                        </div>
+
+                        <div class="concept-card p-6 rounded-xl bg-gradient-to-br from-[#cd7f32]/10 to-transparent">
+                            <h4 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-3">Mill vs. Bentham</h4>
+                            <p class="text-sm text-gray-300 mb-3">John Stuart Mill va millorar l'utilitarisme afegint:</p>
+                            <ul class="text-xs text-gray-400 space-y-2">
+                                <li>• Distinció qualitativa de plaers (superiors/inferiors)</li>
+                                <li>• Connexió amb la dignitat humana</li>
+                                <li>• Drets polítics com a límits (no es calculen)</li>
+                            </ul>
+                            <p class="text-xs text-gray-500 mt-3 italic">Nussbaum reconeix influències de Mill, però insisteix que no resol el problema de les preferències adaptatives.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Recursos -->
+            <div id="recursos" class="content-panel">
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-cinzel text-3xl font-bold text-[#cd7f32] mb-6">Enfocaments basats en Recursos</h3>
+                        <p class="text-gray-300 mb-4">Exemplificats per <span class="text-[#e07a5f] font-bold">John Rawls</span> i la seva teoria dels "béns primaris" (Teoria de la Justícia, 1971).</p>
+                        
+                        <div class="nussbaum-quote p-4 rounded-r-lg my-4">
+                            <p>"Un país és millor per a la seva ciutadania quan més recursos té, sempre que els distribueixi igualitàriament."</p>
+                        </div>
+
+                        <p class="text-gray-300 text-sm mb-6">Aquests enfocaments equivalen a una versió igualitarista de l'enfocament del PIB. Tenen la virtut de preocupar-se per la distribució, però presenten problemes:</p>
+
+                        <div class="space-y-4">
+                            <div class="bg-[#0f172a]/50 p-4 rounded-lg border-l-4 border-[#e07a5f]">
+                                <h5 class="font-bold text-[#e07a5f] mb-2">Problema 1</h5>
+                                <p class="text-sm text-gray-400">Renda i riquesa no són bons indicadors del que les persones són realment capaces de fer. Cada persona té necessitats diferents (nens/adults, discapacitats, etc.).</p>
+                            </div>
+                            <div class="bg-[#0f172a]/50 p-4 rounded-lg border-l-4 border-[#e07a5f]">
+                                <h5 class="font-bold text-[#e07a5f] mb-2">Problema 2</h5>
+                                <p class="text-sm text-gray-400">Algunes desigualtats (gènere, discapacitat) s'han perpetuat històricament. Només distribuir recursos igualitàriament manté la situació injusta actual.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="concept-card p-6 rounded-xl">
+                            <h4 class="font-cinzel text-xl font-bold text-[#cd7f32] mb-4">Crítica a Rawls</h4>
+                            <p class="text-gray-300 text-sm mb-4">Nussbaum reconeix la teoria de Rawls com una gran aportació, però detecta deficiències:</p>
+                            
+                            <div class="space-y-3">
+                                <div class="flex items-start space-x-3">
+                                    <span class="text-red-500 mt-1">⚠️</span>
+                                    <p class="text-sm text-gray-400"><strong>Exclusió de les persones amb discapacitat:</strong> La "posició original" de Rawls assumeix igualtat similar de poder físic i mental, excloent-ne els que no la tenen.</p>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <span class="text-red-500 mt-1">⚠️</span>
+                                    <p class="text-sm text-gray-400"><strong>Concepció kantiana de la persona:</strong> Basada en la racionalitat. Les persones amb discapacitats cognitives no són considerades subjectes de justícia plena.</p>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <span class="text-red-500 mt-1">⚠️</span>
+                                    <p class="text-sm text-gray-400"><strong>Els animals:</strong> Segons Rawls, tenim deures ètics però no polítics envers ells perquè no són racionals.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="concept-card p-6 rounded-xl border-[#cd7f32]/30 bg-gradient-to-br from-[#cd7f32]/5 to-transparent">
+                            <h4 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-3">Resposta de Nussbaum</h4>
+                            <p class="text-sm text-gray-300">Els animals <strong>són</strong> subjectes de justícia. Posseïxen dignitat proporcional a la forma d'agència de la seva espècie. Poden patir dany i frustració, per tant mereixen protecció política i legal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Drets -->
+            <div id="drets" class="content-panel">
+                <div class="max-w-4xl mx-auto">
+                    <h3 class="font-cinzel text-3xl font-bold text-center text-[#cd7f32] mb-8">Relació amb els Drets Humans</h3>
+                    
+                    <p class="text-gray-300 text-center mb-8">L'enfocament de les capacitats es pot entendre com un tipus d'enfocament basat en els drets humans, però amb abast més ampli (inclou animals no humans).</p>
+
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div class="concept-card p-6 rounded-xl">
+                            <h4 class="font-cinzel text-xl font-bold text-[#e07a5f] mb-4">Coincidències</h4>
+                            <ul class="space-y-3 text-sm text-gray-400">
+                                <li class="flex items-start">
+                                    <span class="text-[#cd7f32] mr-2">✓</span>
+                                    <span>Idea fonamental: Totes les persones tenen dret a béns bàsics en virtut de la seva humanitat</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-[#cd7f32] mr-2">✓</span>
+                                    <span>Contingut similar: Capacitats coincideixen amb drets de 1a (civils/polítics) i 2a generació (econòmics/socials)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-[#cd7f32] mr-2">✓</span>
+                                    <span>Comparabilitat transcultural</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-[#cd7f32] mr-2">✓</span>
+                                    <span>Base per a garanties constitucionals</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="concept-card p-6 rounded-xl border-[#cd7f32]/30">
+                            <h4 class="font-cinzel text-xl font-bold text-[#cd7f32] mb-4">Aportacions de Nussbaum</h4>
+                            <ul class="space-y-3 text-sm text-gray-400">
+                                <li class="flex items-start">
+                                    <span class="text-[#e07a5f] mr-2">▸</span>
+                                    <span>Definició filosòfica més clara i inclusiva dels conceptes clau</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-[#e07a5f] mr-2">▸</span>
+                                    <span>Ampliació als animals no humans</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-[#e07a5f] mr-2">▸</span>
+                                    <span>Igualtat total per a persones amb discapacitats cognitives</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-[#e07a5f] mr-2">▸</span>
+                                    <span>Lligam explícit entre drets i dignitat</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-[#e07a5f] mr-2">▸</span>
+                                    <span>Relació clara entre drets i deures</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-8 rounded-2xl text-center bg-gradient-to-r from-[#cd7f32]/10 to-[#e07a5f]/10">
+                        <h4 class="font-cinzel text-xl font-bold text-white mb-4">Crítica al Liberalisme Nord-americà</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Nussbaum critica la tradició del liberalisme polític i jurídic nord-americà que defensa que n'hi ha prou amb la <strong>llibertat negativa</strong> (no interferència). Sosté que els drets fonamentals requereixen <strong>acció positiva</strong> de l'Estat per convertir-se en reals, no només paraules en un paper.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCACIÓ -->
+    <section id="educacio" class="py-20 section-light">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-cinzel text-5xl font-black mb-4 text-[#cd7f32]">EDUCACIÓ I CAPACITATS</h2>
+                <p class="text-xl text-gray-400 font-playfair">"L'educació és un funcionament fèrtil"</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="p-8 rounded-2xl">
+                        <h3 class="font-cinzel text-2xl font-bold text-[#e07a5f] mb-4">Rol Central de l'Educació</h3>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            L'educació a les escoles, famílies o programes de desenvolupament ha estat un element central de l'enfocament de les capacitats des de l'inici. <span class="text-[#cd7f32] font-bold">Forma les aptituds de les persones i les transforma en capacitats internes.</span>
+                        </p>
+                        
+                        <div class="nussbaum-quote p-4 rounded-r-lg my-4">
+                            <p class="text-gray-300 italic">"Té un paper clau en el desenvolupament i l'exercici de la majoria de les capacitats humanes."</p>
+                        </div>
+
+                        <h4 class="font-cinzel text-lg text-[#cd7f32] mb-3">Funcions de l'educació:</h4>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li class="flex items-start">
+                                <span class="text-[#e07a5f] mr-2">📚</span>
+                                <span>Font de satisfacció per a tota la vida</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#e07a5f] mr-2">💼</span>
+                                <span>Millora les opcions d'ocupació</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#e07a5f] mr-2">🏛️</span>
+                                <span>Fomenta la participació política</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#e07a5f] mr-2">🤝</span>
+                                <span>Facilita la interacció productiva social</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-card p-8 rounded-2xl border-[#e07a5f]/30">
+                        <h3 class="font-cinzel text-xl font-bold text-[#e07a5f] mb-4">Educació i Gènere</h3>
+                        <p class="text-gray-300 text-sm mb-4">Eina essencial per combatre la desigualtat de gènere:</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-[#0f172a]/30 p-4 rounded-lg">
+                                <h5 class="font-bold text-[#cd7f32] text-sm mb-2">Alfabetització</h5>
+                                <p class="text-xs text-gray-400">Permet comunicació política entre dones, trencant l'aïllament.</p>
+                            </div>
+                            <div class="bg-[#0f172a]/30 p-4 rounded-lg">
+                                <h5 class="font-bold text-[#cd7f32] text-sm mb-2">Formació</h5>
+                                <p class="text-xs text-gray-400">Millora posició negociadora a la llar, independència econòmica.</p>
+                            </div>
+                            <div class="bg-[#0f172a]/30 p-4 rounded-lg">
+                                <h5 class="font-bold text-[#cd7f32] text-sm mb-2">Empoderament</h5>
+                                <p class="text-xs text-gray-400">Capacitat per afrontar violència de gènere, distribució equitativa de tasques.</p>
+                            </div>
+                            <div class="bg-[#0f172a]/30 p-4 rounded-lg">
+                                <h5 class="font-bold text-[#cd7f32] text-sm mb-2">Temps de lleure</h5>
+                                <p class="text-xs text-gray-400">Ampliació del temps propi per a desenvolupament personal.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="p-6 rounded-xl bg-gradient-to-br from-[#cd7f32]/10 to-transparent text-center">
+                        <div class="text-5xl mb-4">📖</div>
+                        <h4 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-2">Analfabetisme</h4>
+                        <p class="text-sm text-gray-400">"Una discapacitat duradora" que limita totes les altres capacitats.</p>
+                    </div>
+
+                    <div class="p-6 rounded-xl">
+                        <h4 class="font-cinzel text-lg font-bold text-[#e07a5f] mb-3">Continguts Essencials</h4>
+                        <p class="text-xs text-gray-400 mb-3">A més de competències econòmiques:</p>
+                        <ul class="text-xs text-gray-500 space-y-2">
+                            <li>• Pensament crític</li>
+                            <li>• Empatia</li>
+                            <li>• Comprensió històrica i econòmica global</li>
+                            <li>• Arts i humanitats</li>
+                            <li>• Ciutadania democràtica</li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-card p-6 rounded-xl border-[#cd7f32]/30">
+                        <h4 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-3">Obligatorietat</h4>
+                        <p class="text-sm text-gray-400">Primària i Secundària han de ser <strong>obligatòries</strong> per als infants (no es pot cedir a pressions familiars perquè deixin estudis per treballar).</p>
+                    </div>
+
+                    <div class="p-4 bg-[#e07a5f]/10 rounded-lg border border-[#e07a5f]/30">
+                        <p class="text-xs text-[#e07a5f] italic">"L'educació ha de ser sensible al context cultural però capaç de dialogar transcendentalment."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- SÍNTESI FINAL -->
+    <section class="py-20 section-light relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#cd7f32]/5 to-transparent pointer-events-none"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="font-cinzel text-4xl font-bold text-white mb-8">SÍNTESI FINAL</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="concept-card p-6 rounded-xl border-[#e07a5f]/30">
+                    <div class="text-3xl mb-3">🎯</div>
+                    <h3 class="font-cinzel text-lg font-bold text-[#e07a5f] mb-2">Objectiu</h3>
+                    <p class="text-xs text-gray-400">Garantir una vida humanament digna per a tothom a través de les 10 capacitats centrals.</p>
+                </div>
+                
+                <div class="concept-card p-6 rounded-xl border-[#cd7f32]/30">
+                    <div class="text-3xl mb-3">⚖️</div>
+                    <h3 class="font-cinzel text-lg font-bold text-[#cd7f32] mb-2">Mètode</h3>
+                    <p class="text-xs text-gray-400">Consequencialisme respectuós amb la dignitat kantiana. Justícia com a llibertat positiva.</p>
+                </div>
+                
+                <div class="concept-card p-6 rounded-xl border-[#e07a5f]/30">
+                    <div class="text-3xl mb-3">🌍</div>
+                    <h3 class="font-cinzel text-lg font-bold text-[#e07a5f] mb-2">Alcance</h3>
+                    <p class="text-xs text-gray-400">Des dels països més pobres fins als més rics. Inclusió de tota la diversitat humana i animal.</p>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-[#0f172a] to-[#1e293b] p-8 rounded-2xl border border-[#cd7f32]/20">
+                <p class="text-lg text-gray-300 leading-relaxed font-playfair italic">
+                    "La justícia social requereix no només distribuir recursos, sinó crear les condicions perquè cada persona pugui exercir la seva agència, planificar la seva vida i viure amb dignitat."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREGUNTES PER REPASSAR -->
+    <section id="preguntes" class="py-20 section-light">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-cinzel text-4xl font-bold text-[#f8f6f0] mb-4">PREGUNTES PER REPASSAR</h2>
+                <p class="text-[#94a3b8]">Nussbaum ens convida a pensar</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-[#d4a853] to-[#c9ada7] mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- PREFACI I CAPÍTOL 1 -->
+                <div class="space-y-4">
+                    <h3 class="font-cinzel text-xl font-bold text-[#d4a853] border-b border-[#d4a853]/30 pb-2 mb-4">Prefaci i Capítol 1</h3>
+                    
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Quines són les conseqüències de fer servir el PIB com a únic indicador?</p>
+                            <span class="text-[#d4a853] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            Amaga desigualtats socials, ignora la distribució real de la riquesa, no reflecteix la qualitat de vida efectiva de les persones i beneficia les elits. És un indicador agregatiu que no mostra qui rep els beneficis del creixement.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Per a què hauria de servir la política?</p>
+                            <span class="text-[#d4a853] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            Aconseguir que les persones puguin portar una vida humanament digna. Crear un ambient propici perquè els éssers humans puguin gaudir d'una vida llarga, saludable i creativa. Les persones han d'ocupar sempre el lloc central de les polítiques públiques.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">És millor donar diners o proporcionar eines perquè puguin afrontar els problemes?</p>
+                            <span class="text-[#d4a853] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            És millor proporcionar eines (empoderament) perquè puguin assolir per elles mateixos els estàndards adients. No tractar-les com a subjectes passius sinó dotar-les d'autonomia i autoestima per controlar i planificar les seves vides.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Tothom parteix d'una situació inicial igual?</p>
+                            <span class="text-[#d4a853] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            No. Hi ha diferències per gènere, raça, classe social, discapacitat. L'enfocament de les capacitats reconeix que qui més ajuda necessita per superar el llindar de dignitat, més ajuda ha de rebre (justícia equitativa, no igualtat simple).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAPÍTOL 2 -->
+                <div class="space-y-4">
+                    <h3 class="font-cinzel text-xl font-bold text-[#c9ada7] border-b border-[#c9ada7]/30 pb-2 mb-4">Capítol 2: Les Capacitats</h3>
+                    
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Quins tipus de capacitats hi ha?</p>
+                            <span class="text-[#c9ada7] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            <strong>Bàsiques:</strong> facultats innats (equipament biològic).<br>
+                            <strong>Internes:</strong> característiques desenvolupades (personalitat, habilitats).<br>
+                            <strong>Combinades:</strong> oportunitats reals segons context social/polític/econòmic.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Per què cal distingir entre capacitat i funcionament?</p>
+                            <span class="text-[#c9ada7] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            Perquè podem trobar el mateix funcionament (ex: dejuni) amb capacitats diferents: voluntari (té capacitat) vs. forçat per la pobresa (no té capacitat). Les capacitats són llibertat; els funcionaments, la realització.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">S'ha d'igualar les capacitats per a totes les persones?</p>
+                            <span class="text-[#c9ada7] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            No s'han d'igualar les condicions, però sí garantir que tothom superi un llindar mínim en cadascuna de les 10 capacitats centrals. A més, qui més necessita per arribar-hi, més ajuda ha de rebre.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Es pot compensar la manca d'una capacitat amb diners?</p>
+                            <span class="text-[#c9ada7] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            No. Les capacitats són heterogènies i incommensurables. No es pot corregir la falta d'una amb més quantitat d'una altra. Cada una requereix protecció i garantia específica.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Hi ha capacitats dolentes?</p>
+                            <span class="text-[#c9ada7] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            Sí. Per exemple, la capacitat per a la crueltat o la humiliació d'altres. L'Estat no ha de fomentar-les, sinó les que permeten una vida digna i respectuosa.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAPÍTOL 3 -->
+                <div class="space-y-4">
+                    <h3 class="font-cinzel text-xl font-bold text-[#d4a853] border-b border-[#d4a853]/30 pb-2 mb-4">Capítol 3: Crítiques</h3>
+                    
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Quin és el problema de les preferències adaptatives?</p>
+                            <span class="text-[#d4a853] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            Les persones aprenen a no voler allò que la societat ha posat fora del seu abast (ex: dones que renuncien a la independència). L'utilitarisme consolidaria aquesta injustícia satisfent preferències adaptades.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">N'hi ha prou amb llibertat negativa (no interferència)?</p>
+                            <span class="text-[#d4a853] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            No. Cal <strong>llibertat positiva</strong>: acció activa de l'Estat per donar suport a les capacitats. Els drets no són més que paraules en un paper fins que l'acció de l'Estat els converteix en reals.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">La renda garanteix el respecte i la inclusió?</p>
+                            <span class="text-[#d4a853] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            No. Exemples històrics (jueus a Europa, LGTBI+ als EUA) mostren que tenir renda alta no els va lliurar de l'estigma ni la discriminació. Calen polítiques específiques de reconeixement i inclusió.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">És compatible el conseqüencialisme amb el liberalisme polític?</p>
+                            <span class="text-[#d4a853] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            Nussbaum considera que no completament, perquè el conseqüencialisme no distingeix entre àmbit polític i personal. L'enfocament de les capacitats respecta la pluralitat de visions del bé en la vida personal mentre exigeix resultats justos en l'àmbit polític.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAPÍTOL 4 -->
+                <div class="space-y-4">
+                    <h3 class="font-cinzel text-xl font-bold text-[#c9ada7] border-b border-[#c9ada7]/30 pb-2 mb-4">Capítol 4: Justícia</h3>
+                    
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Quina deficiència té Rawls respecte a les discapacitats?</p>
+                            <span class="text-[#c9ada7] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            La "posició original" assumeix igualtat similar de poder físic i mental, excloent persones amb discapacitats greus. Rawls les tracta com a assumptes posteriors, no subjectes primaris de justícia en el contracte.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Es pot ser injust amb un animal?</p>
+                            <span class="text-[#c9ada7] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            Sí. Tenen dignitat proporcional a la seva forma d'agència. Poden patir dolor i frustració dels seus objectius. Són subjectes de justícia política (no només ètica) i mereixen protecció legal.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Què comparteix l'enfocament amb el deontologisme?</p>
+                            <span class="text-[#c9ada7] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            El principi que cada persona és un fi en si mateixa i no ha de ser tractada com a mitjà. El respecte a la humanitat i la dignitat com a fonament. La crítica a l'utilitarisme per no valorar prou cada individu.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Què comparteix amb el conseqüencialisme?</p>
+                            <span class="text-[#c9ada7] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            L'orientació als resultats: cal observar si les polítiques efectivament asseguren les capacitats. És un enfocament orientat als resultats, no només als procediments.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAPÍTOL 8 -->
+                <div class="space-y-4">
+                    <h3 class="font-cinzel text-xl font-bold text-[#d4a853] border-b border-[#d4a853]/30 pb-2 mb-4">Capítol 8: Educació</h3>
+                    
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Per què és obligatòria l'Educació Primària i Secundària?</p>
+                            <span class="text-[#d4a853] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            Perquè els infants són immadurs i poden cedir a pressions familiars per deixar els estudis i treballar. És un funcionament fèrtil que possibilita totes les altres capacitats i empodera les dones.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Quines habilitats s'han de treballar?</p>
+                            <span class="text-[#d4a853] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            A més de competències econòmiques: pensament crític, empatia, comprensió històrica i econòmica global, arts i humanitats per a una ciutadania democràtica responsable.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">A quins elements contextuals han de fer referència?</p>
+                            <span class="text-[#d4a853] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            Han de ser sensibles al context local i cultural, però també capaços d'establir diàleg transcultural sobre principis generals consensuats que es puguin implementar flexiblement a cada país.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PREGUNTES TRANSVERSALS -->
+                <div class="space-y-4">
+                    <h3 class="font-cinzel text-xl font-bold text-[#c9ada7] border-b border-[#c9ada7]/30 pb-2 mb-4">Qüestions Transversals</h3>
+                    
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Què és més important: procediments o resultats?</p>
+                            <span class="text-[#c9ada7] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            L'enfocament és orientat als resultats (conseqüencialista), però respectant sempre la dignitat i els drets (deontològic). El criteri últim és l'efectivitat en garantir capacitats, però sense violar la dignitat humana.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Què mou a acceptar les restriccions socials?</p>
+                            <span class="text-[#c9ada7] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                        L'avantatge recíproc i l'interès propi racional (Hobbes/Rawls), no l'amor al proïsme ni l'altruisme. La igualtat similar de poder fa que ningú no garanteixi sortir-ne vencedor en un estat de naturalesa.
+                        </div>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-lg cursor-pointer" onclick="toggleAnswer(this)">
+                        <div class="flex justify-between items-center">
+                            <p class="text-sm text-[#e2e8f0] font-semibold">Com assegura l'Estat la permanència de les capacitats?</p>
+                            <span class="text-[#c9ada7] transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="hidden mt-3 pt-3 border-t border-white/10 text-xs text-[#94a3b8] leading-relaxed">
+                            Incorporant-les als textos constitucionals i garantint l'accés als tribunals per consolidar-ne el compliment, així com protegint-les dels canvis de mercat o govern.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nota final -->
+            <div class="mt-12 text-center max-w-3xl mx-auto p-6 bg-[#1e293b]/50 rounded-xl border border-[#d4a853]/20">
+                <p class="text-[#94a3b8] text-sm italic">
+                    "La justícia social requereix garantir que tothom pugui exercir la seva agència, planificar la seva vida i viure amb dignitat, respectant la pluralitat i la llibertat de cada persona."
+                </p>
+            </div>
+        </div>
+    </sectio>
+
+       
+    <!-- TEXTOS CLAU - VERSIÓ ESPECÍFICA PAU -->
+        <section id="textos" class="py-20 section-dark relative">
+            <div class="max-w-7xl mx-auto px-4 relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="font-cinzel text-5xl font-black mb-4 text-[#e07a5f]">TEXTOS CLAU</h2>
+                    <p class="text-xl text-gray-400 mb-2">Selecció de <em>Creant Capacitats</em> </p>
+                    <p class="text-sm text-[#94a3b8]">Gui de lectura per a la Prova d'Accés a la Universitat</p>
+                </div>
+    
+                <!-- Estructura detallada -->
+                <div class="space-y-8 max-w-5xl mx-auto">
+                    
+                    <!-- PREFACI -->
+                    <div class="p-6 rounded-2xl border-l-4 border-[#d4a853] bg-gradient-to-r from-[#d4a853]/10 to-transparent">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-cinzel text-2xl font-bold text-[#d4a853]">Prefaci</h3>
+                            <span class="px-3 py-1 bg-[#d4a853]/20 rounded-full text-xs text-[#d4a853]">Text complet seleccionat</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-2"><strong>Extensió:</strong> Els tres primers paràgrafs.</p>
+                        <p class="text-gray-400 text-sm italic">Introducció a la crítica de l'enfocament del creixement econòmic i presentació de l'enfocament de les capacitats com a alternativa.</p>
+                    </div>
+    
+                    <!-- CAPÍTOL 1 -->
+                    <div class="p-6 rounded-2xl border-l-4 border-[#c9ada7]">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-cinzel text-2xl font-bold text-[#c9ada7]">Capítol 1</h3>
+                            <span class="px-3 py-1 bg-[#c9ada7]/20 rounded-full text-xs text-[#c9ada7]">Paràgrafs 27-34</span>
+                        </div>
+                        
+                        <div class="bg-[#0f172a]/50 p-4 rounded-lg mb-4 border border-[#c9ada7]/20">
+                            <p class="text-sm text-gray-300 mb-2"><strong>Inici:</strong> <em>"Dissortadament, els enfocaments teòrics en la teoria del desenvolupament dominants, que s'usen per tot el món, no són aliats de la Vasanti..."</em></p>
+                            <p class="text-sm text-gray-300"><strong>Final:</strong> Final del capítol.</p>
+                        </div>
+    
+                        <div class="flex items-start space-x-3 bg-[#d4a853]/10 p-3 rounded-lg">
+                            <span class="text-[#d4a853] text-lg">📌</span>
+                            <p class="text-xs text-gray-400"> Nussbaum utilitza el cas de la <span class="text-[#d4a853]">Vasanti</span> (descrit a la primera part del capítol)   
+                            per il·lustrar de manera concreta l’enfocament de les capacitats.
+                            La Vasanti és una dona índia que pateix violència domèstica i manca d’autonomia econòmica, i que aconsegueix reconstruir la seva vida gràcies a l’accés 
+                            al microcrèdit i al suport d’una organització de dones. Nussbaum l’utilitza per mostrar que el desenvolupament real no és només ingressos, 
+                            sinó la possibilitat efectiva de viure amb seguretat, llibertat i autonomia.</p>
+                        </div>
+                    </div>
+    
+                    <!-- CAPÍTOL 2 -->
+                    <div class="p-6 rounded-2xl border-l-4 border-[#d4a853]">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-cinzel text-2xl font-bold text-[#d4a853]">Capítol 2: Les Capacitats Centrals</h3>
+                            <span class="px-3 py-1 bg-[#d4a853]/20 rounded-full text-xs text-[#d4a853]">Paràgrafs 4 i 7-25</span>
+                        </div>
+    
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 rounded-full bg-[#d4a853]/20 flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-[#d4a853] text-xs font-bold">4</span>
+                                </div>
+                                <p class="text-sm text-gray-300"><strong>Paràgraf 4:</strong> Comença amb <em>"L'Enfocament de les Capacitats es pot definir provisionalment com..."</em></p>
+                            </div>
+    
+                            <div class="flex items-start space-x-3">
+                                <div class="w-12 h-6 rounded-full bg-[#d4a853]/20 flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-[#d4a853] text-xs font-bold">7-25</span>
+                                </div>
+                                <div class="text-sm text-gray-300">
+                                    <p class="mb-1"><strong>Inici (§7):</strong> <em>"Què són les capacitats?"</em></p>
+                                    <p><strong>Final (§25):</strong> <em>"L'Enfocament de les Capacitats no és una teoria sobre què és la naturalesa humana..."</em></p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="mt-4 pt-4 border-t border-white/10 grid md:grid-cols-3 gap-2 text-xs text-gray-500">
+                            <div class="bg-[#0f172a]/30 p-2 rounded">Paràgraf 4:
+                                Es critica la visió econòmica tradicional del desenvolupament (centrada en el PIB) perquè no reflecteix les desigualtats reals ni la qualitat de vida de les persones.</div>
+                            <div class="bg-[#0f172a]/30 p-2 rounded">Paràgrafs 7–25 (resum en 3 línies):
+                                S’explica amb més detall l’enfocament de les capacitats com a alternativa, destacant que cal fixar-se en les oportunitats reals de les persones.</div>
+                            <div class="bg-[#0f172a]/30 p-2 rounded">Es distingeix entre recursos, funcionaments i capacitats, mostrant que tenir recursos no garanteix poder viure bé.
+                                També es defensa que la justícia exigeix assegurar un llindar mínim de capacitats bàsiques per a tothom</div>
+                        </div>
+                    </div>
+    
+                    <!-- CAPÍTOL 3 -->
+                    <div class="concept-card p-6 rounded-2xl border-l-4 border-[#c9ada7]">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-cinzel text-2xl font-bold text-[#c9ada7]">Capítol 3: Una "Contrateoria" Necessària</h3>
+                            <span class="px-3 py-1 bg-[#c9ada7]/20 rounded-full text-xs text-[#c9ada7]">Seccions seleccionades</span>
+                        </div>
+    
+                        <div class="space-y-4">
+                            <!-- Secció 2 -->
+                            <div class="bg-[#0f172a]/40 p-4 rounded-lg border border-[#c9ada7]/20">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-bold text-[#d4a853] text-sm">Segona Secció: L'Enfocament Utilitarista</h4>
+                                    <span class="text-xs bg-red-900/30 text-red-300 px-2 py-1 rounded">Excloent §5, §6 i §9</span>
+                                </div>
+                                <p class="text-xs text-gray-400">Crítica detallada als quatre problemes fonamentals de l'utilitarisme (agregatiu, reduccionista, preferències adaptatives, satisfacció vs. activitat).</p>
+                            </div>
+    
+                            <!-- Secció 3 -->
+                            <div class="bg-[#0f172a]/40 p-4 rounded-lg border border-[#c9ada7]/20">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-bold text-[#d4a853] text-sm">Tercera Secció: Enfocaments basats en els Recursos</h4>
+                                    <span class="text-xs bg-green-900/30 text-green-300 px-2 py-1 rounded">Secció sencera</span>
+                                </div>
+                                <p class="text-xs text-gray-400">Anàlisi crítica de la teoria dels "béns primaris" de Rawls i els quatre problemes (renda no indica capacitats, desigualtats històriques, respecte/inclusió, altres béns essencials).</p>
+                            </div>
+    
+                            <!-- Secció 4 -->
+                            <div class="bg-[#0f172a]/40 p-4 rounded-lg border border-[#c9ada7]/20">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-bold text-[#d4a853] text-sm">Quarta Secció: Les Capacitats i la Qüestió del Mesurament</h4>
+                                    <span class="text-xs bg-green-900/30 text-green-300 px-2 py-1 rounded">Secció sencera</span>
+                                </div>
+                                <p class="text-xs text-gray-400">Valoració de l'IDH, possibilitat de mesurar les capacitats i crítica a la "fal·làcia del mesurament".</p>
+                            </div>
+    
+                            <!-- Secció 5 -->
+                            <div class="bg-[#0f172a]/40 p-4 rounded-lg border border-[#c9ada7]/20">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-bold text-[#d4a853] text-sm">Cinquena Secció: Els Enfocaments basats en els Drets Humans</h4>
+                                    <span class="text-xs bg-yellow-900/30 text-yellow-300 px-2 py-1 rounded">Paràgrafs 1, 2 i 6</span>
+                                </div>
+                                <p class="text-xs text-gray-400">Coincidències amb els drets humans, deficiències del moviment tradicional (llibertat negativa), proposta de llibertat positiva.</p>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- CAPÍTOL 4 -->
+                    <div class="concept-card p-6 rounded-2xl border-l-4 border-[#d4a853]">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-cinzel text-2xl font-bold text-[#d4a853]">Capítol 4: Drets Fonamentals</h3>
+                            <span class="px-3 py-1 bg-[#d4a853]/20 rounded-full text-xs text-[#d4a853]">Seccions parcials</span>
+                        </div>
+    
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-[#0f172a]/40 p-4 rounded-lg border border-[#d4a853]/20">
+                                <h4 class="font-bold text-[#c9ada7] text-sm mb-2">Quarta Secció: Posicions basades en el Contracte Social</h4>
+                                <div class="flex flex-wrap gap-2 mb-2">
+                                    <span class="text-xs bg-[#d4a853]/20 text-[#d4a853] px-2 py-1 rounded">§3</span>
+                                    <span class="text-xs bg-[#d4a853]/20 text-[#d4a853] px-2 py-1 rounded">§4</span>
+                                    <span class="text-xs bg-[#d4a853]/20 text-[#d4a853] px-2 py-1 rounded">§5</span>
+                                    <span class="text-xs bg-[#d4a853]/20 text-[#d4a853] px-2 py-1 rounded">§6</span>
+                                </div>
+                                <p class="text-xs text-gray-400">Crítica a Rawls: exclusió de persones amb discapacitat i animals. Teories contractualistes i dignitat.</p>
+                            </div>
+    
+                            <div class="bg-[#0f172a]/40 p-4 rounded-lg border border-[#d4a853]/20">
+                                <h4 class="font-bold text-[#c9ada7] text-sm mb-2">Sisena Secció: Conseqüencialisme i Deontologia</h4>
+                                <div class="flex flex-wrap gap-2 mb-2">
+                                    <span class="text-xs bg-[#d4a853]/20 text-[#d4a853] px-2 py-1 rounded">§1</span>
+                                    <span class="text-xs bg-[#d4a853]/20 text-[#d4a853] px-2 py-1 rounded">§3</span>
+                                    <span class="text-xs bg-[#d4a853]/20 text-[#d4a853] px-2 py-1 rounded">§4</span>
+                                    <span class="text-xs bg-[#d4a853]/20 text-[#d4a853] px-2 py-1 rounded">§5</span>
+                                </div>
+                                <p class="text-xs text-gray-400">Relació amb Kant (deontologia) i conseqüencialisme. Orientació als resultats respectant la dignitat.</p>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- CAPÍTOL 8 -->
+                    <div class="concept-card p-6 rounded-2xl border-l-4 border-[#c9ada7] bg-gradient-to-r from-[#c9ada7]/10 to-transparent">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-cinzel text-2xl font-bold text-[#c9ada7]">Capítol 8: Capacitats i Problemes Contemporanis</h3>
+                            <span class="px-3 py-1 bg-green-900/30 rounded-full text-xs text-green-300">Secció sencera</span>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="text-2xl">📚</span>
+                            <h4 class="font-bold text-[#d4a853]">Quarta Secció: L'Educació</h4>
+                        </div>
+                        
+                        <ul class="text-sm text-gray-400 space-y-2 ml-11">
+                            <li>• Rol central de l'educació en el desenvolupament de capacitats</li>
+                            <li>• Funcionament fèrtil i empoderament de les dones</li>
+                            <li>• Obligatorietat de Primària i Secundària</li>
+                            <li>• Continguts: habilitats econòmiques + humanitats (pensament crític, empatia)</li>
+                            <li>• Educació per a la ciutadania democràtica</li>
+                            <li>• Sensibilitat al context local i diàleg transcultural</li>
+                        </ul>
+                    </div>
+    
+                </div>
+    
+                <!-- Resum visual -->
+                <div class="mt-12 max-w-4xl mx-auto">
+                    <div class="bg-gradient-to-r from-[#0f172a] to-[#1e293b] p-8 rounded-2xl border border-[#d4a853]/30">
+                        <h3 class="font-cinzel text-xl font-bold text-[#d4a853] mb-6 text-center">Distribució del Textos per a la PAU</h3>
+                        
+                        <div class="flex justify-center gap-4 flex-wrap">
+    
+                            <div class="flex-1 min-w-[120px] p-3 bg-[#d4a853]/10 rounded-lg">
+                                <div class="text-2xl font-bold text-[#d4a853]">3</div>
+                                <div class="text-xs text-gray-400">Paràgrafs<br>Prefaci</div>
+                            </div>
+                        
+                            <div class="flex-1 min-w-[120px] p-3 bg-[#c9ada7]/10 rounded-lg">
+                                <div class="text-2xl font-bold text-[#c9ada7]">8</div>
+                                <div class="text-xs text-gray-400">Paràgrafs<br>Cap. 1</div>
+                            </div>
+                        
+                            <div class="flex-1 min-w-[120px] p-3 bg-[#d4a853]/10 rounded-lg">
+                                <div class="text-2xl font-bold text-[#d4a853]">20</div>
+                                <div class="text-xs text-gray-400">Paràgrafs<br>Cap. 2</div>
+                            </div>
+                        
+                            <div class="flex-1 min-w-[120px] p-3 bg-[#c9ada7]/10 rounded-lg">
+                                <div class="text-2xl font-bold text-[#c9ada7]">4</div>
+                                <div class="text-xs text-gray-400">Seccions<br>Cap. 3</div>
+                            </div>
+                        
+                            <div class="flex-1 min-w-[120px] p-3 bg-[#c9ada7]/10 rounded-lg">
+                                <div class="text-2xl font-bold text-[#c9ada7]">1</div>
+                                <div class="text-xs text-gray-400">Secció<br>Cap. 8</div>
+                            </div>
+                        
+                        </div>
+    
+                        <div class="mt-6 text-center">
+                            <p class="text-sm text-gray-500 italic">
+                                <span class="text-[#d4a853]">Nota:</span> Aquesta selecció cobreix des del prefaci fins al capítol 8, 
+                                passant per la teoria de les capacitats, les crítiques a altres enfocaments i les aplicacions pràctiques (educació).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Cita final -->
+                <div class="mt-12 max-w-3xl mx-auto text-center">
+                    <div class="nussbaum-quote p-8 rounded-2xl">
+                        <p class="text-xl font-playfair italic text-gray-200 mb-4">
+                            "El que s'ha de fomentar és la capacitat d'elecció, l'autonomia personal i l'autoestima de les persones 
+                            per tal que totes elles puguin controlar i planificar les seves vides per si mateixes."
+                        </p>
+                        <p class="text-sm text-[#d4a853]">— Martha C. Nussbaum, <em>Creant Capacitats</em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    
+
+    <!-- FOOTER -->
+    <footer class="bg-[#0f172a] border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col items-center mb-8">
+                <span class="font-cinzel text-[#cd7f32] text-xl tracking-widest font-bold">
+                    NUSSBAUM
+                </span>
+                <span class="font-cinzel text-[#e07a5f] text-lg italic mt-2">
+                    Dignitat, Capacitats i Justícia
+                </span>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8 mb-8 text-center md:text-left">
+                <div>
+                    <h4 class="font-cinzel text-[#cd7f32] font-bold mb-4">Conceptes Clau</h4>
+                    <ul class="space-y-2 text-xs text-gray-500">
+                        <li>• Capacitats centrals</li>
+                        <li>• Dignitat humana</li>
+                        <li>• Llibertat positiva</li>
+                        <li>• Preferències adaptatives</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-cinzel text-[#cd7f32] font-bold mb-4">Influcies</h4>
+                    <ul class="space-y-2 text-xs text-gray-500">
+                        <li>• Aristòtil</li>
+                        <li>• Kant</li>
+                        <li>• J.S. Mill</li>
+                        <li>• Amartya Sen</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-cinzel text-[#cd7f32] font-bold mb-4">Crítiques</h4>
+                    <ul class="space-y-2 text-xs text-gray-500">
+                        <li>• Utilitarisme</li>
+                        <li>• Rawls (recursos)</li>
+                        <li>• Llibertat negativa</li>
+                        <li>• Contractualisme</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-cinzel text-[#cd7f32] font-bold mb-4">Obres</h4>
+                    <ul class="space-y-2 text-xs text-gray-500">
+                        <li>• Creant Capacitats (2011)</li>
+                        <li>• Frontiers of Justice (2006)</li>
+                        <li>• Not for Profit (2010)</li>
+                        <li>• Women and Human Dev. (2000)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 text-center">
+                <p class="text-gray-600 text-xs uppercase tracking-wider">
+                    Justícia Social • Desenvolupament Humà • Dignitat per a Tothom
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let isManualNavigation = false;
+        /* =========================
+           PROGRESS BAR
+        ========================= */
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+        
+            const bar = document.getElementById('progressBar');
+            if (bar) bar.style.width = scrolled + '%';
+        });
+        
+        
+        /* =========================
+           TAB SYSTEM (UNIC)
+        ========================= */
+        function switchTab(tabId, el = null) {
+        
+            // 1. amagar panells
+            document.querySelectorAll('.content-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+        
+            // 2. activar panell
+            const target = document.getElementById(tabId);
+            if (target) target.classList.add('active');
+        
+            // 3. reset menú superior
+            document.querySelectorAll('.tab-menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+        
+            if (el) {
+                el.classList.add('active');
+            }
+        
+            // 4. sincronitzar també botons del document (IMPORTANT)
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+        
+                const onclick = btn.getAttribute('onclick') || '';
+                if (onclick.includes(tabId)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        
+        
+        /* =========================
+           SMOOTH SCROLL
+        ========================= */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (!href || href === '#') return;
+        
+                const target = document.querySelector(href);
+        
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        
+        /* =========================
+           INTERSECTION OBSERVER (CARDS)
+        ========================= */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        document.querySelectorAll('.concept-card, .capability-card').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = `all 0.3s ease ${index * 0.05}s`;
+            observer.observe(el);
+        });
+        
+        
+        /* =========================
+           TOGGLE ANSWER
+        ========================= */
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.hidden, .block');
+            const arrow = element.querySelector('span.transform');
+        
+            if (!answer) return;
+        
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                answer.classList.add('block');
+                if (arrow) arrow.style.transform = 'rotate(180deg)';
+                element.classList.add('border-[#d4a853]/50');
+            } else {
+                answer.classList.add('hidden');
+                answer.classList.remove('block');
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
+                element.classList.remove('border-[#d4a853]/50');
+            }
+        }
+        
+      /* =========================
+   SCROLL SYNC (VERSIÓ CORRECTA)
+========================= */
+
+window.addEventListener('scroll', () => {
+
+// ❗ BLOQUEIG mentre naveguem manualment
+if (isManualNavigation) return;
+
+const sections = [
+    'biografia',
+    'context',
+    'enfocament',
+    'deu-capacitats',
+    'fonamentacio',
+    'utilitarisme',
+    'recursos',
+    'drets'
+];
+
+const scrollPos = window.scrollY + 150;
+let current = null;
+
+for (let id of sections) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+
+    const rect = el.getBoundingClientRect();
+    const top = rect.top + window.scrollY;
+    const bottom = top + el.offsetHeight;
+
+    if (scrollPos >= top && scrollPos < bottom) {
+        current = id;
+        break;
+    }
+}
+
+if (!current) return;
+
+// 1. neteja global
+document.querySelectorAll('.tab-menu-item, .tab-btn').forEach(el => {
+    el.classList.remove('active');
+});
+
+// 2. activa menú (dropdowns)
+document.querySelectorAll('.tab-menu-item').forEach(item => {
+    const onclick = item.getAttribute('onclick') || '';
+    if (onclick.includes(current)) {
+        item.classList.add('active');
+    }
+});
+
+// 3. activa botons dins document (tabs horitzontals)
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    const onclick = btn.getAttribute('onclick') || '';
+    if (onclick.includes(current)) {
+        btn.classList.add('active');
+    }
+});
+
+}); 
+
+function openCritiques() {
+
+// 1. scroll a la secció
+const section = document.getElementById('critiques');
+if (section) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// 2. activar utilitarisme per defecte
+setTimeout(() => {
+
+    // netejar tot
+    document.querySelectorAll('.content-panel').forEach(p => {
+        p.classList.remove('active');
+    });
+
+    document.querySelectorAll('.tab-btn, .tab-menu-item').forEach(el => {
+        el.classList.remove('active');
+    });
+
+    // activar panell
+    const panel = document.getElementById('utilitarisme');
+    if (panel) panel.classList.add('active');
+
+    // activar botons (menú + document)
+    document.querySelectorAll('[onclick*="utilitarisme"]').forEach(el => {
+        el.classList.add('active');
+    });
+
+}, 300);
+}
+
+function openCritiques() {
+
+// 1. activar bloqueig
+isManualNavigation = true;
+
+// 2. activar utilitarisme
+switchTab('utilitarisme');
+
+// 3. marcar submenú
+document.querySelectorAll('.tab-menu-item').forEach(item => {
+    item.classList.remove('active');
+
+    const onclick = item.getAttribute('onclick') || '';
+    if (onclick.includes('utilitarisme')) {
+        item.classList.add('active');
+    }
+});
+
+// 4. scroll
+const section = document.getElementById('critiques');
+if (section) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// 5. reactivar scroll sync (amb delay)
+setTimeout(() => {
+    isManualNavigation = false;
+}, 400);
+}
+    
+        </script>
+</body>
+</html>

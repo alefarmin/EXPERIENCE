@@ -1,0 +1,302 @@
+body {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    color: #f2f2f2;
+  
+    /* FONS REAL */
+    background:
+      linear-gradient(rgba(0,0,0,0.50), rgba(0,0,0,0.65)),
+      url("img/fons.jpg");
+  
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  
+  /* CENTRE */
+  .home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* CONTENIDOR */
+  .container {
+    padding: 30px;
+  }
+  
+  /* TITOL */
+  h1 {
+    font-size: 3.6rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.7);
+  }
+  
+  /* SUBTITOL */
+  .subtitle {
+    opacity: 0.75;
+    margin-bottom: 50px;
+    font-size: 1.2rem;
+  }
+  
+  /* GRID */
+  .grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  /* TARGETES */
+  .card {
+    padding: 25px 40px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px;
+    text-decoration: none;
+    color: white;
+    font-size: 1.3rem;
+  
+    backdrop-filter: blur(12px);
+    transition: all 0.35s ease;
+  }
+  
+  /* HOVER */
+  .card:hover {
+    transform: translateY(-10px) scale(1.08);
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  }
+
+  body {
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.01);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.container {
+  position: relative;
+}
+
+.experience-title {
+  position: absolute;
+  top: clamp(-80px, -10vw, -30px);
+  left: 50%;
+  transform: translateX(-50%);
+  
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  
+  text-transform: uppercase;
+  
+  color: rgba(255, 255, 255, 0.32);
+  text-shadow: 
+  0 0 12px rgba(255,255,255,0.25),
+  0 0 40px rgba(255,255,255,0.15);
+  
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 15px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+.menu a:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+body {
+  padding-top: 70px;
+}
+  
+.home-inline {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+
+  padding: 8px 12px;
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+
+  color: white;
+  text-decoration: none;
+
+  z-index: 9999;
+}
+
+.home-inline:hover {
+  transform: scale(1.08);
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.35);
+}
+
+.nav-home-btn {
+  background: #fde68a !important;
+  color: #78350f !important;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid #fcd34d;
+  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.35);
+  font-weight: 600;
+  position: relative;
+  z-index: 50;
+  transition: all 0.2s ease;
+}
+
+.nav-home-btn:hover {
+  background: #fcd34d !important;
+  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.5);
+}
+
+nav{
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* =========================
+   NAV (VERSIÓ DEFINITIVA NETA)
+   ========================= */
+
+   nav{
+    width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .nav-inner{
+    max-width:1180px;
+    margin:0 auto;
+  
+    display:flex;
+    align-items:center;
+    gap:0.75rem;
+  
+    padding:0.5rem 1rem;
+  
+    overflow-x:auto;
+    overflow-y:hidden;
+  
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .nav-inner a{
+    white-space: nowrap;
+    flex-shrink: 0;
+  
+    text-decoration:none;
+    color: var(--muted);
+    padding: 14px 10px;
+    border-bottom: 2px solid transparent;
+    font-size: .95rem;
+  }
+  
+  .nav-inner a:hover{
+    color: var(--gold);
+    border-bottom-color:#d8b272;
+  }
+  
+  /* =========================
+   BOTÓ INICI EXPERIENCE (VERSIÓ NETA I POTENT)
+   ========================= */
+
+a.home-experience-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  padding: 10px 18px;
+  border-radius: 9999px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+
+  text-decoration: none;
+
+  background: #facc15;
+  color: #78350f;
+
+  border: 1px solid #f59e0b;
+
+  box-shadow: 0 14px 35px rgba(245,158,11,0.75);
+
+  transition: all 0.25s ease;
+
+  z-index: 1;
+}
+
+/* hover base del botó */
+a.home-experience-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 18px 50px rgba(245,158,11,0.95);
+}
+
+/* =========================
+   EFECTE RESSALTAT REAL (IMPORTANT)
+   ========================= */
+
+a.home-experience-btn::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+
+  border-radius: 9999px;
+
+  background: radial-gradient(
+    circle,
+    rgba(245,158,11,0.45),
+    transparent 70%
+  );
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  z-index: -1;
+}
+
+a.home-experience-btn:hover::after {
+  opacity: 1;
+}

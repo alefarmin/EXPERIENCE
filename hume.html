@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Hume: L'Empirisme Radical - Guia Interactiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #c9a227;
+            --accent: #8b4513;
+            --bg-paper: #f4f1ea;
+            --text-main: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-paper);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Animacions personalitzades */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(201, 162, 39, 0.6); }
+        }
+        
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .glow-effect {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        /* Estils per a les targetes interactives */
+        .concept-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .concept-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .concept-card.active {
+            border-color: var(--secondary);
+            background: linear-gradient(135deg, #fff 0%, #fef9e7 100%);
+        }
+        
+        /* Timeline interactiu */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 3px solid #ddd;
+            transition: all 0.3s;
+        }
+        
+        .timeline-item:hover {
+            border-left-color: var(--secondary);
+            padding-left: 2.5rem;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--secondary);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--secondary);
+        }
+        
+        /* Esquema de les percepcions */
+        .perception-flow {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .flow-arrow {
+            position: absolute;
+            animation: flowMove 2s linear infinite;
+        }
+        
+        @keyframes flowMove {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        
+        /* Tabs personalitzats */
+        .tab-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .tab-btn.active::after {
+            width: 100%;
+        }
+        
+        /* Efecte de "papel vell" per a citacions */
+        .quote-box {
+            background: linear-gradient(to bottom right, #fffef8, #f9f6f0);
+            border-left: 5px solid var(--secondary);
+            position: relative;
+        }
+        
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 80px;
+            color: var(--secondary);
+            opacity: 0.3;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Scrollbar personalitzada */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+        
+        /* Navegació fixa amb blur */
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Grid de conceptes filosòfics */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Efecte de "revelació" per als exemples */
+        .reveal-box {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        
+        .reveal-box.open {
+            max-height: 500px;
+        }
+        
+        /* Comparador interactiu */
+        .comparison-slider {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-slider {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .vs-badge {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--secondary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .vs-badge {
+                position: relative;
+                left: auto;
+                top: auto;
+                transform: none;
+                margin: 1rem auto;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+
+<body class="antialiased">
+    
+    <nav id="navbar" class="nav-blur fixed w-full z-50 border-b border-gray-200 transition-all duration-300">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="flex justify-between h-16 items-center">
+      
+            <!-- ESQUERRA (Inici + logo + títol) -->
+            <div class="flex items-center space-x-6">
+      
+              <!-- INICI -->
+              <a href="index.html" target="_self"
+              class="px-3 py-1.5 rounded-lg bg-amber-100 text-amber-800 font-semibold 
+          hover:bg-amber-200 hover:shadow-sm transition whitespace-nowrap
+          border border-amber-200 relative -ml-20">
+                 ← Inici EXPERIENCE
+              </a>
+      
+              <!-- Separador subtil -->
+              <div class="h-6 w-px bg-gray-300"></div>
+      
+              <!-- Logo + títol -->
+              <a href="index.html" target="_self" class="flex items-center space-x-4 group">
+                
+                <div class="w-10 h-10 bg-gradient-to-br from-amber-600 to-amber-800 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-105 transition-transform">
+                  H
+                </div>
+      
+                <span class="font-display text-xl font-bold text-slate-800 group-hover:text-amber-700 transition-colors">
+                  Hume Experience Project
+                </span>
+      
+              </a>
+      
+            </div>
+      
+            <!-- DRETA -->
+            <div class="hidden md:flex items-center space-x-8">
+      
+              <a href="#biografia" class="text-slate-600 hover:text-amber-700 transition-colors font-medium">Biografia</a>
+              <a href="#empirisme" class="text-slate-600 hover:text-amber-700 transition-colors font-medium">Empirisme</a>
+              <a href="#coneixement" class="text-slate-600 hover:text-amber-700 transition-colors font-medium">Coneixement</a>
+              <a href="#causalitat" class="text-slate-600 hover:text-amber-700 transition-colors font-medium">Causalitat</a>
+              <a href="#escepticisme" class="text-slate-600 hover:text-amber-700 transition-colors font-medium">Escepticisme</a>
+      
+            </div>
+      
+          </div>
+        </div>
+      
+      </nav>
+
+   <!-- Hero Section amb Imatge de Fons -->
+<header class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+
+    <!-- FONS -->
+    <div class="absolute inset-0 z-0">
+  
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-transparent to-slate-900/70"></div>
+  
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(15,23,42,0.78)_0%,_rgba(15,23,42,0.92)_70%)]"></div>
+  
+      <img
+        src="https://kimi-web-img.moonshot.cn/img/s3-eu-west-1.amazonaws.com/3660d1e6d17972ac25bd749266a98f915aec1722.jpg"
+        alt="David Hume"
+        class="w-full h-full object-cover object-[50%_25%] opacity-40"
+      />
+  
+    </div>
+  
+    <!-- ORNAMENTS -->
+    <div class="absolute right-[-80px] top-1/2 -translate-y-1/2 z-10 pointer-events-none">
+      <div class="w-72 h-72 rounded-full bg-gradient-to-br from-amber-400/25 via-transparent to-transparent blur-2xl"></div>
+    </div>
+  
+    <div class="absolute left-[-100px] top-1/3 z-10 pointer-events-none">
+      <div class="w-96 h-96 rounded-full bg-slate-300/10 blur-3xl"></div>
+    </div>
+  
+    <!-- CONTINGUT CENTRAL (PUJAT) -->
+    <div class="relative z-20 w-full max-w-6xl mx-auto px-6 text-center -translate-y-10 md:-translate-y-16">
+  
+      <span class="inline-block px-4 py-1 mb-5 text-sm font-semibold tracking-wider text-amber-300 uppercase bg-amber-900/30 rounded-full border border-amber-500/30">
+        Filosofia Moderna • Il·lustració Escocesa
+      </span>
+  
+      <h1 class="font-display text-5xl md:text-7xl font-bold mb-5 leading-tight text-white">
+        David Hume<br>
+        <span class="text-amber-400">L'Empirisme Radical</span>
+      </h1>
+  
+      <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        El filòsof escocès que va revolucionar la nostra comprensió del coneixement humà, la causalitat i els límits de la raó.
+      </p>
+  
+    </div>
+  
+    <!-- BLOC INFERIOR DRET: RETRAT + CITA (VERSIÓ FINAL EQUILIBRADA) -->
+<div class="absolute right-4 md:right-10 bottom-8 md:bottom-10 z-30 hidden md:flex items-end gap-5">
+
+    <!-- CITA -->
+    <div class="relative max-w-xs text-right">
+  
+      <!-- SUBRATLLAT SUPERIOR + LÍNIA CAP AL RETRAT (RECUPERADA I MILLORADA) -->
+      <div class="flex items-center justify-end gap-3 mb-3">
+  
+        <!-- subratllat superior -->
+        <div class="w-12 h-px bg-gradient-to-l from-amber-300/70 to-transparent"></div>
+  
+        <!-- línia cap al retrat -->
+        <div class="w-6 h-px bg-amber-300/40"></div>
+  
+      </div>
+  
+      <div class="text-amber-100 italic text-lg leading-snug opacity-90">
+        “La probabilitat és el guia de la vida humana.”
+      </div>
+  
+      <div class="text-xs text-amber-300 mt-2 opacity-80 not-italic">
+        — David Hume
+      </div>
+  
+    </div>
+  
+    <!-- RETRAT -->
+    <div class="relative w-44 md:w-48 lg:w-56">
+  
+      <!-- glow -->
+      <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-400/25 to-transparent blur-xl"></div>
+  
+      <!-- marc blanc -->
+      <div class="absolute -inset-2 rounded-2xl border border-white/50"></div>
+  
+      <!-- imatge -->
+      <img
+        src="https://kimi-web-img.moonshot.cn/img/s3-eu-west-1.amazonaws.com/3660d1e6d17972ac25bd749266a98f915aec1722.jpg"
+        alt="Retrat de David Hume"
+        class="relative rounded-2xl opacity-95"
+      />
+  
+    </div>
+  
+  </div>
+  
+    <!-- SCROLL -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+      <i data-lucide="chevron-down" class="w-8 h-8 text-white/50"></i>
+    </div>
+  
+  </header>
+
+    <!-- Secció 1: Biografia i Context (Timeline interactiu) -->
+    <section id="biografia" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-slate-800 mb-4">Vida i Context</h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">De l'Edimburg del segle XVIII als salons de París, la trajectòria d'un pensador que va desafiar les certeses de la seva època.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <!-- Timeline -->
+                <div class="space-y-8">
+                    <div class="timeline-item pb-8">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-slate-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <span class="text-amber-600 font-bold text-sm">1711</span>
+                            <h3 class="font-display text-xl font-bold mt-1 mb-2">Naixement a Edimburg</h3>
+                            <p class="text-slate-600">Nascut en una família que volia que estudiés jurisprudència, però els seus interessos el van portar cap a la filosofia.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item pb-8">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-slate-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <span class="text-amber-600 font-bold text-sm">1734</span>
+                            <h3 class="font-display text-xl font-bold mt-1 mb-2">La Flèche</h3>
+                            <p class="text-slate-600">Viatja a França i resideix a la prestigiosa escola jesuïta on havia estudiat Descartes. Aquí comença a gestar el seu pensament.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item pb-8">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-slate-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <span class="text-amber-600 font-bold text-sm">1739-1740</span>
+                            <h3 class="font-display text-xl font-bold mt-1 mb-2">El Tractat</h3>
+                            <p class="text-slate-600">Publica el <em>Tractat de la naturalesa humana</em>, una obra revolucionària que inicialment passa desapercebuda.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item pb-8">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-slate-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <span class="text-amber-600 font-bold text-sm">1763</span>
+                            <h3 class="font-display text-xl font-bold mt-1 mb-2">Èxit a París</h3>
+                            <p class="text-slate-600">Viatja a París i entra en contacte amb els il·lustrats francesos. Rep el reconeixement que l'acadèmia li havia negat.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-slate-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <span class="text-amber-600 font-bold text-sm">1776</span>
+                            <h3 class="font-display text-xl font-bold mt-1 mb-2">Tornada i mort</h3>
+                            <p class="text-slate-600">Torna a Edimburg, on mor al cap de quatre anys, deixant un llegat filosòfic fonamental per a la filosofia moderna.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Context històric -->
+                <div class="sticky top-24 space-y-6">
+                    <div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-8 rounded-2xl shadow-xl">
+                        <h3 class="font-display text-2xl font-bold mb-4 flex items-center gap-2">
+                            <i data-lucide="book-open" class="w-6 h-6 text-amber-400"></i>
+                            Context Filosòfic
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <span class="w-2 h-2 bg-amber-400 rounded-full mt-2 flex-shrink-0"></span>
+                                <span><strong>Culminació de l'empirisme:</strong> Hume porta fins a les últimes conseqüències l'empirisme iniciat per Locke.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-2 h-2 bg-amber-400 rounded-full mt-2 flex-shrink-0"></span>
+                                <span><strong>Crítica a Descartes:</strong> Evoluciona el dubte metòdic cartesià cap a una posició escepticista més profunda.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-2 h-2 bg-amber-400 rounded-full mt-2 flex-shrink-0"></span>
+                                <span><strong>Il·lustració escocesa:</strong> Forma part del moviment il·lustrat anglès, lluita contra el dogmatisme i el fanatisme.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-2 h-2 bg-amber-400 rounded-full mt-2 flex-shrink-0"></span>
+                                <span><strong>Newton:</strong> Busca dotar la ciència newtoniana d'un fonament filosòfic sense recórrer a Déu.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-r-lg">
+                        <h4 class="font-bold text-amber-900 mb-2">Pregunta clau</h4>
+                        <p class="text-amber-800 italic">"Podem demostrar que les nostres idees tenen la seva causa última en un món material? Coneixem les idees i no directament les coses?"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secció 2: L'Empirisme de Hume (Interactiu) -->
+    <section id="empirisme" class="py-20 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-amber-600 font-semibold tracking-wider uppercase text-sm">Bases del pensament</span>
+                <h2 class="font-display text-4xl font-bold text-slate-800 mt-2 mb-4">El Principi de la Còpia</h2>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto">Hume estableix que tot el coneixement humà es redueix a <strong>percepcions</strong>, dividides en impressions i idees. Descobreix com funciona aquest mecanisme:</p>
+            </div>
+
+            <!-- Diagrama interactiu de percepcions -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-12">
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <!-- Impressions -->
+                    <div class="concept-card bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-xl border-2 border-red-200" onclick="toggleDetail('impressions-detail')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-display text-2xl font-bold text-red-900">Impressions</h3>
+                            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white">
+                                <i data-lucide="flame" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                        <p class="text-red-800 mb-4">Percepcions <strong>vives i fortes</strong>. Són les dades immediates de l'experiència.</p>
+                        <ul class="space-y-2 text-sm text-red-700">
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="eye" class="w-4 h-4"></i>
+                                <strong>De sensació:</strong> colors, sons, calor (externes)
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="heart" class="w-4 h-4"></i>
+                                <strong>De reflexió:</strong> emocions, passions, desitjos (internes)
+                            </li>
+                        </ul>
+                        <div class="mt-4 text-xs text-red-600 font-semibold uppercase tracking-wider">Apareixen primer</div>
+                    </div>
+
+                    <!-- Fletxa animada (visible només desktop) -->
+                    <div class="hidden md:flex items-center justify-center">
+                        <div class="relative w-full h-32">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-full h-1 bg-gradient-to-r from-red-300 to-blue-300 relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-white/50 w-1/3 animate-[flowMove_2s_linear_infinite]"></div>
+                                </div>
+                            </div>
+                            <div class="absolute right-0 top-1/2 transform -translate-y-1/2">
+                                <i data-lucide="arrow-right" class="w-8 h-8 text-blue-400"></i>
+                            </div>
+                            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 bg-white px-4 py-1 rounded-full text-xs font-bold text-slate-500 border shadow-sm">
+                                PRINCIPI DE LA CÒPIA
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Idees -->
+                    <div class="concept-card bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-200" onclick="toggleDetail('idees-detail')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-display text-2xl font-bold text-blue-900">Idees</h3>
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                                <i data-lucide="cloud" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                        <p class="text-blue-800 mb-4">Percepcions <strong>tenues i febles</strong>. Són còpies de les impressions en el pensament.</p>
+                        <ul class="space-y-2 text-sm text-blue-700">
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="brain" class="w-4 h-4"></i>
+                                <strong>Simples:</strong> còpies directes d'impressions
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="puzzle" class="w-4 h-4"></i>
+                                <strong>Complexes:</strong> combinades per la imaginació
+                            </li>
+                        </ul>
+                        <div class="mt-4 text-xs text-blue-600 font-semibold uppercase tracking-wider">Apareixen després</div>
+                    </div>
+                </div>
+
+                <!-- Detalls expandibles -->
+                <div id="impressions-detail" class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500 mb-4">
+                    <h4 class="font-bold text-red-900 mb-2">Exemple d'impressió</h4>
+                    <p class="text-red-800">Quan sents el calor d'una flama (impressió de sensació) o sents ira davant una injustícia (impressió de reflexió), estas vivint una impressió. És una experiència directa, immediata i vívida.</p>
+                </div>
+
+                <div id="idees-detail" class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500 mb-4">
+                    <h4 class="font-bold text-blue-900 mb-2">Exemple d'idea</h4>
+                    <p class="text-blue-800">Quan recordes aquella flama o aquella sensació d'ira més tard, tens una idea. És una "fotocòpia" més feble de l'original. Si no has tingut mai la impressió, no pots tenir la idea (això és el <strong>principi de la còpia</strong>).</p>
+                </div>
+
+                <!-- Principi de la còpia explicat -->
+                <div class="quote-box p-8 rounded-xl mt-8">
+                    <p class="text-lg text-slate-700 italic relative z-10 pl-8">
+                        "Totes les nostres idees simples en la seva primera aparició són derivades d'impressions simples que els corresponen i que representen exactament."
+                    </p>
+                    <div class="mt-4 flex items-center gap-3 pl-8">
+                        <div class="w-10 h-10 bg-slate-200 rounded-full overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/s3-eu-west-1.amazonaws.com/3660d1e6d17972ac25bd749266a98f915aec1722.jpg" alt="Hume" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <div class="font-bold text-slate-800">David Hume</div>
+                            <div class="text-sm text-slate-500">Tractat de la naturalesa humana</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Validació d'idees -->
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h3 class="font-display text-2xl font-bold mb-6 text-center">Com sabem si una idea és vàlida?</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center p-6 bg-slate-50 rounded-xl hover:bg-amber-50 transition-colors">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 text-amber-600">
+                            <span class="text-2xl font-bold">1</span>
+                        </div>
+                        <h4 class="font-bold mb-2">Descompon</h4>
+                        <p class="text-sm text-slate-600">Si és una idea complexa, separa-la en idees simples</p>
+                    </div>
+                    <div class="text-center p-6 bg-slate-50 rounded-xl hover:bg-amber-50 transition-colors">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 text-amber-600">
+                            <span class="text-2xl font-bold">2</span>
+                        </div>
+                        <h4 class="font-bold mb-2">Busca l'origen</h4>
+                        <p class="text-sm text-slate-600">Per a cada idea simple, busca la impressió corresponent</p>
+                    </div>
+                    <div class="text-center p-6 bg-slate-50 rounded-xl hover:bg-amber-50 transition-colors">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 text-amber-600">
+                            <span class="text-2xl font-bold">3</span>
+                        </div>
+                        <h4 class="font-bold mb-2">Verifica</h4>
+                        <p class="text-sm text-slate-600">Si falta alguna impressió, és una ficció de la ment</p>
+                    </div>
+                </div>
+                <div class="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg text-center">
+                    <p class="text-red-800 font-semibold">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 inline mr-2"></i>
+                        Aplicació: Les idees de substància, jo o causalitat no tenen impressió corresponent directa!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secció 3: Les Lleis d'Associació (Visual) -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-slate-800 mb-4">Les Lleis d'Associació d'Idees</h2>
+                <p class="text-lg text-slate-600">Hume descobreix que la imaginació no opera a l'atzar, sinó que segueix tres principis naturals que regeixen com uneix les idees:</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Semblança -->
+                <div class="group relative bg-gradient-to-b from-purple-50 to-white p-8 rounded-2xl border-2 border-purple-200 hover:border-purple-400 transition-all hover:shadow-xl">
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                        <i data-lucide="copy" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-purple-900 mt-6 mb-4 text-center">Semblança</h3>
+                    <p class="text-slate-600 text-center mb-4">Unides per similitud</p>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-purple-100">
+                        <div class="flex items-center justify-center gap-4 mb-3">
+                            <div class="w-16 h-16 bg-amber-100 rounded-lg border-2 border-amber-400 flex items-center justify-center">
+                                <i data-lucide="image" class="w-8 h-8 text-amber-600"></i>
+                            </div>
+                            <i data-lucide="arrow-right" class="w-6 h-6 text-purple-400"></i>
+                            <div class="w-16 h-16 bg-blue-100 rounded-full border-2 border-blue-400 flex items-center justify-center">
+                                <i data-lucide="user" class="w-8 h-8 text-blue-600"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-slate-600 text-center">Una foto (idea) ens fa pensar en la persona real (impressió)</p>
+                    </div>
+                </div>
+                <!-- Contigüitat -->
+                <div class="group relative bg-gradient-to-b from-green-50 to-white p-8 rounded-2xl border-2 border-green-200 hover:border-green-400 transition-all hover:shadow-xl">
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                        <i data-lucide="map-pin" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-green-900 mt-6 mb-4 text-center">Contigüitat</h3>
+                    <p class="text-slate-600 text-center mb-4">Unides per proximitat</p>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-green-100">
+                        <div class="flex items-center justify-center gap-2 mb-3">
+                            <div class="px-3 py-1 bg-green-100 rounded text-green-800 font-bold">París</div>
+                            <i data-lucide="arrow-right" class="w-6 h-6 text-green-400"></i>
+                            <div class="px-3 py-1 bg-green-100 rounded text-green-800 font-bold">França</div>
+                        </div>
+                        <p class="text-sm text-slate-600 text-center">Anomenar París fa pensar en França (espai/temps)</p>
+                    </div>
+                </div>
+
+                <!-- Causalitat -->
+                <div class="group relative bg-gradient-to-b from-amber-50 to-white p-8 rounded-2xl border-2 border-amber-200 hover:border-amber-400 transition-all hover:shadow-xl ring-4 ring-amber-100">
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform animate-pulse">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-amber-900 mt-6 mb-4 text-center">Causa-Efecte</h3>
+                    <p class="text-slate-600 text-center mb-4">Unides per connexió</p>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-amber-100">
+                        <div class="flex items-center justify-center gap-3 mb-3">
+                            <div class="w-14 h-14 bg-gray-100 rounded-lg border-2 border-gray-400 flex items-center justify-center">
+                                <i data-lucide="cloud-fog" class="w-8 h-8 text-gray-600"></i>
+                            </div>
+                            <i data-lucide="arrow-right" class="w-6 h-6 text-amber-400"></i>
+                            <div class="w-14 h-14 bg-orange-100 rounded-lg border-2 border-orange-400 flex items-center justify-center">
+                                <i data-lucide="flame" class="w-8 h-8 text-orange-600"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-slate-600 text-center">Veur fum ens fa pensar immediatament en foc</p>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <span class="inline-block px-3 py-1 bg-amber-200 text-amber-800 text-xs rounded-full font-bold">MÉS IMPORTANT</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-slate-800 text-white p-8 rounded-2xl">
+                <h3 class="font-display text-2xl font-bold mb-4 flex items-center gap-2">
+                    <i data-lucide="lightbulb" class="w-6 h-6 text-amber-400"></i>
+                    Per què és important?
+                </h3>
+                <p class="text-slate-300 leading-relaxed">
+                    Aquestes lleis són el <strong>"ciment de l'univers"</strong> per a nosaltres. Són els únics llaços que uneixen les nostres idees i ens relacionen amb el món exterior. Segons Hume, fins i tot les idees metafísiques complexes (com la substància o el jo) sorgeixen de l'aplicació d'aquestes lleis per part de la imaginació, guiada per l'hàbit.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secció 4: Tipus de Coneixement (Comparador) -->
+    <section id="coneixement" class="py-20 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-slate-800 mb-4">Els Dos Tipus de Coneixement</h2>
+                <p class="text-lg text-slate-600">Hume estableix una distinció fonamental que determina què podem saber amb certesa i què només podem creure:</p>
+            </div>
+
+            <div class="comparison-slider relative">
+                <div class="vs-badge">VS</div>
+                
+                <!-- Relacions d'idees -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-blue-500">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                            <i data-lucide="calculator" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-slate-800">Relacions d'Idees</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0"></i>
+                            <div>
+                                <span class="font-semibold text-slate-800">Certesa demostrativa</span>
+                                <p class="text-sm text-slate-600">Coneixement universal i necessari</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0"></i>
+                            <div>
+                                <span class="font-semibold text-slate-800">No amplia coneixement</span>
+                                <p class="text-sm text-slate-600">Tracta sobre entitats abstractes</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0"></i>
+                            <div>
+                                <span class="font-semibold text-slate-800">Principi de no-contradicció</span>
+                                <p class="text-sm text-slate-600">Pensar el contrari és impossible</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                        <div class="text-sm font-bold text-blue-900 mb-2">Exemples:</div>
+                        <ul class="text-sm text-blue-800 space-y-1">
+                            <li>• "2+2=4"</li>
+                            <li>• "El quadrat de la hipotenusa..."</li>
+                            <li>• Lògica i matemàtiques</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Qüestions de fet -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-amber-500">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600">
+                            <i data-lucide="globe" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-slate-800">Qüestions de Fet</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="alert-circle" class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0"></i>
+                            <div>
+                                <span class="font-semibold text-slate-800">Certesa probable</span>
+                                <p class="text-sm text-slate-600">Coneixement particular i contingent</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="alert-circle" class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0"></i>
+                            <div>
+                                <span class="font-semibold text-slate-800">Amplia coneixement</span>
+                                <p class="text-sm text-slate-600">Parla de la realitat empírica</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="alert-circle" class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0"></i>
+                            <div>
+                                <span class="font-semibold text-slate-800">Basat en l'experiència</span>
+                                <p class="text-sm text-slate-600">Podem imaginar el contrari sense contradicció</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-amber-50 rounded-lg">
+                        <div class="text-sm font-bold text-amber-900 mb-2">Exemples:</div>
+                        <ul class="text-sm text-amber-800 space-y-1">
+                            <li>• "El sol sortirà demà"</li>
+                            <li>• "Aquesta bola mou l'altra"</li>
+                            <li>• Física, química, biologia</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <div class="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 text-white rounded-full text-sm font-semibold">
+                    <i data-lucide="info" class="w-5 h-5"></i>
+                    <span>Tot el coneixement del món físic es basa en qüestions de fet, que depenen de la relació causa-efecte</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secció 5: La Causalitat (El problema central) -->
+    <section id="causalitat" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-amber-600 font-semibold tracking-wider uppercase text-sm">El problema fonamental</span>
+                <h2 class="font-display text-4xl font-bold text-slate-800 mt-2 mb-4">La Crítica de la Causalitat</h2>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto">Hume analitza l'exemple de les boles de billar per demostrar que la connexió necessària entre causa i efecte és una il·lusió de la ment.</p>
+            </div>
+
+            <!-- Visualització del problema de les boles -->
+            <div class="bg-slate-900 rounded-2xl p-8 mb-12 text-white">
+                <h3 class="font-display text-2xl font-bold mb-8 text-center">L'Experiment Mental: Les Boles de Billar</h3>
+                
+                <div class="relative h-64 bg-slate-800 rounded-xl overflow-hidden mb-8">
+                    <!-- Representació animada -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="relative w-full max-w-2xl px-8">
+                            <!-- Bola 1 (moviment) -->
+                            <div id="ball1" class="absolute left-0 top-1/2 transform -translate-y-1/2 w-16 h-16 bg-white rounded-full shadow-lg border-4 border-gray-300 transition-all duration-1000">
+                                <div class="absolute inset-0 flex items-center justify-center text-slate-900 font-bold">A</div>
+                            </div>
+                            
+                            <!-- Bola 2 (aturada) -->
+                            <div id="ball2" class="absolute left-32 top-1/2 transform -translate-y-1/2 w-16 h-16 bg-red-600 rounded-full shadow-lg border-4 border-red-800">
+                                <div class="absolute inset-0 flex items-center justify-center text-white font-bold">B</div>
+                            </div>
+                            
+                            <!-- Bola 2 després del xoc (amagada inicialment) -->
+                            <div id="ball2-moving" class="absolute left-32 top-1/2 transform -translate-y-1/2 w-16 h-16 bg-red-600 rounded-full shadow-lg border-4 border-red-800 opacity-0 transition-all duration-1000">
+                                <div class="absolute inset-0 flex items-center justify-center text-white font-bold">B</div>
+                            </div>
+
+                            <!-- Fletxes de moviment -->
+                            <div id="arrow1" class="absolute left-20 top-1/2 transform -translate-y-1/2 text-amber-400 opacity-0">
+                                <i data-lucide="arrow-right" class="w-8 h-8"></i>
+                            </div>
+                            
+                            <div id="arrow2" class="absolute left-48 top-1/2 transform -translate-y-1/2 text-amber-400 opacity-0">
+                                <i data-lucide="arrow-right" class="w-8 h-8"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center mb-8">
+                    <button onclick="runBilliardDemo()" class="px-6 py-3 bg-amber-600 hover:bg-amber-700 rounded-lg font-semibold transition-colors flex items-center gap-2">
+                        <i data-lucide="play" class="w-5 h-5"></i>
+                        Executar experiment
+                    </button>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 text-sm">
+                    <div class="bg-slate-800 p-4 rounded-lg">
+                        <div class="font-bold text-amber-400 mb-2">1. Contigüitat</div>
+                        <p class="text-slate-300">No hi ha interval entre el xoc i el moviment. Les boles es toquen.</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-lg">
+                        <div class="font-bold text-amber-400 mb-2">2. Prioritat temporal</div>
+                        <p class="text-slate-300">El moviment de A és anterior al moviment de B.</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-lg">
+                        <div class="font-bold text-amber-400 mb-2">3. Conjunció constant</div>
+                        <p class="text-slate-300">Sempre que A xoca amb B, B es mou (observació repetida).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- El problema -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-xl">
+                    <h3 class="font-display text-xl font-bold text-red-900 mb-4 flex items-center gap-2">
+                        <i data-lucide="x-circle" class="w-6 h-6"></i>
+                        El que NO veiem
+                    </h3>
+                    <p class="text-red-800 mb-4">Malgrat observar sempre la successió A→B, <strong>mai no veiem la "connexió necessària"</strong> entre elles.</p>
+                    <ul class="space-y-2 text-red-700 text-sm">
+                        <li>• No hi ha impressió d'una "força" o "poder" que passi d'A a B</li>
+                        <li>• No podem demostrar a priori que B <em>ha de</em> moure's</li>
+                        <li>• És lògicament possible imaginar que A xoca i B no es mou</li>
+                    </ul>
+                </div>
+
+                <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-xl">
+                    <h3 class="font-display text-xl font-bold text-green-900 mb-4 flex items-center gap-2">
+                        <i data-lucide="check-circle" class="w-6 h-6"></i>
+                        La solució de Hume
+                    </h3>
+                    <p class="text-green-800 mb-4">La causalitat és un <strong>hàbit de la ment</strong>, no una connexió real:</p>
+                    <ul class="space-y-2 text-green-700 text-sm">
+                        <li>• Per repetició, la ment associa les idees per semblança i contigüitat</li>
+                        <li>• Aquesta associació produeix una <strong>expectativa</strong> (sentiment de creencesa)</li>
+                        <li>• La "necessitat" està en l'observador, no en els objectes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- El problema de la inducció -->
+            <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 border border-amber-200">
+                <h3 class="font-display text-2xl font-bold text-amber-900 mb-4">El Problema de la Inducció</h3>
+                <p class="text-slate-700 mb-6 text-lg">
+                    Per predir el futur basant-nos en el passat, assumim que <strong>la natura és uniforme</strong>. Però Hume demostra que aquest principi és indemostrable:
+                </p>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center text-amber-700 font-bold flex-shrink-0">1</div>
+                        <p class="text-slate-700">Tot raonament probable suposa que el futur serà com el passat</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center text-amber-700 font-bold flex-shrink-0">2</div>
+                        <p class="text-slate-700">Aquesta suposició no es pot demostrar per la raó (no és una relació d'idees)</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center text-amber-700 font-bold flex-shrink-0">3</div>
+                        <p class="text-slate-700">Tampoc es pot demostrar per l'experiència (seria circular: usar inducció per provar inducció)</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">✓</div>
+                        <p class="text-slate-900 font-semibold">Per tant, és el <strong>costum</strong> (habit), no la raó, el que ens fa esperar que el futur serà com el passat</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secció 6: Escepticisme i Metafísica -->
+    <section id="escepticisme" class="py-20 bg-slate-800 text-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold mb-4">Conseqüències Esceptiques</h2>
+                <p class="text-lg text-slate-300 max-w-3xl mx-auto">Si apliquem el principi de la còpia i l'anàlisi de la causalitat fins al final, arribem a conclusions sorprenents sobre la metafísica tradicional.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Substància material -->
+                <div class="bg-slate-700/50 p-6 rounded-xl border border-slate-600 hover:border-amber-500 transition-colors">
+                    <div class="w-14 h-14 bg-slate-600 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="box" class="w-7 h-7 text-amber-400"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">Substància Material</h3>
+                    <p class="text-slate-300 text-sm mb-4">No tenim impressió d'una "cosa" que subsisteix per sota de les qualitats sensibles.</p>
+                    <div class="bg-slate-800 p-3 rounded text-xs text-amber-300 border-l-2 border-amber-500">
+                        "La idea de substància és només una col·lecció d'idees simples unides per la imaginació"
+                    </div>
+                </div>
+
+                <!-- Jo/Ànima -->
+                <div class="bg-slate-700/50 p-6 rounded-xl border border-slate-600 hover:border-amber-500 transition-colors">
+                    <div class="w-14 h-14 bg-slate-600 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="user" class="w-7 h-7 text-amber-400"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">El Jo</h3>
+                    <p class="text-slate-300 text-sm mb-4">No tenim impressió d'un "jo" que pensa, només d'una successió de percepcions.</p>
+                    <div class="bg-slate-800 p-3 rounded text-xs text-amber-300 border-l-2 border-amber-500">
+                        "L'ànima és un teatre on es succeeixen contínuament percepcions diferents"
+                    </div>
+                </div>
+
+                <!-- Déu -->
+                <div class="bg-slate-700/50 p-6 rounded-xl border border-slate-600 hover:border-amber-500 transition-colors">
+                    <div class="w-14 h-14 bg-slate-600 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="star" class="w-7 h-7 text-amber-400"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">Déu</h3>
+                    <p class="text-slate-300 text-sm mb-4">Les demostracions de Déu (causalitat o argument ontològic) violen els límits del coneixement humà.</p>
+                    <div class="bg-slate-800 p-3 rounded text-xs text-amber-300 border-l-2 border-amber-500">
+                        "L'existència de Déu és indemostrable basant-nos en impressions"
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-gradient-to-r from-amber-600/20 to-orange-600/20 rounded-2xl p-8 border border-amber-500/30">
+                <h3 class="font-display text-2xl font-bold mb-4 text-amber-400">El Fenomenisme</h3>
+                <p class="text-slate-300 text-lg leading-relaxed">
+                    Hume conclou que no podem demostrar l'existència d'un món extramental. Només podem conèixer <strong>el que se'ns mostra a través dels sentits</strong>: els fenòmens. Aquesta posició, que limita el coneixement a l'experiència immediata, es coneix com a <strong>fenomenisme</strong>.
+                </p>
+                <div class="mt-6 flex items-center gap-4">
+                    <div class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center text-slate-900 font-bold text-xl">!</div>
+                    <p class="text-amber-200 font-semibold">
+                        Tot i això, Hume és pràctic: la naturalesa és massa forta per permetre'ns viure com a esceptics radicals. El costum guia la vida quotidiana.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secció 7: Activitats i Recapitulació -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-slate-800 mb-4">Per Repassar</h2>
+                <p class="text-lg text-slate-600"> Recull final Ítems del pensament de Hume</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <h3 class="font-display text-2xl font-bold text-slate-800 mb-6">Preguntes de Teoria del Coneixement</h3>
+                    
+                    <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-blue-500">
+                        <div class="mb-3">
+                            <span class="font-semibold text-slate-800 text-lg">Totes les idees provenen de l'experiència?</span>
+                        </div>
+                        <div class="text-slate-600 text-sm leading-relaxed">
+                            Pensa en conceptes com "infinit" o "perfecte". Podem tenir una impressió directa d'aquests conceptes, o són construccions de la ment?
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-green-500">
+                        <div class="mb-3">
+                            <span class="font-semibold text-slate-800 text-lg">Què és una idea segons Hume?</span>
+                        </div>
+                        <div class="text-slate-600 text-sm leading-relaxed">
+                            Una idea és una còpia feble d'una impressió. És una "fotografia" mental menys vívida que l'experiència original.
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-amber-500">
+                        <div class="mb-3">
+                            <span class="font-semibold text-slate-800 text-lg">Podem tenir coneixement universal de la realitat física?</span>
+                        </div>
+                        <div class="text-slate-600 text-sm leading-relaxed">
+                            No. El coneixement de qüestions de fet és sempre contingent i probable, mai necessari i demostratiu com les matemàtiques.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="font-display text-2xl font-bold text-slate-800 mb-6">Preguntes de Metafísica</h3>
+                    
+                    <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-purple-500">
+                        <div class="mb-3">
+                            <span class="font-semibold text-slate-800 text-lg">El jo és una substància?</span>
+                        </div>
+                        <div class="text-slate-600 text-sm leading-relaxed">
+                            Per Hume, no. Som només un "teatre" de percepcions canviant. No hi ha un "actor" (jo) permanent darrere de les escenes.
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-red-500">
+                        <div class="mb-3">
+                            <span class="font-semibold text-slate-800 text-lg">Podem demostrar l'existència del món exterior?</span>
+                        </div>
+                        <div class="text-slate-600 text-sm leading-relaxed">
+                            No tenim impressió de la causa (món extern), només de l'efecte (sensacions). La causalitat no ens permet saltar més enllà de les percepcions.
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-indigo-500">
+                        <div class="mb-3">
+                            <span class="font-semibold text-slate-800 text-lg">Necessitem certeses per viure?</span>
+                        </div>
+                        <div class="text-slate-600 text-sm leading-relaxed">
+                            Hume diu que n'hi ha prou amb creences raonables basades en l'hàbit. La naturalesa ens impulsa a actuar encara que la raó dubti.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-white font-bold mb-4">David Hume</h4>
+                    <p class="text-sm">1711-1776. Filòsof escocès, historiador i assagista. Una de les figures més importants de la Il·lustració escocesa i de la filosofia occidental.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Obres Principals</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>• Tractat de la naturalesa humana (1739-1740)</li>
+                        <li>• Investigació sobre l'enteniment humà (1748)</li>
+                        <li>• Investigació sobre els principis de la moral (1751)</li>
+                        <li>• Diàlegs sobre la religió natural (1779)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Conceptes Clau</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs">Empirisme</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs">Escepticisme</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs">Causalitat</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs">Impressions</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs">Idees</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs">Hàbit</span>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </footer>
+
+    <!-- Modal per al vídeo (simulat) -->
+    <div id="videoModal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 relative">
+            <button onclick="closeVideoModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h3 class="font-display text-2xl font-bold mb-4">Context Històric</h3>
+            <div class="aspect-video bg-slate-100 rounded-lg flex items-center justify-center mb-4">
+                <div class="text-center text-slate-500">
+                    <i data-lucide="film" class="w-16 h-16 mx-auto mb-2 opacity-50"></i>
+                    <p>Aquí s'incrustaria un vídeo sobre la Il·lustració escocesa</p>
+                </div>
+            </div>
+            <p class="text-slate-600">La Il·lustració escocesa va ser un període d'intensa activitat intel·lectual a Escòcia durant el segle XVIII, amb figures com Adam Smith, Adam Ferguson i David Hume.</p>
+        </div>
+    </div>
+
+    <script>
+        // Inicialitzar icones de Lucide
+        lucide.createIcons();
+
+        // Funcions de navegació
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Funcions per a detalls expandibles
+        function toggleDetail(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('open');
+        }
+
+        // Demo de les boles de billar
+        function runBilliardDemo() {
+            const ball1 = document.getElementById('ball1');
+            const ball2 = document.getElementById('ball2');
+            const ball2Moving = document.getElementById('ball2-moving');
+            const arrow1 = document.getElementById('arrow1');
+            const arrow2 = document.getElementById('arrow2');
+
+            // Reset
+            ball1.style.left = '0';
+            ball2Moving.style.opacity = '0';
+            ball2Moving.style.left = '8rem';
+            arrow1.style.opacity = '0';
+            arrow2.style.opacity = '0';
+
+            // Animació
+            setTimeout(() => {
+                ball1.style.left = '6rem'; // Moure A cap a B
+                arrow1.style.opacity = '1';
+            }, 100);
+
+            setTimeout(() => {
+                ball2.style.opacity = '0'; // Amagar B aturada
+                ball2Moving.style.opacity = '1';
+                ball2Moving.style.left = '14rem'; // Moure B
+                arrow1.style.opacity = '0';
+                arrow2.style.opacity = '1';
+            }, 1100);
+
+            setTimeout(() => {
+                arrow2.style.opacity = '0';
+            }, 2100);
+        }
+
+        // Modal de vídeo
+        function showVideoModal() {
+            document.getElementById('videoModal').classList.remove('hidden');
+            document.getElementById('videoModal').classList.add('flex');
+        }
+
+        function closeVideoModal() {
+            document.getElementById('videoModal').classList.add('hidden');
+            document.getElementById('videoModal').classList.remove('flex');
+        }
+
+        // Navegació suau
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Tancar menú mòbil si està obert
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+
+        // Animacions en scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section > div').forEach((el) => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
