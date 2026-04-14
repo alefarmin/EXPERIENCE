@@ -221,12 +221,14 @@
     <nav class="fixed top-0 w-full bg-black/80 backdrop-blur-md z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <div class="flex items-center space-x-3">
-                    <svg class="w-8 h-8 text-red-700 hammer-icon" fill="currentColor" viewBox="0 0 24 24">
+                <a href="#inici" class="flex items-center space-x-3 group">
+                    <svg class="w-8 h-8 text-red-700 hammer-icon group-hover:scale-110 transition" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/>
                     </svg>
-                    <span class="font-cinzel text-xl font-bold text-yellow-500">NIETZSCHE</span>
-                </div>
+                    <span class="font-cinzel text-xl font-bold text-yellow-500 group-hover:text-yellow-400 transition">
+                        NIETZSCHE Experience
+                    </span>
+                </a>
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="../index.html" class="home-experience-btn">
                         ← Inici EXPERIENCE
@@ -284,14 +286,14 @@
                 
                     <a href="#proposta" class="hover:text-yellow-500 transition">La Proposta</a>
                     <a href="#etern" class="hover:text-yellow-500 transition">Etern Retorn</a>
-                
+                    <a href="#repassar" class="hover:text-yellow-500 transition">Per repassar</a>
                 </div>
             </div>
         </div>
     </nav>
 
    <!-- Hero Section -->
-<section class="relative min-h-screen flex items-center section-dark pt-16">
+<section id="inici" class="relative min-h-screen flex items-center section-dark pt-16">
 
     <!-- Imatge -->
     <div class="absolute inset-0 opacity-40">
@@ -869,6 +871,27 @@
                         </div>
                 
                     </div>
+                    <div class="concept-card p-6 rounded-xl border-purple-500/30">
+                        <h3 class="font-cinzel text-xl text-purple-400 mb-4">Crítica al llenguatge</h3>
+                    
+                        <p class="text-gray-300 mb-4">
+                        <strong> Conclusió:</strong> les paraules, convertides en "conceptes", no reflecteixen la realitat. <strong>Són metàfores que simplifiquen i deformen l’experiència.</strong>
+                        </p>
+                    
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li>• No capten la singularitat de les coses</li>
+                            <li>• Són generalitzacions arbitràries</li>
+                            <li>• Depenen dels interessos humans</li>
+                        </ul>
+                    
+                        <div class="bg-purple-900/20 p-4 rounded mt-4 text-sm">
+                            <b>Exemple:</b> dir "fulla" implica ignorar totes les diferències entre fulles reals.
+                        </div>
+                    
+                        <p class="text-yellow-400 font-bold mt-4">
+                            👉 El llenguatge no revela la realitat: la construeix.
+                        </p>
+                    </div>
                 
                 </div>
                 <div class="text-center my-6">
@@ -908,28 +931,18 @@
                                 ser veraç és només mentir d’acord amb les normes acceptades”
                             </div>
                         </div>
-                
-                        <div class="concept-card p-6 rounded-xl border-purple-500/30">
-                            <h3 class="font-cinzel text-xl text-purple-400 mb-4">Crítica al llenguatge</h3>
-                        
-                            <p class="text-gray-300 mb-4">
-                                Les paraules no reflecteixen la realitat. Són metàfores que simplifiquen i deformen l’experiència.
-                            </p>
-                        
-                            <ul class="space-y-2 text-sm text-gray-300">
-                                <li>• No capten la singularitat de les coses</li>
-                                <li>• Són generalitzacions arbitràries</li>
-                                <li>• Depenen dels interessos humans</li>
-                            </ul>
-                        
-                            <div class="bg-purple-900/20 p-4 rounded mt-4 text-sm">
-                                <b>Exemple:</b> dir "fulla" implica ignorar totes les diferències entre fulles reals.
+
+                        <div class="concept-card p-6 rounded-xl">
+                            <h4 class="font-cinzel text-xl font-bold text-yellow-500 mb-4">El Problema de la Veritat</h4>
+                            <p class="text-gray-300 mb-4">Allò que anomenem "veritat" no és més que una convenció. Un acord tàcit entre humans que han decidit posar nom a les coses, classificar-les, crear conceptes... per poder entendre's entre ells.</p>
+                            
+                            <div class="bg-black/40 p-4 rounded-lg">
+                                <p class="text-red-400 font-bold mb-2">"Ser veraç és només mentir d'acord amb les normes acceptades"</p>
+                                <p class="text-xs text-gray-500">La majoria de persones no volen descobrir la veritat, volen encaixar, no desentonar, ser reconeguts repetint les mateixes "veritats" que els altres. Insegurs de mena, la manca de creativitat, d'orgull i d'amor propi els converteix en simple "ramat".</p>
                             </div>
-                        
-                            <p class="text-yellow-400 font-bold mt-4">
-                                👉 El llenguatge no revela la realitat: la construeix.
-                            </p>
                         </div>
+                
+                        
                 
                     </div>
                 
@@ -989,79 +1002,100 @@
                     </div>
                 </div>  
             </div>   
+           
             <!-- Tab Content: Reality -->
             <div id="realitat" class="content-panel">
-                <div class="grid lg:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="font-cinzel text-3xl font-bold text-yellow-500 mb-6">La Concepció de la Realitat</h3>
-                        
-                        <div class="space-y-4 text-gray-300">
-                            <p>Quin ha estat el vici fonamental de la metafísica tradicional? <span class="text-red-400 font-bold">Ha estat la duplicació de la realitat</span>, en distingir entre un món vertader i un món aparent.</p>
-                            
-                            <p class="text-gray-400 text-sm mt-4 leading-relaxed">
-                                Però, segons Nietzsche, aquesta distinció és un error: el suposat 
-                                <span class="text-red-400 font-semibold">“món vertader”</span> no és més que una 
-                                <span class="text-red-300 font-semibold">ficció construïda per la raó</span>, 
-                                que acaba desvalorant el món real, aquell en què té lloc la vida. Aquesta actitud neix del rebuig al canvi, al sofriment i a la incertesa que caracteritzen la vida.
-                            </p>
-                            <div class="grid md:grid-cols-2 gap-4 my-6">
 
-                                <!-- MÓN VERTADER -->
-                                <div class="p-4 bg-white/5 rounded-lg border border-white/10 flex flex-col">
-                                    <h4 class="font-cinzel text-red-400 font-bold mb-2">Món "Vertader" (Metafísica)</h4>
-                            
-                                    <ul class="text-sm space-y-1 text-gray-400">
-                                        <li>• Ésser: únic, immutable</li>
-                                        <li>• Etern i intemporal</li>
-                                        <li>• Essències accessibles a la raó</li>
-                                        <li>• Expressat amb conceptes</li>
-                                        <li>• Perfecte</li>
-                                        <li>• 👎 <strong>Filosofia de l'Ésser</strong></li>
-                                    </ul>
-                            
-                                    <!-- CONCLUSIÓ BAIXADA -->
-                                    <div class="mt-8 pt-4 border-t border-red-500/20">
-                                        <p class="text-red-400 text-sm font-semibold leading-relaxed">
-                                            ⚠️ Ficció racional que suplanta la vida
-                                        </p>
-                                    </div>
+                <div class="max-w-4xl mx-auto px-4">
+            
+                    <!-- Títol -->
+                    <h3 class="font-cinzel text-3xl font-bold text-yellow-500 mb-6">
+                        La Concepció de la Realitat
+                    </h3>
+            
+                    <div class="space-y-4 text-gray-300">
+            
+                        <p>
+                            Quin ha estat el vici fonamental de la metafísica tradicional?
+                            <span class="text-red-400 font-bold">Ha estat la duplicació de la realitat</span>,
+                            en distingir entre un món vertader i un món aparent.
+                        </p>
+            
+                        <p class="text-gray-400 text-sm mt-4 leading-relaxed">
+                            Però, segons Nietzsche, aquesta distinció és un error: el suposat
+                            <span class="text-red-400 font-semibold">“món vertader”</span> no és més que una
+                            <span class="text-red-300 font-semibold">ficció construïda per la raó</span>,
+                            que acaba desvalorant el món real, aquell en què té lloc la vida. Aquesta actitud neix del rebuig al canvi, al sofriment i a la incertesa que caracteritzen la vida.
+                        </p>
+            
+                        <!-- COMPARACIÓ CENTRADA -->
+                        <div class="grid md:grid-cols-2 gap-6 my-12 md:my-16 pb-8 border-b border-white/5">
+            
+                            <!-- MÓN VERTADER -->
+                            <div class="p-4 bg-white/5 rounded-lg border border-white/10 flex flex-col">
+                                <h4 class="font-cinzel text-red-400 font-bold mb-2">
+                                    Món "Vertader" (Metafísica)
+                                </h4>
+            
+                                <ul class="text-sm space-y-1 text-gray-400">
+                                    <li>• Ésser: únic, immutable</li>
+                                    <li>• Etern i intemporal</li>
+                                    <li>• Essències accessibles a la raó</li>
+                                    <li>• Expressat amb conceptes</li>
+                                    <li>• Perfecte</li>
+                                    <li>• 👎 <strong>Filosofia de l'Ésser</strong></li>
+                                </ul>
+            
+                                <div class="mt-8 pt-4 border-t border-red-500/20">
+                                    <p class="text-red-400 text-sm font-semibold">
+                                        ⚠️ Ficció racional que suplanta la vida
+                                    </p>
                                 </div>
-                            
-                                <!-- MÓN NIETZSCHE -->
-                                <div class="p-4 bg-yellow-900/20 rounded-lg border border-yellow-500/30 flex flex-col">
-                                    <h4 class="font-cinzel text-yellow-500 font-bold mb-2">Món Aparent (Nietzsche)</h4>
-                            
-                                    <ul class="text-sm space-y-1 text-gray-400">
-                                        <li>• Esdevenir: múltiple, canviant</li>
-                                        <li>• Transitori i espaciotemporal</li>
-                                        <li>• Fenòmens experimentats pels sentits</li>
-                                        <li>• Expressat amb intuïcions</li>
-                                        <li>• 👍 <strong>Filosofia de l'Esdevenir</strong></li>
-                                    </ul>
-                            
-                                    <!-- CONCLUSIÓ BAIXADA -->
-                                    <div class="mt-8 pt-4 border-t border-yellow-500/20">
-                                        <p class="text-yellow-300 text-sm font-semibold leading-relaxed">
-                                            ✔ L’única realitat: la vida en el seu esdevenir
-                                        </p>
-                                    </div>
-                                </div>
-                            
                             </div>
-
-                           
-
-                            <h4 class="font-cinzel text-xl font-bold text-yellow-500 mt-6 mb-3">Genealogia de la "Filosofia de l'Ésser"</h4>
-                            <div class="space-y-3 text-sm">
-                                <div class="timeline-item">
-                                    <strong class="text-red-400">Sòcrates:</strong> Introdueix l'equació "raó = virtut = felicitat". La racionalitat suplanta la seguretat instintiva. Primer signe de decadència.
+            
+                            <!-- MÓN NIETZSCHE -->
+                            <div class="p-4 bg-yellow-900/20 rounded-lg border border-yellow-500/30 flex flex-col">
+                                <h4 class="font-cinzel text-yellow-500 font-bold mb-2">
+                                    Món Aparent (Nietzsche)
+                                </h4>
+            
+                                <ul class="text-sm space-y-1 text-gray-400">
+                                    <li>• Esdevenir: múltiple, canviant</li>
+                                    <li>• Transitori i espaciotemporal</li>
+                                    <li>• Fenòmens experimentats pels sentits</li>
+                                    <li>• Expressat amb intuïcions</li>
+                                    <li>• La realitat "arrelada a la terra"</li>
+                                    <li>• 👍 <strong>Filosofia de l'Esdevenir</strong></li>
+                                </ul>
+            
+                                <div class="mt-8 pt-4 border-t border-yellow-500/20">
+                                    <p class="text-yellow-300 text-sm font-semibold">
+                                        ✔ L’única realitat: la vida en el seu esdevenir
+                                    </p>
                                 </div>
+                            </div>
+            
+                        </div>
+            
+                        <!-- GENEALOGIA CENTRADA -->
+                        <div class="mt-16 pt-8 border-t border-white/5">
+            
+                            <h4 class="font-cinzel text-2xl font-bold text-yellow-500 mb-8 text-center tracking-wide">
+                                Genealogia de la "Filosofia de l'Ésser"
+                            </h4>
+            
+                            <div class="max-w-3xl mx-auto space-y-3 text-sm">
+            
                                 <div class="timeline-item">
-                                    <strong class="text-red-400">Plató:</strong> Afegeix desconfiança dels sentits, negació del temps, duplicació de la realitat amb el Món de les Idees. Finalment inverteix
-                                    la jerarquia de l'ésser, destacant com a més real aquelles Idees que tenen una generalitat més gran. 
+                                    <strong class="text-red-400">Sòcrates:</strong>
+                                    Introdueix l'equació "raó = virtut = felicitat". La racionalitat, expressada en conceptes, suplanta la seguretat instintiva. Primer signe de decadència.
+                                </div>
+            
+                                <div class="timeline-item">
+                                    <strong class="text-red-400">Plató:</strong>
+                                    Afegeix desconfiança dels sentits, negació del temps, duplicació de la realitat amb el Món de les Idees. Finalment inverteix la jerarquia de l'ésser, destacant com a més real aquelles Idees que tenen una generalitat més gran.
                                     👉 <strong>Tota una «catedral de conceptes» edificada sobre el no-res!</strong>
-                                
-                                    <!-- CITA SUBORDINADA -->
+            
                                     <div class="nietzsche-quote mt-4 ml-6 p-4 rounded-r-lg border-l-2 border-red-500/50 opacity-90">
                                         <p class="text-xs text-red-400 mb-1 font-semibold">→ conseqüència del platonisme</p>
                                         <p class="text-sm italic text-gray-300">
@@ -1069,58 +1103,71 @@
                                         </p>
                                     </div>
                                 </div>
+            
                                 <div class="timeline-item">
-                                    <strong class="text-red-400">Cristianisme:</strong> "Platonisme per al poble", una simple vulgarització de "la metafísica de l'ésser" de Plató. 
-                                    La vida es  desvaloritza: s'entén només com una prova, un trànsit de dolor per aconseguir la vida vertadera (cel).
-                                    També s'aguditza l'hostilitat cap als sentits, les passions i el cos. 
-
+                                    <strong class="text-red-400">Cristianisme:</strong>
+                                    "Platonisme per al poble", una simple vulgarització de "la metafísica de l'ésser" de Plató.
+                                    La vida es desvaloritza: s'entén només com una prova, un trànsit de dolor per aconseguir la vida vertadera (cel).
+                                    També s'aguditza l'hostilitat cap als sentits, les passions i el cos.
                                 </div>
+            
                                 <div class="timeline-item">
-                                    <strong class="text-red-400">Il·lustració/Positivisme:</strong> Noves invencions d'una raó que jutja negativament la vida.
+                                    <strong class="text-red-400">Il·lustració/Positivisme:</strong>
+                                    Noves invencions d'una raó que jutja negativament la vida.
                                 </div>
+            
                             </div>
                         </div>
-                        
+            
                     </div>
-                    
-                    <div class="space-y-6">
-                        <div class="concept-card p-6 rounded-xl">
-                            <h4 class="font-cinzel text-xl font-bold text-yellow-500 mb-4">El Problema de la Veritat</h4>
-                            <p class="text-gray-300 mb-4">Allò que anomenem "veritat" no és més que una convenció. Un acord tàcit entre humans que han decidit posar nom a les coses, classificar-les, crear conceptes... per poder entendre's entre ells.</p>
-                            
-                            <div class="bg-black/40 p-4 rounded-lg">
-                                <p class="text-red-400 font-bold mb-2">"Ser veraç és només mentir d'acord amb les normes acceptades"</p>
-                                <p class="text-xs text-gray-500">La majoria de persones no volen descobrir la veritat, volen encaixar, no desentonar, ser reconeguts repetint les mateixes "veritats" que els altres. Insegurs de mena, la manca de creativitat, d'orgull i d'amor propi els converteix en simple "ramat".</p>
-                            </div>
-                        </div>
-
-                        <div class="concept-card p-6 rounded-xl border-red-500/30">
-                            <h4 class="font-cinzel text-lg font-bold text-red-400 mb-3">Conseqüències del Socratisme</h4>
-                            <ul class="space-y-2 text-sm text-gray-300">
-                                <li class="flex items-start"><span class="text-red-500 mr-2">⚡</span> Sòcrates considera com a real només el que les coses tenen en comú (conceptes)</li>
-                                <li class="flex items-start"><span class="text-red-500 mr-2">⚡</span> Plató objectiva els conceptes i els converteix en essències (Món de les Idees)</li>
-                                <li class="flex items-start"><span class="text-red-500 mr-2">⚡</span> Aquesta realitat separada (transmón) degrada la nostra existència concreta</li>
-                                <li class="flex items-start"><span class="text-red-500 mr-2">⚡</span> Es crea una "catedral de conceptes" cada vegada més buida</li>
-                            </ul>
-                        </div>
-                        <div class="mt-6 p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
-
-                            <p class="text-sm text-gray-300 leading-relaxed">
-                                👉 La tasca de Nietzsche és 
-                                <span class="text-red-300 font-semibold">invertir aquesta jerarquia</span> 
-                                arrelant-se de nou a la terra, destruint el “món vertader” com a ficció i 
-                                <span class="text-yellow-300 font-semibold">reafirmant el valor del món sensible</span>, 
-                                l’únic on la vida es desplega realment.
-                            </p>
-                        
-                        </div>
-                    </div>
+            
                 </div>
+                <!-- CONSEQÜÈNCIES (RESTAURAT) -->
+<div class="max-w-3xl mx-auto mt-12 space-y-3">
+
+    <h4 class="font-cinzel text-xl font-bold text-yellow-500 text-center mb-6">
+        Conseqüències del Socratisme__Punts Clau
+    </h4>
+
+    <div class="space-y-3 text-sm text-gray-300 max-w-xl mx-auto">
+
+        <div class="flex items-start gap-2">
+            <span class="text-red-500 mt-1">⚡</span>
+            <span>Sòcrates considera com a real només el que les coses tenen en comú (conceptes)</span>
+        </div>
+
+        <div class="flex items-start gap-2">
+            <span class="text-red-500 mt-1">⚡</span>
+            <span>Plató objectiva els conceptes i els converteix en essències (Món de les Idees)</span>
+        </div>
+
+        <div class="flex items-start gap-2">
+            <span class="text-red-500 mt-1">⚡</span>
+            <span>Aquesta realitat separada (transmón) degrada la nostra existència concreta</span>
+        </div>
+
+        <div class="flex items-start gap-2">
+            <span class="text-red-500 mt-1">⚡</span>
+            <span>Es crea una "catedral de conceptes" cada vegada més buida</span>
+        </div>
+
+    </div>
+
+                <div class="mt-6 p-4 bg-red-900/20 border border-red-500/30 rounded-lg text-sm text-gray-300">
+                    👉 La tasca de Nietzsche és 
+                    <span class="text-red-400 font-semibold">invertir aquesta jerarquia</span> 
+                    arrelant-se de nou a la terra, destruint el “món vertader” com a ficció i 
+                    <span class="text-yellow-300 font-semibold">reafirmant el valor del món sensible</span>, 
+                    l’únic on la vida es desplega realment.
+                </div>
+
+            </div>
+
                 <div class="mt-12 max-w-4xl mx-auto">
                     <div class="border-l-4 border-red-500 pl-6 space-y-4">
                         
                         <p class="text-gray-300 leading-relaxed">
-                            EN CONCLUSIÓ: Nietzsche considera que la tradició filosòfica —des de Plató fins al cristianisme— ha construït una visió del món que 
+                        <strong>EN CONCLUSIÓ:</strong> Nietzsche considera que la tradició filosòfica —des de Plató fins al cristianisme— ha construït una visió del món que 
                             <span class="text-red-400 font-semibold">nega la vida.</span> Aquesta negació es manifesta en la recerca d’un món vertader, 
                             en la moral del sacrifici i en la confiança en una veritat absoluta.
                         </p>
@@ -1894,7 +1941,7 @@
     </script>
 
     <!-- PREGUNTES PER REFLEXIONAR (DIRECTE AMB FLETXA) -->
-<section class="py-20 section-dark">
+<section id="repassar" class="py-20 section-dark">
     <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-12">
             <h2 class="font-cinzel text-4xl font-bold text-white mb-4">PREGUNTES PER REPASSAR</h2>
@@ -2375,7 +2422,7 @@
                             <path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/>
                         </svg>
                         <span class="font-cinzel font-bold text-yellow-500 text-center block">
-                            <span class="text-2xl">NIETZSCHE</span><br>
+                            <span class="text-2xl">NIETZSCHE Experience</span><br>
                             <span class="text-red-500 text-3xl">Síííí!!!</span>
                         </span>
                     </div>
