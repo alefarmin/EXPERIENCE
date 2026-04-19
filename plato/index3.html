@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plató: Idees i Justícia</title>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-blue': '#0f172a',
+                        'academic-blue': '#1e293b',
+                        'gold': '#d4a853',
+                        'gold-light': '#e6c77d',
+                        'philosophy-purple': '#7c3aed',
+                        'ivory': '#f5f5dc'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --deep-blue: #0f172a;
+            --academic-blue: #1e293b;
+            --gold: #d4a853;
+            --ivory: #f5f5dc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--deep-blue);
+            color: var(--ivory);
+        }
+
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+
+        .section-dark {
+            background: linear-gradient(135deg, var(--deep-blue), var(--academic-blue));
+        }
+
+        .shimmer-text {
+            background: linear-gradient(90deg, #fff, var(--gold), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 6s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .home-experience-btn{
+            margin-left: 12px;
+            padding: 6px 10px;
+            font-size: 12px;
+            border-radius: 8px;
+            color: #facc15;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .tab-menu-item.active {
+            color: #d4a853;
+            border-left: 3px solid #d4a853;
+            background: rgba(212,168,83,0.1);
+        }
+    </style>
+</head>
+
+<body id="top">
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full bg-[#0f172a]/90 backdrop-blur-md z-50 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+
+            <span class="font-cinzel text-xl text-[#d4a853] font-bold">
+                PLATÓ Experience
+            </span>
+
+            <div class="hidden md:flex space-x-8 items-center">
+
+                <a href="../index.html" class="home-experience-btn">
+                    ← Inici EXPERIENCE
+                </a>
+
+                <!-- INTRO -->
+                <div class="relative group">
+                    <a href="#biografia">Introducció ▼</a>
+                    <div class="absolute hidden group-hover:block bg-[#0f172a] p-2 rounded">
+                        <a href="#biografia" class="tab-menu-item block px-3 py-1"
+                           onclick="switchTab('biografia', this)">Biografia</a>
+                        <a href="#context" class="tab-menu-item block px-3 py-1"
+                           onclick="switchTab('context', this)">Context</a>
+                    </div>
+                </div>
+
+                <!-- TEORIA -->
+                <div class="relative group">
+                    <a href="#caverna">Coneixement ▼</a>
+                    <div class="absolute hidden group-hover:block bg-[#0f172a] p-2 rounded">
+                        <a onclick="switchTab('caverna', this)" class="tab-menu-item block px-3 py-1">Caverna</a>
+                        <a onclick="switchTab('idees', this)" class="tab-menu-item block px-3 py-1">Idees</a>
+                        <a onclick="switchTab('coneixement', this)" class="tab-menu-item block px-3 py-1">Coneixement</a>
+                    </div>
+                </div>
+
+                <!-- ANTROPOLOGIA -->
+                <a href="#anima">Ànima</a>
+
+                <!-- POLÍTICA -->
+                <div class="relative group">
+                    <a href="#estat">Política ▼</a>
+                    <div class="absolute hidden group-hover:block bg-[#0f172a] p-2 rounded">
+                        <a onclick="switchTab('estat', this)" class="tab-menu-item block px-3 py-1">Estat</a>
+                        <a onclick="switchTab('classes', this)" class="tab-menu-item block px-3 py-1">Classes</a>
+                        <a onclick="switchTab('justicia', this)" class="tab-menu-item block px-3 py-1">Justícia</a>
+                    </div>
+                </div>
+
+                <a href="#textos">Textos</a>
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center section-dark pt-16">
+
+    <div class="absolute inset-0">
+        <img src="img/plato.jpg"
+             class="w-full h-full object-cover opacity-60">
+    </div>
+
+    <div class="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 to-[#0f172a]/60"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+
+        <div class="max-w-3xl space-y-6">
+
+            <span class="font-playfair text-[#d4a853] text-xl border px-4 py-1 rounded-full">
+                Filosofia Clàssica
+            </span>
+
+            <h2 class="font-cinzel text-3xl text-[#d4a853] tracking-widest">
+                PLATÓ
+            </h2>
+
+            <h1 class="font-cinzel text-6xl font-black shimmer-text">
+                EL MÓN DE LES IDEES
+            </h1>
+
+            <p class="font-playfair text-xl text-gray-300 italic">
+                Una recerca de la veritat, la justícia i el coneixement més enllà de les aparences sensibles.
+            </p>
+
+            <div class="flex flex-wrap gap-4 text-[#d4a853] font-cinzel text-sm">
+                <span>• VERITAT</span>
+                <span>• IDEES</span>
+                <span>• JUSTÍCIA</span>
+                <span>• ÀNIMA</span>
+                <span>• FILÒSOF-REI</span>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!--Seccio Biografia i Context històric (1)-->
+
+<!-- BIOGRAFIA + CONTEXT -->
+<section id="biografia" class="py-20 section-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+
+            <!-- ESQUERRA: BIOGRAFIA -->
+            <div>
+                <h2 class="font-cinzel text-4xl font-bold mb-6 text-[#d4a853]">
+                    Breus Dades Biogràfiques
+                </h2>
+
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+
+                    <p>
+                        Plató (427–347 aC) va néixer a <span class="text-[#d4a853] font-semibold">Atenes</span> en el si d’una família aristocràtica. 
+                        El seu nom real era <span class="italic">Aristocles</span>, però el sobrenom “Plató” podria fer referència a la seva complexió robusta.
+                    </p>
+
+                    <p>
+                        Va rebre una formació d’elit en disciplines com la política, la dialèctica i les matemàtiques. 
+                        Inicialment es va interessar per la filosofia a través de <span class="text-[#d4a853] font-semibold">Cràtil</span>, però la influència decisiva va ser la del seu mestre 
+                        <span class="text-[#d4a853] font-semibold">Sòcrates</span>.
+                    </p>
+
+                    <div class="nussbaum-quote p-4 rounded-r-lg my-6">
+                        <p class="text-lg">
+                            "La condemna a mort de Sòcrates marcarà profundament el pensament de Plató i el seu rebuig de la política atenenca."
+                        </p>
+                    </div>
+
+                    <p>
+                        Després de la mort de Sòcrates, Plató va viatjar al sud d’Itàlia, on va entrar en contacte amb el pensament 
+                        <span class="text-[#d4a853] font-semibold">pitagòric</span> i les doctrines òrfiques.
+                    </p>
+
+                    <p>
+                        L’any <span class="text-[#d4a853] font-semibold">387 aC</span> va fundar a Atenes 
+                        <span class="text-[#d4a853] font-semibold">l’Acadèmia</span>, una de les primeres institucions educatives de la història, 
+                        amb l’objectiu de formar governants savis.
+                    </p>
+
+                    <p class="text-[#d4a853] font-semibold">
+                        El seu projecte filosòfic té una clara finalitat política: trobar les bases d’un Estat just.
+                    </p>
+
+                </div>
+            </div>
+
+            <!-- DRETA: CONTEXT -->
+            <div class="space-y-6">
+
+                <!-- CONTEXT PRINCIPAL -->
+                <div class="concept-card p-6 rounded-xl">
+                    <h3 class="font-cinzel text-xl font-bold text-[#d4a853] mb-4">
+                        Context Històric i Filosòfic
+                    </h3>
+
+                    <p class="text-gray-100 text-lg font-semibold italic mb-4">
+                        La filosofia de Plató neix d’una crisi profunda de la ciutat d’Atenes.
+                    </p>
+
+                    <ul class="space-y-3 text-sm text-gray-300">
+
+                        <li class="flex items-start">
+                            <span class="text-[#d4a853] mr-2">▸</span>
+                            <span>
+                                <strong>Guerres del Peloponès:</strong> conflicte entre Atenes i Esparta que provoca la decadència política i moral de la polis.
+                            </span>
+                        </li>
+
+                        <li class="flex items-start">
+                            <span class="text-[#d4a853] mr-2">▸</span>
+                            <span>
+                                <strong>Els Trenta Tirans:</strong> govern oligàrquic violent que Plató rebutja malgrat la seva proximitat familiar, degut als seus abusos.
+                            </span>
+                        </li>
+
+                        <li class="flex items-start">
+                            <span class="text-[#d4a853] mr-2">▸</span>
+                            <span>
+                                <strong>Democràcia atenenca:</strong> Plató la critica per estar dominada per la manipulació, la demagògia i la ignorància.
+                            </span>
+                        </li>
+
+                        <li class="flex items-start">
+                            <span class="text-red-400 mr-2">▸</span>
+                            <span class="border-l-2 border-red-400 pl-4 text-rose-200 italic">
+                                <strong class="text-red-300">Mort de Sòcrates:</strong> 
+                                símbol de la injustícia política i punt de ruptura definitiu.
+                            </span>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <!-- SOFISTES -->
+                <div class="concept-card p-6 rounded-xl border-[#d4a853]/30">
+                    <h3 class="font-cinzel text-xl font-bold text-[#d4a853] mb-4">
+                        Els Sofistes: el gran adversari
+                    </h3>
+
+                    <p class="text-sm text-gray-300 mb-4">
+                        Plató construeix la seva filosofia en oposició als sofistes, a qui acusa de destruir la veritat i la justícia.
+                    </p>
+
+                    <div class="space-y-3 text-sm text-gray-300">
+
+                        <div class="flex items-start">
+                            <span class="text-red-400 mr-2">▸</span>
+                            <span>
+                                <strong>Relativisme moral:</strong> el que és just o injust depèn de cada societat. 
+                                Per a Plató, això minava tota possibilitat d'ordre estable.
+                            </span>
+                        </div>
+
+                        <div class="flex items-start">
+                            <span class="text-red-400 mr-2">▸</span>
+                            <span>
+                                <strong>Escepticisme:</strong> no es pot conèixer cap veritat absoluta.
+                            </span>
+                        </div>
+
+                        <div class="flex items-start">
+                            <span class="text-red-400 mr-2">▸</span>
+                            <span>
+                                <strong>Convencionalisme:</strong> les lleis són només acords humans, no tenen fonament universal.
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4 text-xs text-gray-400 italic">
+                        → Plató, que volia sostreure la polis dels continus canvis legislatius respondrà amb la teoria de les Idees i la recerca de valors universals.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- CAVERNA -->
+
+    <section id="caverna" class="py-20 section-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+        <div class="text-center mb-16">
+            <h2 class="font-cinzel text-5xl font-bold text-[#d4a853] mb-4">
+                El Mite de la Caverna
+            </h2>
+            <p class="text-gray-300 max-w-3xl mx-auto text-lg italic">
+                Una al·legoria sobre la ignorància, el coneixement, l’educació i el deure polític del filòsof.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 items-stretch mb-12">
+            <div class="rounded-2xl overflow-hidden border border-[#d4a853]/30 h-full">
+                <img src="img/caverna.jpg" alt="Al·legoria de la caverna" class="w-full h-full object-cover min-h-[420px]">
+            </div>
+
+            <!-- FASES APILADES -->
+    <div class="flex flex-col gap-3">
+
+        <div class="concept-card p-4 rounded-xl border-gray-600/30">
+            <h3 class="font-cinzel text-xl text-gray-300 mb-4">
+            1. La Ignorància
+            </h3>
+            
+            <p class="text-sm text-gray-400 mb-4">
+            Els presoners confonen les ombres amb la realitat.
+            Viuen dins el món de les aparences.
+            </p>
+            
+            <div class="bg-black/30 p-4 rounded text-xs text-gray-400">
+            <strong>Realitat percebuda:</strong> ombres<br>
+            <strong>Coneixement:</strong> Eikasia / Doxa
+            </div>
+            
+            <div class="mt-4 text-xs italic text-gray-500">
+            → Confusió entre aparença i realitat
+            </div>
+            </div>
+
+
+            <div class="concept-card p-4 rounded-xl border-[#d4a853]/30">
+                <h3 class="font-cinzel text-xl text-[#d4a853] mb-4">
+                2. L’Alliberament
+                </h3>
+                
+                <p class="text-sm text-gray-300 mb-4">
+                L’ascens cap a la llum és esforçat:
+                educar és oredusposar l’ànima cap a la veritat.
+                </p>
+                
+                <div class="bg-[#d4a853]/10 p-4 rounded text-xs text-gray-300">
+                <strong>Procés:</strong> educació<br>
+                <strong>Coneixement:</strong> Diànoia
+                </div>
+                
+                <div class="mt-4 text-xs italic text-gray-400">
+                → El saber exigeix esforç
+                </div>
+                </div>
+
+
+                <div class="concept-card p-4 rounded-xl border-yellow-500/40">
+                    <h3 class="font-cinzel text-xl text-yellow-400 mb-4">
+                    3. La Veritat i el Retorn
+                    </h3>
+                    
+                    <p class="text-sm text-gray-300 mb-4">
+                    La contemplació del Sol revela la Idea del Bé.
+                    Però el filòsof ha de tornar.
+                    </p>
+                    
+                    <div class="bg-yellow-500/10 p-4 rounded text-xs text-gray-300">
+                    <strong>Sol:</strong> Idea del Bé<br>
+                    <strong>Coneixement:</strong> Noesi
+                    </div>
+                    
+                    <div class="mt-4 text-xs italic text-gray-400">
+                    → El savi ha de governar
+                    </div>
+    </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 mb-12">
+            <div class="concept-card p-6 rounded-xl border-[#d4a853]/30">
+                <h3 class="font-cinzel text-2xl text-center text-[#d4a853] mb-6">Descodificació simbòlica</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-black/30 p-4 rounded-xl border border-gray-600/30">
+                        <h4 class="text-[#d4a853] text-sm mb-1">⛓ Cadenes</h4>
+                        <p class="text-xs text-gray-400">Prejudicis i opinió rebuda.</p>
+                    </div>
+                    <div class="bg-black/30 p-4 rounded-xl border border-gray-600/30">
+                        <h4 class="text-[#d4a853] text-sm mb-1">🔥 Foc</h4>
+                        <p class="text-xs text-gray-400">Coneixement sensible limitat.</p>
+                    </div>
+                    <div class="bg-[#d4a853]/10 p-4 rounded-xl border border-[#d4a853]/30">
+                        <h4 class="text-[#d4a853] text-sm mb-1">☀ Sol</h4>
+                        <p class="text-xs text-gray-300">La Idea del Bé.</p>
+                    </div>
+                    <div class="bg-[#d4a853]/10 p-4 rounded-xl border border-[#d4a853]/30">
+                        <h4 class="text-[#d4a853] text-sm mb-1">↺ Retorn</h4>
+                        <p class="text-xs text-gray-300">Deure polític del filòsof.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-card p-6 rounded-xl border-[#d4a853]/30">
+                <h3 class="font-cinzel text-2xl text-center text-[#d4a853] mb-6">Dos àmbits de realitat</h3>
+                <div class="grid grid-cols-2 gap-4 h-full">
+                    <div class="bg-black/30 p-5 rounded-xl">
+                        <h4 class="font-cinzel text-gray-300 mb-3 border-b border-gray-700 pb-2">Dins</h4>
+                        <ul class="space-y-2 text-xs text-gray-400">
+                            <li>▸ Món sensible</li>
+                            <li>▸ Llum del foc</li>
+                            <li>▸ Ombres / Opinió</li>
+                        </ul>
+                    </div>
+                    <div class="bg-[#d4a853]/10 p-5 rounded-xl">
+                        <h4 class="font-cinzel text-[#d4a853] mb-3 border-b border-[#d4a853]/30 pb-2">Fora</h4>
+                        <ul class="space-y-2 text-xs text-gray-300">
+                            <li>▸ Món intel·ligible</li>
+                            <li>▸ Llum del sol</li>
+                            <li>▸ Idees / Ciència</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="concept-card p-6 rounded-xl border-[#d4a853]/30 mb-20">
+            <h3 class="font-cinzel text-2xl text-[#d4a853] mb-8 text-center">Els quatre graus del coneixement</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div class="bg-black/30 p-5 rounded-xl border border-gray-700/30">
+                    <strong class="text-[#d4a853]">Eikasia</strong><br>
+                    <span class="text-gray-400 text-xs">Ombres i aparences</span>
+                </div>
+                <div class="bg-black/30 p-5 rounded-xl border border-gray-700/30">
+                    <strong class="text-[#d4a853]">Pistis</strong><br>
+                    <span class="text-gray-400 text-xs">Objectes sensibles</span>
+                </div>
+                <div class="bg-[#d4a853]/10 p-5 rounded-xl border border-[#d4a853]/20">
+                    <strong class="text-[#d4a853]">Diànoia</strong><br>
+                    <span class="text-gray-300 text-xs">Raó discursiva</span>
+                </div>
+                <div class="bg-yellow-500/10 p-5 rounded-xl border border-yellow-500/30">
+                    <strong class="text-yellow-400">Noesi</strong><br>
+                    <span class="text-gray-300 text-xs">Intel·lecció de les Idees</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-20">
+            <h3 class="font-cinzel text-3xl text-center text-[#d4a853] mb-10">Quatre lectures del mite</h3>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="concept-card p-6 rounded-xl border-gray-700/40 text-center">
+                    <h4 class="font-cinzel text-[#d4a853] mb-3">Metafísica</h4>
+                    <p class="text-sm text-gray-400">Món sensible vs. Món de les Idees.</p>
+                </div>
+                <div class="concept-card p-6 rounded-xl border-gray-700/40 text-center">
+                    <h4 class="font-cinzel text-[#d4a853] mb-3">Epistemològica</h4>
+                    <p class="text-sm text-gray-400">El pas de la doxa a l'episteme.</p>
+                </div>
+                <div class="concept-card p-6 rounded-xl border-gray-700/40 text-center">
+                    <h4 class="font-cinzel text-[#d4a853] mb-3">Antropològica</h4>
+                    <p class="text-sm text-gray-400">Educar és girar l’ànima cap a la veritat.</p>
+                </div>
+                <div class="concept-card p-6 rounded-xl border-gray-700/40 text-center">
+                    <h4 class="font-cinzel text-[#d4a853] mb-3">Política</h4>
+                    <p class="text-sm text-gray-400">El filòsof ha de tornar i governar.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto">
+            <div class="concept-card p-10 rounded-xl border-yellow-400/40 text-center bg-yellow-500/5">
+                <div class="text-4xl mb-4">☀️</div>
+                <h3 class="font-cinzel text-3xl text-yellow-400 mb-4">Finalitat última del mite</h3>
+                <p class="text-gray-300 mb-6 text-lg max-w-4xl mx-auto">
+                    Postular valors universals que guiïn el governant en la justícia.
+                </p>
+                <div class="inline-block bg-yellow-500/10 p-5 rounded italic text-gray-300 border border-yellow-500/20">
+                    Sol = Idea del Bé = principi suprem del ser, del coneixement i de la justícia.
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+                        
+
+
+    <!-- IDEES (1) -->
+
+<section id="idees" class="py-20 section-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- TÍTOL -->
+    <div class="text-center mb-16">
+        <h2 class="font-cinzel text-5xl font-bold text-[#d4a853] mb-4">
+            La Teoria de les Idees
+        </h2>
+        <p class="text-gray-300 max-w-2xl mx-auto text-lg italic">
+            Plató distingeix entre dues realitats: el món que percebem i el món que és veritable.
+        </p>
+    </div>
+    
+    <!-- DUALITAT -->
+    <div class="grid md:grid-cols-2 gap-10 items-stretch">
+    
+        <!-- MÓN SENSIBLE -->
+        <div class="concept-card p-8 rounded-xl border-gray-500/30 relative overflow-hidden">
+    
+            <div class="absolute top-0 right-0 text-xs text-gray-500 p-2">
+                👁 PERCEPCIÓ
+            </div>
+    
+            <h3 class="font-cinzel text-2xl text-gray-300 mb-4">
+                Món Sensible
+            </h3>
+    
+            <p class="text-sm text-gray-400 mb-6">
+                És el món que percebem amb els sentits. Tot és canviant, imperfecte i enganyós.
+            </p>
+    
+            <ul class="space-y-3 text-sm text-gray-300">
+                <li>▸ Objectes materials</li>
+                <li>▸ Canvi constant</li>
+                <li>▸ Imperfecció</li>
+                <li>▸ Accesible pels sentits </li>
+                <li>▸ Coneixement: <strong>doxa</strong></li>
+            </ul>
+    
+            <!-- MINI CAIXA -->
+            <div class="mt-6 bg-black/30 p-4 rounded text-xs text-gray-400 italic">
+                → El que veiem no és la realitat autèntica
+            </div>
+    
+        </div>
+    
+        <!-- MÓN INTEL·LIGIBLE -->
+        <div class="concept-card p-8 rounded-xl border-[#d4a853]/40 relative overflow-hidden">
+    
+            <div class="absolute top-0 right-0 text-xs text-[#d4a853] p-2">
+                🧠 RAÓ
+            </div>
+    
+            <h3 class="font-cinzel text-2xl text-[#d4a853] mb-4">
+                Món Intel·ligible
+            </h3>
+    
+            <p class="text-sm text-gray-300 mb-6">
+                És el món de les Idees: realitats eternes, immutables i perfectes.
+                És l'autèntica realitat
+            </p>
+    
+            <ul class="space-y-3 text-sm text-gray-300">
+                <li>▸ Idees (formes)</li>
+                <li>▸ Eternitat</li>
+                <li>▸ Perfecció</li>
+                <li>▸ Accesible només amb la Raó</li>
+                <li>▸ Coneixement: <strong>episteme</strong></li>
+            </ul>
+    
+            <!-- MINI CAIXA -->
+            <div class="mt-6 bg-[#d4a853]/10 p-4 rounded text-xs text-gray-300 italic">
+                → La veritable realitat només es pot comprendre amb la raó
+            </div>
+    
+        </div>
+    
+    </div>
+    
+         <!-- LÍNIA DE CONNEXIÓ -->
+    <div class="relative my-16">
+    
+        <div class="h-[2px] bg-gradient-to-r from-gray-500 via-[#d4a853] to-[#d4a853]"></div>
+    
+        <div class="absolute left-1/2 transform -translate-x-1/2 -top-3 text-xs text-[#d4a853] bg-[#0f172a] px-3 py-1 rounded-full border border-[#d4a853]/40">
+            PARTICIPACIÓ
+        </div>
+    
+    </div>
+    
+    <!-- IDEA DEL BÉ -->
+    <div class="max-w-3xl mx-auto">
+    
+        <div class="concept-card p-8 rounded-xl border-yellow-400/40 text-center">
+    
+            <div class="text-4xl mb-4">☀️</div>
+    
+            <h3 class="font-cinzel text-2xl text-yellow-400 mb-4">
+                La Idea del Bé
+            </h3>
+    
+            <p class="text-gray-300 mb-4">
+                És la Idea suprema, font de totes les altres Idees i de la veritat mateixa.
+            </p>
+    
+            <div class="bg-yellow-500/10 p-4 rounded text-sm text-gray-300 italic">
+                → Com el Sol en la caverna, el Bé il·lumina i fa possible el coneixement
+            </div>
+    
+        </div>
+    
+    </div>
+    
+    <!-- QUOTE -->
+    <div class="max-w-2xl mx-auto mt-16">
+        <div class="nussbaum-quote p-6 rounded-r-xl text-center">
+            <p class="text-xl">
+                "El visible és només una ombra del que és real."
+            </p>
+        </div>
+    </div>
+    
+    
+   
+   
+        <!-- RELACIÓ -->
+        <div class="concept-card p-8 rounded-xl mb-16 border-[#d4a853]/30">
+        
+        <h3 class="font-cinzel text-2xl text-[#d4a853] mb-6">
+        Relació entre Idees i coses
+        </h3>
+        
+        <p class="text-gray-300 mb-6">
+        Les coses no tenen realitat per si mateixes: són en la mesura que es relacionen amb les Idees.
+        </p>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+        
+            <!-- MIMESI -->
+            <div class="bg-black/30 p-6 rounded-xl border border-gray-600/30">
+                <h4 class="font-cinzel text-lg text-gray-300 mb-3">Mimesi (imitació)</h4>
+                <p class="text-sm text-gray-400">
+                    Les coses són còpies imperfectes de les Idees. Igual que les ombres en la caverna, imiten una realitat superior.
+                </p>
+            </div>
+        
+            <!-- PARTICIPACIÓ -->
+            <div class="bg-[#d4a853]/10 p-6 rounded-xl border border-[#d4a853]/30">
+                <h4 class="font-cinzel text-lg text-[#d4a853] mb-3">Méthexis (participació)</h4>
+                <p class="text-sm text-gray-300">
+                    Les coses són el que són perquè participen de les Idees. La seva essència depèn d’aquesta participació.
+                </p>
+            </div>
+        
+        </div>
+        
+        <div class="mt-6 text-xs text-gray-400 italic">
+        → Cada cosa és allò que és en funció de les Idees de les quals participa
+        </div>
+        
+        </div>
+        
+        <!-- COSMOGONIA -->
+        <div class="concept-card p-8 rounded-xl mb-16 border-purple-500/30">
+        
+        <h3 class="font-cinzel text-2xl text-purple-400 mb-6">
+        La Cosmogonia: origen del món sensible
+        </h3>
+        
+        <div class="grid md:grid-cols-3 gap-6 text-sm">
+        
+        <div class="bg-purple-900/20 p-5 rounded-xl">
+        <strong>Matèria</strong><br>
+        <span class="text-gray-400">Caòtica i en moviment</span>
+        </div>
+        
+        <div class="bg-purple-900/20 p-5 rounded-xl">
+        <strong>Idees</strong><br>
+        <span class="text-gray-400">Models perfectes</span>
+        </div>
+        
+        <div class="bg-purple-900/20 p-5 rounded-xl">
+        <strong>Demiürg</strong><br>
+        <span class="text-gray-400">Intel·ligència ordenadora</span>
+        </div>
+        
+        </div>
+        
+        <div class="mt-6 bg-black/30 p-6 rounded-xl text-sm text-gray-300">
+        El <strong>demiürg</strong> modela la matèria prenent les Idees com a model per crear el món.
+        </div>
+        
+        <div class="mt-4 text-xs text-gray-400 italic">
+        → Model teleològic: el món tendeix al Bé, però la matèria impedeix la perfecció
+        </div>
+        
+        </div>
+        
+        <!-- DEPENDÈNCIA -->
+        <div class="grid md:grid-cols-2 gap-10">
+        
+            <!-- ONTOLÒGICA -->
+            <div class="concept-card p-6 rounded-xl border-[#d4a853]/30">
+                <h3 class="font-cinzel text-lg text-[#d4a853] mb-3">
+                    Dependència Ontològica
+                </h3>
+                <p class="text-sm text-gray-300">
+                    Les Idees són la causa del ser de les coses. 
+                    Les coses només existeixen en la mesura que participen de les Idees.
+                </p>
+            </div>
+        
+            <!-- GNOSEOLÒGICA -->
+            <div class="concept-card p-6 rounded-xl border-[#d4a853]/30">
+                <h3 class="font-cinzel text-lg text-[#d4a853] mb-3">
+                    Dependència Gnoseològica
+                </h3>
+                <p class="text-sm text-gray-300">
+                    Només podem conèixer les coses si coneixem les Idees. 
+                    El coneixement veritable depèn de la comprensió del món intel·ligible.
+                </p>
+            </div>
+        
+        </div>
+        
+        <!-- QUOTE FINAL -->
+        <div class="max-w-3xl mx-auto mt-16">
+            <div class="nussbaum-quote p-6 rounded-r-xl text-center">
+                <p class="text-xl">
+                    "El món sensible només té sentit a la llum de les Idees."
+                </p>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+     </section>
+
+
+
+
+
+
+
+   <!-- CONEIXEMENT -->
+
+
+
+   <section id="coneixement" class="py-20 section-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- TÍTOL -->
+    <div class="text-center mb-16">
+        <h2 class="font-cinzel text-5xl font-bold text-[#d4a853] mb-4">
+            El Coneixement en Plató
+        </h2>
+        <p class="text-gray-300 max-w-2xl mx-auto text-lg italic">
+            Conèixer no és aprendre, sinó recordar allò que l’ànima ja sabia.
+        </p>
+    </div>
+    
+    <!-- REMINISCÈNCIA -->
+    <div class="concept-card p-8 rounded-xl mb-16 border-[#d4a853]/30">
+    
+    <h3 class="font-cinzel text-2xl text-[#d4a853] mb-4">
+    Teoria de la Reminiscència
+    </h3>
+    
+    <p class="text-gray-300 mb-6">
+    Plató defensa que l’ànima ha contemplat les Idees abans d’unir-se al cos. 
+    Conèixer és recordar (anamnesi) aquestes veritats oblidades.
+    </p>
+    
+    <div class="bg-[#d4a853]/10 p-5 rounded-xl text-sm text-gray-300 italic">
+    → Aprendre és recuperar un saber innat, no adquirir-lo des de zero
+    </div>
+    
+    </div>
+    
+    <!-- LÍNIA DEL CONEIXEMENT -->
+    <div class="mb-20">
+    
+    <h3 class="font-cinzel text-3xl text-center text-[#d4a853] mb-10">
+    La Línia del Coneixement
+    </h3>
+    
+    <div class="grid md:grid-cols-2 gap-10">
+    
+        <!-- DOXA -->
+        <div class="concept-card p-8 rounded-xl border-gray-600/30">
+    
+            <h4 class="font-cinzel text-xl text-gray-300 mb-6 text-center">
+                DOXA (Opinió)
+            </h4>
+    
+            <div class="space-y-6">
+    
+                <div class="bg-black/30 p-5 rounded-xl border border-gray-600/30">
+                    <strong class="text-gray-300">Eikasia</strong>
+                    <p class="text-xs text-gray-400">
+                        Coneixement de les ombres i imatges → il·lusió
+                    </p>
+                </div>
+    
+                <div class="bg-black/30 p-5 rounded-xl border border-gray-600/30">
+                    <strong class="text-gray-300">Pistis</strong>
+                    <p class="text-xs text-gray-400">
+                        Coneixement dels objectes físics → creença
+                    </p>
+                </div>
+    
+            </div>
+    
+        </div>
+    
+        <!-- EPISTEME -->
+        <div class="concept-card p-8 rounded-xl border-[#d4a853]/40">
+    
+            <h4 class="font-cinzel text-xl text-[#d4a853] mb-6 text-center">
+                EPISTEME (Ciència)
+            </h4>
+    
+            <div class="space-y-6">
+    
+                <div class="bg-[#d4a853]/10 p-5 rounded-xl border border-[#d4a853]/30">
+                    <strong>Diànoia</strong>
+                    <p class="text-xs text-gray-300">
+                        Coneixement matemàtic → raonament
+                    </p>
+                </div>
+    
+                <div class="bg-[#d4a853]/20 p-5 rounded-xl border border-yellow-400/40">
+                    <strong>Noesis</strong>
+                    <p class="text-xs text-gray-200">
+                        Coneixement de les Idees → intel·ligència pura
+                    </p>
+                </div>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+    
+    <!-- LÍNIA VISUAL -->
+    <div class="relative mt-12">
+    
+    <div class="h-[3px] bg-gradient-to-r from-gray-600 via-[#d4a853] to-yellow-400"></div>
+    
+    <div class="flex justify-between text-xs mt-2 text-gray-400">
+    <span>Ignorància</span>
+    <span>Veritat</span>
+    </div>
+    
+    </div>
+    
+    </div>
+    
+    <!-- CONNEXIÓ AMB LA CAVERNA -->
+    <div class="concept-card p-8 rounded-xl border-purple-500/30">
+    
+    <h3 class="font-cinzel text-xl text-purple-400 mb-4">
+    Relació amb el Mite de la Caverna
+    </h3>
+    
+    <div class="grid md:grid-cols-4 gap-4 text-center text-sm">
+    
+    <div class="bg-purple-900/20 p-4 rounded">
+    Ombres<br><span class="text-gray-400">Eikasia</span>
+    </div>
+    
+    <div class="bg-purple-900/20 p-4 rounded">
+    Objectes<br><span class="text-gray-400">Pistis</span>
+    </div>
+    
+    <div class="bg-purple-900/20 p-4 rounded">
+    Exterior<br><span class="text-gray-400">Diànoia</span>
+    </div>
+    
+    <div class="bg-purple-900/20 p-4 rounded">
+    Sol<br><span class="text-gray-400">Noesis</span>
+    </div>
+    
+    </div>
+    
+    </div>
+    
+    <!-- QUOTE FINAL -->
+    <div class="max-w-3xl mx-auto mt-16">
+        <div class="nussbaum-quote p-6 rounded-r-xl text-center">
+            <p class="text-xl">
+                "Conèixer és recordar el que l’ànima ja ha vist."
+            </p>
+        </div>
+    </div>
+    
+    </div>
+    </section>     
+
+
+
+
+
+
+    <!-- ÀNIMA -->
+
+
+    <section id="anima" class="py-20 section-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- TÍTOL -->
+    <div class="text-center mb-16">
+        <h2 class="font-cinzel text-5xl font-bold text-[#d4a853] mb-4">
+            L’Ànima en Plató
+        </h2>
+        <p class="text-gray-300 max-w-2xl mx-auto text-lg italic">
+            L’ésser humà és una realitat dual: cos i ànima, on aquesta última és la veritable essència.
+        </p>
+    </div>
+    
+    <!-- MARC PRINCIPAL -->
+    <div class="border border-[#d4a853]/30 rounded-2xl p-8 bg-[#0f172a]/40 backdrop-blur">
+    
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+    
+    <!-- ESQUERRA -->
+    <div class="space-y-6">
+    
+    <h3 class="font-cinzel text-2xl text-[#d4a853]">
+    Dualisme antropològic
+    </h3>
+    
+    <p class="text-gray-300 leading-relaxed">
+    Plató defensa que l’ésser humà està format per dues realitats diferents:
+    el cos, material i imperfecte, i l’ànima, immaterial i immortal.
+    </p>
+    
+    <div class="bg-black/30 border border-gray-600/30 p-5 rounded-xl">
+    <p class="text-sm text-gray-300">
+    El cos és una presó per a l’ànima, que limita el seu accés al coneixement veritable.
+    </p>
+    </div>
+    
+    <div class="nussbaum-quote p-5 rounded-r-lg">
+    <p class="text-lg">
+    "L’ànima ha de separar-se del cos per assolir la veritat."
+    </p>
+    </div>
+    
+    </div>
+    
+    <!-- DRETA -->
+    <div class="space-y-6">
+    
+    <h3 class="font-cinzel text-2xl text-[#d4a853]">
+    Parts de l’ànima
+    </h3>
+    
+    <div class="space-y-4">
+    
+    <!-- RACIONAL -->
+    <div class="concept-card p-5 rounded-xl border-[#d4a853]/40">
+    <strong class="text-[#d4a853]">Ànima racional</strong>
+    <p class="text-xs text-gray-300">
+    Busca la veritat → ha de governar
+    </p>
+    </div>
+    
+    <!-- IRASCIBLE -->
+    <div class="concept-card p-5 rounded-xl border-red-400/40">
+    <strong class="text-red-400">Ànima irascible</strong>
+    <p class="text-xs text-gray-300">
+    Valor, coratge → ajuda la raó
+    </p>
+    </div>
+    
+    <!-- CONCUPISCIBLE -->
+    <div class="concept-card p-5 rounded-xl border-blue-400/40">
+    <strong class="text-blue-400">Ànima concupiscible</strong>
+    <p class="text-xs text-gray-300">
+    Desigs i passions → ha de ser controlada
+    </p>
+    </div>
+    
+    </div>
+    
+    </div>
+    
+    </div>
+    </div>
+    
+    <!-- CARRO ALAT -->
+    <div class="mt-16 border border-purple-500/30 rounded-2xl p-8 bg-[#0f172a]/40">
+    
+    <h3 class="font-cinzel text-2xl text-purple-400 mb-6 text-center">
+    El mite del carro alat
+    </h3>
+    
+    <div class="grid md:grid-cols-3 gap-6 text-center">
+    
+    <div class="bg-purple-900/20 p-5 rounded-xl">
+    🐎 Cavall blanc<br>
+    <span class="text-gray-400 text-xs">Part noble (irascible)</span>
+    </div>
+    
+    <div class="bg-purple-900/20 p-5 rounded-xl">
+    🧠 Auriga<br>
+    <span class="text-gray-400 text-xs">Raó (guia)</span>
+    </div>
+    
+    <div class="bg-purple-900/20 p-5 rounded-xl">
+    🐎 Cavall negre<br>
+    <span class="text-gray-400 text-xs">Desigs (concupiscible)</span>
+    </div>
+    
+    </div>
+    
+    <div class="mt-6 bg-black/30 p-5 rounded-xl text-sm text-gray-300">
+    La vida moral consisteix en l’harmonia entre les parts de l’ànima, dirigida per la raó.
+    </div>
+    
+    </div>
+    
+    <!-- VIRTUTS -->
+    <div class="mt-16 border border-[#d4a853]/30 rounded-2xl p-8 bg-[#0f172a]/40">
+    
+    <h3 class="font-cinzel text-2xl text-[#d4a853] mb-6 text-center">
+    Virtuts de l’ànima
+    </h3>
+    
+    <div class="grid md:grid-cols-3 gap-6 text-center">
+    
+    <div class="concept-card p-5 rounded-xl">
+    Saviesa<br><span class="text-xs text-gray-400">Raó</span>
+    </div>
+    
+    <div class="concept-card p-5 rounded-xl">
+    Valentia<br><span class="text-xs text-gray-400">Irascible</span>
+    </div>
+    
+    <div class="concept-card p-5 rounded-xl">
+    Temprança<br><span class="text-xs text-gray-400">Concupiscible</span>
+    </div>
+    
+    </div>
+    
+    <div class="mt-6 text-center text-sm text-gray-300 italic">
+    → La justícia és l’harmonia de totes les parts
+    </div>
+    
+    </div>
+    
+    </div>
+    </section>
+
+
+
+
+
+    
+    <!-- POLÍTICA -->
+
+
+
+<section id="politica" class="py-20 section-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- TÍTOL -->
+    <div class="text-center mb-16">
+        <h2 class="font-cinzel text-5xl font-bold text-[#d4a853] mb-4">
+            La Política en Plató
+        </h2>
+        <p class="text-gray-300 max-w-2xl mx-auto text-lg italic">
+            La justícia consisteix en l’harmonia de la ciutat, quan cada classe compleix la seva funció.
+        </p>
+    </div>
+    
+    <!-- MARC PRINCIPAL -->
+    <div class="border border-[#d4a853]/30 rounded-2xl p-10 bg-[#0f172a]/40 backdrop-blur">
+    
+    <h3 class="font-cinzel text-2xl text-[#d4a853] mb-10 text-center">
+    Estructura de la Ciutat Ideal
+    </h3>
+    
+    <!-- CAPES -->
+    <div class="space-y-6 max-w-3xl mx-auto">
+    
+        <!-- FILÒSOFS -->
+        <div class="relative concept-card p-6 rounded-xl border-yellow-400/50 text-center">
+    
+            <div class="text-3xl mb-2">👑</div>
+    
+            <h4 class="font-cinzel text-xl text-yellow-400">
+                Governants (Filòsofs)
+            </h4>
+    
+            <p class="text-sm text-gray-300 mt-2">
+                Coneixen el Bé → han de governar
+            </p>
+    
+            <div class="mt-4 bg-yellow-500/10 p-3 rounded text-xs text-gray-300">
+                Virtut: <strong>Saviesa</strong>
+            </div>
+    
+        </div>
+    
+        <!-- GUARDIANS -->
+        <div class="relative concept-card p-6 rounded-xl border-red-400/50 text-center">
+    
+            <div class="text-3xl mb-2">🛡️</div>
+    
+            <h4 class="font-cinzel text-xl text-red-400">
+                Guardians
+            </h4>
+    
+            <p class="text-sm text-gray-300 mt-2">
+                Defensen la ciutat i mantenen l’ordre
+            </p>
+    
+            <div class="mt-4 bg-red-500/10 p-3 rounded text-xs text-gray-300">
+                Virtut: <strong>Valentia</strong>
+            </div>
+    
+        </div>
+    
+        <!-- PRODUCTORS -->
+        <div class="relative concept-card p-6 rounded-xl border-blue-400/50 text-center">
+    
+            <div class="text-3xl mb-2">🌾</div>
+    
+            <h4 class="font-cinzel text-xl text-blue-400">
+                Productors
+            </h4>
+    
+            <p class="text-sm text-gray-300 mt-2">
+                Satisfan les necessitats materials
+            </p>
+    
+            <div class="mt-4 bg-blue-500/10 p-3 rounded text-xs text-gray-300">
+                Virtut: <strong>Temprança</strong>
+            </div>
+    
+        </div>
+    
+    </div>
+    
+    <!-- LÍNIES DE CONNEXIÓ -->
+    <div class="mt-10 max-w-3xl mx-auto text-center text-xs text-gray-400 italic">
+    → Cada classe ha de complir la seva funció sense interferir en les altres
+    </div>
+    
+    </div>
+    
+    <!-- CORRESPONDÈNCIA ÀNIMA-CIUTAT -->
+    <div class="mt-16 border border-purple-500/30 rounded-2xl p-8 bg-[#0f172a]/40">
+    
+    <h3 class="font-cinzel text-2xl text-purple-400 mb-6 text-center">
+    Correspondència entre Ànima i Ciutat
+    </h3>
+    
+    <div class="grid md:grid-cols-3 gap-6 text-center">
+    
+    <div class="bg-purple-900/20 p-5 rounded-xl">
+    🧠 Raó<br>
+    <span class="text-gray-400 text-xs">Governants</span>
+    </div>
+    
+    <div class="bg-purple-900/20 p-5 rounded-xl">
+    🔥 Irascible<br>
+    <span class="text-gray-400 text-xs">Guardians</span>
+    </div>
+    
+    <div class="bg-purple-900/20 p-5 rounded-xl">
+    💧 Desig<br>
+    <span class="text-gray-400 text-xs">Productors</span>
+    </div>
+    
+    </div>
+    
+    </div>
+    
+    <!-- JUSTÍCIA -->
+    <div class="mt-16 border border-[#d4a853]/30 rounded-2xl p-8 bg-[#0f172a]/40">
+    
+    <h3 class="font-cinzel text-2xl text-[#d4a853] mb-6 text-center">
+    La Justícia
+    </h3>
+    
+    <div class="max-w-3xl mx-auto text-center text-gray-300 leading-relaxed">
+    
+    <p class="mb-4">
+    La justícia no consisteix en la igualtat, sinó en l’harmonia.
+    </p>
+    
+    <div class="bg-[#d4a853]/10 p-6 rounded-xl text-lg italic">
+    → Cada part ha de fer allò que li correspon
+    </div>
+    
+    <p class="mt-4 text-sm text-gray-400">
+    Quan això es compleix, la ciutat és justa — igual que l’ànima.
+    </p>
+    
+    </div>
+    
+    </div>
+    
+    <!-- DEGENERACIÓ (EXTRA NIVELL PRO) -->
+    <div class="mt-16 border border-red-500/30 rounded-2xl p-8 bg-[#0f172a]/40">
+    
+    <h3 class="font-cinzel text-2xl text-red-400 mb-6 text-center">
+    Degeneració dels règims polítics
+    </h3>
+    
+    <div class="grid md:grid-cols-5 gap-4 text-center text-xs">
+    
+    <div class="bg-red-900/20 p-3 rounded">Aristocràcia</div>
+    <div class="bg-red-900/20 p-3 rounded">Timocràcia</div>
+    <div class="bg-red-900/20 p-3 rounded">Oligarquia</div>
+    <div class="bg-red-900/20 p-3 rounded">Democràcia</div>
+    <div class="bg-red-900/20 p-3 rounded">Tirania</div>
+    
+    </div>
+    
+    <div class="mt-4 text-center text-gray-400 italic text-xs">
+    → Progressiva degradació del govern basat en la raó
+    </div>
+    
+    </div>
+    
+    <!-- QUOTE -->
+    <div class="max-w-3xl mx-auto mt-16">
+        <div class="nussbaum-quote p-6 rounded-r-xl text-center">
+            <p class="text-xl">
+                "La ciutat justa és aquella on cadascú fa el que li correspon."
+            </p>
+        </div>
+    </div>
+    
+    </div>
+    </section>
+
+
+
+
+   
+    <!-- EDUCACIÓ DEL FILÒSOF -->
+
+
+
+<section id="educacio" class="py-20 section-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- TÍTOL -->
+    <div class="text-center mb-16">
+        <h2 class="font-cinzel text-5xl font-bold text-[#d4a853] mb-4">
+            L’Educació del Filòsof
+        </h2>
+        <p class="text-gray-300 max-w-2xl mx-auto text-lg italic">
+            El coneixement és un camí d’ascens des de la ignorància fins a la contemplació del Bé.
+        </p>
+    </div>
+    
+    <!-- MARC PRINCIPAL -->
+    <div class="border border-[#d4a853]/30 rounded-2xl p-10 bg-[#0f172a]/40 backdrop-blur">
+    
+    <h3 class="font-cinzel text-2xl text-[#d4a853] mb-10 text-center">
+    L’Ascens cap al Coneixement
+    </h3>
+    
+    <!-- ESCALA -->
+    <div class="space-y-8 max-w-3xl mx-auto">
+    
+        <!-- NIVELL 1 -->
+        <div class="concept-card p-6 rounded-xl border-gray-600/40">
+            <h4 class="font-cinzel text-lg text-gray-300 mb-2">
+                1. Ignorància (Caverna)
+            </h4>
+            <p class="text-sm text-gray-400">
+                L’individu viu entre ombres i creences, sense accedir a la veritat.
+            </p>
+        </div>
+    
+        <!-- NIVELL 2 -->
+        <div class="concept-card p-6 rounded-xl border-gray-500/40 ml-6">
+            <h4 class="font-cinzel text-lg text-gray-300 mb-2">
+                2. Educació inicial
+            </h4>
+            <p class="text-sm text-gray-400">
+                Música i gimnàstica → formació del cos i del caràcter.
+            </p>
+        </div>
+    
+        <!-- NIVELL 3 -->
+        <div class="concept-card p-6 rounded-xl border-[#d4a853]/30 ml-12">
+            <h4 class="font-cinzel text-lg text-[#d4a853] mb-2">
+                3. Matemàtiques (diànoia)
+            </h4>
+            <p class="text-sm text-gray-300">
+                Desenvolupament del pensament abstracte i racional.
+            </p>
+        </div>
+    
+        <!-- NIVELL 4 -->
+        <div class="concept-card p-6 rounded-xl border-yellow-400/40 ml-16">
+            <h4 class="font-cinzel text-lg text-yellow-400 mb-2">
+                4. Dialèctica (noesis)
+            </h4>
+            <p class="text-sm text-gray-200">
+                Coneixement directe de les Idees i comprensió de la realitat.
+            </p>
+        </div>
+    
+        <!-- NIVELL 5 -->
+        <div class="concept-card p-6 rounded-xl border-yellow-300/60 ml-20">
+            <h4 class="font-cinzel text-lg text-yellow-300 mb-2">
+                5. Contemplació del Bé
+            </h4>
+            <p class="text-sm text-gray-200">
+                Punt culminant del coneixement: la font de tota veritat.
+            </p>
+        </div>
+    
+    </div>
+    
+    <!-- LÍNIA ASCENS -->
+    <div class="relative mt-12 max-w-3xl mx-auto">
+        <div class="h-[3px] bg-gradient-to-r from-gray-600 via-[#d4a853] to-yellow-300"></div>
+    </div>
+    
+    </div>
+    
+    <!-- RETORN A LA CAVERNA -->
+    <div class="mt-16 border border-purple-500/30 rounded-2xl p-8 bg-[#0f172a]/40">
+    
+    <h3 class="font-cinzel text-2xl text-purple-400 mb-6 text-center">
+    El Retorn del Filòsof
+    </h3>
+    
+    <div class="max-w-3xl mx-auto text-center text-gray-300 leading-relaxed">
+    
+    <p class="mb-4">
+    El filòsof no pot quedar-se en la contemplació del Bé.
+    </p>
+    
+    <div class="bg-purple-900/20 p-6 rounded-xl text-lg italic">
+    → Ha de tornar a la caverna per governar i guiar els altres
+    </div>
+    
+    <p class="mt-4 text-sm text-gray-400">
+    Tot i que això implica incomprensió i rebuig.
+    </p>
+    
+    </div>
+    
+    </div>
+    
+    
+    
+    <!-- SÍNTESI FINAL -->
+
+    
+    <div class="mt-16 border border-[#d4a853]/30 rounded-2xl p-8 bg-[#0f172a]/40">
+    
+    <h3 class="font-cinzel text-2xl text-[#d4a853] mb-6 text-center">
+    Síntesi del pensament platònic
+    </h3>
+    
+    <div class="grid md:grid-cols-3 gap-6 text-center text-sm">
+    
+    <div class="concept-card p-5 rounded-xl">
+    Coneixement<br>
+    <span class="text-gray-400">Ascens cap a les Idees</span>
+    </div>
+    
+    <div class="concept-card p-5 rounded-xl">
+    Ànima<br>
+    <span class="text-gray-400">Ha de ser guiada per la raó</span>
+    </div>
+    
+    <div class="concept-card p-5 rounded-xl">
+    Política<br>
+    <span class="text-gray-400">Govern dels savis</span>
+    </div>
+    
+    </div>
+    
+    <div class="mt-6 text-center text-gray-300 italic">
+    → Tot convergeix en la Idea del Bé
+    </div>
+    
+    </div>
+    
+    <!-- QUOTE FINAL -->
+    <div class="max-w-3xl mx-auto mt-16">
+        <div class="nussbaum-quote p-6 rounded-r-xl text-center">
+            <p class="text-xl">
+                "Només qui ha vist el Bé pot governar amb justícia."
+            </p>
+        </div>
+    </div>
+    
+    </div>
+    </section>
