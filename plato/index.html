@@ -44,8 +44,8 @@
         .font-playfair { font-family: 'Playfair Display', serif; }
 
         .section-dark {
-            background: linear-gradient(135deg, var(--deep-blue), var(--academic-blue));
-        }
+   background: linear-gradient(135deg, #0f172a, #1e293b);
+}
 
         .shimmer-text {
             background: linear-gradient(90deg, #fff, var(--gold), #fff);
@@ -72,9 +72,28 @@
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(212,168,83,0.2);
         }
-        .section-light {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-        }
+        
+        .section-light{
+   position: relative;
+   background: linear-gradient(135deg,#1e293b,#334155);
+}
+
+.section-light::before{
+   content:"";
+   position:absolute;
+   top:0;
+   left:15%;
+   width:70%;
+   height:1px;
+
+   background:linear-gradient(
+      to right,
+      transparent,
+      rgba(212,168,83,.35),
+      transparent
+   );
+}
+
         .nussbaum-quote {
             border-left: 3px solid #d4a853;
             background: rgba(212,168,83,0.05);
@@ -108,68 +127,24 @@
                 </a>
 
                 <!-- INTRO -->
-                <div class="relative group">
-                    <a href="#biografia">Introducció ▼</a>
-                    <div class="absolute hidden group-hover:block bg-[#0f172a] p-2 rounded">
-                        <a href="#biografia" class="tab-menu-item block px-3 py-1"
-                           onclick="switchTab('biografia', this)">Biografia</a>
-                        <a href="#context" class="tab-menu-item block px-3 py-1"
-                           onclick="switchTab('context', this)">Context</a>
-                    </div>
-                </div>
+                <!-- CONEIXEMENT -->
+                <a href="#introduccio">Introducció</a>
 
-                <!-- TEORIA -->
-                <div class="relative group">
-                    <a href="#caverna">Coneixement ▼</a>
-                    <div class="absolute hidden group-hover:block bg-[#0f172a] p-2 rounded">
-                        <a onclick="switchTab('caverna', this)" class="tab-menu-item block px-3 py-1">Caverna</a>
-                        <a onclick="switchTab('idees', this)" class="tab-menu-item block px-3 py-1">Idees</a>
-                        <a onclick="switchTab('coneixement', this)" class="tab-menu-item block px-3 py-1">Coneixement</a>
-                    </div>
-                </div>
+                <!-- MITE DE LA CAVERNA -->
+                <a href="#caverna">Al·legoria</a>
+
+                <!-- METAFÍSICA -->
+                <a href="#metafisica">Metafísica</a>
+
+                <!-- CONEIXEMENT -->
+                <a href="#coneixement">Epistemologia</a>
 
                 <!-- ANTROPOLOGIA -->
-                <a href="#anima">Ànima</a>
-
-                <!-- ÈTICA -->
-                <div class="relative group">
-                    <a href="#etica">Ètica ▼</a>
-                    <div class="absolute hidden group-hover:block bg-[#0f172a] p-2 rounded">
-                        <a onclick="switchTab('etica', this)" class="tab-menu-item block px-3 py-1">Virtuts</a>
-                        <a onclick="switchTab('educacio', this)" class="tab-menu-item block px-3 py-1">Educació filòsof</a>
-                    </div>
-                </div>
-
-                <!-- ÈTICA -->
-                <div class="relative group">
-                    <a href="#etica">Ètica ▼</a>
-                    <div class="absolute hidden group-hover:block bg-[#0f172a] p-2 rounded">
-                        <a onclick="switchTab('etica', this)" class="tab-menu-item block px-3 py-1">Virtuts</a>
-                        <a onclick="switchTab('educacio', this)" class="tab-menu-item block px-3 py-1">Educació</a>
-                    </div>
-                </div>
-
-                <!-- ÈTICA -->
-                <div class="relative group">
-                    <a href="#etica">Ètica ▼</a>
-                    <div class="absolute hidden group-hover:block bg-[#0f172a] p-2 rounded">
-                        <a href="#etica" class="tab-menu-item block px-3 py-1">Virtuts</a>
-                        <a href="#educacio" class="tab-menu-item block px-3 py-1">Educació</a>
-                    </div>
-                </div>
-
-                <!-- ÈTICA -->
-                <div class="relative group">
-                    <a href="#etica">Ètica ▼</a>
-                    <div class="absolute hidden group-hover:block bg-[#0f172a] p-2 rounded">
-                        <a href="#etica" class="tab-menu-item block px-3 py-1">Virtuts</a>
-                        <a href="#educacio" class="tab-menu-item block px-3 py-1">Educació</a>
-                    </div>
-                </div>
+                <a href="#anima">Antropologia</a>
 
                 <!-- POLÍTICA -->
                 <div class="relative group">
-                    <a href="#estat">Política ▼</a>
+                    <a href="#politica">Política ▼</a>
                     <div class="absolute hidden group-hover:block bg-[#0f172a] p-2 rounded">
                         <a onclick="switchTab('estat', this)" class="tab-menu-item block px-3 py-1">Estat</a>
                         <a onclick="switchTab('classes', this)" class="tab-menu-item block px-3 py-1">Classes</a>
@@ -177,7 +152,10 @@
                     </div>
                 </div>
 
-                <a href="#textos">Textos</a>
+                 <!-- ÈTICA -->
+                 <a href="#etica">Êtica</a>
+
+                <a href="#sintesis">Sintessis</a>
 
             </div>
         </div>
@@ -189,7 +167,7 @@
 
     <div class="absolute inset-0">
         <img src="img/parthenon.jpg"
-             class="w-full h-full object-cover opacity-90">
+             class="w-full h-full object-cover opacity-100">
     </div>
 
     <div class="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 to-[#0f172a]/60"></div>
@@ -234,7 +212,7 @@
 <!--Seccio Biografia i Context històric (1)-->
 
 <!-- BIOGRAFIA + CONTEXT -->
-<section id="biografia" class="py-20 section-light">
+<section id="introduccio" class="py-20 section-light">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 gap-12 items-center">
 
@@ -580,7 +558,7 @@
                     <div class="bg-[#d4a853]/10 p-4 rounded-xl border border-[#d4a853]/20 flex flex-col justify-between">
                         <div>
                             <h4 class="font-cinzel text-[#d4a853] text-xs mb-2">🧑 Antropològica</h4>
-                            <p class="text-xs text-gray-300">Educar és girar l'ànima cap a la veritat: <em>paideia</em>.</p>
+                            <p class="text-xs text-gray-300">Educar és girar l'ànima cap a la veritat: <em>Influència pitagòrica - ascetisme ànima/cos</em>.</p>
                         </div>
                     </div>
                     <div class="bg-[#d4a853]/10 p-4 rounded-xl border border-[#d4a853]/20 flex flex-col justify-between">
@@ -613,7 +591,7 @@
 
     <!-- IDEES (1) -->
 
-<section id="idees" class="py-20 section-light">
+<section id="metafisica" class="py-20 section-light">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- TÍTOL -->
@@ -1077,7 +1055,8 @@
         <div class="grid md:grid-cols-2 gap-3 text-xs text-gray-300">
             <div class="flex items-start gap-2"><span class="text-[#d4a853]">▸</span><span><strong>Desconfiança dels sentits:</strong> allò que mostren és mera aparença, no l'autèntica realitat.</span></div>
             <div class="flex items-start gap-2"><span class="text-[#d4a853]">▸</span><span><strong>Idees innates:</strong> l'ànima les coneixia al món intel·ligible i les recorda al món sensible.</span></div>
-            <div class="flex items-start gap-2"><span class="text-[#d4a853]">▸</span><span><strong>Matemàtiques:</strong> propedèutica per al coneixement filosòfic de les Idees. D'aquí la inscripció de l'Acadèmia.</span></div>
+            <div class="flex items-start gap-2"><span class="text-[#d4a853]">▸</span><span><strong>Matemàtiques:</strong> propedèutica per al coneixement filosòfic de les Idees. D'aquí la inscripció al frontispici de l'Acadèmia:
+                "No entri ningú que no sàpiga matemàtiques".</span></div>
             <div class="flex items-start gap-2"><span class="text-[#d4a853]">▸</span><span><strong>Coneixement per la raó sola:</strong> és possible conèixer la realitat sense recórrer a l'experiència sensible.</span></div>
         </div>
     </div>
@@ -1290,7 +1269,6 @@
 
     
     <!-- POLÍTICA -->
-
 
 
 <section id="politica" class="py-20 section-dark">
@@ -1742,7 +1720,7 @@
     
     <!-- SÍNTESI FINAL -->
 
-    
+    <section id="sintesis" class="py-20 section-light">
     <div class="mt-16 border border-[#d4a853]/30 rounded-2xl p-8 bg-[#0f172a]/40">
     
     <h3 class="font-cinzel text-2xl text-[#d4a853] mb-6 text-center">
