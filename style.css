@@ -298,3 +298,52 @@ a.home-experience-btn::after {
 a.home-experience-btn:hover::after {
   opacity: 1;
 }
+
+/* CONSTEL·LACIONS */
+
+.constellations {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.constellation-title {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  opacity: 0.4;
+  margin-bottom: 20px;
+}
+
+.constellation-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.constellation {
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.constellation:hover {
+  opacity: 1;
+  border-color: rgba(255,255,255,0.4);
+}
+
+.constellation {
+  text-decoration: none;
+  color: inherit;
+}
+
+.constellation {
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  opacity: 0.45;
+}
+
+

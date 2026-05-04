@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="ca" class="h-full scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +20,7 @@
                 }
             }
         }
+        
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -106,19 +107,28 @@
             border-left: 3px solid #d4a853;
             background: rgba(212,168,83,0.1);
         }
+       
+        .active-section {
+    color: #d4a853 !important;
+    border-bottom: 2px solid #d4a853;
+    padding-bottom: 2px;
+    transition: all 0.2s ease;
+}
+        
     </style>
 </head>
 
-<body id="top">
+<body id="top" class="min-h-screen flex flex-col m-0 overflow-x-hidden overflow-y-visible">
+
 
 <!-- NAV -->
 <nav class="fixed top-0 w-full bg-[#0f172a]/90 backdrop-blur-md z-50 border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex items-center justify-between h-16">
 
-            <span class="font-cinzel text-xl text-[#d4a853] font-bold">
+            <a href="#top" class="font-cinzel text-xl text-[#d4a853] font-bold transition hover:text-white hover:tracking-widest">
                 PLATÓ Experience
-            </span>
+            </a>
 
             <div class="hidden md:flex space-x-8 items-center">
 
@@ -128,43 +138,46 @@
 
                 <!-- INTRO -->
                 <!-- CONEIXEMENT -->
-                <a href="#introduccio">Introducció</a>
+                <a href="#introduccio"class="nav-link" >Introducció</a>
 
                 <!-- MITE DE LA CAVERNA -->
-                <a href="#caverna">Al·legoria</a>
+                <a href="#caverna" class="nav-link">Al·legoria</a>
 
                 <!-- METAFÍSICA -->
-                <a href="#metafisica">Metafísica</a>
+                <a href="#metafisica" class="nav-link">Metafísica</a>
 
                 <!-- CONEIXEMENT -->
-                <a href="#coneixement">Epistemologia</a>
+                <a href="#coneixement"class="nav-link" >Epistemologia</a>
 
                 <!-- ANTROPOLOGIA -->
-                <a href="#anima">Antropologia</a>
+                <a href="#anima" class="nav-link">Antropologia</a>
 
-                <!-- POLÍTICA -->
-                <div class="relative group">
-                    <a href="#politica">Política ▼</a>
-                    <div class="absolute hidden group-hover:block bg-[#0f172a] p-2 rounded">
-                        <a onclick="switchTab('estat', this)" class="tab-menu-item block px-3 py-1">Estat</a>
-                        <a onclick="switchTab('classes', this)" class="tab-menu-item block px-3 py-1">Classes</a>
-                        <a onclick="switchTab('justicia', this)" class="tab-menu-item block px-3 py-1">Justícia</a>
-                    </div>
-                </div>
+               <!-- POLÍTICA -->
+<div class="relative group">
+    <a href="#politica" class="nav-link">Política ▼</a>
+    <div class="absolute hidden group-hover:block bg-[#0f172a] p-2 rounded">
+        <a href="#estat"    class="nav-link block px-3 py-1">Estat</a>
+        <a href="#classes"  class="nav-link block px-3 py-1">Classes</a>
+        <a href="#justicia" class="nav-link block px-3 py-1">Justícia</a>
+        <a href="#regims"   class="nav-link block px-3 py-1">Règims</a>
+    </div>
+</div>
 
                  <!-- ÈTICA -->
-                 <a href="#etica">Êtica</a>
+                 <a href="#etica" class="nav-link">Ètica</a>
 
-                <a href="#sintesis">Sintessis</a>
+                <a href="#sintesis" class="nav-link">Síntesi</a>
 
             </div>
         </div>
     </div>
 </nav>
 
-<!-- HERO -->
-<section class="relative min-h-screen flex items-center section-dark pt-16">
+<main class="flex-1 flex flex-col">
 
+<!-- HERO -->
+<section id="top" class="relative min-h-screen flex items-start section-dark pt-32">
+   
     <div class="absolute inset-0">
         <img src="img/parthenon.jpg"
              class="w-full h-full object-cover opacity-100">
@@ -172,7 +185,7 @@
 
     <div class="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 to-[#0f172a]/60"></div>
 
-    <div class="relative z-10 max-w-5xl mx-auto px-6">
+    <div class="relative z-10 max-w-5xl mx-auto px-6 lg:-translate-x-10">
 
         <div class="max-w-3xl space-y-6">
 
@@ -184,7 +197,7 @@
                 PLATÓ
             </h2>
 
-            <h1 class="font-cinzel text-6xl font-black shimmer-text">
+            <h1 class="font-cinzel text-8xl font-black shimmer-text">
                 EL MÓN DE LES IDEES
             </h1>
 
@@ -202,6 +215,39 @@
 
         </div>
     </div>
+    
+    <!-- RETRAT PLATÓ LATERAL (CORREGIT) -->
+    <div class="absolute bottom-16 right-[7%] lg:right-[10%] z-20 hidden md:flex items-center gap-8 scale-110 lg:scale-125 origin-bottom-right drop-shadow-2xl">
+    
+    <!-- TEXT -->
+    <div class="text-right space-y-1">
+      <p class="font-cinzel text-[#d4a853] text-sm tracking-wider">
+        PLATÓ
+      </p>
+      <p class="text-gray-400 text-xs">
+        s. IV aC
+      </p>
+      <p class="font-playfair text-sm text-gray-300 italic max-w-[180px] leading-snug">
+        “El món sensible és només una ombra de la realitat.”
+      </p>
+    </div>
+  
+    <!-- IMATGE -->
+    <div class="relative w-44 md:w-48 lg:w-56">
+  
+      <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-400/25 to-transparent blur-xl"></div>
+  
+      <div class="absolute -inset-2 rounded-2xl border border-white/50"></div>
+  
+      <img
+        src="img/plato2.jpg"
+        alt="Retrat de Plató"
+        class="relative rounded-2xl opacity-95"
+      />
+  
+    </div>
+  
+  </div>
 </section>
 
 
@@ -1269,12 +1315,14 @@
 
     
     <!-- POLÍTICA -->
-
+    <h3 id="estat" class="font-cinzel text-xl text-[#d4a853] mb-3">
+    </h3>
 
 <section id="politica" class="py-20 section-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- TÍTOL -->
+     
     <div class="text-center mb-16">
         <h2 class="font-cinzel text-5xl font-bold text-[#d4a853] mb-4">
             La Política en Plató
@@ -1283,7 +1331,7 @@
             La justícia consisteix en l’harmonia de la ciutat, quan cada classe compleix la seva funció.
         </p>
     </div>
-    
+  
     <!-- MARC PRINCIPAL -->
     <div class="border border-[#d4a853]/30 rounded-2xl p-10 bg-[#0f172a]/40 backdrop-blur">
     
@@ -1303,12 +1351,16 @@
     </div>
 
     <!-- ORIGEN DE L'ESTAT -->
+    <h3 id="classes" class="font-cinzel text-2xl text-[#d4a853] mb-10 text-center">
+    </h3>   
     <div class="concept-card p-6 rounded-xl border-[#d4a853]/30 mb-8">
         <h3 class="font-cinzel text-xl text-[#d4a853] mb-3">Origen de l'Estat</h3>
         <p class="text-gray-300 text-sm leading-relaxed">L'ésser humà no és autosuficient: necessita els altres per satisfer les seves necessitats vitals. Aquesta interdependència origina la societat i l'Estat. La política té per finalitat <strong>organitzar els esforços comuns de la millor manera per a tothom</strong> — el que avui anomenaríem <em>divisió social del treball</em>.</p>
     </div>
 
-        <h3 class="font-cinzel text-2xl text-[#d4a853] mb-10 text-center">
+    
+    
+    <h3 class="font-cinzel text-2xl text-[#d4a853] mb-10 text-center">
     Estructura de la Ciutat Ideal
     </h3>
     
@@ -1403,6 +1455,9 @@
     </div>
     
     <!-- CORRESPONDÈNCIA ÀNIMA-CIUTAT -->
+    <h3 id="justicia" class="font-cinzel text-2xl text-[#d4a853] mb-6 text-center">
+    </h3>
+
     <div class="mt-16 border border-purple-500/30 rounded-2xl p-8 bg-[#0f172a]/40">
     
     <h3 class="font-cinzel text-2xl text-purple-400 mb-6 text-center">
@@ -1454,8 +1509,12 @@
     </div>
     
     </div>
+
+
     
     <!-- DEGENERACIÓ (EXTRA NIVELL PRO) -->
+    <h3 id="regims" class="font-cinzel text-2xl text-red-400 mb-6 text-center">
+    </h3>
     <div class="mt-16 border border-red-500/30 rounded-2xl p-8 bg-[#0f172a]/40">
     
     <h3 class="font-cinzel text-2xl text-red-400 mb-6 text-center">
@@ -1788,14 +1847,168 @@
     
     </div>
     
-    <!-- QUOTE FINAL -->
-    <div class="max-w-3xl mx-auto mt-16">
-        <div class="nussbaum-quote p-6 rounded-r-xl text-center">
-            <p class="text-xl">
-                "Només qui ha vist el Bé pot governar amb justícia."
-            </p>
-        </div>
-    </div>
     
+    <!-- QUOTE FINAL ESPECTACULAR -->
+    <div class="relative max-w-2xl mx-auto mt-0 text-center mb-2">
+
+    <!-- glow subtil darrere -->
+    <div class="absolute inset-0 bg-gradient-to-r from-[#d4a853]/10 via-transparent to-[#d4a853]/10 blur-xl blur-xl pointer-events-none"></div>
+
+    <!-- contingut -->
+    <div class="relative px-6 py-4">
+
+        <!-- línia decorativa superior -->
+        <div class="w-24 h-[2px] bg-[#d4a853] mx-auto mb-6"></div>
+
+        <p class="font-cinzel text-xl md:text-2xl text-[#d4a853] leading-snug tracking-wide">
+            “Només qui ha vist el Bé<br class="hidden md:block">
+            pot governar amb justícia.”
+        </p>
+
+        <!-- subtítol opcional -->
+        <p class="mt-6 text-gray-400 text-sm italic">
+            — Idea central de la filosofia política de Plató
+        </p>
+
+        <!-- línia decorativa inferior -->
+        <div class="w-24 h-[2px] bg-[#d4a853] mx-auto mt-6"></div>
+
     </div>
-    </section>
+</div>
+</section>
+
+</main>  
+
+  <!-- FOOTER -->
+  <footer class="bg-[#020617] text-gray-400 pt-16 pb-6 border-t border-white/10">
+
+    <!-- línia superior decorativa -->
+    <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-[#d4a853]/40 to-transparent mb-12"></div>
+
+    <div class="max-w-6xl mx-auto px-6">
+
+        <div class="grid md:grid-cols-3 gap-10 mb-12">
+
+            <!-- PLATÓ -->
+            <div>
+                <h4 class="font-cinzel text-[#d4a853] text-lg mb-4 tracking-wider">
+                    PLATÓ
+                </h4>
+                <p class="text-sm leading-relaxed text-gray-400">
+                    Al S. IV aC., juntament amb Aristòtil, representa la culminació de la filosofia grega, 
+                    convertint-se en un dels fonaments més sòlids per al conjunt de la filosofia occidental posterior.
+                </p>
+            </div>
+
+            <!-- OBRES -->
+            <div>
+                <h4 class="font-cinzel text-[#d4a853] text-lg mb-4 tracking-wider">
+                    Obres Principals
+                </h4>
+                <ul class="space-y-2 text-sm">
+                    <li class="hover:text-white transition">• La República</li>
+                    <li class="hover:text-white transition">• El Fedó</li>
+                    <li class="hover:text-white transition">• El Banquet</li>
+                    <li class="hover:text-white transition">• El Sofista</li>
+                </ul>
+            </div>
+
+            <!-- CONCEPTES -->
+            <div>
+                <h4 class="font-cinzel text-[#d4a853] text-lg mb-4 tracking-wider">
+                    Conceptes Clau
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs">Idees</span>
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs">Raó</span>
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs">Dialèctica</span>
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs">Reminiscència</span>
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs">Mímesis</span>
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs">Justícia</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- separador -->
+        <div class="border-t border-white/10 pt-6 text-center">
+
+            <p class="text-xs text-gray-500 italic">
+                “La filosofia comença en l’admiració.”
+            </p>
+
+            <p class="text-xs text-gray-600 mt-2">
+                © 2026 — Plató Experience
+            </p>
+
+        </div>
+
+    </div>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    
+        const sections = Array.from(document.querySelectorAll("section[id]"));
+        const navLinks = document.querySelectorAll(".nav-link");
+        const parentMap = { estat: 'politica', classes: 'politica', justicia: 'politica', regims: 'politica' };
+    
+        let ignoreScroll = false;
+        let lastSublink = null; // ← recorda quin sublink s'ha clicat
+    
+        function setActive(id) {
+            navLinks.forEach(link => {
+                link.classList.toggle(
+                    "active-section",
+                    link.getAttribute("href") === "#" + id
+                );
+            });
+            // si tornem a la secció pare, reactiva també el sublink
+            if (lastSublink && parentMap[lastSublink] === id) {
+                document.querySelector('[href="#' + lastSublink + '"]')?.classList.add("active-section");
+            }
+        }
+    
+        function getCurrentSection() {
+            const scrollPos = window.scrollY + window.innerHeight * 0.3;
+            let current = sections[0];
+            for (const section of sections) {
+                if (section.offsetTop <= scrollPos) current = section;
+                else break;
+            }
+            return current.getAttribute("id");
+        }
+    
+        function onScroll() {
+            if (ignoreScroll) return;
+            setActive(getCurrentSection());
+        }
+    
+        window.addEventListener("scroll", onScroll, { passive: true });
+    
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                const target = link.getAttribute("href").replace("#", "");
+                ignoreScroll = true;
+    
+                if (parentMap[target]) {
+                    lastSublink = target; // ← guarda el sublink clicat
+                    document.querySelector('[href="#' + parentMap[target] + '"]')?.classList.add("active-section");
+                } else {
+                    lastSublink = null; // ← reset si cliques una secció normal
+                }
+    
+                setActive(target);
+    
+                setTimeout(() => {
+                    ignoreScroll = false;
+                    setActive(getCurrentSection());
+                }, 700);
+            });
+        });
+    
+        setActive(getCurrentSection());
+    });
+    </script>
+</body>
+</html>

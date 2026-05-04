@@ -1,0 +1,2211 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Del Leviatà al Vel d'Ignorança | Genealogia del Liberalisme Polític</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-hover: #1f1f1f;
+            --text-primary: #f0ece2;
+            --text-secondary: #a8a29e;
+            --text-muted: #78716c;
+            --accent-gold: #c9a227;
+            --accent-gold-dim: #a08220;
+            --accent-red: #8b2635;
+            --accent-red-dim: #5c1a23;
+            --border: #2a2a2a;
+            --border-light: #3a3a3a;
+            --shadow: rgba(0,0,0,0.6);
+            --gold: var(--accent-gold);
+            --red: var(--accent-red);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .font-playfair { font-family: 'Playfair Display', serif; }
+
+        /* Navegació */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 0 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-gold); }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: radial-gradient(ellipse at center, #1a1510 0%, #0a0a0a 70%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a227' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--accent-gold);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.3s;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #f0ece2 0%, #c9a227 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.6s;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.9s;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent-gold);
+        }
+
+        /* Seccions */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--accent-red);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .section-intro {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            position: relative;
+            padding: 3rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-gold-dim), var(--accent-red-dim));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 50%;
+    position: relative;
+    margin-bottom: 0rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(even) {
+    justify-content: flex-start;
+    padding-right: 0;
+    padding-left: 50%;
+}
+
+.timeline-content {
+    max-width: 320px;           /* 🔥 menys ample */
+    padding: 0 1.2rem;          /* 🔥 menys aire */
+    position: relative;
+    top: -10px;
+}
+
+        .timeline-dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--bg-primary);
+            border: 3px solid var(--accent-gold);
+            border-radius: 50%;
+            top: 0.5rem;
+            right: -8px;
+            z-index: 10;
+        }
+
+        
+
+     /* COMPACTACIÓ REAL */
+.timeline-item:nth-child(odd) .timeline-content {
+    transform: translateX(-40px);
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    transform: translateX(40px);
+}   
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            right: auto;
+            left: -8px;
+        }
+
+        .timeline-year {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-author {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-work {
+            font-size: 0.9rem;
+            color: var(--accent-red);
+            font-style: italic;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .timeline-text {
+    font-size: 0.8rem;
+    line-height: 1.3;
+    margin-top: 4px;
+}
+
+.timeline-year {
+    font-size: 1.2rem;
+}
+
+.timeline-author {
+    font-size: 1.1rem;
+}
+
+        /* Tabs Filòsofs */
+        .philosophers-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            max-width: 100%;
+            padding: 6rem 2rem;
+        }
+
+        .philosophers-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .tabs-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.7rem 1.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--accent-gold-dim);
+            color: var(--text-primary);
+        }
+
+        .tab-btn.active {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+            border-color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-panel.active { display: block; }
+
+        .philosopher-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .philosopher-meta h3 {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .philosopher-meta .work {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--accent-red);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .philosopher-meta .years {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .concept-box {
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent-red);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .concept-highlight {
+    color: var(--accent-gold);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0.3rem 0 0.6rem;
+    line-height: 1.3;
+}
+
+        .concept-box h4 {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+    border-left: 3px solid var(--accent-gold);
+    padding-left: 8px;
+}
+
+        .concept-box p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 0.4rem 0;
+        }
+
+        .philosopher-visual {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .visual-title {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Diagrama Hobbes */
+        .diagram-hobbes { text-align: center; }
+
+        .state-nature {
+            background: var(--accent-red-dim);
+            border: 1px solid var(--accent-red);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .arrow-down {
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .leviathan-box {
+            background: linear-gradient(135deg, #1a1a1a, #2a1a10);
+            border: 2px solid var(--accent-gold);
+            padding: 1.5rem;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .leviathan-box::after {
+            content: '♦';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-card);
+            padding: 0 10px;
+            color: var(--accent-gold);
+        }
+        .contracte-social ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1rem;
+    list-style: none;
+}
+
+.contracte-social li {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 0.4rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.contracte-social li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent-gold);
+    font-weight: bold;
+}
+
+        /* Diagrama Locke */
+        .rights-list { list-style: none; }
+
+        .rights-list li {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: var(--bg-primary);
+            border-left: 3px solid var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .rights-list .icon {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+        }
+
+        /* Diagrama Rawls */
+        .veil-diagram {
+            text-align: center;
+            padding: 2rem;
+            background: radial-gradient(circle, #1a1a1a 0%, var(--bg-card) 70%);
+            border: 1px solid var(--border);
+        }
+
+        .veil-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #0f0f0f;
+            border: 3px dashed var(--accent-gold);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .veil-label {
+            position: absolute;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .veil-top { top: -25px; }
+        .veil-bottom { bottom: -25px; }
+        .veil-left { left: -40px; }
+        .veil-right { right: -50px; }
+
+        .principles {
+            text-align: left;
+            margin-top: 1.5rem;
+        }
+
+        .principle {
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            background: var(--bg-primary);
+            border-left: 3px solid var(--accent-red);
+            font-size: 0.9rem;
+        }
+
+        .principle strong { color: var(--accent-gold); }
+
+        /* Comparativa */
+        #comparison-section {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 5rem 0; /* sense padding lateral */
+}
+
+/* contenidor centrat */
+.section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .comparison-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold-dim);
+        }
+
+        .comparison-card h4 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .comparison-card ul { list-style: none; }
+
+        .comparison-card li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .comparison-card li:last-child { border-bottom: none; }
+
+        .comparison-card .label {
+            color: var(--accent-red);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        /* FAQ / Accordion */
+        .faq-section { max-width: 800px; }
+
+        .accordion-item {
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 0;
+        }
+
+        .accordion-header {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            text-align: left;
+            padding: 1.5rem 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .accordion-header:hover { color: var(--accent-gold); }
+
+        .accordion-icon {
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+            font-family: 'Cinzel', serif;
+        }
+
+        .accordion-item.open .accordion-icon { transform: rotate(45deg); }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .accordion-item.open .accordion-body {
+            max-height: 500px;
+            padding-bottom: 1.5rem;
+        }
+
+        /* Conclusió */
+        .conclusion-box {
+            background: linear-gradient(135deg, #1a1510, #161616);
+            border: 1px solid var(--accent-gold-dim);
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .conclusion-box::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            color: var(--accent-gold);
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        .conclusion-box p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .conclusion-author {
+            margin-top: 1.5rem;
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Animacions */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .timeline-line { left: 20px; }
+            .timeline-item, .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-left: 50px;
+                padding-right: 0;
+            }
+            .timeline-dot, .timeline-item:nth-child(even) .timeline-dot {
+                left: 12px;
+                right: auto;
+            }
+            .philosopher-card { grid-template-columns: 1fr; }
+            .comparison-grid { grid-template-columns: 1fr; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+
+        /* Llista estructurada dins concept-box */
+.concept-list {
+    margin: 0.5rem 0 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.concept-list li {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 0.35rem;
+    font-size: 0.88rem;
+    line-height: 1.35;
+    color: var(--text-secondary);
+}
+
+.concept-list li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--accent-gold);
+}
+
+/* Nota final més discreta */
+.concept-note {
+    margin-top: 0.6rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+.philosopher-visual .concept-box {
+    margin-top: 1.8rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+}
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.4; /* 👈 aquí controles l'opacitat fàcilment */
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* VISUAL PANEL */
+.ph-visual{background:var(--bg-2);border:1px solid var(--border);padding:2rem;}
+.ph-visual-title{font-family:var(--font-ui);font-size:.65rem;text-transform:uppercase;letter-spacing:.18em;color:var(--text-3);margin-bottom:1.8rem;display:flex;align-items:center;gap:.6rem;}
+.ph-visual-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.ph-quote{border-left:2px solid var(--gold-line);padding:.8rem 1.2rem;font-style:italic;color:var(--text-2);font-size:.95rem;line-height:1.85;margin-top:1.5rem;}
+
+.quote-highlight {
+    margin-top: 1.5rem;
+    padding: 1.2rem 1.5rem;
+
+    background: #000; /* 👈 fons negre */
+    
+    border-left: 4px solid rgba(255,255,255,0.25); /* 👈 NO vermell */
+    border-radius: 6px;
+
+    position: relative;
+
+    font-style: italic;
+    color: var(--text-secondary);
+}
+.quote-highlight::before {
+    content: "“";
+    position: absolute;
+    top: -10px;
+    left: 10px;
+
+    font-size: 3rem;
+    color: rgba(255,255,255,0.15);
+    line-height: 1;
+}
+.quote-highlight p {
+    margin: 0;
+    font-size: 0.9rem;   /* 👈 AQUÍ canvies la mida */
+    line-height: 1.6;    /* 👈 millora lectura */
+}
+.key-rights {
+    color: var(--accent-gold);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+/* separació real */
+.concept-quote {
+    margin-top: 0.8rem;
+}
+
+/* etiqueta "Autonomia" */
+.quote-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-red);
+    margin-bottom: 0.2rem;
+}
+
+/* la cita */
+.quote-highlight {
+    display: block;
+    color: var(--accent-gold);
+    font-style: italic;
+    line-height: 1.4;
+}
+#comparison-section {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 5rem 2rem;
+    max-width: 100%;
+}
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+    position: relative;
+}
+.comparison-grid::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    right: 5%;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        var(--accent-red),
+        var(--accent-gold)
+    );
+    opacity: 0.2;
+    z-index: 0;
+}
+.comparison-card {
+    position: relative;
+    z-index: 1;
+    padding: 1.2rem;
+    font-size: 0.85rem;
+}
+.comparison-card li {
+    padding: 0.35rem 0;
+    font-size: 0.8rem;
+}
+.comparison-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent-gold); /* 👈 AFEGEIX AIXÒ */
+    padding: 2rem;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+
+#comparison-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: var(--accent-gold-dim);
+    opacity: 0.3;
+}
+/* GRID */
+.glossary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+/* ITEM */
+.gloss-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 1.4rem;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.gloss-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-gold-dim);
+}
+
+/* TERME */
+.gloss-term {
+    font-family: 'Cinzel', serif;
+    color: var(--accent-gold);
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+}
+
+/* AUTOR */
+.gloss-author {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-red);
+    margin-bottom: 0.6rem;
+}
+
+/* DEFINICIÓ */
+.gloss-def {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+#connexions .comparison-card {
+    position: relative;
+}
+
+#connexions .comparison-card::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--accent-gold-dim);
+    opacity: 0.3;
+}
+.home-experience-btn {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 6px 14px;
+  margin-right: 15px;
+
+  border-radius: 9999px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  color: #fff;
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+}
+
+.home-experience-btn:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 16px;
+}
+.nav-container .logo {
+  white-space: nowrap;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  transition: all 0.25s ease;
+}
+.nav-container .logo:hover {
+  color: #ffffff;
+  letter-spacing: 0.12em; /* això és el “tracking-widest” */
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 0.80rem;
+  letter-spacing: 0.04em;
+  font-weight: 300;
+}
+
+a.home-experience-btn {
+  all: unset; /* 🔥 mata interferències */
+  
+  display: inline-flex !important;
+  align-items: center;
+  
+  padding: 6px 10px;
+  margin-right: 12px;
+
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+
+  border-radius: 8px;
+
+  color: #d4a853 !important;
+  background: rgba(0,0,0,0.3) !important;
+
+  border: 1px solid rgba(212,168,83,0.3) !important;
+
+  cursor: pointer;
+  text-decoration: none !important;
+
+  white-space: nowrap; /* 🔥 evita salts */
+}
+
+a.home-experience-btn:hover {
+  background: rgba(212,168,83,0.1) !important;
+  color: #e6c77d !important;
+  border-color: rgba(212,168,83,0.6) !important;
+}
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo"> Breu FILOSOFIA POLITICA</a>
+            <ul class="nav-links">
+                <a href="../index.html" class="home-experience-btn">
+                    ← Inici EXPERIENCE
+                  </a>
+                <li><a href="#intro" class="nav-link">Introducció</a></li>
+                <li><a href="#timeline" class="nav-link">Cronologia</a></li>
+                <li><a href="#filosofos" class="nav-link">Filòsofs</a></li>
+                <li><a href="#conexions" class="nav-link">Conexions</a></li>
+                <li><a href="#comparison-section" class="nav-link">Comparativa</a></li>
+                <li><a href="#glossari" class="nav-link">Glossari</a></li>
+                <li><a href="#faq" class="nav-link">Qüestions</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <img src="img/politica4.jpg" class="hero-bg">
+        <div class="hero-content">
+            <p class="hero-subtitle">Una genealogia del pensament polític modern</p>
+            <h1>Del Leviatà al Vel de la Ignorància</h1>
+            <p class="hero-description">
+                Com va néixer el liberalisme polític? Un viatge filosòfic des de "la por" de Hobbes a la justícia de J.Rawls, 
+                seguint el fil històric que va transformar el poder absolut en llibertat raonada.
+            </p>
+        </div>
+        <a href="#intro" class="scroll-indicator">
+            <span>Descobrir</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+        </a>
+    </header>
+
+    <section id="intro">
+        <div class="section-header reveal">
+            <span class="section-tag">El Problema Fundacional</span>
+            <h2 class="section-title">Per què obeïm?</h2>
+            <p class="section-intro">
+                La filosofia política moderna neix d'una pregunta simple: 
+                <em>per què haig de fer cas de l'Estat?</em> La resposta no pot ser «perquè sí». 
+                Ha de ser una resposta que pugui acceptar qualsevol persona racional, 
+                independentment de la seva fe, classe o origen. Aquesta és la història de com la resposta va evolucionar des de
+                "la por" fins convertir-se en "justícia".
+            </p>
+        </div>
+    </section>
+
+
+    <section id="timeline" style="max-width: 900px;">
+        <div class="section-header reveal">
+            <span class="section-tag">Línia del Temps</span>
+            <h2 class="section-title">La Cadena d'Or</h2>
+        </div>
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">1651</div>
+                    <div class="timeline-author">Thomas Hobbes</div>
+                    <span class="timeline-work">Leviatan</span>
+                    <p class="timeline-text">
+                        L'estat de natura és una "guerra de tots contra tots". Només un sobirà absolut amb el monopoli de la força pot garantir la seguretat.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">1689</div>
+                    <div class="timeline-author">John Locke</div>
+                    <span class="timeline-work">Segon Tractat sobre el Govern Civil</span>
+                    <p class="timeline-text">
+                        Els drets naturals (vida, llibertat, propietat) pre-existeixen a l'Estat. El govern és un fideïcomís revocable que no pot ser absolut.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">1748</div>
+                    <div class="timeline-author">Montesquieu</div>
+                    <span class="timeline-work">De l'esperit de les lleis</span>
+                    <p class="timeline-text">
+                        La llibertat no resideix en qualsevol forma de govern, sinó en la separació de poders: legislatiu, executiu i judicial.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">1762</div>
+                    <div class="timeline-author">Jean-Jacques Rousseau</div>
+                    <span class="timeline-work">Del Contracte Social</span>
+                    <p class="timeline-text">
+                        L'home és bo per naturalesa, però la societat el corromp. La solució: la voluntat general, on cadascú obeeix una llei que es dóna a si mateix.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">1795</div>
+                    <div class="timeline-author">Immanuel Kant</div>
+                    <span class="timeline-work">Per la Pau Perpètua</span>
+                    <p class="timeline-text">
+                        La pau no és un buit de guerra, sinó una institució. Les repúbliques cosmopolites, governades per la llei, són la clau de la pau internacional.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">1859</div>
+                    <div class="timeline-author">John Stuart Mill</div>
+                    <span class="timeline-work">Sobre la Llibertat</span>
+                    <p class="timeline-text">
+                        El principi de nocivitat: l'única finalitat per la qual es pot exercir poder sobre un membre d'una comunitat civilitzada és evitar el mal als altres.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">1971</div>
+                    <div class="timeline-author">John Rawls</div>
+                    <span class="timeline-work">Teoria de la Justícia</span>
+                    <p class="timeline-text">
+                        Darrere del «vel d'ignorància», agents racionals triarien dos principis de justícia que fan de la llibertat i l'equitat els fonaments de la societat.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="philosophers-section" id="filosofos">
+        <div class="philosophers-inner">
+            <div class="section-header reveal">
+                <span class="section-tag">Anàlisi Detallada</span>
+                <h2 class="section-title">Els Arquitectes del Liberalisme</h2>
+            </div>
+
+            <div class="tabs-nav reveal">
+                <button class="tab-btn active" onclick="openTab(event, 'hobbes')">Hobbes</button>
+                <button class="tab-btn" onclick="openTab(event, 'locke')">Locke</button>
+                <button class="tab-btn" onclick="openTab(event, 'rousseau')">Rousseau</button>
+                <button class="tab-btn" onclick="openTab(event, 'kant')">Kant</button>
+                <button class="tab-btn" onclick="openTab(event, 'mill')">Mill</button>
+                <button class="tab-btn" onclick="openTab(event, 'rawls')">Rawls</button>
+            </div>
+
+            <!-- HOBBES -->
+            <div id="hobbes" class="tab-panel active">
+                <div class="philosopher-card">
+                    <div class="philosopher-meta">
+                        <h3>Thomas Hobbes</h3>
+                        <span class="work">Leviatan (1651)</span>
+                        <span class="years">1588–1679 | Anglaterra</span>
+                        
+                        <div class="concept-box">
+                            <h4>L'Estat de Natura</h4>
+                            <p class="concept-highlight">
+                                Guerra de tots contra tots
+                            </p>
+                            <p>Sense govern, els éssers humans existeixen en una  <em>"guerra de tots contra tots"</em>. No hi ha justícia ni injustícia, només força. La vida és "solitària, pobra, desagradable, brutal i curta".</p>
+                        </div>
+                        
+                        <div class="concept-box">
+                            <h4>El Contracte Social</h4>
+                            <div class="contracte-social">
+                                <p class="concept-highlight">
+                                    Transferència de drets al sobirà
+                                </p>
+                            
+                                <ul>
+                                    <li>Per escapar del terror, els individus transfereixen tots els seus drets a un sobirà absolut (el <em>Leviatan</em>) a canvi de seguretat. </li>
+                                    <li> Aquest contracte és irrevocable: la desobediència retorna al caos. Obediència = ordre / ruptura = caos</li>
+                                    <li>L'individu aliena gairebé tots els seus drets al sobirà (excepte el dret a la vida), i a canvi obté seguretat i pau. 
+                                        La seva llibertat es redueix al silenci de la llei.<li>  
+                                    <li> No hi ha cap transformació moral, sinó submissió coercitiva.</li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+
+                        <div class="concept-box">
+                            <h4>LLegat Liberal</h4>
+                            <p>Paradoxalment, Hobbes funda el liberalisme mostrant que el poder polític deriva del <strong>consentiment</strong> dels governats, no de Déu. El sobirà existeix perquè els individus el necessiten per viure.</p>
+                        </div>
+                    </div>
+                    <div class="philosopher-visual">
+                        <div class="visual-title">L'Arquitectura del Poder</div>
+                        <div class="diagram-hobbes">
+                            <div class="state-nature">
+                                <strong>ESTAT DE NATURA</strong><br>
+                                <span style="font-size:0.85rem; color:var(--text-secondary)">Guerra de tots contra tots<br>Sense llei, sense propietat</span>
+                            </div>
+                            <div class="arrow-down">▼</div>
+                            <div style="font-size:0.9rem; color:var(--accent-gold); margin-bottom:0.5rem;">Contracte Social Unànime</div>
+                            <div class="arrow-down">▼</div>
+                            <div class="leviathan-box">
+                                <strong>LEVIATAN</strong><br>
+                                <span style="font-size:0.85rem; color:var(--text-secondary)">Sobirà Absolut<br>Monopoli de la força<br>Seguretat garantida</span>
+                            </div>
+                        </div>
+                        <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+                            <div class="visual-title" style="font-size:0.95rem; margin-bottom:1rem;">Concepte Clau</div>
+                            <div class="quote-highlight">
+                            <p> "L'home és un llop per a l'home"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOCKE -->
+            <div id="locke" class="tab-panel">
+                <div class="philosopher-card">
+                    <div class="philosopher-meta">
+                        <h3>John Locke</h3>
+                        <span class="work">Segon Tractat sobre el Govern Civil (1689)</span>
+                        <span class="years">1632–1704 | Anglaterra</span>
+                        
+                        <div class="concept-box">
+                            <h4>Drets Naturals Inalienables</h4>
+                            <p>
+                                L'estat de natura no és caòtic; està regit per la 
+                                <span class="key-term">llei natural</span>. 
+                                Tot individu té drets pre-polítics: 
+                                <span class="key-rights">vida, llibertat i propietat</span>.
+                                </p>
+                                Aquests drets no els concedeix l'Estat; els posseeix per naturalesa.</p>
+                        </div>
+                        
+                        <div class="concept-box">
+                            <h4>Govern Limitat i Consentiment</h4>
+                            <p class="concept-highlight">
+                                El poder és delegat i revocable
+                            </p>
+                            <ul class="concept-list">
+                                <li>El poder legislatiu és el "fideïcomissari" del poble. Això vol dir que el poble li ha "prestat" el poder amb una finalitat específica  → protegir la vida, la llibertat i la propietat.</li>
+                                <li> El govern no és el "propietari" del poder, sinó un simple administrador, amb una funció delegada i limitada.</li>
+                                <li> L'Estat neix especialment per <em>resoldre disputes</em> sobre propietat, amb lleis i jutge imparcial.</li>
+                                <li>Si el govern viola els drets naturals, el contracte es trenca i el poble té dret a la revolució, dret legítim de recuperar el seu poder 
+                                    original i dipositar-lo en un nou govern.</li>
+                            </ul> 
+                            <p class="concept-note">
+                                Sense jutge imparcial, la propietat és insegura en l’estat de natura; per això es crea l’Estat.
+                            </p>
+                        </div>
+
+                
+
+                        <div class="concept-box">
+                            <h4>Tolerància Religiosa</h4>
+                            <p>L'Estat no ha d'intervenir en les consciències. 
+                                La religió és un assumpte privat entre l'individu i Déu; el govern només pot regular accions externes que danyarien els altres. 
+                                La tolerància no és una concessió generosa, sinó una condició estructural de la pau civil en una societat plural.
+                                 Separació entre església i Estat.</p>
+                        </div>
+                    </div>
+                    <div class="philosopher-visual">
+                        <div class="visual-title">Els Tres Drets Fundamentals</div>
+                        <ul class="rights-list">
+                            <li>
+                                <span class="icon">❖</span>
+                                <div>
+                                    <strong style="color:var(--text-primary); display:block; margin-bottom:0.2rem;">Vida</strong>
+                                    <span style="font-size:0.85rem;">Dret a la supervivència i integritat física</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="icon">❖</span>
+                                <div>
+                                    <strong style="color:var(--text-primary); display:block; margin-bottom:0.2rem;">Llibertat</strong>
+                                    <span style="font-size:0.85rem;">Autonomia personal dins els límits de la llei natural</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="icon">❖</span>
+                                <div>
+                                    <strong style="color:var(--text-primary); display:block; margin-bottom:0.2rem;">Propietat</strong>
+                                    <span style="font-size:0.85rem;">Fruit del treball; fonament de la independència econòmica</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="quote-highlight">
+                             <p> "Els éssers humans són, per naturalesa, lliures, iguals i independents. Cap pot ser sotmès al poder polític d'un altre sense el seu propi consentiment."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                        <!-- ROUSSEAU -->
+                        <div id="rousseau" class="tab-panel">
+                            <div class="philosopher-card">
+                                <div class="philosopher-meta">
+                                    <h3>Jean-Jacques Rousseau</h3>
+                                    <span class="work">Del Contracte Social (1762)</span>
+                                    <span class="years">1712–1778 | Ginebra / França</span>
+                                    
+                                    <div class="concept-box">
+                                        <h4>Estat de naturalesa</h4>
+                                        <ul class="concept-list">
+                                          <li>Parteix d'un estat natural hipotètic en què l'ésser humà viu sol, sense propietat ni lligams socials. </li>
+                                          <li><strong>És lliure perquè només obeeix els seus instints (autoconservació i pietat) i no depèn de la voluntat de ningú altre</strong>.</li>
+                                          <li>No hi ha moral ni injustícia perquè no hi ha llei ni propietat.</li>
+                                          <li>Aquesta llibertat natural s'interpreta en el sentit que l'home no depèn de la voluntat de ningú. L'home natural és lliure perquè és autosuficient.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="concept-box">
+                                        <h4>Les cadenes socials: l'Estat il·legítim</h4>
+                                        <ul class="concept-list">
+                                           <p>En sortir de l'estat natural (per causes com la propietat privada, la divisió del treball, la desigualtat), l'home entra en societat. 
+                                            Però les societats existents (les monarquies absolutes, les jerarquies, les lleis injustes) l'encadenen perquè:</p>
+                                            <li> L'home obeeix altres homes (no lleis justes), i perd la seva llibertat natural.
+                                            <li> La desigualtat artificial (riquesa, poder, honor) el sotmet a la dependència i la vanitat (amor propi corrupte),
+                                                una vanitat comparativa que busca dominació i reconeixement, i que fa miserables tant als que dominen com als dominats.
+                                            <li> Les institucions polítiques vigents són il·legítimes: només serveixen per consolidar la dominació dels rics sobre els pobres (com descriu al <i> Discurs sobre la desigualtat).</i> 
+                                        </ul>   
+                                            <p><strong>Així, les "cadenes" són les relacions de dependència, l'opressió, la propietat exclusiva i les lleis que no expressen la voluntat general. </strong> 
+                                            </p>
+                                    </div>
+                                    
+                                    <div class="concept-box">
+                                        <h4>El contracte social legítim: La Voluntat General</h4>
+                                        <ul class="concept-list">
+                                        <p>Rousseau es pregunta com es pot viure en societat sense perdre la llibertat?
+                                           La resposta és un contracte social legítim que transformi les cadenes en llibertat civil i moral.</p>
+                                           <li>El contracte social no és una transacció, sinó una <strong>transformació moral</strong>. L'individu aliena tots els seus drets a la comunitat, 
+                                            però en retorn es transfoma en "ciutadà", guanyant la llibertat civil i la llibertat moral.</li>
+                                           <li>Cadenes legítimes: Els individus s'uneixen per formar un cos col·lectiu (la República) i cadascú s'aliena completament a <strong>la voluntat general.</strong> 
+                                            Així, en obeir la llei (que ell mateix ha votat com a ciutadà), s'obeeix si mateix.</li> 
+                                           <li> Llibertat civil: protegida per la llei (diferent de la llibertat natural, que era mera independència instintiva).</li>
+                                           <li>Llibertat moral: obeir la llei que un s'ha donat a si mateix, la qual cosa el fa autènticament lliure 
+                                            (superar els desitjos individuals per actuar segons la raó i el bé comú). </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="philosopher-visual">
+                                    <div class="visual-title">La Transformació Rousseauiana</div>
+                                    <div style="display:flex; flex-direction:column; gap:1rem; text-align:center;">
+                                        <div style="padding:1.5rem; background:var(--bg-primary); border:1px solid var(--border);">
+                                            <div style="color:var(--accent-red); font-family:'Cinzel',serif; margin-bottom:0.5rem;">L'HOME NATURAL</div>
+                                            <div style="font-size:0.85rem; color:var(--text-secondary);">Instints, força, desig immediat<br><em>(Llibertat natural = servitud)</em></div>
+                                        </div>
+                                        <div style="color:var(--accent-gold); font-size:1.5rem;">⬡</div>
+                                        <div style="padding:1.5rem; background:linear-gradient(135deg, #1a1a1a, #1a1510); border:1px solid var(--accent-gold-dim);">
+                                            <div style="color:var(--accent-gold); font-family:'Cinzel',serif; margin-bottom:0.5rem;">EL CIUTADÀ</div>
+                                            <div style="font-size:0.85rem; color:var(--text-secondary);">Raó, llei, voluntat general<br><em>(Llibertat moral = autonomia)</em></div>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="concept-box">
+                                        <h4>Llibertat Natural vs. Llibertat Moral</h4>
+                                    
+                                        <p>
+                                            La llibertat natural (impulsos) és una servitud. 
+                                            La veritable llibertat és 
+                                            <span class="key-term">obeir una llei que un mateix s'ha prescrit</span>.
+                                        </p>
+                                    
+                                        <p class="concept-quote">
+                                            <span class="quote-label">Autonomia</span>
+                                            <span class="quote-highlight">
+                                                "Obeir una llei que ens imposem a nosaltres mateixos és ser lliures."
+                                            </span>
+                                        </p>
+                                    </div>
+            
+                                    <div class="concept-box">
+                                        <h4>El Legat Democràtic</h4>
+                                        <p>La sobirania resideix inalienablement en el poble. El govern és merament executiu de la voluntat general. Això obre la porta a la democràcia participativa i al concepte d'autodeterminació.</p>
+                                    </div>
+
+                                    <div class="concept-quote">
+                                        <h4>Conclusió: una denúncia i un programa</h4>
+                                        <div class="quote-highlight">
+                                        <p> "L'home neix lliure, i a tot arreu està encadenat. Qui es creu el senyor dels altres no deixa de ser més esclau que ells."</p>
+                                        </div>
+                                        <ul class="concept-list">
+                                       
+                                           <li>Denúncia: Les societats històriques (feudals, absolutes) han traït la llibertat natural i han posat cadenes il·legítimes.</li>
+                                            
+                                           <li>Programa: Només un contracte social basat en la voluntat general pot transformar les cadenes en un ordre just on l'home, 
+                                            tot i no ser lliure com a salvatge, esdevé lliure com a ciutadà (és a dir, autònom i moral).</li>
+                                        </ul>   
+                                            
+                                         <p>Per tant, l'objectiu és que la llibertat sigui possible dins de la llei, no malgrat la llei.</p>
+                                    </div>
+                                   
+                                </div>
+                                
+                            </div>
+                        </div>
+            
+                        <!-- KANT -->
+                        <div id="kant" class="tab-panel">
+                            <div class="philosopher-card">
+                                <div class="philosopher-meta">
+                                    <h3>Immanuel Kant</h3>
+                                    <span class="work">Per la Pau Perpètua (1795)</span>
+                                    <span class="years">1724–1804 | Königsberg, Prússia</span>
+                                    
+                                    <div class="concept-box">
+                                        <h4>La República Cosmopolita</h4>
+                                        <p>La pau no és una dona de la fortuna, sinó una <em>institució</em>. Els estats han de convertir-se en repúbliques (separació de poders, govern representatiu) i formar una federació de nacions lliures.</p>
+                                    </div>
+                                    
+                                    <div class="concept-box">
+                                        <h4>Autonomia i Imperatiu Categòric</h4>
+                                        <p>La política ha de sotmetre's a la moral. Cap tractat de pau és vàlid si permet l'esclavatge o l'annexió. La llei política ha de ser universalitzable: actua segons màximes que puguis voler com a llei universal.</p>
+                                    </div>
+            
+                                    <div class="concept-box">
+                                        <h4>Hospitabilitat Universal</h4>
+                                        <p>Estrangers han de ser tractats amb hospitalitat, no com a enemics. Aquest és el germen del dret internacional i els drets humans cosmopolites.</p>
+                                    </div>
+                                </div>
+                                <div class="philosopher-visual">
+                                    <div class="visual-title">Condicions Preliminars per a la Pau</div>
+                                    <div style="display:grid; gap:0.8rem;">
+                                        <div style="padding:1rem; background:var(--bg-primary); border-left:3px solid var(--accent-gold);">
+                                            <strong style="color:var(--text-primary); font-size:0.9rem;">1. Constitució republicana</strong>
+                                            <p style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.3rem;">Separació de poders i representació ciutadana</p>
+                                        </div>
+                                        <div style="padding:1rem; background:var(--bg-primary); border-left:3px solid var(--accent-gold);">
+                                            <strong style="color:var(--text-primary); font-size:0.9rem;">2. Federació d'estats lliures</strong>
+                                            <p style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.3rem;">No un imperi mundial, sinó una lliga de pau</p>
+                                        </div>
+                                        <div style="padding:1rem; background:var(--bg-primary); border-left:3px solid var(--accent-gold);">
+                                            <strong style="color:var(--text-primary); font-size:0.9rem;">3. Dret cosmopolita</strong>
+                                            <p style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.3rem;">Hospitalitat universal per a tot ésser humà</p>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top:1.5rem; padding:1rem; border:1px solid var(--border); text-align:center;">
+                                        <span style="font-family:'Playfair Display',serif; color:var(--accent-gold); font-style:italic;">"Sapere aude" — Tinguis el coratge de servir-te del teu propi enteniment</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <!-- MILL -->
+                        <div id="mill" class="tab-panel">
+                            <div class="philosopher-card">
+                                <div class="philosopher-meta">
+                                    <h3>John Stuart Mill</h3>
+                                    <span class="work">Sobre la Llibertat (1859)</span>
+                                    <span class="years">1806–1873 | Anglaterra</span>
+                                    
+                                    <div class="concept-box">
+                                        <h4>El Principi de Nocivitat</h4>
+                                        <p>L'individu és sobirà sobre si mateix: el seu cos i la seva ment.</p>
+                                        <div class="quote-highlight">
+                                          <p><i>"L'única finalitat per la qual es pot exercir poder sobre un membre d'una comunitat civilitzada, contra la seva voluntat, és impedir el mal als altres".</i> </p> 
+                                        </div>
+                                           
+                                    </div>
+                                    
+                                    <div class="concept-box">
+                                        <h4>Llibertat d'Expressió</h4>
+                                        <p>Fins i tot les opinions falses han de ser escoltades. Sense contrast, la veritat esdevé un "dogma mort". La llibertat d'expressió és un motor de progrés social i intel·lectual.</p>
+                                        <div class="quote-highlight">
+                                            <p>
+                                                "Si tota la humanitat menys un estiguessin d'acord en una única opinió, 
+                                                no tindrien més dret a silenciar aquesta persona única del que ella tindria 
+                                                a silenciar el món."
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+            
+                                    <div class="concept-box">
+                                        <h4>Utilitarisme Qualificat</h4>
+                                        <p>Mill defensa l'utilitarisme, però no basat en el plaer animal, sinó en la <strong>felicitat superior</strong>: el desenvolupament de les facultats superiors (art, moral, ciència) com a bé social.</p>
+                                    </div>
+                                </div>
+                                <div class="philosopher-visual">
+                                    <div class="visual-title">L'Esfera de la Llibertat Individual</div>
+                                    <div style="padding:2rem; background:radial-gradient(circle, #1a1a1a 0%, var(--bg-card) 70%); border:1px solid var(--border); text-align:center; margin-bottom:1.5rem;">
+                                        <div style="width:120px; height:120px; border-radius:50%; border:3px solid var(--accent-gold); margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; color:var(--accent-gold); font-size:0.85rem; padding:1rem;">
+                                            ESFERA PRIVADA
+                                        </div>
+                                        <div style="font-size:0.9rem; color:var(--text-secondary);">
+                                            Consciència · Pensament · Expressió<br>
+                                            Projectes de vida · Associació voluntària
+                                        </div>
+                                    </div>
+
+                                    <div class="ph-visual" style="margin-top:1.2rem;">
+                                        <div class="ph-visual-title">El Criteri del Dany</div>
+                                        <div style="display:grid;gap:.8rem;">
+                                            <div style="padding:1rem;border-left:3px solid var(--accent-gold);background:var(--bg-card);">
+                                                <div style="font-family:'Cinzel',serif;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-gold);margin-bottom:.3rem;">
+                                                    Permès (esfera privada)
+                                                </div>
+                                                <div style="font-size:.85rem;color:var(--text-secondary); line-height:1.4;">Consum de drogues · Estils de vida no convencionals · Expressions impopulars · Decisions que sols afecten un mateix</div>
+                                          </div>
+                                          <div style="padding:1rem;border-left:3px solid var(--accent-red);background:var(--bg-card);">
+                                            <div style="font-family:'Cinzel',serif;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-red);margin-bottom:.3rem;">
+                                                Regulable (dany a altri)
+                                            </div>
+                                            <div style="font-size:.85rem;color:var(--text-secondary); line-height:1.4;">Violència física · Frau · Incompliment de deures legals · Pertorbar la llibertat dels altres</div>
+                                          </div>
+                                        </div>
+                                        <div class="ph-quote">«Sobre si mateix, sobre el seu propi cos i ment, l'individu és sobirà.»</div>
+                                      </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+            
+                        <!-- RAWLS -->
+                        <div id="rawls" class="tab-panel">
+                            <div class="philosopher-card">
+                                <div class="philosopher-meta">
+                                    <h3>John Rawls</h3>
+                                    <span class="work">Teoria de la Justícia (1971)</span>
+                                    <span class="years">1921–2002 | Estats Units</span>
+                                    
+                                    <div class="concept-box">
+                                        <h4>La Posició Original i el Vel d'Ignorància</h4>
+                                        <p>Per decidir principis justos, imaginem individus racionals darrere d'un <strong>"vel d'ignorància"</strong>: no saben la seva posició social, 
+                                            talents, ni concepció del bé, gènere, edat etc.</p>
+                                        <p>El vel no és un obstacle: és el mecanisme que garanteix la imparcialitat. Si ningú no sap quin lloc ocuparà en la societat, 
+                                            ningú no pot dissenyar principis que l'avantatagin particularment. El resultat seria principis que qualsevol pogués acceptar 
+                                            independentment de qui fos. Així garanteixen imparcialitat.</p>
+                                    </div>
+                                    
+                                    <div class="concept-box">
+                                        <h4>Els Dos Principis de Justícia</h4>
+                                        <p><strong>1.</strong> Cada persona té igual dret als drets i llibertats bàsiques més extensos compatibles amb els drets dels altres.<br><br>
+                                        <strong>2.</strong> Les desigualtats socials i econòmiques han d'estar ordenades de manera que: (a) comportin càrrecs oberts a tothom sota condicions d'igualtat d'oportunitats, i (b) afavoreixin els menys afavorits (principi de diferència).</p>
+                                    </div>
+            
+                                    <div class="concept-box">
+                                        <h4>Liberalisme Polític</h4>
+                                        <p>En societats pluralistes, la justícia no es fonamenta en una doctrina moral completa, sinó en una <em>concepció política</em> que tots els ciutadans raonables poden acceptar des de les seves visions del món.</p>
+                                    </div>
+                                </div>
+                                <div class="philosopher-visual">
+                                    <div class="visual-title">L'Experiment Mental Rawlsià</div>
+                                    <div class="veil-diagram">
+                                        <div class="veil-circle">
+                                            <span style="font-size:0.8rem;">POSICIÓ<br>ORIGINAL</span>
+                                            <span class="veil-label veil-top">Racionalitat</span>
+                                            <span class="veil-label veil-bottom">Imparcialitat</span>
+                                            <span class="veil-label veil-left">Ignorància</span>
+                                            <span class="veil-label veil-right">Igualtat</span>
+                                        </div>
+                                        <div style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:1rem;">
+                                            Agents que ignoren la seva posició a la vida trien:
+                                        </div>
+                                        <div class="principles">
+                                            <div class="principle">
+                                                <strong>Principi 1:</strong> Igualtat de drets i llibertats bàsiques (prioritat absoluta)
+                                            </div>
+                                            <div class="principle">
+                                                <strong>Principi 2a:</strong> Igualtat d'oportunitats justa
+                                            </div>
+                                            <div class="principle">
+                                                <strong>Principi 2b:</strong> Diferència: les desigualtats només si beneficien els menys afavorits
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top:1.5rem; text-align:center; font-family:'Playfair Display',serif; color:var(--accent-gold); font-style:italic; font-size:1.1rem;">
+                                        "La justícia és la primera virtut de les institucions socials, com la veritat ho és dels sistemes de pensament."
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <section id="conexions">
+
+                    <!-- HEADER -->
+                    <div class="section-header reveal">
+                        <span class="section-tag">Diàleg Filosòfic</span>
+                        <h2 class="section-title">Com es Responen Entre Si</h2>
+                        <p class="section-intro">
+                            Cada pensador llegeix els anteriors, identifica els seus errors i proposa una solució diferent. El liberalisme és un debat acumulatiu, no un progrés lineal.
+                        </p>
+                    </div>
+                
+                    <!-- GRID -->
+                    <div class="comparison-grid reveal" style="grid-template-columns:1fr;">
+                
+                        <!-- ITEM -->
+                        <div class="comparison-card">
+                            <h4>Locke → Hobbes</h4>
+                            <p class="concept-highlight">Crítica: el contracte no pot ser absolut</p>
+                            <p style="font-size:0.85rem; line-height:1.6; color:var(--text-secondary);">
+                                Locke accepta que el poder polític necessita fonamentació racional, però rebutja la conclusió hobbesiana. 
+                                Si el sobirà absolut garanteix la seguretat, però ell mateix representa una amenaça als drets naturals (pot detenir, expropiar, matar arbitràriament), 
+                                llavors és pitjor que el mal que pretén curar. Un contracte racional mai no cediria tots els drets sense reservar-se almenys el dret a la revolució quan el govern es perverteixi.
+                            </p>
+                        </div>
+                
+                        <!-- ITEM -->
+                        <div class="comparison-card">
+                            <h4>Rousseau → Locke</h4>
+                            <p class="concept-highlight">Crítica: la propietat és el problema</p>
+                            <p style="font-size:0.85rem; line-height:1.6; color:var(--text-secondary);">
+                                Rousseau accepta que Locke ha superat Hobbes, però critica la sacralització lockiana de la propietat. 
+                                 propietat privada no és un dret pre-polític: és una institució social que crea desigualtat artificial i dependència. 
+                                 Un Estat basat en la protecció de la propietat com a Locke el descriu és, en el fons, un instrument de legitimació de la dominació dels rics. 
+                                 La veritable llibertat no és protegir el que ja tenim, sinó participar en la creació de les lleis que ens governen.
+                            </p>
+                        </div>
+                
+                        <!-- ITEM -->
+                        <div class="comparison-card">
+                            <h4>Kant → Rousseau</h4>
+                            <p class="concept-highlight">Síntesi: autonomia sense voluntat general</p>
+                            <p style="font-size:0.85rem; line-height:1.6; color:var(--text-secondary);">
+                                Kant admira profundament Rousseau i li deu la idea d'autonomia. Però desconfia de la «voluntat general»: 
+                                qui decideix quan una voluntat és general i no particular? En lloc de la democràcia directa rousseauiana, Kant funda la legitimitat en la raó pràctica universal: 
+                                no en el que la gent de fet vol, sinó en el que volem tots si actuem racionalment. Així, la legitimitat no depèn del que la majoria vol, sinó del que pot ser universalitzat racionalment.
+                                La llei justa és la que podria ser universalitzada; l'autonomia és obeir la raó pròpia, no la voluntat de la majoria.
+                               
+                            </p>
+                        </div>
+                
+                        <!-- ITEM -->
+                        <div class="comparison-card">
+                            <h4>Mill → Kant / utilitarisme</h4>
+                            <p class="concept-highlight">Síntesi: llibertat i utilitat</p>
+                            <p style="font-size:0.85rem; line-height:1.6; color:var(--text-secondary);">
+                                Mill vol fonamentar la llibertat sense apel·lar a drets naturals metafísics ni a l'autonomia kantiana.
+                                 La seva estratègia és utilitarista: la llibertat individual produeix conseqüències socials valuoses (progrés, diversitat, descoberta de la veritat).
+                                 Però al mateix temps, Mill reconeix que les majories poden suprimir la llibertat si els convé numèricament. 
+                                La llibertat és, alhora, un dret i un instrument del bé social; els arguments es reforcen mútuament.
+                            </p>
+                        </div>
+                
+                        <!-- ITEM -->
+                        <div class="comparison-card">
+                            <h4>Rawls → Tradició</h4>
+                            <p class="concept-highlight">Síntesi: justícia com a equitat</p>
+                            <p style="font-size:0.85rem; line-height:1.6; color:var(--text-secondary);">
+                                Rawls integra i supera la tradició. De Locke pren la prioritat dels drets individuals sobre els fins col·lectius.
+                                De Rousseau, la idea que la justícia requereix una perspectiva imparcial (la posició original és una formalització laica de la voluntat general). 
+                                De Kant, el respecte a les persones com a fins en si mateixes i la prioritat de la raó pràctica.
+                                Però rebutja l'utilitarisme (que podria sacrificar uns per beneficiar molts) i funda la justícia en l'equitat: allò que persones lliures i racionals acceptarien en condicions d'imparcialitat.
+                            </p>
+                        </div>
+                
+                    </div>
+                
+                </section>
+
+
+                <section id="comparison-section">
+
+                    <div class="section-inner">
+                
+                        <!-- HEADER -->
+                        <div class="section-header reveal">
+                            <span class="section-tag">Mapa Conceptual</span>
+                            <h2 class="section-title">Evolució del Contracte Social</h2>
+                            <p class="section-intro">
+                                De la seguretat absoluta a la justícia equitativa: com van canviar els fonaments del poder legítim al llarg de quatre segles.
+                            </p>
+                        </div>
+                
+                        <!-- GRID COMPARATIU -->
+                        <div class="comparison-grid reveal">
+                
+                            <div class="comparison-card">
+                                <h4>Hobbes (1651)</h4>
+                                <ul>
+                                    <li><span class="label">Motivació</span> Por a la mort violenta</li>
+                                    <li><span class="label">Estat de natura</span> Guerra de tots contra tots</li>
+                                    <li><span class="label">Sobirania</span> Absoluta i irrevocable</li>
+                                    <li><span class="label">Drets</span> Ningú en té contra el Leviatan</li>
+                                    <li><span class="label">Finalitat</span> Seguretat física</li>
+                                </ul>
+                            </div>
+                
+                            <div class="comparison-card">
+                                <h4>Locke (1689)</h4>
+                                <ul>
+                                    <li><span class="label">Motivació</span> Protegir drets pre-existents</li>
+                                    <li><span class="label">Estat de natura</span> Inconvenient, no terrible</li>
+                                    <li><span class="label">Sobirania</span> Limitada, fiduciària</li>
+                                    <li><span class="label">Drets</span> Vida, llibertat, propietat</li>
+                                    <li><span class="label">Finalitat</span> Resoldre disputes de propietat</li>
+                                </ul>
+                            </div>
+                
+                            <div class="comparison-card">
+                                <h4>Rousseau (1762)</h4>
+                                <ul>
+                                    <li><span class="label">Motivació</span> Llibertat moral (autonomia)</li>
+                                    <li><span class="label">Estat de natura</span> Bondat natural corrompuda</li>
+                                    <li><span class="label">Sobirania</span> Popular i inalienable</li>
+                                    <li><span class="label">Drets</span> Participació en la voluntat general</li>
+                                    <li><span class="label">Finalitat</span> Transformació moral ciutadana</li>
+                                </ul>
+                            </div>
+                
+                            <div class="comparison-card">
+                                <h4>Rawls (1971)</h4>
+                                <ul>
+                                    <li><span class="label">Motivació</span> Justícia com a equitat</li>
+                                    <li><span class="label">Estat de natura</span> Posició original (vel d'ignorància)</li>
+                                    <li><span class="label">Sobirania</span> Constitucional democràtica</li>
+                                    <li><span class="label">Drets</span> Llibertats bàsiques + béns primaris</li>
+                                    <li><span class="label">Finalitat</span> Cooperació equitativa entre lliures i iguals</li>
+                                </ul>
+                            </div>
+                
+                        </div>
+                
+                        <!-- DIÀLEG CONCEPTUAL -->
+                        <div class="reveal" style="margin-top:4rem;">
+                
+                            <div class="section-header">
+                                <span class="section-tag">Diàleg Conceptual</span>
+                                <h2 class="section-title" style="font-size:2rem;">
+                                    Llibertat Negativa vs. Positiva
+                                </h2>
+                            </div>
+
+                            <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:1rem;">
+                                <em>Isaiah Berlin (1958) va formalitzar la distinció entre dos conceptes de llibertat</em>
+                            </p>
+
+                
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
+                
+                                <!-- NEGATIVA -->
+                                <div style="background:var(--bg-card); border:1px solid var(--border); padding:2rem; border-top:4px solid var(--accent-red);">
+                                    <h4 style="color:var(--accent-red); margin-bottom:1rem; font-family:'Cinzel',serif;">
+                                        Llibertat Negativa
+                                    </h4>
+                
+                                    <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:1rem;">
+                                        <em>"Ser lliure és no ser interferit per altres."</em>
+                                    </p>
+
+                                    <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:1rem;">
+                                        Es defineix per l'absència d'obstacles externs. Com més gran és l'espai on ningú no interfereix en les meves decisions, més lliure soc. 
+                                        No importa si tinc la capacitat real d'exercir la meva llibertat; importa que ningú no em la prohibeixi.
+                                    </p>
+                
+                                    <ul style="color:var(--text-secondary); font-size:0.9rem; padding-left:1.2rem; line-height:2;">
+                                        <li>Hobbes: absència d'obstacles o impediments externs</li>
+                                        <li>Locke: llibertat dins la llei natural, protegida pel govern</li>
+                                        <li>Mill: esfera privada inviolable contra qualsevol poder</li>
+                                    </ul>
+                
+                                    <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); color:var(--text-muted); font-size:0.85rem;">
+                                        <strong>Pregunta clau:</strong> Fins on pot arribar l'Estat abans de violar la meva llibertat?
+                                    </div>
+                                </div>
+                
+                                <!-- POSITIVA -->
+                                <div style="background:var(--bg-card); border:1px solid var(--border); padding:2rem; border-top:4px solid var(--accent-gold);">
+                                    <h4 style="color:var(--accent-gold); margin-bottom:1rem; font-family:'Cinzel',serif;">
+                                        Llibertat Positiva
+                                    </h4>
+                
+                                    <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:1rem;">
+                                        <em>"Ser lliure és governar-se a un mateix."</em>
+                                    </p>
+
+                                    <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:1rem;">
+                                        Es defineix per la capacitat real d'autodeterminació. No n'hi ha prou que ningú no em prohibeixi res si no tinc les condicions (econòmiques, educatives, polítiques) 
+                                        per exercir realment la meva autonomia. La llibertat real requereix recursos, no sols absència de prohibicions.
+                                    </p>
+                                    
+                
+                                    <ul style="color:var(--text-secondary); font-size:0.9rem; padding-left:1.2rem; line-height:2;">
+                                        <li>Rousseau: obeir la llei que un s'imposa com a ciutadà</li>
+                                        <li>Kant: autonomia moral, actuar per la llei raó pràctica</li>
+                                        <li>Mill: garantir desenvolupament de les facultats superiors </li>
+                                        <li>Rawls: llibertat real garantida i d'igualtat d'oportunitats</li>
+                                    </ul>
+                
+                                    <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); color:var(--text-muted); font-size:0.85rem;">
+                                        <strong>Pregunta clau:</strong> Què necessito per ser realment lliure?
+                                    </div>
+                                </div>
+                
+                            </div>
+                
+                        </div>
+                
+                    </div>
+                
+                </section>
+
+<!-- GLOSSARI -->
+<section id="glossari">
+<div id="glossari" class="reveal" style="margin-top:6rem;">
+
+    <div class="section-header">
+        <span class="section-tag">Conceptes Clau</span>
+        <h2 class="section-title">Glossari del Liberalisme Polític</h2>
+        <p class="section-intro">
+            Els conceptes nuclears de la tradició, amb la seva genealogia i usos principals.
+        </p>
+    </div>
+
+    <div class="glossary-grid">
+
+        <div class="gloss-item">
+            <div class="gloss-term">Contracte Social</div>
+            <div class="gloss-author">Hobbes · Locke · Rousseau · Rawls</div>
+            <div class="gloss-def">
+                Ficció teòrica que fonamenta el poder polític legítim. No és un fet històric, sinó un experiment mental: seguretat (Hobbes), drets (Locke), transformació moral (Rousseau), imparcialitat (Rawls).
+            </div>
+        </div>
+
+        <div class="gloss-item">
+            <div class="gloss-term">Estat de Natura</div>
+            <div class="gloss-author">Hobbes · Locke · Rousseau</div>
+            <div class="gloss-def">
+                Situació hipotètica prèvia a l’Estat. Serveix per entendre per què cal el poder polític. Va de la guerra (Hobbes) a la bondat natural (Rousseau).
+            </div>
+        </div>
+
+        <div class="gloss-item">
+            <div class="gloss-term">Sobirania</div>
+            <div class="gloss-author">Hobbes · Rousseau · Montesquieu</div>
+            <div class="gloss-def">
+                Poder polític suprem. Absolut (Hobbes), popular i inalienable (Rousseau), o distribuït per evitar abusos (Montesquieu).
+            </div>
+        </div>
+
+        <div class="gloss-item">
+            <div class="gloss-term">Voluntat General</div>
+            <div class="gloss-author">Rousseau</div>
+            <div class="gloss-def">
+                Voluntat orientada al bé comú. No és suma d’interessos particulars, sinó perspectiva del ciutadà com a membre del cos polític.
+            </div>
+        </div>
+
+        <div class="gloss-item">
+            <div class="gloss-term">Principi de Nocivitat</div>
+            <div class="gloss-author">John Stuart Mill</div>
+            <div class="gloss-def">
+                Només es pot limitar la llibertat per evitar dany a altres. Defineix la frontera entre esfera privada i regulació pública.
+            </div>
+        </div>
+
+        <div class="gloss-item">
+            <div class="gloss-term">Vel d'Ignorància</div>
+            <div class="gloss-author">John Rawls</div>
+            <div class="gloss-def">
+                Dispositiu per garantir imparcialitat: ningú sap la seva posició social. Permet triar principis justos universalment acceptables.
+            </div>
+        </div>
+
+        <div class="gloss-item">
+            <div class="gloss-term">Principi de Diferència</div>
+            <div class="gloss-author">John Rawls</div>
+            <div class="gloss-def">
+                Les desigualtats només són legítimes si beneficien els menys afavorits.
+            </div>
+        </div>
+
+        <div class="gloss-item">
+            <div class="gloss-term">Imperatiu Categòric</div>
+            <div class="gloss-author">Immanuel Kant</div>
+            <div class="gloss-def">
+                Actua només segons màximes universalitzables. Criteri per jutjar lleis i accions.
+            </div>
+        </div>
+
+        <div class="gloss-item">
+            <div class="gloss-term">Llibertat Negativa / Positiva</div>
+            <div class="gloss-author">Isaiah Berlin</div>
+            <div class="gloss-def">
+                Negativa: absència d’interferència. Positiva: capacitat real d’autodeterminació.
+            </div>
+        </div>
+
+        <div class="gloss-item">
+            <div class="gloss-term">Drets Naturals</div>
+            <div class="gloss-author">Locke · Kant</div>
+            <div class="gloss-def">
+                Drets inherents a la persona, independents de l’Estat.
+            </div>
+        </div>
+
+        <div class="gloss-item">
+            <div class="gloss-term">Separació de Poders</div>
+            <div class="gloss-author">Montesquieu</div>
+            <div class="gloss-def">
+                Distribució del poder per evitar la tirania.
+            </div>
+        </div>
+
+        <div class="gloss-item">
+            <div class="gloss-term">Consens per Superposició</div>
+            <div class="gloss-author">John Rawls</div>
+            <div class="gloss-def">
+                Acord polític entre doctrines diferents sense compartir una filosofia única.
+            </div>
+        </div>
+
+    </div>
+</div>
+</section>
+
+            
+                <section id="faq" class="faq-section">
+                    <div class="section-header reveal">
+                        <span class="section-tag">Qüestions Fundamentals</span>
+                        <h2 class="section-title">Interrogants Oberts</h2>
+                    </div>
+            
+                    <div class="accordion-item reveal">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Per què Hobbes és considerat liberal si defensava l'absolutisme?</span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-body">
+                            <p>Hobbes és el fundador <em>involuntari</em> del liberalisme perquè va ser el primer a justificar el poder polític des de la perspectiva de l'<strong>individu</strong>, no de Déu o la tradició. El Leviatan no governa per dret diví, sinó perquè els individus racionalment porucs el necessiten. Això introdueix la idea revolucionària que la legitimitat política ve del <strong>consentiment</strong> i de l'<strong>interès propi</strong> racional — els fonaments mateixos del pensament liberal modern.</p>
+                        </div>
+                    </div>
+            
+                    <div class="accordion-item reveal">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Quina és la diferència fonamental entre Locke i Rousseau?</span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-body">
+                            <p>Per a <strong>Locke</strong>, els individus entren a la societat per protegir drets que ja posseeixen. El contracte és un <em>acord de protecció</em>; la societat és un servei per a l'individu preexistent.<br><br>
+                            Per a <strong>Rousseau</strong>, l'individu pre-social no és complet. El contracte social <em>transforma</em> la naturalesa humana: l'home natural esdevé ciutadà moral. La societat no protegeix un "jo" preexistent, sinó que el constitueix. Per això Rousseau és més proper al republicanisme clàssic que al liberalisme individualista.</p>
+                        </div>
+                    </div>
+            
+                    <div class="accordion-item reveal">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>El vel d'ignorància de Rawls és realista?</span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-body">
+                            <p>No pretén ser-ho. És un <strong>experiment mental</strong>, una eina de reflexió. Rawls no diu que mai decidim així, sinó que <em>si</em> volguéssim principis justos que tothom pogués acceptar independentment de la seva posició, <em>hauríem</em> de triar darrere d'aquest vel. És un criteri de justificació, no una descripció psicològica. La seva força resideix en forçar-nos a preguntar-nos: "M'agradaria viure en aquesta societat si no sabés qui seria?"</p>
+                        </div>
+                    </div>
+            
+                    <div class="accordion-item reveal">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Com connecta Mill amb la tradició rawlsiana?</span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-body">
+                            <p>Mill i Rawls comparteixen la creença que la llibertat individual té un <strong>valor instrumental</strong> per al progrés humà, però també un <strong>valor intrínsec</strong>. Per a Mill, la llibertat d'expressió i de consciència és necessària per descobrir la veritat i desenvolupar caràcters nobles. Rawls eleva aquesta intuïció a principi de justícia: les llibertats bàsiques són inviolables perquè són condició de la dignitat humana i de la raó pública. Tots dos defensen que una societat que reprimeix la diversitat de visions del bé empobreix la humanitat.</p>
+                        </div>
+                    </div>
+            
+                    <div class="accordion-item reveal">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Quin és el problema del liberalisme polític avui?</span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-body">
+                            <p>El liberalisme polític rawlsià assumeix que ciutadans amb visions del món diferents (religioses, seculars, filosòfiques) poden coincidir en una concepció política de la justícia. Però quan les divisions són existencials —quan grups rebutgen els fonaments mateixos de la igualtat o de la raó pública—, el consens es trenca. La pregunta oberta és: pot el liberalisme defensar-se de doctrines antilibertàries sense traïr els seus propis principis de neutralitat?</p>
+                        </div>
+                    </div>
+            
+                    <div class="conclusion-box reveal">
+                        <p>
+                            Del terror de l'estat de natura a l'esperança de la justícia com a equitat, 
+                            el liberalisme polític no és una doctrina acabada, sinó una <strong>conversació</strong> 
+                            sobre com viure junts sense renunciar a la nostra dignitat.
+                        </p>
+                        <div class="conclusion-author">— De Hobbes a Rawls, 1651–1971</div>
+                    </div>
+                </section>
+            
+                <footer>
+                    <p>Genealogia del Liberalisme Polític · Filosofia Moderna</p>
+                    <p style="margin-top:0.5rem; font-size:0.75rem;">Disseny acadèmic per a ús pedagògic</p>
+                </footer>
+            
+                <script>
+                    // Tabs functionality
+                    function openTab(evt, tabName) {
+                        var i, tabPanel, tabBtn;
+                        
+                        tabPanel = document.getElementsByClassName("tab-panel");
+                        for (i = 0; i < tabPanel.length; i++) {
+                            tabPanel[i].classList.remove("active");
+                        }
+                        
+                        tabBtn = document.getElementsByClassName("tab-btn");
+                        for (i = 0; i < tabBtn.length; i++) {
+                            tabBtn[i].classList.remove("active");
+                        }
+                        
+                        document.getElementById(tabName).classList.add("active");
+                        evt.currentTarget.classList.add("active");
+                    }
+            
+                    // Accordion functionality
+                    function toggleAccordion(element) {
+                        var item = element.parentElement;
+                        var isOpen = item.classList.contains('open');
+                        
+                        // Close all
+                        var allItems = document.getElementsByClassName('accordion-item');
+                        for (var i = 0; i < allItems.length; i++) {
+                            allItems[i].classList.remove('open');
+                        }
+                        
+                        // Open clicked if it was closed
+                        if (!isOpen) {
+                            item.classList.add('open');
+                        }
+                    }
+            
+                    // Scroll reveal animation
+                    function reveal() {
+                        var reveals = document.querySelectorAll(".reveal, .timeline-item");
+                        
+                        for (var i = 0; i < reveals.length; i++) {
+                            var windowHeight = window.innerHeight;
+                            var elementTop = reveals[i].getBoundingClientRect().top;
+                            var elementVisible = 100;
+                            
+                            if (elementTop < windowHeight - elementVisible) {
+                                reveals[i].classList.add("visible");
+                            }
+                        }
+                    }
+            
+                    window.addEventListener("scroll", reveal);
+                    // Trigger once on load
+                    reveal();
+            
+                    // Active nav link on scroll
+                    window.addEventListener('scroll', function() {
+                        var sections = document.querySelectorAll('section, .philosophers-section');
+                        var navLinks = document.querySelectorAll('.nav-link');
+                        
+                        var current = '';
+                        sections.forEach(function(section) {
+                            var sectionTop = section.offsetTop;
+                            var sectionHeight = section.clientHeight;
+                            if (pageYOffset >= (sectionTop - 200)) {
+                                current = section.getAttribute('id');
+                            }
+                        });
+            
+                        navLinks.forEach(function(link) {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').slice(1) === current) {
+                                link.classList.add('active');
+                            }
+                        });
+                    });
+                </script>
+            
+            </body>
+            </html>

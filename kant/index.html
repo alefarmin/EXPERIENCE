@@ -83,8 +83,8 @@
         }
         
         .section-reveal {
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 1;
+            transform: none;
             transition: all 0.8s ease-out;
         }
         
@@ -188,6 +188,27 @@
             background: var(--kant-gold);
             transform: scale(1.3);
         }
+
+        .nav-link {
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    font-weight: 400;
+    opacity: 0.85;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    opacity: 1;
+    color: #facc15;
+}
+
+nav a.serif {
+    transition: all 0.3s ease;
+}
+
+nav a.serif:hover {
+    letter-spacing: 0.08em;
+}
         
         .postulate-card {
             background: white;
@@ -278,39 +299,147 @@
     margin-top: 12px;
     color: #facc15;
 }
+.nav-link {
+    color: #e5e7eb;
+    transition: all 0.25s ease;
+}
+
+.nav-link:hover {
+    color: #facc15;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #d1d5db;
+    transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+    background: rgba(250,204,21,0.1);
+    color: #facc15;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.nav-link.active {
+    color: var(--kant-gold);
+    border-bottom: 2px solid var(--kant-gold);
+    padding-bottom: 2px;
+}
+
+.nav-link.active {
+    color: #d4af37;
+    border-bottom: 2px solid #d4af37;
+}
+
+.home-experience-btn {
+    padding: 6px 12px;
+    border-radius: 8px;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+
+    color: #facc15;
+    background: rgba(255,255,255,0.08);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition: all 0.25s ease;
+}
+
+.home-experience-btn:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-1px);
+}
 
     </style>
 
 </head>
+
 <body class="text-gray-800">
-    <a href="./index.html" class="index-floating-btn">
-        ← Inici EXPERIENCE
+
+<!-- NAVIGATION -->
+<nav class="fixed top-0 w-full bg-[#0f172a]/80 backdrop-blur-md z-50 border-b border-white/10">
+    
+    <div class="max-w-7xl mx-auto px-6">
+        
+        <div class="flex items-center justify-between h-14">
+
+            <!-- ESQUERRA: TÍTOL -->
+            <a href="#hero" class="serif text-3xl text-yellow-400 tracking-wide font-bold transition hover:text-white hover:tracking-widest">
+                Kant <span class="opacity-80 font-normal">Experience</span>
+              </a>
+    
+
+ <!-- DRETA: MENÚ -->
+ <div class="flex items-center gap-8 text-sm whitespace-nowrap">
+     <!-- Inici EXPERIENCE ara dins el menú -->
+     <a href="../index.html"
+     class="home-experience-btn"
+               hover:bg-white/20 transition text-sm font-semibold tracking-wide">
+         ← Inici EXPERIENCE
+     </a>
+
+            <!-- DRETA -->
+            <div class="flex items-center gap-8 text-lg whitespace-nowrap">
+                <a href="#context" class="nav-link">Context</a>
+                <a href="#project" class="nav-link">Projecte</a>
+                <a href="#critique" class="nav-link">Crítica</a>
+                <a href="#goodwill" class="nav-link">Bona voluntat</a>
+
+                <!-- Dropdown IMPERATIU -->
+<div class="relative group flex-shrink-0">
+    <a href="#imperative" class="nav-link flex items-center gap-1">
+        Imperatiu <span class="text-xs">▼</span>
     </a>
 
-    <!-- Scroll Progress -->
-    <div class="scroll-indicator" id="scrollBar"></div>
+    <div class="absolute right-0 top-full pt-2 w-64
+            opacity-0 invisible group-hover:visible group-hover:opacity-100
+            pointer-events-none group-hover:pointer-events-auto
+            transition duration-200">
+    
+        <div class="bg-black/90 backdrop-blur-md
+                    border border-white/10 rounded-xl">
 
-    <!-- Navigation Dots -->
-    <div class="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 space-y-4 hidden md:block">
-        <div class="nav-dot active" onclick="scrollToSection('hero')"></div>
-        <div class="nav-dot" onclick="scrollToSection('context')"></div>
-        <div class="nav-dot" onclick="scrollToSection('project')"></div>
-        <div class="nav-dot" onclick="scrollToSection('critique')"></div>
-        <div class="nav-dot" onclick="scrollToSection('goodwill')"></div>
-        <div class="nav-dot" onclick="scrollToSection('imperative')"></div>
-        <div class="nav-dot" onclick="scrollToSection('examples')"></div>
-        <div class="nav-dot" onclick="scrollToSection('postulates')"></div>
+            <a href="#definicions" class="dropdown-item nav-link">
+                Definició i tipus
+            </a>
+
+            <a href="#formulations" class="dropdown-item nav-link">
+                Les tres formulacions
+            </a>
+
+            <a href="#examples" class="dropdown-item nav-link">
+                Exemples d'aplicació
+            </a>
+
+        </div>
     </div>
+</div>
+                <!-- POSTULATS (ARA FORA DEL DROPDOWN PERÒ AL MATEIX NIVELL) -->
+                <a href="#postulates" class="nav-link">Postulats</a>
 
+            </div>
+        </div>
+    </div>
+</nav>
                          <!-- HERO SECTION -->
     <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
         <!-- Imatge de fons ben visible -->
-        <div class="absolute inset-0 z-0"> <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Immanuel_Kant_%28painted_portrait%29.jpg" 
-            alt="Immanuel Kant" style="width: 100%; height: 100%; object-fit: cover; object-position: center 60%; opacity: 0.7; filter: grayscale(20%) contrast(1.1);" 
+        <div class="absolute inset-0 z-0"> <img src="img/kant4.jpg" 
+            alt="Immanuel Kant" style="width: 100%; height: 100%; object-fit: cover; object-position: center 30%; opacity: 1; filter: grayscale(20%) contrast(1.1);" 
             onerror="this.style.display='none'"> </div>
         
         <!-- Overlay degradat més lleuger -->
-        <div class="absolute inset-0 z-0" style="background: linear-gradient(135deg, rgba(30,58,95,0.5) 0%, rgba(44,82,130,0.4) 50%, rgba(30,58,95,0.6) 100%);"></div>
+        <div class="absolute inset-0 z-0" style="background: linear-gradient(135deg, rgba(30,58,95,0.2) 0%, rgba(44,82,130,0.4) 50%, rgba(30,58,95,0.2) 100%);"></div>
         
         <!-- Cercles decoratius simples -->
         <div class="absolute inset-0 pointer-events-none z-0">
@@ -348,7 +477,7 @@
 
     <!-- CONTEXT SECTION -->
     <section id="context" class="py-20 bg-white section-reveal">
-        <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
                 <span class="text-blue-800 font-semibold tracking-wider uppercase text-sm">Context</span>
                 <h2 class="serif text-4xl md:text-5xl font-bold text-gray-900 mt-2">La Il·lustració Alemanya</h2>
@@ -432,7 +561,7 @@
 
     <!-- THREE QUESTIONS SECTION -->
     <section id="project" class="py-20 bg-gray-50 section-reveal">
-        <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
                 <span class="text-blue-800 font-semibold tracking-wider uppercase text-sm">El Projecte Filosòfic</span>
                 <h2 class="serif text-4xl md:text-5xl font-bold text-gray-900 mt-2">Les Tres Preguntes Fonamentals</h2>
@@ -545,7 +674,7 @@
     </section>
         <!-- CRITIQUE SECTION -->
         <section id="critique" class="py-20 bg-white section-reveal">
-            <div class="container mx-auto px-6">
+            <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-16">
                     <span class="text-red-800 font-semibold tracking-wider uppercase text-sm">Crítica</span>
                     <h2 class="serif text-4xl md:text-5xl font-bold text-gray-900 mt-2">Crítica a les Ètiques Teleològiques</h2>
@@ -667,7 +796,7 @@
     
         <!-- GOOD WILL SECTION -->
         <section id="goodwill" class="py-20 bg-gray-50 section-reveal">
-            <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <span class="text-blue-800 font-semibold tracking-wider uppercase text-sm">Concepte Central</span>
                     <h2 class="serif text-4xl md:text-5xl font-bold text-gray-900 mt-2">Bona Voluntat, Deure i Valor Moral</h2>
@@ -746,15 +875,19 @@
                 </div>
             </div>
         </section>
+
+
             <!-- IMPERATIVE SECTION -->
 <section id="imperative" class="py-20 bg-white section-reveal">
-    <div class="container mx-auto px-6">
+    <section id="definicions"> 
+    <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-16">
             <span class="text-yellow-600 font-semibold tracking-wider uppercase text-sm">El Cor de l'Ètica</span>
             <h2 class="serif text-4xl md:text-5xl font-bold text-gray-900 mt-2">L'Imperatiu Categòric</h2>
             <p class="text-gray-600 mt-4 text-lg">Principi formal universal de la moralitat</p>
             <div class="w-24 h-1 bg-yellow-500 mx-auto mt-4"></div>
         </div>
+       
 
         <!-- Definitions -->
         <div class="grid md:grid-cols-3 gap-6 mb-12">
@@ -927,7 +1060,10 @@
 </section>
 
             <!-- Three Formulations -->
-            <div class="bg-gradient-to-br from-blue-900 to-blue-800 rounded-3xl p-8 md:p-12 text-white shadow-2xl max-w-7xl mx-auto">
+            <!-- THREE FORMULATIONS SECTION -->
+            <section id="formulations" class="py-20 bg-white section-reveal"> 
+<section class="py-20 bg-white section-reveal">
+    <div class="bg-gradient-to-br from-blue-900 to-blue-800 rounded-3xl p-8 md:p-12 text-white shadow-2xl max-w-7xl mx-auto">
                 <h3 class="serif text-3xl font-bold text-center mb-12">Les Tres Formulacions de l'Imperatiu Categòric</h3>
                 
                 <div class="space-y-8">
@@ -984,7 +1120,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+       
     </section>
 
     <!-- EXAMPLES SECTION -->
@@ -1108,7 +1244,7 @@
 
     <!-- POSTULATES SECTION -->
     <section id="postulates" class="py-20 bg-white section-reveal">
-        <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
                 <span class="text-purple-800 font-semibold tracking-wider uppercase text-sm">Metafísica Pràctica</span>
                 <h2 class="serif text-4xl md:text-5xl font-bold text-gray-900 mt-2">Els Postulats de la Raó Pràctica</h2>
@@ -1213,72 +1349,100 @@
     </div>
 
     <script>
-        // Initialize Lucide icons
         lucide.createIcons();
-
-        // Scroll progress bar
+    
+        // ── Scroll progress bar ──────────────────────────────────────────
         window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const winScroll = document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('scrollBar').style.width = scrolled + '%';
-            
-            // Update nav dots
-            updateNavDots();
-            
-            // Reveal sections
+            document.getElementById('scrollBar').style.width = (winScroll / height * 100) + '%';
             revealSections();
         });
-
-        // Navigation
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        }
-
+    
+        // ── Nav dots ─────────────────────────────────────────────────────
         function updateNavDots() {
-            const sections = ['hero', 'context', 'project', 'critique', 'goodwill', 'imperative', 'examples', 'postulates'];
+            const sectionIds = ['hero','context','project','critique','goodwill','imperative','examples','postulates'];
             const scrollPos = window.scrollY + 100;
-            
-            sections.forEach((section, index) => {
-                const element = document.getElementById(section);
-                const dot = document.querySelectorAll('.nav-dot')[index];
-                
-                if (element.offsetTop <= scrollPos && (element.offsetTop + element.offsetHeight) > scrollPos) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
+            sectionIds.forEach((id, i) => {
+                const el  = document.getElementById(id);
+                const dot = document.querySelectorAll('.nav-dot')[i];
+                if (!el || !dot) return;
+                const active = el.offsetTop <= scrollPos && (el.offsetTop + el.offsetHeight) > scrollPos;
+                dot.classList.toggle('active', active);
             });
         }
-
-        // Section reveal animation
+        window.addEventListener('scroll', updateNavDots);
+    
+        // ── Section reveal ───────────────────────────────────────────────
         function revealSections() {
-            const sections = document.querySelectorAll('.section-reveal');
-            sections.forEach(section => {
-                const windowHeight = window.innerHeight;
-                const elementTop = section.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < windowHeight - elementVisible) {
-                    section.classList.add('visible');
-                }
+            document.querySelectorAll('.section-reveal').forEach(s => {
+                if (s.getBoundingClientRect().top < window.innerHeight - 150)
+                    s.classList.add('visible');
             });
         }
-
-        // Modal functions
+    
+        // ── Modal ────────────────────────────────────────────────────────
         function openModal(title, content) {
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('modalTitle').textContent   = title;
+            document.getElementById('modalContent').innerHTML  = content;
             document.getElementById('infoModal').classList.add('active');
         }
-
         function closeModal() {
             document.getElementById('infoModal').classList.remove('active');
         }
-
-        // Initialize
-        revealSections();
-        updateNavDots();
+    
+        // ── Active nav link ──────────────────────────────────────────────
+        document.addEventListener("DOMContentLoaded", () => {
+    
+            const sectionIds = ['hero','context','project','critique','goodwill',
+                                'imperative','definicions', 'formulations','examples','postulates'];
+            const navLinks   = document.querySelectorAll(".nav-link");
+    
+            // Subseccions que han de destacar el link pare #imperative
+            const parentMap = { definicions: 'imperative', formulations: 'imperative', examples: 'imperative' };
+    
+            function setActive(rawId) {
+                const targetHref = '#' + (parentMap[rawId] ?? rawId);
+                navLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    link.classList.toggle('active',
+                        href === targetHref || href === '#' + rawId
+                    );
+                });
+            }
+    
+            // Observer: activa el link quan la secció ocupa la zona superior de la pantalla
+            const observer = new IntersectionObserver(entries => {
+                // Ens quedem l'entrada que estigui intersectant i tingui el top més proper al viewport
+                const visible = entries
+                    .filter(e => e.isIntersecting)
+                    .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    
+                if (visible.length) setActive(visible[0].target.id);
+    
+            }, {
+                rootMargin: '-60px 0px -40% 0px',   // s'activa quan la secció entra al terç superior
+                threshold: 0
+            });
+    
+            sectionIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) observer.observe(el);
+            });
+    
+            // Click: actualitza l'actiu immediatament sense esperar l'observer
+            navLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    const href = this.getAttribute('href');
+                    if (!href?.startsWith('#')) return;
+                    setActive(href.slice(1));   // treu el '#' i crida setActive
+                });
+            });
+    
+            // Inicialitza
+            revealSections();
+            updateNavDots();
+        });
     </script>
 </body>
 </html>

@@ -221,8 +221,8 @@
     <nav class="fixed top-0 w-full bg-[#0f172a]/90 backdrop-blur-md z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <a href="#top" class="flex items-center space-x-3 group">
-                    <span class="font-cinzel text-xl font-bold text-[#cd7f32] group-hover:opacity-80 transition">
+                <a href="#top" class="flex items-center space-x-3 group -ml-10">
+                    <span class="font-cinzel text-xl font-bold text-[#cd7f32] group-hover:opacity-80 transition hover:text-white hover:tracking-widest">
                         NUSSBAUM Experience
                     </span>
                 </a>
@@ -231,7 +231,6 @@
                         ← Inici EXPERIENCE
                     </a>
 
-                <div class="hidden md:flex space-x-8 items-center">
                     <div class="relative group">
                         <a href="#biografia" class="hover:text-[#cd7f32] transition flex items-center gap-1">
                             Introducció
@@ -257,7 +256,7 @@
                 
                     <div class="relative group">
                         <a href="#enfocament" class="hover:text-[#cd7f32] transition flex items-center gap-1">
-                            Les Capacitats
+                            Capacitats
                             <span class="text-xs">▼</span>
                         </a>
                     
@@ -320,7 +319,8 @@
                     <a href="#idh" class="hover:text-[#cd7f32] transition">IDH</a>
                     <a href="#avaluacio" class="hover:text-[#cd7f32] transition">Avaluació</a>
                     <a href="#educacio" class="hover:text-[#cd7f32] transition">Educació</a>
-                    <a href="#textos" class="hover:text-[#cd7f32] transition">Textos Clau</a>
+                    <a href="#sintesis" class="hover:text-[#cd7f32] transition">Síntesis</a>
+                    <a href="#textos" class="hover:text-[#cd7f32] transition">Textos</a>
                 </div>
             </div>
         </div>
@@ -902,13 +902,27 @@
                     </div>
                 </div>
 
-
+               
                 <!-- CLAUS INTERPRETATIVES DE LES CAPACITATS -->
+               
+                <div class="mt-20 text-center">
+                    <div class="w-24 h-[2px] bg-[#cd7f32] mx-auto mb-6 opacity-50"></div>
+                    
+                    <h3 class="font-cinzel text-3xl font-bold text-[#e07a5f] mb-3">
+                      Com interpretar les capacitats?
+                    </h3>
+                  
+                    <p class="text-gray-400 max-w-2xl mx-auto text-sm">
+                      Més enllà de la llista, aquestes claus ens ajuden a entendre el sentit filosòfic 
+                      i polític de l’enfocament.
+                    </p>
+                  </div>
+               
 <div class="mt-16 space-y-8">
 
     <!-- IDEA GENERAL -->
     <div class="bg-indigo-900/20 p-6 rounded-xl border-l-4 border-indigo-500">
-        <h3 class="font-cinzel text-xl font-bold text-indigo-400 mb-3">Com entendre les capacitats centrals?</h3>
+        <h3 class="font-cinzel text-xl font-bold text-indigo-400 mb-3">Punt de partida</h3>
         <p class="text-sm text-gray-300">
             Les capacitats centrals defineixen el <b>mínim de dignitat humana</b>. 
             No indiquen com hem de viure, sinó quin és el <b>llindar de llibertat real</b> que tota societat ha de garantir.
@@ -968,32 +982,36 @@
         </ul>
     </div>
 
-    <!-- INTERDEPENDÈNCIA -->
-    <div class="bg-yellow-900/20 p-6 rounded-xl border-l-4 border-yellow-500">
-        <h3 class="font-bold text-yellow-400 mb-2">Interdependència</h3>
-        <p class="text-sm text-gray-300">
-            Les capacitats es <b>sostenen mútuament</b>. 
-            La manca d’una pot afectar greument les altres.
-        </p>
-    </div>
-
-    <!-- IMPLEMENTACIÓ -->
-    <div class="bg-purple-900/20 p-6 rounded-xl border-l-4 border-purple-500">
-        <h3 class="font-bold text-purple-400 mb-2">Aplicació política</h3>
-        <p class="text-sm text-gray-300">
-            Les capacitats són abstractes i s’han de concretar en 
-            <b>constitucions, lleis i polítiques públiques</b>.
-        </p>
-    </div>
-
-    <!-- TEORIA PARCIAL -->
-    <div class="bg-red-900/20 p-6 rounded-xl border-l-4 border-red-500">
-        <h3 class="font-bold text-red-400 mb-2">Teoria parcial de la justícia</h3>
-        <p class="text-sm text-gray-300">
-            No resol tots els problemes socials: fixa un <b>mínim exigible</b>, 
-            a partir del qual cada societat pot avançar.
-        </p>
-    </div>
+    <div class="mt-4 grid md:grid-cols-3 gap-6">
+  
+        <div class="bg-yellow-900/20 p-6 rounded-xl border-l-4 border-yellow-500">
+          <h4 class="font-bold text-yellow-400 mb-2">Interdependència</h4>
+          <ul class="text-sm text-gray-300 space-y-1">
+            <li>Les capacitats es <b>sostenen mútuament</b>. </li>
+            <li>La manca d’una pot afectar greument les altres.</li>
+          </ul>
+        </div>
+      
+        <div class="bg-purple-900/20 p-6 rounded-xl border-l-4 border-purple-500">
+          <h4 class="font-bold text-purple-400 mb-2">Implementació política</h4>
+          <ul class="text-sm text-gray-300 space-y-1">
+            <li>Adaptació al context</li>
+            <li>Polítiques concretes. </li>
+            <li> Les capacitats són abstractes: s’han de concretar en 
+                <b>constitucions, lleis i polítiques públiques</b></li>
+          </ul>
+        </div>
+      
+        <div class="bg-red-900/20 p-6 rounded-xl border-l-4 border-red-500">
+          <h4 class="font-bold text-red-400 mb-2">Teoria parcial de la Justícia</h4>
+          <ul class="text-sm text-gray-300 space-y-1">
+            <li>No defineix una utopia</li>
+            <li>No resol tots els problemes socials: fixa un <b>mínim exigible</b>, 
+                a partir del qual cada societat pot avançar.</li>
+          </ul>
+        </div>
+      
+      </div>
 
 </div> 
 
@@ -1001,7 +1019,7 @@
 <!-- CONCEPTES COMPLEMENTARIS -->
 <div class="mt-16">
     <h3 class="font-cinzel text-2xl font-bold text-center text-[#e07a5f] mb-8">
-        Per aplicar la teoria: conceptes clau
+        Important a l'hora d'aplicar la teoria: conceptes clau
     </h3>
 
     <div class="grid md:grid-cols-3 gap-6">
@@ -1969,6 +1987,7 @@
 
 
     <!-- SÍNTESI FINAL -->
+    <section id="sintesis" class="py-20 section-light">
     <section class="py-20 section-light relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#cd7f32]/5 to-transparent pointer-events-none"></div>
         

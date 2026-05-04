@@ -194,14 +194,16 @@
         
         /* Efecte de "revelació" per als exemples */
         .reveal-box {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
-        }
-        
-        .reveal-box.open {
-            max-height: 500px;
-        }
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.reveal-box.open {
+    opacity: 1;
+    max-height: 500px; /* només ajust de seguretat */
+}
         
         /* Comparador interactiu */
         .comparison-slider {
@@ -244,60 +246,60 @@
                 margin: 1rem auto;
             }
         }
+
+        .concept-card:hover ~ div .arrow-line {
+    filter: brightness(1.2);
+}
     </style>
 <base target="_blank">
 </head>
 
 <body class="antialiased">
     
-    <nav id="navbar" class="nav-blur fixed w-full z-50 border-b border-gray-200 transition-all duration-300">
+    <nav id="navbar" class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 transition-all duration-300">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div class="flex justify-between h-16 items-center">
       
-            <!-- ESQUERRA (Inici + logo + títol) -->
-            <div class="flex items-center space-x-6">
-      
-              <!-- INICI -->
-              <a href="index.html" target="_self"
-              class="px-3 py-1.5 rounded-lg bg-amber-100 text-amber-800 font-semibold 
-          hover:bg-amber-200 hover:shadow-sm transition whitespace-nowrap
-          border border-amber-200 relative -ml-20">
-                 ← Inici EXPERIENCE
-              </a>
-      
-              <!-- Separador subtil -->
-              <div class="h-6 w-px bg-gray-300"></div>
-      
-              <!-- Logo + títol -->
-              <a href="#top" target="_self" class="flex items-center space-x-4 group">
-                
-                <div class="w-10 h-10 bg-gradient-to-br from-amber-600 to-amber-800 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-105 transition-transform">
-                  H
-                </div>
-      
-                <span class="font-display text-xl font-bold text-slate-800 group-hover:text-amber-700 transition-colors">
-                  Hume Experience Project
-                </span>
-      
-              </a>
-      
-            </div>
-      
-            <!-- DRETA -->
-            <div class="hidden md:flex items-center space-x-8">
-      
-              <a href="#biografia" class="text-slate-600 hover:text-amber-700 transition-colors font-medium">Biografia</a>
-              <a href="#empirisme" class="text-slate-600 hover:text-amber-700 transition-colors font-medium">Empirisme</a>
-              <a href="#coneixement" class="text-slate-600 hover:text-amber-700 transition-colors font-medium">Coneixement</a>
-              <a href="#causalitat" class="text-slate-600 hover:text-amber-700 transition-colors font-medium">Causalitat</a>
-              <a href="#escepticisme" class="text-slate-600 hover:text-amber-700 transition-colors font-medium">Escepticisme</a>
-      
-            </div>
-      
+            <!-- ESQUERRA -->
+<div class="flex items-center gap-8">
+
+    <!-- Logo + títol -->
+    <a href="#top" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 bg-gradient-to-br from-amber-600 to-amber-800 rounded-full flex items-center justify-center text-white font-bold shadow-md group-hover:scale-105 transition">
+        H
+      </div>
+  
+      <span class="font-display text-lg md:text-xl font-bold text-slate-800 group-hover:text-amber-700 transition">
+        Hume Experience Project
+      </span>
+    </a>
+  
+  </div>
+  
+  <!-- DRETA -->
+  <div class="flex items-center gap-6">
+  
+    <!-- INICI (ARA AQUÍ) -->
+    <a href="../index.html"
+       class="text-sm px-3 py-1.5 rounded-lg bg-amber-100 text-amber-800 font-semibold
+       hover:bg-amber-200 transition border border-amber-200 whitespace-nowrap">
+       ← Inici Experience
+    </a>
+  
+    <!-- MENÚ -->
+    <a href="#biografia" class="nav-link">Context</a>
+    <a href="#empirisme" class="nav-link">Empirisme</a>
+    <a href="#facultats" class="nav-link">Facultats i Lleis</a>
+    <a href="#coneixement" class="nav-link">Tipus coneixement</a>
+    <a href="#causalitat" class="nav-link">Causalitat</a>
+    <a href="#escepticisme" class="nav-link">Escepticisme</a>
+  
+  </div>
           </div>
         </div>
+      
       
       </nav>
 
@@ -312,7 +314,7 @@
       <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(15,23,42,0.78)_0%,_rgba(15,23,42,0.92)_70%)]"></div>
   
       <img
-        src="https://kimi-web-img.moonshot.cn/img/s3-eu-west-1.amazonaws.com/3660d1e6d17972ac25bd749266a98f915aec1722.jpg"
+        src="David_Hume.jpg"
         alt="David Hume"
         class="w-full h-full object-cover object-[50%_25%] opacity-40"
       />
@@ -384,7 +386,7 @@
   
       <!-- imatge -->
       <img
-        src="https://kimi-web-img.moonshot.cn/img/s3-eu-west-1.amazonaws.com/3660d1e6d17972ac25bd749266a98f915aec1722.jpg"
+        src="David_Hume.jpg"
         alt="Retrat de David Hume"
         class="relative rounded-2xl opacity-95"
       />
@@ -471,7 +473,7 @@
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="w-2 h-2 bg-amber-400 rounded-full mt-2 flex-shrink-0"></span>
-                                <span><strong>Crítica a Descartes:</strong> Evoluciona el dubte metòdic cartesià cap a una posició escepticista més profunda.</span>
+                                <span><strong>Crítica a Descartes:</strong> Evoluciona el dubte metòdic cartesià cap a una posició escèptica més profunda.</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="w-2 h-2 bg-amber-400 rounded-full mt-2 flex-shrink-0"></span>
@@ -502,81 +504,114 @@
                 <p class="text-lg text-slate-600 max-w-3xl mx-auto">Hume estableix que tot el coneixement humà es redueix a <strong>percepcions</strong>, dividides en impressions i idees. Descobreix com funciona aquest mecanisme:</p>
             </div>
 
-            <!-- Diagrama interactiu de percepcions -->
-            <div class="bg-white rounded-2xl shadow-xl p-8 mb-12">
-                <div class="grid md:grid-cols-2 gap-8 mb-8">
-                    <!-- Impressions -->
-                    <div class="concept-card bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-xl border-2 border-red-200" onclick="toggleDetail('impressions-detail')">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="font-display text-2xl font-bold text-red-900">Impressions</h3>
-                            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white">
-                                <i data-lucide="flame" class="w-6 h-6"></i>
-                            </div>
-                        </div>
-                        <p class="text-red-800 mb-4">Percepcions <strong>vives i fortes</strong>. Són les dades immediates de l'experiència.</p>
-                        <ul class="space-y-2 text-sm text-red-700">
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="eye" class="w-4 h-4"></i>
-                                <strong>De sensació:</strong> colors, sons, calor (externes)
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="heart" class="w-4 h-4"></i>
-                                <strong>De reflexió:</strong> emocions, passions, desitjos (internes)
-                            </li>
-                        </ul>
-                        <div class="mt-4 text-xs text-red-600 font-semibold uppercase tracking-wider">Apareixen primer</div>
-                    </div>
+            
+            <div class="bg-white border border-slate-200 rounded-2xl shadow-lg p-6 md:p-10 space-y-10"> 
+            <!-- Flux impressions → idees -->
+<div class="flex flex-col md:flex-row items-stretch gap-6 md:gap-0 mb-10">
 
-                    <!-- Fletxa animada (visible només desktop) -->
-                    <div class="hidden md:flex items-center justify-center">
-                        <div class="relative w-full h-32">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-full h-1 bg-gradient-to-r from-red-300 to-blue-300 relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-white/50 w-1/3 animate-[flowMove_2s_linear_infinite]"></div>
-                                </div>
-                            </div>
-                            <div class="absolute right-0 top-1/2 transform -translate-y-1/2">
-                                <i data-lucide="arrow-right" class="w-8 h-8 text-blue-400"></i>
-                            </div>
-                            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 bg-white px-4 py-1 rounded-full text-xs font-bold text-slate-500 border shadow-sm">
-                                PRINCIPI DE LA CÒPIA
-                            </div>
-                        </div>
-                    </div>
+    <!-- IMPRESSIONS -->
+    <div class="concept-card flex-1 bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-xl border-2 border-red-200 relative z-10"
+         onclick="toggleDetail('impressions-detail')">
+        
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-display text-2xl font-bold text-red-900">Impressions</h3>
+            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white">
+                <i data-lucide="flame" class="w-6 h-6"></i>
+            </div>
+        </div>
 
-                    <!-- Idees -->
-                    <div class="concept-card bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-200" onclick="toggleDetail('idees-detail')">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="font-display text-2xl font-bold text-blue-900">Idees</h3>
-                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white">
-                                <i data-lucide="cloud" class="w-6 h-6"></i>
-                            </div>
-                        </div>
-                        <p class="text-blue-800 mb-4">Percepcions <strong>tenues i febles</strong>. Són còpies de les impressions en el pensament.</p>
-                        <ul class="space-y-2 text-sm text-blue-700">
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="brain" class="w-4 h-4"></i>
-                                <strong>Simples:</strong> còpies directes d'impressions
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="puzzle" class="w-4 h-4"></i>
-                                <strong>Complexes:</strong> combinades per la imaginació
-                            </li>
-                        </ul>
-                        <div class="mt-4 text-xs text-blue-600 font-semibold uppercase tracking-wider">Apareixen després</div>
-                    </div>
-                </div>
+        <p class="text-red-800 mb-4">
+            Percepcions <strong>vives i fortes</strong>. Són el punt de partida, les dades immediates de l'experiència.
+        </p>
 
-                <!-- Detalls expandibles -->
-                <div id="impressions-detail" class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500 mb-4">
-                    <h4 class="font-bold text-red-900 mb-2">Exemple d'impressió</h4>
-                    <p class="text-red-800">Quan sents el calor d'una flama (impressió de sensació) o sents ira davant una injustícia (impressió de reflexió), estas vivint una impressió. És una experiència directa, immediata i vívida.</p>
-                </div>
+        <ul class="space-y-2 text-sm text-red-700">
+            <li class="flex items-center gap-2">
+                <i data-lucide="eye" class="w-4 h-4"></i>
+                <strong>De sensació:</strong> món extern (color, sons, calor...)
+            </li>
+            <li class="flex items-center gap-2">
+                <i data-lucide="heart" class="w-4 h-4"></i>
+                <strong>De reflexió:</strong> món intern (emocions, passions, desitjos...)
+            </li>
+        </ul>
 
-                <div id="idees-detail" class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500 mb-4">
-                    <h4 class="font-bold text-blue-900 mb-2">Exemple d'idea</h4>
-                    <p class="text-blue-800">Quan recordes aquella flama o aquella sensació d'ira més tard, tens una idea. És una "fotocòpia" més feble de l'original. Si no has tingut mai la impressió, no pots tenir la idea (això és el <strong>principi de la còpia</strong>).</p>
-                </div>
+        <div class="mt-4 text-xs text-red-600 font-semibold uppercase tracking-wider">
+            ORIGEN, apareixen primer
+        </div>
+    </div>
+
+    <!-- FLETXA CENTRAL -->
+    <div class="flex items-center justify-center px-2 md:px-0">
+        <div class="flex flex-col items-center">
+            
+            <div class="hidden md:block text-xs font-bold text-slate-500 mb-2">
+                PRINCIPI DE LA CÒPIA
+            </div>
+
+            <div class="relative w-20 md:w-32 h-1 bg-gradient-to-r from-red-300 via-purple-300 to-blue-300 overflow-hidden rounded-full">
+                <div class="absolute inset-0 bg-white/50 w-1/3 animate-[flowMove_2s_linear_infinite]"></div>
+            </div>
+
+            <i data-lucide="arrow-right" class="w-6 h-6 text-blue-400 mt-2"></i>
+        </div>
+    </div>
+
+    <!-- IDEES -->
+    <div class="concept-card flex-1 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-200 relative z-10"
+         onclick="toggleDetail('idees-detail')">
+        
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-display text-2xl font-bold text-blue-900">Idees</h3>
+            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                <i data-lucide="cloud" class="w-6 h-6"></i>
+            </div>
+        </div>
+
+        <p class="text-blue-800 mb-4">
+            Percepcions <strong>més febles</strong>. Són còpies de les impressions en la ment gràcies a la memòria.
+        </p>
+
+        <ul class="space-y-2 text-sm text-blue-700">
+            <li class="flex items-center gap-2">
+                <i data-lucide="brain" class="w-4 h-4"></i>
+                <strong>Simples:</strong> còpies directes d'impressions
+            </li>
+            <li class="flex items-center gap-2">
+                <i data-lucide="puzzle" class="w-4 h-4"></i>
+                <strong>Complexes:</strong> combinació d'idees simples per la imaginació
+            </li>
+        </ul>
+
+        <div class="mt-4 text-xs text-blue-600 font-semibold uppercase tracking-wider">
+            DERIVACIÓ, apareixen després 
+        </div>
+    </div>
+
+</div>
+               <!-- Detalls expandibles en paral·lel -->
+               <div class="flex flex-col md:flex-row gap-6 mt-6">
+    <!-- Exemple impressions -->
+    <div id="impressions-detail" class="reveal-box open flex-1 bg-red-100/60 p-4 rounded-lg border-l-4 border-red-500">
+        <h4 class="font-bold text-red-900 mb-2">Exemple d'impressió</h4>
+        <p class="text-red-800 text-sm">
+            Quan sents el calor d'una flama (impressió de sensació) o sents ira davant una injustícia (impressió de reflexió), estas vivint una impressió. 
+            És una experiència directa, immediata i vívida.
+        </p>
+    </div>
+
+    <!-- Espaiat central per alinear amb la fletxa de dalt -->
+    <div class="hidden md:flex items-center justify-center" style="width:5rem; flex-shrink:0;"></div>
+
+    <!-- Exemple idees -->
+    <div id="idees-detail" class="reveal-box open flex-1 bg-blue-100/60 p-4 rounded-lg border-l-4 border-blue-500">
+        <h4 class="font-bold text-blue-900 mb-2">Exemple d'idea</h4>
+        <p class="text-blue-800 text-sm">
+            Quan recordes aquella flama o aquella sensació d'ira més tard, tens una idea. És una "fotocòpia" més feble de l'original. Si no has tingut mai la impressió, 
+            no pots tenir la idea (això és el principi de la còpia).
+        </p>
+    </div>
+
+</div>
 
                 <!-- Principi de la còpia explicat -->
                 <div class="quote-box p-8 rounded-xl mt-8">
@@ -594,9 +629,10 @@
                     </div>
                 </div>
             </div>
+          
 
             <!-- Validació d'idees -->
-            <div class="bg-white rounded-2xl shadow-lg p-8">
+            <div class="bg-white rounded-2xl shadow-lg p-8 mt-12">
                 <h3 class="font-display text-2xl font-bold mb-6 text-center">Com sabem si una idea és vàlida?</h3>
                 <div class="grid md:grid-cols-3 gap-6">
                     <div class="text-center p-6 bg-slate-50 rounded-xl hover:bg-amber-50 transition-colors">
@@ -630,6 +666,101 @@
             </div>
         </div>
     </section>
+
+
+    <section  id="facultats" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+      
+          <!-- Títol -->
+          <div class="text-center mb-16">
+            <span class="text-amber-600 font-semibold tracking-wider uppercase text-sm">
+              Arquitectura del coneixement
+            </span>
+            <h2 class="font-display text-4xl font-bold text-slate-800 mt-2 mb-4">
+              Les Facultats de la Ment segons Hume
+            </h2>
+            <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+              El coneixement no es forma directament, sinó a través de tres facultats que processen les percepcions.
+            </p>
+          </div>
+      
+          <!-- Flux -->
+          <div class="grid md:grid-cols-3 gap-8">
+      
+            <!-- MEMÒRIA -->
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-700">
+                  <i data-lucide="archive"></i>
+                </div>
+                <h3 class="font-bold text-lg text-slate-800">Memòria</h3>
+              </div>
+      
+              <p class="text-sm text-slate-600 mb-3">
+                Conserva les impressions originals transformant-les debilitades en forma d'idees.
+              </p>
+      
+              <ul class="text-sm text-slate-600 space-y-2">
+                <li>• Manté l’ordre de les impressions</li>
+                <li>• No combina ni inventa</li>
+                <li>• Base de la continuïtat del coneixement</li>
+              </ul>
+            </div>
+      
+            <!-- IMAGINACIÓ -->
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700">
+                  <i data-lucide="sparkles"></i>
+                </div>
+                <h3 class="font-bold text-lg text-slate-800">Imaginació</h3>
+              </div>
+      
+              <p class="text-sm text-slate-600 mb-3">
+                Combina idees simples per formar idees complexes. 
+              </p>
+      
+              <ul class="text-sm text-slate-600 space-y-2">
+                <li>• Pot ser voluntària o espontània</li>
+                <li>• Obeeix lleis d’associació</li>
+                <li>• Les idees caràcter metafísic, com la de substància, la de jo o el principi de causalitat serien un exemple d'idees complexes.</li>
+              </ul>
+            </div>
+      
+            <!-- RAÓ -->
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-red-700">
+                  <i data-lucide="brain"></i>
+                </div>
+                <h3 class="font-bold text-lg text-slate-800">Raó</h3>
+              </div>
+      
+              <p class="text-sm text-slate-600 mb-3">
+                Relaciona idees i forma judicis/enunciats. És la base del coneixement organitzat
+              </p>
+      
+              <ul class="text-sm text-slate-600 space-y-2">
+                <li>• Relacions d’idees (matemàtiques)</li>
+                <li>• Qüestions de fet (experiència)</li>
+                <li>• No crea coneixement, el connecta</li>
+              </ul>
+            </div>
+      
+          </div>
+      
+          <!-- Flux explicatiu -->
+          <div class="mt-12 bg-slate-900 text-white p-8 rounded-2xl">
+            <h3 class="font-display text-xl font-bold mb-4">Com es construeix el coneixement?</h3>
+            <p class="text-slate-300 leading-relaxed">
+              Les <strong>impressions</strong> es converteixen en idees gràcies a la memòria.  
+              La <strong>imaginació</strong> les combina segons les lleis d’associació.  
+              La <strong>raó</strong> estableix judicis sobre aquestes idees.
+            </p>
+          </div>
+      
+        </div>
+      </section>
 
     <!-- Secció 3: Les Lleis d'Associació (Visual) -->
     <section class="py-20 bg-white">
@@ -1000,7 +1131,7 @@
                 <div class="mt-6 flex items-center gap-4">
                     <div class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center text-slate-900 font-bold text-xl">!</div>
                     <p class="text-amber-200 font-semibold">
-                        Tot i això, Hume és pràctic: la naturalesa és massa forta per permetre'ns viure com a esceptics radicals. El costum guia la vida quotidiana.
+                        Tot i això, Hume és pràctic: la naturalesa és massa forta per permetre'ns viure com a escèptics radicals. El costum guia la vida quotidiana.
                     </p>
                 </div>
             </div>
@@ -1143,9 +1274,10 @@
 
         // Funcions per a detalls expandibles
         function toggleDetail(id) {
-            const element = document.getElementById(id);
-            element.classList.toggle('open');
-        }
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.toggle('open');
+}
 
         // Demo de les boles de billar
         function runBilliardDemo() {
@@ -1225,18 +1357,19 @@
         };
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in');
-                    entry.target.style.opacity = '1';
-                }
-            });
-        }, observerOptions);
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.remove('opacity-0');
+            entry.target.classList.add('animate-fade-in');
+        }
+    });
+}, observerOptions);
 
-        document.querySelectorAll('section > div').forEach((el) => {
-            el.style.opacity = '0';
-            observer.observe(el);
-        });
+        document.querySelectorAll('section').forEach((el) => {
+    el.classList.add('opacity-0');
+    observer.observe(el);
+});
+
     </script>
 </body>
 </html>
