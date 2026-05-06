@@ -210,6 +210,17 @@
     border-left: 3px solid #cd7f32;
     padding-left: 0.75rem;
 }
+
+.active-section {
+    color: #cd7f32 !important;
+    border-bottom: 2px solid #cd7f32;
+    padding-bottom: 2px;
+    transition: all 0.2s ease;
+}
+#textos-anchor {
+    display: block;
+    height: 0;
+}
     </style>
 </head>
 <body id="top" class="antialiased">
@@ -232,7 +243,7 @@
                     </a>
 
                     <div class="relative group">
-                        <a href="#biografia" class="hover:text-[#cd7f32] transition flex items-center gap-1">
+                        <a href="#biografia" class="nav-link hover:text-[#cd7f32] transition flex items-center gap-1">
                             Introducció
                             <span class="text-xs">▼</span>
                         </a>
@@ -255,7 +266,7 @@
                     </div>
                 
                     <div class="relative group">
-                        <a href="#enfocament" class="hover:text-[#cd7f32] transition flex items-center gap-1">
+                        <a href="#enfocament" class="nav-link hover:text-[#cd7f32] transition flex items-center gap-1">
                             Capacitats
                             <span class="text-xs">▼</span>
                         </a>
@@ -288,7 +299,7 @@
                         <!-- BOTÓ PRINCIPAL (ARA FUNCIONA) -->
                         <a href="#critiques"
                            onclick="openCritiques(); return false;"
-                           class="hover:text-[#cd7f32] transition flex items-center gap-1">
+                           class="nav-link hover:text-[#cd7f32] transition flex items-center gap-1">
                             Crítiques
                             <span class="text-xs">▼</span>
                         </a>
@@ -316,11 +327,11 @@
                     
                         </div>
                     </div>
-                    <a href="#idh" class="hover:text-[#cd7f32] transition">IDH</a>
-                    <a href="#avaluacio" class="hover:text-[#cd7f32] transition">Avaluació</a>
-                    <a href="#educacio" class="hover:text-[#cd7f32] transition">Educació</a>
-                    <a href="#sintesis" class="hover:text-[#cd7f32] transition">Síntesis</a>
-                    <a href="#textos" class="hover:text-[#cd7f32] transition">Textos</a>
+                    <a href="#idh" class="nav-link hover:text-[#cd7f32] transition">IDH</a>
+                    <a href="#avaluacio" class="nav-link hover:text-[#cd7f32] transition">Avaluació</a>
+                    <a href="#educacio" class="nav-link hover:text-[#cd7f32] transition">Educació</a>
+                    <a href="#sintesis" class="nav-link hover:text-[#cd7f32] transition">Síntesis</a>
+                    <a href="#textos" class="nav-link hover:text-[#cd7f32] transition">Textos</a>
                 </div>
             </div>
         </div>
@@ -2023,7 +2034,7 @@
     </section>
 
     <!-- PREGUNTES PER REPASSAR -->
-    <section id="preguntes" class="py-20 section-light">
+    <section  class="py-20 section-light">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-12">
                 <h2 class="font-cinzel text-4xl font-bold text-[#f8f6f0] mb-4">PREGUNTES PER REPASSAR</h2>
@@ -2299,6 +2310,7 @@
 
        
     <!-- TEXTOS CLAU - VERSIÓ ESPECÍFICA PAU -->
+    <div id="textos-anchor"></div>
         <section id="textos" class="py-20 section-dark relative">
             <div class="max-w-7xl mx-auto px-4 relative z-10">
                 <div class="text-center mb-16">
@@ -2647,25 +2659,51 @@
                     btn.classList.add('active');
                 }
             });
-        }
+            
+            if (['utilitarisme','recursos','drets'].includes(tabId)) {
+    isManualNavigation = true;
+    const section = document.getElementById('critiques');
+    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    
+    // temps proporcional a la distància
+    const dist = Math.abs(window.scrollY - (section?.offsetTop || 0));
+    const delay = Math.min(2000, Math.max(800, dist * 0.5));
+    
+    setTimeout(() => {
+        isManualNavigation = false;
+        if (window.setActiveMain) setActiveMain(tabId);
+    }, delay);
+}
+} 
         
         
         /* =========================
            SMOOTH SCROLL
         ========================= */
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (!href || href === '#') return;
-        
-                const target = document.querySelector(href);
-        
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+
+        const target = document.querySelector(href);
+
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const id = href.replace('#', '');
+            // espera que el scroll s'aturi
+            let timer;
+            const onScroll = () => {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    window.removeEventListener('scroll', onScroll);
+                    if (window.setActiveMain) setActiveMain(id);
+                }, 150);
+            };
+            window.addEventListener('scroll', onScroll);
+        }
+    });
+});
         
         
         /* =========================
@@ -2713,99 +2751,57 @@
             }
         }
         
-      /* =========================
-   SCROLL SYNC (VERSIÓ CORRECTA)
+/* =========================
+   SCROLL SYNC
 ========================= */
-
 window.addEventListener('scroll', () => {
+    if (isManualNavigation) return;
 
-// ❗ BLOQUEIG mentre naveguem manualment
-if (isManualNavigation) return;
-
-const sections = [
-    'biografia',
-    'context',
-    'enfocament',
-    'deu-capacitats',
-    'fonamentacio',
-    'utilitarisme',
-    'recursos',
-    'drets'
-];
-
-const scrollPos = window.scrollY + 150;
-let current = null;
-
-for (let id of sections) {
-    const el = document.getElementById(id);
-    if (!el) continue;
-
-    const rect = el.getBoundingClientRect();
-    const top = rect.top + window.scrollY;
-    const bottom = top + el.offsetHeight;
-
-    if (scrollPos >= top && scrollPos < bottom) {
-        current = id;
-        break;
+    // detecta final de pàgina → activa textos
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2000) {
+        console.log("nearBottom! scrollY:", window.scrollY, "innerHeight:", window.innerHeight, "total:", document.documentElement.scrollHeight);
+        if (window.setActiveMain) setActiveMain('textos');
+        return;
     }
-}
 
-if (!current) return;
+    const sections = [
+        'biografia', 'context', 'enfocament', 'deu-capacitats', 'fonamentacio',
+        'critiques', 'utilitarisme', 'recursos', 'drets',
+        'idh', 'avaluacio', 'educacio', 'sintesis'
+    ];
 
-// 1. neteja global
-document.querySelectorAll('.tab-menu-item, .tab-btn').forEach(el => {
-    el.classList.remove('active');
-});
+    const scrollPos = window.scrollY + window.innerHeight * 0.8;
+    let current = null;
 
-// 2. activa menú (dropdowns)
-document.querySelectorAll('.tab-menu-item').forEach(item => {
-    const onclick = item.getAttribute('onclick') || '';
-    if (onclick.includes(current)) {
-        item.classList.add('active');
+    for (let id of sections) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        const bottom = top + el.offsetHeight;
+        if (scrollPos >= top && scrollPos < bottom) {
+            current = id;
+            break;
+        }
     }
-});
 
-// 3. activa botons dins document (tabs horitzontals)
-document.querySelectorAll('.tab-btn').forEach(btn => {
-    const onclick = btn.getAttribute('onclick') || '';
-    if (onclick.includes(current)) {
-        btn.classList.add('active');
-    }
-});
+    if (!current) return;
 
-}); 
-
-function openCritiques() {
-
-// 1. scroll a la secció
-const section = document.getElementById('critiques');
-if (section) {
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// 2. activar utilitarisme per defecte
-setTimeout(() => {
-
-    // netejar tot
-    document.querySelectorAll('.content-panel').forEach(p => {
-        p.classList.remove('active');
-    });
-
-    document.querySelectorAll('.tab-btn, .tab-menu-item').forEach(el => {
+    document.querySelectorAll('.tab-menu-item, .tab-btn').forEach(el => {
         el.classList.remove('active');
     });
-
-    // activar panell
-    const panel = document.getElementById('utilitarisme');
-    if (panel) panel.classList.add('active');
-
-    // activar botons (menú + document)
-    document.querySelectorAll('[onclick*="utilitarisme"]').forEach(el => {
-        el.classList.add('active');
+    document.querySelectorAll('.tab-menu-item').forEach(item => {
+        const onclick = item.getAttribute('onclick') || '';
+        if (onclick.includes(current)) item.classList.add('active');
     });
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        const onclick = btn.getAttribute('onclick') || '';
+        if (onclick.includes(current)) btn.classList.add('active');
+    });
+    if (window.setActiveMain) setActiveMain(current);
 
-}, 300);
-}
+});
+
+
 
 function openCritiques() {
 
@@ -2814,6 +2810,8 @@ isManualNavigation = true;
 
 // 2. activar utilitarisme
 switchTab('utilitarisme');
+
+setActiveMain('utilitarisme');
 
 // 3. marcar submenú
 document.querySelectorAll('.tab-menu-item').forEach(item => {
@@ -2834,9 +2832,58 @@ if (section) {
 // 5. reactivar scroll sync (amb delay)
 setTimeout(() => {
     isManualNavigation = false;
-}, 400);
+    setActiveMain('utilitarisme');
+}, 2500);
 }
     
-        </script>
+ </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const navLinks = document.querySelectorAll(".nav-link");
+        const parentMap = {
+            context:        'biografia',
+            'deu-capacitats': 'enfocament',
+            fonamentacio:   'enfocament',
+            utilitarisme:   'critiques',
+            recursos:       'critiques',
+            drets:          'critiques',
+            'textos-anchor': 'textos', 
+        };
+    
+        window.setActiveMain = function(id) {
+    const parentId = parentMap[id] ?? id;
+    document.querySelectorAll(".nav-link").forEach(link => {
+        const href = link.getAttribute("href");
+        link.classList.toggle("active-section", href === "#" + parentId);
+    });
+}
+    
+        
+
+       // Bidireccionalitat: tabs interns → nav
+document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const onclick = btn.getAttribute("onclick") || "";
+        const match = onclick.match(/switchTab\('(.+?)'\)/);
+        if (match) {
+            const tabId = match[1];
+            const parentId = parentMap[tabId];
+            if (parentId) {
+                navLinks.forEach(l => l.classList.remove("active-section"));
+                document.querySelector('[href="#' + parentId + '"]')?.classList.add("active-section");
+                document.querySelectorAll('.tab-menu-item').forEach(item => {
+                    item.classList.remove('active');
+                    const oc = item.getAttribute('onclick') || '';
+                    if (oc.includes(tabId)) item.classList.add('active');
+                }); // ← tanca forEach tab-menu-item
+            }  // ← tanca if (parentId)
+        }  // ← tanca if (match)
+    }); // ← tanca addEventListener
+}); // ← tanca forEach tab-btn
+
+}); // ← tanca DOMContentLoaded
+</script>
+
 </body>
 </html>

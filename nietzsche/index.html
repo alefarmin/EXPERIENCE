@@ -210,6 +210,13 @@
     object-position: 50% 30%;  /* mou la imatge */
     transform: scale(1,8);     /* zoom */
 }
+
+.active-section {
+    color: #D4AF37 !important;
+    border-bottom: 2px solid #D4AF37;
+    padding-bottom: 2px;
+    transition: all 0.2s ease;
+}
     </style>
 </head>
 <body class="antialiased">
@@ -230,63 +237,35 @@
                     </span>
                 </a>
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="../index.html" class="home-experience-btn">
-                        ← Inici EXPERIENCE
-                    </a>
-    
-                    <!-- DROPDOWN INTRODUCCIÓ -->
+                    <a href="../index.html" class="home-experience-btn">← Inici EXPERIENCE</a>
+
+<!-- Introducció -->
 <div class="relative group">
-    <a href="#biografia" class="hover:text-yellow-500 transition flex items-center gap-1">
-        Introducció
-        <span class="text-xs">▼</span>
+    <a href="#biografia" class="nav-link hover:text-yellow-500 transition flex items-center gap-1">
+        Introducció <span class="text-xs">▼</span>
     </a>
-
-    <!-- Submenú -->
     <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
-
-        <a href="#biografia" class="block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">
-            Biografia i context
-        </a>
-
-        <a href="#estil" class="block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">
-            Estil aforístic
-        </a>
-
-        <a href="#mètode" class="block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">
-            Mètode genealògic
-        </a>
-
+        <a href="#biografia-inici" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Biografia i context</a>
+        <a href="#estil"     class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Estil aforístic</a>
+        <a href="#mètode"    class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Mètode genealògic</a>
     </div>
 </div>
-                
-                    <!-- DROPDOWN MARTELL -->
-                    <div class="relative group">
-                        <a href="#martell" class="hover:text-yellow-500 transition flex items-center gap-1">
-                            Filosofia del Martell
-                            <span class="text-xs">▼</span>
-                        </a>
-                
-                        <!-- Submenú -->
-                        <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
-                
-                            <a href="#coneixement" class="block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">
-                                Coneixement i Veritat
-                            </a>
-                
-                            <a href="#realitat" class="block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">
-                                Realitat i Ésser
-                            </a>
-                
-                            <a href="#moral" class="block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">
-                                Moral i Valors
-                            </a>
-                
-                        </div>
-                    </div>
-                
-                    <a href="#proposta" class="hover:text-yellow-500 transition">La Proposta</a>
-                    <a href="#etern" class="hover:text-yellow-500 transition">Etern Retorn</a>
-                    <a href="#repassar" class="hover:text-yellow-500 transition">Per repassar</a>
+
+<!-- Filosofia del Martell -->
+<div class="relative group">
+    <a href="#martell" class="nav-link hover:text-yellow-500 transition flex items-center gap-1">
+        Filosofia del Martell <span class="text-xs">▼</span>
+    </a>
+    <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+        <a href="#coneixement" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Coneixement i Veritat</a>
+        <a href="#realitat"    class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Realitat i Ésser</a>
+        <a href="#moral"       class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Moral i Valors</a>
+    </div>
+</div>
+
+<a href="#proposta"  class="nav-link hover:text-yellow-500 transition">La Proposta</a>
+<a href="#etern"     class="nav-link hover:text-yellow-500 transition">Etern Retorn</a>
+<a href="#repassar"  class="nav-link hover:text-yellow-500 transition">Per repassar</a>
                 </div>
             </div>
         </div>
@@ -365,6 +344,7 @@
 
     <!-- Biography Section -->
     <section id="biografia" class="py-20 section-light">
+        <div id="biografia-inici"></div>   <!-- ← anchor nou -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div>
@@ -2659,7 +2639,7 @@
         }
     </script>
     <script>
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
+        document.querySelectorAll('a[href^="#"]:not(.nav-link)').forEach(link => {
             link.addEventListener("click", function(e) {
                 const targetId = this.getAttribute("href").substring(1);
                 const targetPanel = document.getElementById(targetId);
@@ -2707,30 +2687,111 @@ if (matchingBtn) {
         });
         </script>
         
+        
+
         <script>
-            document.querySelector('a[href="#martell"]').addEventListener("click", function () {
-                
-                const defaultPanel = document.getElementById("coneixement");
+            document.addEventListener("DOMContentLoaded", () => {
             
-                // Activar el primer subapartat
-                if (defaultPanel) {
-                    document.querySelectorAll(".content-panel").forEach(panel => {
-                        panel.classList.remove("active");
+                const sections = Array.from(document.querySelectorAll("section[id]"));
+                const navLinks = document.querySelectorAll(".nav-link");
+            
+                const parentMap = {
+                    'biografia-inici': 'biografia',   // ← nou
+                    estil:       'biografia',
+                    mètode:      'biografia',
+                    coneixement: 'martell',
+                    realitat:    'martell',
+                    moral:       'martell',
+                };
+            
+                let ignoreScroll = false;
+                let lastSublink = null;
+            
+                function setActive(id) {
+    const parentId = id ? parentMap[id] : null;
+    navLinks.forEach(link => {
+        const href = link.getAttribute("href");
+        const isActive = id && (
+            href === "#" + id || (parentId && href === "#" + parentId)
+        );
+        link.classList.toggle("active-section", !!isActive);
+    });
+    if (id && lastSublink && parentMap[lastSublink] === id) {
+        document.querySelector('[href="#' + lastSublink + '"]')?.classList.add("active-section");
+    }
+}
+            
+                function getCurrentSection() {
+                    const scrollPos = window.scrollY + window.innerHeight * 0.3;
+                    let current = sections[0];
+                    for (const section of sections) {
+                        if (section.offsetTop <= scrollPos) current = section;
+                        else break;
+                    }
+                    const id = current?.getAttribute("id");
+                    const hasLink = Array.from(navLinks).some(l => l.getAttribute("href") === "#" + id);
+                    return hasLink ? id : null;
+                }
+            
+                window.addEventListener("scroll", () => {
+                    if (ignoreScroll) return;
+                    setActive(getCurrentSection());
+                }, { passive: true });
+            
+                navLinks.forEach(link => {
+                    link.addEventListener("click", () => {
+                        const target = link.getAttribute("href").replace("#", "");
+                        ignoreScroll = true;
+                        if (parentMap[target]) {
+                            lastSublink = target;
+                            document.querySelector('[href="#' + parentMap[target] + '"]')?.classList.add("active-section");
+                        } else {
+                            lastSublink = null;
+                        }
+
+                        // just abans del setActive(target):
+if (['coneixement','realitat','moral'].includes(target)) {
+    document.querySelectorAll(".content-panel").forEach(p => p.classList.remove("active"));
+    document.getElementById(target)?.classList.add("active");
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelector(`.tab-btn[onclick="switchTab('${target}')"]`)?.classList.add("active");
+    const offset = 10; // augmenta o redueix fins que quedi bé
+    const y = document.getElementById("martell").getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+}
+
+if (target === 'biografia-inici') {
+    const offset = 10;
+    const y = document.getElementById("biografia").getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+}
+
+                        setActive(target);
+                        setTimeout(() => {
+                            ignoreScroll = false;
+                            setActive(getCurrentSection());
+                        }, 700);
                     });
-                    defaultPanel.classList.add("active");
-                }
-            
-                // Activar també el botó corresponent
-                document.querySelectorAll(".tab-btn").forEach(btn => {
-                    btn.classList.remove("active");
                 });
+
+                // Bidireccionalitat: tabs interns → nav
+document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const onclick = btn.getAttribute("onclick"); // "switchTab('coneixement')"
+        const match = onclick?.match(/switchTab\('(.+?)'\)/);
+        if (match) {
+            const tabId = match[1];
+            lastSublink = tabId;
+            document.querySelector('[href="#' + parentMap[tabId] + '"]')?.classList.add("active-section");
+            setActive(tabId);
+        }
+    });
+});
             
-                const firstBtn = document.querySelector(`.tab-btn[onclick="switchTab('coneixement')"]`);
-                if (firstBtn) {
-                    firstBtn.classList.add("active");
-                }
+                setActive(getCurrentSection());
             });
-            </script> 
+            </script>
+            
    <style>
     .home-experience-btn{
         margin-left: 12px;
