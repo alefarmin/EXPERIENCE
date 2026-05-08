@@ -334,7 +334,7 @@
          class="w-40 md:w-52 rounded-lg shadow-2xl border border-yellow-500/30 opacity-60 backdrop-blur-sm bg-black/30 p-1">
 </div>
 <!-- Frase al costat de Nietzsche -->
-<div class="absolute right-6 md:right-40 lg:right-72 bottom-10 md:bottom-20 max-w-xs md:max-w-sm text-right">
+<div class="absolute right-6 md:right-40 lg:right-72 bottom-10 md:bottom-15 max-w-xs md:max-w-sm text-right">
     <p class="font-playfair text-base md:text-base italic text-gray-200 leading-relaxed">
         “La raó, quan es creu superior a la vida, acaba generant el contrari del que volia: un món sense sentit. Un món on tot és explicat, però res és pròpiament viscut”.
     </p>
@@ -2688,7 +2688,6 @@ if (matchingBtn) {
         </script>
         
         
-
         <script>
             document.addEventListener("DOMContentLoaded", () => {
             
@@ -2696,7 +2695,7 @@ if (matchingBtn) {
                 const navLinks = document.querySelectorAll(".nav-link");
             
                 const parentMap = {
-                    'biografia-inici': 'biografia',   // ← nou
+                    'biografia-inici': 'biografia',
                     estil:       'biografia',
                     mètode:      'biografia',
                     coneixement: 'martell',
@@ -2705,21 +2704,25 @@ if (matchingBtn) {
                 };
             
                 let ignoreScroll = false;
-                let lastSublink = null;
+                let lastMartellTab = 'coneixement';
             
                 function setActive(id) {
-    const parentId = id ? parentMap[id] : null;
-    navLinks.forEach(link => {
-        const href = link.getAttribute("href");
-        const isActive = id && (
-            href === "#" + id || (parentId && href === "#" + parentId)
-        );
-        link.classList.toggle("active-section", !!isActive);
-    });
-    if (id && lastSublink && parentMap[lastSublink] === id) {
-        document.querySelector('[href="#' + lastSublink + '"]')?.classList.add("active-section");
-    }
-}
+                    const parentId = id ? parentMap[id] : null;
+                    navLinks.forEach(link => {
+                        const href = link.getAttribute("href");
+                        const isActive = id && (
+                            href === "#" + id || (parentId && href === "#" + parentId)
+                        );
+                        link.classList.toggle("active-section", !!isActive);
+                    });
+                    if (id === 'martell') {
+                        document.querySelector('[href="#' + lastMartellTab + '"]')?.classList.add("active-section");
+                        document.querySelectorAll(".tab-btn").forEach(btn => {
+                            const oc = btn.getAttribute("onclick") || '';
+                            btn.classList.toggle("active", oc.includes(lastMartellTab));
+                        });
+                    }
+                }
             
                 function getCurrentSection() {
                     const scrollPos = window.scrollY + window.innerHeight * 0.3;
@@ -2742,30 +2745,29 @@ if (matchingBtn) {
                     link.addEventListener("click", () => {
                         const target = link.getAttribute("href").replace("#", "");
                         ignoreScroll = true;
-                        if (parentMap[target]) {
-                            lastSublink = target;
-                            document.querySelector('[href="#' + parentMap[target] + '"]')?.classList.add("active-section");
-                        } else {
-                            lastSublink = null;
+            
+                        if (['coneixement','realitat','moral'].includes(target)) {
+                            lastMartellTab = target;
+                            document.querySelectorAll(".content-panel").forEach(p => p.classList.remove("active"));
+                            document.getElementById(target)?.classList.add("active");
+                            document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+                            document.querySelector(`.tab-btn[onclick="switchTab('${target}')"]`)?.classList.add("active");
+                            const y = document.getElementById("martell").getBoundingClientRect().top + window.pageYOffset - 10;
+                            window.scrollTo({ top: y, behavior: "smooth" });
                         }
-
-                        // just abans del setActive(target):
-if (['coneixement','realitat','moral'].includes(target)) {
+            
+                        if (target === 'biografia-inici') {
+                            const y = document.getElementById("biografia").getBoundingClientRect().top + window.pageYOffset - 10;
+                            window.scrollTo({ top: y, behavior: "smooth" });
+                        }
+                        if (target === 'martell') {
+    lastMartellTab = 'coneixement';
     document.querySelectorAll(".content-panel").forEach(p => p.classList.remove("active"));
-    document.getElementById(target)?.classList.add("active");
+    document.getElementById('coneixement')?.classList.add("active");
     document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    document.querySelector(`.tab-btn[onclick="switchTab('${target}')"]`)?.classList.add("active");
-    const offset = 10; // augmenta o redueix fins que quedi bé
-    const y = document.getElementById("martell").getBoundingClientRect().top + window.pageYOffset - offset;
-    window.scrollTo({ top: y, behavior: "smooth" });
+    document.querySelector(`.tab-btn[onclick="switchTab('coneixement')"]`)?.classList.add("active");
 }
-
-if (target === 'biografia-inici') {
-    const offset = 10;
-    const y = document.getElementById("biografia").getBoundingClientRect().top + window.pageYOffset - offset;
-    window.scrollTo({ top: y, behavior: "smooth" });
-}
-
+            
                         setActive(target);
                         setTimeout(() => {
                             ignoreScroll = false;
@@ -2773,20 +2775,20 @@ if (target === 'biografia-inici') {
                         }, 700);
                     });
                 });
-
+            
                 // Bidireccionalitat: tabs interns → nav
-document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-        const onclick = btn.getAttribute("onclick"); // "switchTab('coneixement')"
-        const match = onclick?.match(/switchTab\('(.+?)'\)/);
-        if (match) {
-            const tabId = match[1];
-            lastSublink = tabId;
-            document.querySelector('[href="#' + parentMap[tabId] + '"]')?.classList.add("active-section");
-            setActive(tabId);
-        }
-    });
-});
+                document.querySelectorAll(".tab-btn").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const onclick = btn.getAttribute("onclick");
+                        const match = onclick?.match(/switchTab\('(.+?)'\)/);
+                        if (match) {
+                            const tabId = match[1];
+                            lastMartellTab = tabId;
+                            document.querySelector('[href="#' + parentMap[tabId] + '"]')?.classList.add("active-section");
+                            setActive(tabId);
+                        }
+                    });
+                });
             
                 setActive(getCurrentSection());
             });

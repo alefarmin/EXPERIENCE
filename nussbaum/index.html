@@ -1284,6 +1284,7 @@
             </div>
 
             <!-- Tab Content: Utilitarisme -->
+            <div id="critica-utilitarisme"></div>  <!-- àncora visible -->
             <div id="utilitarisme" class="content-panel active">
                 <div class="grid lg:grid-cols-2 gap-8">
                     <div class="space-y-6">
@@ -2612,8 +2613,13 @@
         </div>
     </footer>
 
-    <script>
+   
+   
+   <script>
         let isManualNavigation = false;
+        let lastCritiquesTab = 'utilitarisme'; // ← AFEGEIX
+
+
         /* =========================
            PROGRESS BAR
         ========================= */
@@ -2661,6 +2667,7 @@
             });
             
             if (['utilitarisme','recursos','drets'].includes(tabId)) {
+                lastCritiquesTab = tabId; // ← AFEGEIX
     isManualNavigation = true;
     const section = document.getElementById('critiques');
     if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2785,6 +2792,20 @@ window.addEventListener('scroll', () => {
     }
 
     if (!current) return;
+
+    // ← AFEGEIX AQUÍ
+    if (current === 'critiques') {
+    if (window.setActiveMain) setActiveMain('critiques');
+    document.querySelectorAll('.tab-menu-item').forEach(item => {
+        const onclick = item.getAttribute('onclick') || '';
+        item.classList.toggle('active', onclick.includes(lastCritiquesTab));
+    });
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        const onclick = btn.getAttribute('onclick') || '';
+        btn.classList.toggle('active', onclick.includes(lastCritiquesTab));
+    });
+    return;
+}
 
     document.querySelectorAll('.tab-menu-item, .tab-btn').forEach(el => {
         el.classList.remove('active');
