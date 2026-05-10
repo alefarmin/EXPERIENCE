@@ -250,6 +250,26 @@
         .concept-card:hover ~ div .arrow-line {
     filter: brightness(1.2);
 }
+ 
+.nav-link {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    color: #4a5568;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.nav-link:hover {
+    color: var(--secondary);
+}
+
+.nav-link.active,
+.nav-link.text-amber-600 {
+    color: var(--secondary);
+    font-weight: 600;
+    border-bottom: 2px solid var(--secondary);
+}
 
     </style>
 
@@ -274,7 +294,7 @@
             </div>
       
             <!-- DRETA -->
-            <div class="flex items-center gap-6">
+            <div class="flex items-center gap-6 flex-nowrap">
               <a href="../index.html"
                  class="text-sm px-3 py-1.5 rounded-lg bg-amber-100 text-amber-800 font-semibold
                  hover:bg-amber-200 transition border border-amber-200 whitespace-nowrap">
