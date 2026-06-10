@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descartes (1596–1650)</title>
+<style>
+  :root {
+    --sand: #F5F0E8;
+    --ink: #1A1612;
+    --ink-mid: #4A3F35;
+    --ink-light: #8A7D72;
+    --accent: #8B2635;
+    --accent-light: #F2E8EA;
+    --gold: #B5822A;
+    --gold-light: #FAF3E4;
+    --border: #D6CFC4;
+    --section-bg: #FDFAF6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--sand);
+    color: var(--ink);
+    line-height: 1.75;
+    font-size: 16px;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: var(--sand);
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+    border-bottom: 4px solid var(--accent);
+  }
+
+  header .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+  }
+
+  header h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: normal;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  header .dates {
+    font-size: 1.1rem;
+    color: var(--ink-light);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+
+  header .tagline {
+    font-size: 0.95rem;
+    color: #9A8F83;
+    max-width: 520px;
+    margin: 0 auto;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--ink-mid);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  nav a {
+    color: #C8BFB5;
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.1rem;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+
+  nav a:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  /* SECTIONS */
+  section {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  section:first-of-type {
+    border-top: none;
+    margin-top: 2.5rem;
+  }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: normal;
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+    color: var(--ink);
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: bold;
+    margin: 1.75rem 0 0.6rem;
+    color: var(--ink-mid);
+  }
+
+  p {
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  /* CALLOUT BOX */
+  .callout {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+
+  .callout strong {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  /* GOLD CALLOUT */
+  .callout-gold {
+    background: var(--gold-light);
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+
+  .callout-gold strong {
+    color: var(--gold);
+  }
+
+  /* CARDS GRID */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    padding: 1.1rem 1.25rem;
+  }
+
+  .card.gold {
+    border-top-color: var(--gold);
+  }
+
+  .card h4 {
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    font-family: 'Courier New', monospace;
+  }
+
+  .card.gold h4 {
+    color: var(--gold);
+  }
+
+  .card p {
+    font-size: 0.93rem;
+    color: var(--ink-mid);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  /* STEP LIST — per al dubte metòdic */
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+  }
+
+  .steps li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    align-items: start;
+  }
+
+  .steps li::before {
+    content: counter(step);
+    background: var(--accent);
+    color: white;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .steps li .step-title {
+    font-weight: bold;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .steps li .step-body {
+    font-size: 0.95rem;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+
+  /* SUBSTÀNCIES TABLE */
+  .substance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    margin: 1.5rem 0;
+    overflow: hidden;
+  }
+
+  @media (max-width: 640px) {
+    .substance-grid { grid-template-columns: 1fr; }
+  }
+
+  .substance-col {
+    padding: 1.2rem 1rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .substance-col:last-child { border-right: none; }
+
+  .substance-col .tag {
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    margin-bottom: 0.6rem;
+    display: inline-block;
+  }
+
+  .sub-infinita .tag { background: var(--ink); color: var(--sand); }
+  .sub-pensant .tag  { background: var(--accent); color: white; }
+  .sub-extensa .tag  { background: var(--gold); color: white; }
+
+  .substance-col h4 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    color: var(--ink);
+  }
+
+  .substance-col .latin {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    margin-bottom: 0.75rem;
+  }
+
+  .substance-col ul {
+    list-style: none;
+    padding: 0;
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+
+  .substance-col ul li {
+    border-top: 1px solid var(--border);
+    padding: 0.3rem 0;
+  }
+
+  .substance-col ul li strong {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.1rem;
+  }
+
+  /* IDEAS TYPES */
+  .idea-types {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+
+  @media (max-width: 580px) {
+    .idea-types { grid-template-columns: 1fr; }
+  }
+
+  .idea-card {
+    border: 1px solid var(--border);
+    padding: 1rem;
+    background: var(--section-bg);
+  }
+
+  .idea-card .ic-label {
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.35rem;
+  }
+
+  .idea-card h5 {
+    font-size: 1rem;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+
+  .idea-card p {
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  .idea-card.innata {
+    border-color: var(--accent);
+    border-top: 2px solid var(--accent);
+  }
+
+  /* DIVIDER */
+  .divider {
+    text-align: center;
+    margin: 2.5rem 0;
+    color: var(--border);
+    font-size: 1.2rem;
+    letter-spacing: 0.4em;
+  }
+
+  /* QUALITATS */
+  .qualitats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  @media (max-width: 540px) {
+    .qualitats { grid-template-columns: 1fr; }
+  }
+
+  .qualitat-box {
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--border);
+  }
+
+  .qualitat-box.primaries {
+    border-top: 3px solid var(--gold);
+    background: var(--gold-light);
+  }
+
+  .qualitat-box.secundaries {
+    border-top: 3px solid var(--ink-light);
+    background: #F7F5F2;
+  }
+
+  .qualitat-box h4 {
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 0.4rem;
+  }
+
+  .qualitat-box.primaries h4 { color: var(--gold); }
+  .qualitat-box.secundaries h4 { color: var(--ink-light); }
+
+  .qualitat-box p {
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+    margin-bottom: 0.4rem;
+  }
+
+  .qualitat-box .exemples {
+    font-size: 0.83rem;
+    font-style: italic;
+    color: var(--ink-light);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: var(--ink-light);
+    text-align: center;
+    padding: 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    margin-top: 4rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Filosofia moderna — Racionalisme</p>
+  <h1>Descartes</h1>
+  <p class="dates">1596 – 1650</p>
+  <p class="tagline">«Penso, aleshores existeixo» — el filòsof que va posar els fonaments de la filosofia moderna a partir del dubte radical</p>
+</header>
+
+<nav>
+  <a href="#bio">Biografia</a>
+  <a href="#context">Context</a>
+  <a href="#dubte">Dubte metòdic</a>
+  <a href="#veritat">Primeres veritats</a>
+  <a href="#deu">Existència de Déu</a>
+  <a href="#mon">Món material</a>
+  <a href="#substancies">Substàncies</a>
+  <a href="#cos-anima">Cos i ànima</a>
+  <a href="#racionalisme">Racionalisme</a>
+</nav>
+
+<main>
+
+  <!-- BIOGRAFIA -->
+  <section id="bio">
+    <p class="section-label">Context biogràfic</p>
+    <h2>Breu perfil</h2>
+    <p>Descartes va néixer a La Haye (Bretanya francesa) en el si d'una família de la petita noblesa. Es va formar al prestigiós col·legi jesuïta de La Flèche, on va rebre una sòlida formació humanística i científica dins la tradició escolàstica. Tot i llicenciar-se en dret, la seva independència econòmica li va permetre dedicar-se de ple a l'estudi i va viure en diversos països europeus.</p>
+    <p>El contacte amb la nova ciència es va produir gràcies al savi holandès Isaac Beeckman (1588–1637), que el va introduir en la física matemàtica. El 1649 va acceptar la invitació de la reina Cristina de Suècia i es va instal·lar a Estocolm, però la duresa del clima nòrdic li va provocar una pneumònia i va morir l'any següent.</p>
+    <div class="cards">
+      <div class="card">
+        <h4>Contribucions filosòfiques</h4>
+        <p>Considerat el pare de la filosofia moderna. Inicia un nou enfocament essencialment gnoseològic: abans de respondre «què és la realitat», cal investigar <em>com</em> la coneixem.</p>
+      </div>
+      <div class="card gold">
+        <h4>Contribucions científiques</h4>
+        <p>Creador de la geometria analítica i l'òptica geomètrica. El seu mecanicisme va ser fonamental per a la física clàssica que Newton desenvoluparia poc després.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTEXT -->
+  <section id="context">
+    <p class="section-label">Context històric i filosòfic</p>
+    <h2>La crisi de l'escolàstica</h2>
+    <p>La publicació del <em>Discurs del mètode</em> (1637) és considerat el moment d'inici de la filosofia moderna. La filosofia escolàstica —síntesi entre la teologia cristiana i Aristòtil elaborada per Tomàs d'Aquino (s. XIII)— estava completament desacreditada. En el seu descrèdit havien influït:</p>
+    <div class="cards">
+      <div class="card">
+        <h4>El nominalisme d'Occam (s. XIV)</h4>
+        <p>Guillem d'Occam (1290–1349) qüestiona els universals i soscava les bases metafísiques de l'escolàstica.</p>
+      </div>
+      <div class="card">
+        <h4>Humanisme i escepticisme (ss. XV–XVI)</h4>
+        <p>L'humanisme renaixentista carrega contra l'intel·lectualisme aristotèlic. Es recuperen els arguments escèptics de l'hel·lenisme.</p>
+      </div>
+      <div class="card">
+        <h4>Reforma protestant</h4>
+        <p>Imposa la interpretació personal de la Bíblia, posant en qüestió l'autoritat de l'Església com a criteri de veritat.</p>
+      </div>
+      <div class="card">
+        <h4>Revolució científica</h4>
+        <p>Copèrnic, Kepler i Galileu elaboren teories alternatives sobre la natura molt més explicatives i precises que les escolàstiques.</p>
+      </div>
+    </div>
+
+    <h3>Els dos pilars en crisi</h3>
+    <p>L'escolàstica havia fonamentat el saber en dos pilars que van quedar desacreditats:</p>
+    <div class="callout">
+      <strong>El criteri de veritat escolàstic:</strong> la fe en la veritat revelada i l'argument d'autoritat (Bíblia, pares de l'Església, Aristòtil reinterpretat per Tomàs). L'Església era l'autoritat última que determinava el que era cert.
+    </div>
+    <div class="callout">
+      <strong>El mètode escolàstic:</strong> el sil·logisme aristotèlic (deducció des d'una premissa major fins a una conclusió). Problema: si la premissa major no és certa, la deducció no té valor real. A més, es criticava per no permetre descobrir cap veritat nova.
+    </div>
+
+    <p><strong>L'objectiu cartesià</strong> era, doncs, restablir l'edifici del saber sobre bases sòlides, definint un nou criteri de veritat i un nou mètode, i superant el repte de l'escepticisme hel·lenístic recuperat al Renaixement.</p>
+
+    <div class="callout-gold">
+      <strong>Influència de la nova ciència:</strong> Descartes compartia amb Copèrnic, Kepler i Galileu la idea que la natura es pot comprendre i expressar a través de proporcions matemàtiques simples. El mètode matemàtic representava per a ell el model ideal del saber rigorós i cert. Tanmateix, com a racionalista, va deixar de banda l'observació i l'experimentació.
+    </div>
+  </section>
+
+  <!-- DUBTE METÒDIC -->
+  <section id="dubte">
+    <p class="section-label">Meditació primera — Gnoseologia</p>
+    <h2>El dubte metòdic</h2>
+    <p>L'objectiu del filòsof és trobar uns primers principis totalment evidents i indubtables per reconstruir l'edifici sencer de la filosofia i la ciència. El medi per aconseguir-ho és el <strong>dubte metòdic</strong>: aplicar sistemàticament el dubte fins on arribi, seguint criteris de dubte progressivament més radicals.</p>
+
+    <div class="callout">
+      No cal demostrar que totes les opinions anteriors són falses: n'hi ha prou de trobar el <em>més petit motiu de dubte</em> per rebutjar-les. El dubte s'ha de dirigir contra els <em>fonaments</em>, no contra cada creença particular.
+    </div>
+>Els sentits a vegades ens enganyen; per tant, no podem fiar-nos plenament de la informació que ens proporcionen. Tot el que hem percebut pels sentits queda en dubte. <em>Però:</em> aquest criteri no permet dubtar de l'existència de les coses mateixes.</span>
+    <h3>Els tres criteris de dubte</h3>
+    <ol class="steps">
+        <li>
+            <div class="step-content">
+              <div class="step-title">Desconfiança dels sentits</div>
+              <div class="step-body">
+                Els sentits a vegades ens enganyen; per tant, no podem fiar-nos plenament de la informació que ens proporcionen. 
+            Tot el que hem percebut pels sentits queda en dubte. <em>Però:</em> aquest criteri no permet dubtar de l'existència de les coses mateixes.
+              </div>
+            </div>
+          </li>
+        
+          <li>
+            <div class="step-content">
+              <div class="step-title">La dificultat de distingir vetlla i somni</div>
+              <div class="step-body">
+                Si durant el somni la realitat que vivim és producció de la nostra ment, podria passar el mateix amb la realitat de la vetlla? 
+                Amb aquest criteri podem dubtar que les coses materials existeixin i que siguin la causa de les nostres idees. 
+                <em>Però:</em> no permet dubtar de les veritats matemàtiques: despert o adormit, 2 + 3 = 5.</span>
+              </div>
+            </div>
+          </li> 
+
+          <li>
+            <div class="step-content">
+              <div class="step-title">La hipòtesi del geni maligne</div>
+              <div class="step-body">
+                I si en lloc de Déu existís un ésser infinitament poderós i astut que m'enganyés sempre, fins i tot quan raono sobre les veritats matemàtiques? 
+            Amb aquest criteri podem dubtar de tot, incloent-hi les matemàtiques i l'existència de Déu. Resultat: <em>suspensió total del judici</em>
+              </div>
+            </div>
+          </li> 
+      
+    </ol>
+
+    <div class="callout-gold">
+      <strong>Utilitat del dubte metòdic:</strong> ens allibera de prejudicis, acostuma l'esperit a allunyar-se dels sentits (font principal de l'error), i fa que no puguem tenir cap dubte respecte del que descobrim posteriorment com a vertader. El dubte s'aplica només a l'àmbit del coneixement, no al de l'acció pràctica. Per a la vida quotidiana, Descartes proposa una <em>moral provisional</em> (moderació, mesura, inspiració estoica).
+    </div>
+  </section>
+
+  <!-- PRIMERES VERITATS -->
+  <section id="veritat">
+    <p class="section-label">Meditació segona — Gnoseologia</p>
+    <h2>Les primeres veritats i el criteri de veritat</h2>
+    <p>Reprenent el dubte i aplicant-lo fins al límit, Descartes es pregunta si és possible dubtar fins i tot de la pròpia existència del jo. En aquest moment apareix una primera afirmació que resisteix tots els criteris de dubte:</p>
+
+    <div class="callout" style="font-size:1.05rem; text-align:center; padding: 1.5rem 2rem;">
+      <strong>«Penso, aleshores existeixo»</strong><br>
+      <em style="font-size:0.9rem;">Cogito ergo sum</em>
+    </div>
+
+    <p>Si el geni maligne m'enganya, és perquè jo existeixo. No puc dubtar de l'acte de pensar sense que aquest acte ja pressuposi la meva existència. «Jo soc, jo existeixo» és la primera veritat indubtable.</p>
+
+    <h3>El criteri de veritat</h3>
+    <div class="callout-gold">
+      <strong>Criteri cartesià:</strong> «Només acceptaré com a vertader allò que la meva raó pugui concebre de manera <em>clara i distinta</em>.» La primera veritat és el model de tota certesa futura: s'admetrà com a vertader allò que se'ns presenti a la raó amb el mateix grau de claredat i distinció que el <em>cogito</em>.
+    </div>
+
+    <h3>La segona veritat: la res cogitans</h3>
+    <p>Descartes sap que existeix, però no sap clarament <em>què</em> és. Examina els atributs del cos i de l'ànima:</p>
+    <ul style="margin: 0.75rem 0 1rem 1.5rem; color: var(--ink-mid); font-size:0.95rem; line-height:1.7;">
+      <li>Dels atributs del cos pot dubtar, doncs la hipòtesi del geni maligne ho permet.</li>
+      <li>Dels atributs de l'ànima (caminar, nodrir-se) pot dubtar, perquè ocorren també en somnis.</li>
+      <li><strong>De l'acte de pensar no pot dubtar:</strong> és l'únic atribut inseparable de mi.</li>
+    </ul>
+    <p>Conclusió: <strong>«No soc més que una cosa que pensa»</strong> — una substància pensant (<em>res cogitans</em>), la naturalesa o essència de la qual consisteix a pensar.</p>
+
+    <h3>Qualitats primàries i secundàries: l'exemple de la cera</h3>
+    <p>Per demostrar que l'enteniment és superior als sentits com a via de coneixement, Descartes analitza un tros de cera que s'apropa al foc. Totes les qualitats sensibles canvien (color, olor, forma, consistència), però la cera continua essent la mateixa. Allò que es manté —l'extensió, la flexibilitat, la capacitat de canvi— només pot ser conegut per l'<strong>enteniment</strong>, no pels sentits ni la imaginació.</p>
+
+    <div class="qualitats">
+      <div class="qualitat-box primaries">
+        <h4>Qualitats primàries</h4>
+        <p>Conegudes per l'enteniment. Matematitzables (quantificables). Objectives: estan realment en els cossos.</p>
+        <p class="exemples">Magnitud, figura, nombre, situació, durada, moviment.</p>
+      </div>
+      <div class="qualitat-box secundaries">
+        <h4>Qualitats secundàries</h4>
+        <p>Conegudes pels sentits. No quantificables; apareixen confuses i obscures. Subjectives: producte o afecció dels sentits.</p>
+        <p class="exemples">Colors, olors, sabors, sons, calor, fred.</p>
+      </div>
+    </div>
+
+    <p>Conclusió: res no és més fàcil de conèixer que la pròpia ànima —del cos puc dubtar, però no de l'existència del pensament.</p>
+  </section>
+
+  <!-- EXISTÈNCIA DE DÉU -->
+  <section id="deu">
+    <p class="section-label">Meditació cinquena — Metafísica</p>
+    <h2>La demostració de l'existència de Déu</h2>
+    <p>Descartes ha establert el <em>cogito</em> i el criteri de veritat, però les veritats matemàtiques continuen en dubte a causa de la hipòtesi del geni maligne. Si aconseguís demostrar que Déu existeix i que és veraç, podria eliminar aquest obstacle. El camí és analitzar els continguts del pensament.</p>
+
+    <h3>Els tres tipus d'idees</h3>
+    <div class="idea-types">
+      <div class="idea-card">
+        <p class="ic-label">Tipus 1</p>
+        <h5>Adventícies</h5>
+        <p>Provenen dels sentits; semblen venir de fora. No fiables, ja que els sentits ens enganyen.</p>
+      </div>
+      <div class="idea-card">
+        <p class="ic-label">Tipus 2</p>
+        <h5>Factícies</h5>
+        <p>La imaginació les construeix a partir d'altres idees. Inventades per mi; sense realitat pròpia (sirenes, centaures).</p>
+      </div>
+      <div class="idea-card innata">
+        <p class="ic-label">Tipus 3 — fiables</p>
+        <h5>Innates ✦</h5>
+        <p>Han nascut amb mi; formen part constitutiva del pensament. Se m'imposen de manera immediata i evident. Bases del saber.</p>
+      </div>
+    </div>
+
+    <div class="callout-gold">
+      <strong>Connexió amb Plató:</strong> l'afirmació de les idees innates és un pressupòsit bàsic de tota teoria del coneixement racionalista. En Descartes, però, no són reminiscents (com en Plató): han estat posades per Déu en la raó humana en néixer.
+    </div>
+
+    <h3>L'argument ontològic (inspirat en Anselm de Canterbury)</h3>
+    <p>Descartes posseeix la idea innata de Déu com un <em>ésser summament perfecte</em>. Aquesta idea no pot ser adventícia (no hem vist Déu pels sentits) ni factícia (un ésser imperfecte no pot produir la idea d'alguna cosa perfecta).</p>
+
+    <div class="callout">
+      Quan analitzo una idea innata, tot allò que concebo de manera clara i distinta que li pertany, li pertany efectivament. Analitzant la idea d'un ésser summament perfecte, concebo que l'existència li pertany necessàriament, ja que la mancança d'existència seria una imperfecció. Per tant, <strong>Déu existeix</strong> (<em>res infinita</em>).
+    </div>
+
+    <p>L'objecció que, igual que de la idea d'un triangle no es deriva que n'existeixi cap, de la idea de Déu no se'n deriva l'existència real, queda refutada: en qualsevol altre ésser puc separar essència i existència, però en Déu no, perquè l'existència forma part de la seva essència; separar-les suposaria concebre un ésser summament perfecte al qual faltés una perfecció.</p>
+
+    <h3>Déu com a garantia del saber</h3>
+    <p>Demostrada l'existència de Déu, Descartes pot:</p>
+    <ul style="margin: 0.75rem 0 1rem 1.5rem; color: var(--ink-mid); font-size:0.95rem; line-height:1.7;">
+      <li>Eliminar la hipòtesi del geni maligne: Déu és summament perfecte, i enganyar és una imperfecció.</li>
+      <li>Restablir el valor de les veritats matemàtiques.</li>
+      <li>Fonamentar el criteri de veritat: allò que concebo clarament i distinta és vertader perquè Déu veraç no permet l'engany quan fem un ús recte de la raó.</li>
+    </ul>
+    <div class="callout-gold">
+      <strong>L'error humà:</strong> Déu ens ha fet lliures. L'enteniment concep les idees, però el judici (afirmar, negar, dubtar) depèn de la voluntat. L'error sorgeix quan la voluntat lliure accepta allò que l'enteniment no concep amb prou claredat. Déu no n'és responsable.
+    </div>
+  </section>
+
+  <!-- MÓN MATERIAL -->
+  <section id="mon">
+    <p class="section-label">Meditació sisena — Metafísica</p>
+    <h2>La demostració del món material</h2>
+    <p>Descartes sap que és <em>res cogitans</em>, ha demostrat l'existència de Déu (<em>res infinita</em>) i ha restablert les veritats matemàtiques. Queda per demostrar l'existència del món material.</p>
+
+    <p>El raonament és causal: tinc una facultat passiva de sentir que em permet rebre idees de coses sensibles. Ha d'existir una facultat activa capaç de produir-les. Aquesta facultat no puc ser jo mateix (les idees apareixen sense el meu consentiment i contràriament a la meva voluntat). Tampoc no pot ser Déu directament, perquè Déu no és fal·laç i m'ha donat la forta inclinació a creure que provenen de coses materials. Per tant:</p>
+
+    <div class="callout">
+      <strong>Les coses materials (<em>res extensa</em>) existeixen</strong>, perquè Déu, que és veraç, no permetria que tingués la inclinació irrefrenable a creure-les reals si no ho fossin. De nou, Déu apareix com a garantia del coneixement cert.
+    </div>
+
+    <h3>Límits del coneixement: realisme moderat</h3>
+    <p>Déu garanteix que les nostres idees mostren el que les coses són <em>respecte a les qualitats primàries</em> (matematitzables, objectives), però no respecte a les qualitats secundàries (subjectives, producte dels sentits). Aquesta posició supera el realisme gnoseològic ingenu (que les nostres idees són còpia exacta de la realitat) i estableix un <strong>idealisme cartesià</strong>: coneixem idees, no directament les coses.</p>
+
+    <div class="callout-gold">
+      <strong>La idea del món com a representació:</strong> el coneixement humà no és res més que una representació mental de la realitat. Aquesta nova concepció condicionarà tota la filosofia moderna posterior (tant el racionalisme com l'empirisme i Kant).
+    </div>
+  </section>
+
+  <div class="divider">· · ·</div>
+
+  <!-- SUBSTÀNCIES -->
+  <section id="substancies">
+    <p class="section-label">Metafísica</p>
+    <h2>Les tres substàncies cartesianes</h2>
+    <p>Descartes defineix la substància com «una realitat que existeix de tal manera que no necessita cap altra realitat per existir» (<em>Principis de filosofia</em>, I, 51). En sentit estricte, només Déu és substància pròpiament; la <em>res cogitans</em> i la <em>res extensa</em> ho són per analogia, perquè per existir necessiten Déu.</p>
+    <p>En la substància es distingeix entre <strong>atributs</strong> (trets essencials sense els quals és impossible concebre-la) i <strong>modes</strong> (trets no essencials que resideixen en la substància).</p>
+
+    <div class="substance-grid">
+      <div class="substance-col sub-infinita">
+        <span class="tag">Res infinita</span>
+        <h4>Déu</h4>
+        <p class="latin">Substància infinita</p>
+        <ul>
+          <li><strong>Naturalesa</strong>No creada. Absolutament independent. Summament perfecta.</li>
+          <li><strong>Atributs</strong>Infinitud, eternitat, immutabilitat, omnisciència, omnipotència.</li>
+          <li><strong>Modes</strong>Cap.</li>
+        </ul>
+      </div>
+      <div class="substance-col sub-pensant">
+        <span class="tag">Res cogitans</span>
+        <h4>Ànima</h4>
+        <p class="latin">Substància pensant</p>
+        <ul>
+          <li><strong>Naturalesa</strong>Creada. Dependent de Déu. Independent de la res extensa. Finita i imperfecta.</li>
+          <li><strong>Atribut</strong>El pensament.</li>
+          <li><strong>Modes</strong>Enteniment i voluntat (dubtar, afirmar, negar, voler, imaginar, sentir…). Es regeix per la llibertat.</li>
+        </ul>
+      </div>
+      <div class="substance-col sub-extensa">
+        <span class="tag">Res extensa</span>
+        <h4>Món material</h4>
+        <p class="latin">Substància extensa</p>
+        <ul>
+          <li><strong>Naturalesa</strong>Creada. Dependent de Déu. Independent de la res cogitans. Finita i imperfecta.</li>
+          <li><strong>Atribut</strong>L'extensió (longitud, amplada, profunditat).</li>
+          <li><strong>Modes</strong>Qualitats primàries. Es regeix per la necessitat (determinisme mecanicista).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout-gold">
+      La independència radical entre la res cogitans i la res extensa defineix dos àmbits regits per principis diferents: el món natural (inert, matematitzable, determinista, base de la ciència moderna) i l'acció moral (dependent d'una voluntat lliure, pròpia de l'ànima immortal). Això, però, planteja el problema de la relació entre cos i ànima en l'ésser humà.
+    </div>
+  </section>
+
+  <!-- COS I ÀNIMA -->
+  <section id="cos-anima">
+    <p class="section-label">Antropologia filosòfica</p>
+    <h2>L'ésser humà: cos i ànima</h2>
+    <p>L'ésser humà és singular perquè és l'únic ésser en el qual la substància extensa (cos) i la substància pensant (ànima) estan en connexió. La resta dels éssers vius són pura extensió: sense ànima, els seus moviments segueixen lleis mecanicistes. L'ànima no és, doncs, principi del moviment ni principi vital.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h4>El cos (res extensa)</h4>
+        <p>Cosa extensa, divisible, que no pensa. Els seus moviments estan regits per la necessitat i s'expliquen mecanicistament. Comparable a una màquina fabricada i composta d'ossos, nervis, músculs, venes i pell.</p>
+      </div>
+      <div class="card">
+        <h4>L'ànima (res cogitans)</h4>
+        <p>Cosa que pensa, indivisible, inextensa. La seva activitat es regeix per la llibertat. Diferent del cos i independent d'ell; per existir no necessita el cos (d'aquí la seva immortalitat).</p>
+      </div>
+    </div>
+
+    <h3>La glàndula pineal i els esperits animals</h3>
+    <p>Cos i ànima interactuen a través de la <strong>glàndula pineal</strong>, estructura única del cervell que conté un fluid tènue —els <em>esperits animals</em>— que corre pels nervis distribuïts per tot el cos.</p>
+    <ul style="margin: 0.75rem 0 1rem 1.5rem; color: var(--ink-mid); font-size:0.95rem; line-height:1.7;">
+      <li><strong>Del cos a l'ànima:</strong> les sensacions, percepcions i passions són estats del cos que es transmeten a l'ànima a través dels esperits animals fins a la glàndula pineal, que s'agita i afecta l'ànima.</li>
+      <li><strong>De l'ànima al cos:</strong> en les accions voluntàries, l'ànima mou la glàndula pineal per invertir el moviment dels esperits animals cap a la part del cos que vol moure. Les accions involuntàries (respiració, batec del cor) obeeixen a causes purament mecàniques.</li>
+    </ul>
+
+    <div class="callout">
+      Remarcar la independència entre cos i ànima tenia també la funció cristiana de justificar la immortalitat de l'ànima: com que per existir no necessita el cos, pot continuar existint un cop el cos es destrueix. Per a Descartes, com a pensador cristià, l'ànima és creada per Déu en cada ocasió (sense la preexistència platònica), però a partir del moment de la creació és immortal.
+    </div>
+  </section>
+
+  <!-- RACIONALISME -->
+  <section id="racionalisme">
+    <p class="section-label">Síntesi gnoseològica</p>
+    <h2>El racionalisme cartesià: idees innates i deducció</h2>
+    <p>La desconfiança en els sentits travessa tot el sistema cartesià. El saber s'elabora al marge de la informació sensorial i a partir de l'ús exclusiu de la raó.</p>
+
+    <h3>Intuïció i idees innates</h3>
+    <p>La raó proporciona uns primers principis —veritats indubtables— a partir dels quals es reconstrueix el saber. Descartes els concep com una «llum natural» que capta de manera immediata una veritat simple que s'imposa sense possibilitat de dubte. El paradigma de la intuïció és el <em>cogito</em>. Cada una d'aquestes veritats simples s'identifica amb una idea innata.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h4>Idea de Déu</h4>
+        <p>Innata. No pot provenir dels sentits ni de la imaginació (ésser imperfecte). Implica un ésser perfecte, infinit, causa sui. Serveix de prova de l'existència de Déu.</p>
+      </div>
+      <div class="card">
+        <h4>Idea del jo (cogito)</h4>
+        <p>Innata. Fonament del coneixement cert. Sorgeix de la reflexió interna, no de cap experiència externa.</p>
+      </div>
+      <div class="card">
+        <h4>Idees matemàtiques i geomètriques</h4>
+        <p>Les veritats de nombre, forma i proporció (triangle, cercle, igualtat) no depenen de la percepció; formen part de l'estructura racional de la ment.</p>
+      </div>
+      <div class="card">
+        <h4>Idees metafísiques fonamentals</h4>
+        <p>Substància, ment (res cogitans), cos (res extensa). Organitzen la realitat de manera natural sense necessitat d'experiència.</p>
+      </div>
+    </div>
+
+    <h3>Deducció</h3>
+    <p>A partir de la intuïció de les idees innates i de la intuïció de les connexions entre elles, la <strong>deducció</strong> és el segon mode de coneixement: en un moviment continu de la raó, recolzada en la memòria, s'elaboren les idees més complexes del sistema filosòfic. És el que Descartes fa a les <em>Meditacions metafísiques</em>, emulant el mode de demostració dels matemàtics i geòmetres (<em>more geometrico</em>).</p>
+
+    <div class="callout-gold">
+      <strong>Diferència amb Plató:</strong> les idees innates cartesianes no són reminiscents (no provenen d'un món de les idees contemplat per l'ànima preexistent). Han estat posades per Déu en la raó humana en el moment del naixement. Descartes no pot mantenir la preexistència de l'ànima: com a pensador cristià, l'ànima és creada per Déu. Qualsevol persona que pensi correctament pot descobrir les idees innates.
+    </div>
+
+    <h3>El mecanicisme cartesià</h3>
+    <p>Descartes concep l'univers com una enorme màquina regida per lleis precises, sense cap teleologisme ni voluntat. Combinat amb la geometria analítica que ell mateix va crear, va canviar radicalment la comprensió del món i va servir de base per a la física clàssica newtoniana.</p>
+    <div class="cards">
+      <div class="card">
+        <h4>La matèria és extensió</h4>
+        <p>Tot el que existeix físicament ocupa un espai i es pot dividir en parts més petites.</p>
+      </div>
+      <div class="card">
+        <h4>Lleis universals</h4>
+        <p>Hi ha lleis fixes i immutables que governen el comportament de tot el que existeix.</p>
+      </div>
+      <div class="card">
+        <h4>Principi d'inèrcia</h4>
+        <p>Un objecte en moviment continuarà movent-se en línia recta si cap força l'atura. La quantitat total de moviment d'un sistema tancat es manté constant.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Apunts de filosofia — Descartes (1596–1650) · Meditacions metafísiques (1641) · PAU
+</footer>
+
+</body>
+</html>

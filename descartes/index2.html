@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descartes: El Filòsof del Fonament</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-navy: #060912;
+    --midnight: #0d1525;
+    --slate: #1a2740;
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --crimson: #7B1E2E;
+    --crimson-light: #A3304A;
+    --ivory: #F5F0E8;
+    --silver: #9aaabf;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--deep-navy);
+    color: var(--ivory);
+    overflow-x: hidden;
+  }
+
+  .font-cinzel  { font-family: 'Cinzel', serif; }
+  .font-playfair{ font-family: 'Playfair Display', serif; }
+  .font-bebas   { font-family: 'Bebas Neue', sans-serif; }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed; top:0; left:0; height:3px;
+    background: linear-gradient(90deg, var(--crimson), var(--gold));
+    z-index:1000; transition: width .1s;
+  }
+
+  /* Scroll float */
+  @keyframes float {
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-16px); }
+  }
+  .float-anim { animation: float 5s ease-in-out infinite; }
+
+  /* Shimmer */
+  @keyframes shimmer {
+    0%{ background-position:-200% center; }
+    100%{ background-position:200% center; }
+  }
+  .shimmer-text {
+    background: linear-gradient(90deg, var(--ivory) 0%, var(--gold) 50%, var(--ivory) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* Pulse glow */
+  @keyframes pulse-glow {
+    0%,100%{ box-shadow: 0 0 15px rgba(201,168,76,.25); }
+    50%    { box-shadow: 0 0 35px rgba(201,168,76,.55); }
+  }
+
+  /* Section alternance */
+  .section-dark  { background: linear-gradient(135deg, #060912 0%, #0d1525 100%); position:relative; overflow:hidden; }
+  .section-mid   { background: linear-gradient(135deg, #0d1525 0%, #1a2740 100%); }
+  .section-light { background: linear-gradient(135deg, #1a2740 0%, #1f3050 100%); }
+
+  /* Cards */
+  .concept-card {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(201,168,76,.2);
+    backdrop-filter: blur(8px);
+    transition: all .4s cubic-bezier(.4,0,.2,1);
+  }
+  .concept-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--gold);
+    box-shadow: 0 18px 36px rgba(123,30,46,.3);
+  }
+  .concept-card.no-anim:hover { transform: none; box-shadow: none; }
+
+  /* Quote */
+  .descartes-quote {
+    border-left: 4px solid var(--crimson);
+    background: linear-gradient(90deg, rgba(123,30,46,.15) 0%, transparent 100%);
+    font-style: italic;
+  }
+
+  /* Tabs */
+  .tab-btn {
+    transition: all .3s;
+    border-bottom: 2px solid transparent;
+    color: #9aaabf;
+  }
+  .tab-btn.active {
+    border-bottom-color: var(--gold);
+    color: var(--gold);
+  }
+  .content-panel { display:none; animation: fadeIn .5s; }
+  .content-panel.active { display:block; }
+  @keyframes fadeIn {
+    from{ opacity:0; transform:translateY(16px); }
+    to  { opacity:1; transform:translateY(0); }
+  }
+
+  /* Timeline */
+  .timeline-item {
+    position:relative;
+    padding-left: 2rem;
+    border-left: 2px solid rgba(201,168,76,.3);
+  }
+  .timeline-item::before {
+    content:''; position:absolute; left:-6px; top:2px;
+    width:10px; height:10px;
+    background: var(--gold); border-radius:50%;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width:8px; }
+  ::-webkit-scrollbar-track { background: var(--deep-navy); }
+  ::-webkit-scrollbar-thumb { background: var(--crimson); border-radius:4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+  /* Active nav */
+  .active-section {
+    color: var(--gold) !important;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 2px;
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full bg-black/60 backdrop-blur-md z-50 border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+      <a href="#inici" class="flex items-center space-x-3 group">
+        <svg class="w-7 h-7 text-yellow-500 group-hover:scale-110 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+        </svg>
+        <span class="font-cinzel text-lg font-bold text-yellow-500 group-hover:text-white transition hover:tracking-widest">DESCARTES Experience</span>
+      </a>
+      <div class="hidden md:flex space-x-6 items-center text-sm">
+        <a href="../index.html" class="home-btn">← Inici EXPERIENCE</a>
+
+        <!-- Introducció dropdown -->
+        <div class="relative group">
+          <a href="#biografia" class="nav-link hover:text-yellow-500 transition flex items-center gap-1">Introducció <span class="text-xs">▼</span></a>
+          <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+            <a href="#biografia"  class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Biografia i context</a>
+            <a href="#context"    class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Context filosòfic</a>
+          </div>
+        </div>
+
+        <!-- Filosofia del Fonament dropdown -->
+        <div class="relative group">
+          <a href="#fonament" class="nav-link hover:text-yellow-500 transition flex items-center gap-1">Filosofia del Fonament <span class="text-xs">▼</span></a>
+          <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+            <a href="#dubte"      class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">El Dubte Metòdic</a>
+            <a href="#veritat"    class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Primeres Veritats</a>
+            <a href="#deu"        class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Existència de Déu</a>
+          </div>
+        </div>
+
+        <a href="#substancies" class="nav-link hover:text-yellow-500 transition">Substàncies</a>
+        <a href="#racionalisme" class="nav-link hover:text-yellow-500 transition">Racionalisme</a>
+        <a href="#repassar"    class="nav-link hover:text-yellow-500 transition">Per repassar</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inici" class="relative min-h-screen flex items-center section-dark pt-16">
+  <!-- Background decoratiu geomètric -->
+  <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, #C9A84C 0%, transparent 50%), radial-gradient(circle at 80% 20%, #7B1E2E 0%, transparent 40%)"></div>
+  <!-- Grid de perspectiva cartesiana -->
+  <svg class="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
+    <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#C9A84C" stroke-width="0.5"/></pattern></defs>
+    <rect width="100%" height="100%" fill="url(#grid)"/>
+  </svg>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 w-full">
+    <div class="max-w-3xl">
+      <div class="mb-6 inline-block">
+        <span class="font-cinzel text-sm border border-yellow-500/50 text-yellow-500 px-5 py-2 rounded-full tracking-widest uppercase">Cogito ergo sum</span>
+      </div>
+      <h2 class="font-cinzel text-3xl md:text-4xl text-yellow-500 tracking-[0.2em] mb-3">DESCARTES</h2>
+      <h1 class="font-cinzel text-5xl md:text-7xl font-black mb-6 leading-tight shimmer-text">
+        EL FILÒSOF<br>DEL FONAMENT
+      </h1>
+      <p class="font-playfair text-xl md:text-2xl text-gray-300 mb-8 italic">
+        Una recerca radical de la certesa absoluta que va posar els fonaments de la filosofia moderna, el racionalisme i la ciència occidental.
+      </p>
+      <div class="flex flex-wrap gap-4 text-sm text-yellow-500/80 font-cinzel tracking-wider">
+        <span>• DUBTE METÒDIC</span>
+        <span>• COGITO ERGO SUM</span>
+        <span>• RES COGITANS</span>
+        <span>• RES EXTENSA</span>
+        <span>• IDEES INNATES</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Frase lateral dreta -->
+  <div class="absolute right-8 bottom-20 max-w-xs text-right hidden lg:block">
+    <p class="font-playfair text-base italic text-gray-300 leading-relaxed">
+      "Per establir quelcom ferm i constant en les ciències, cal, una vegada en la vida, enderrocar-ho tot de dalt a baix i tornar a començar des dels primers fonaments."
+    </p>
+    <div class="mt-2 h-[2px] bg-gradient-to-l from-yellow-500 via-red-600 to-transparent"></div>
+  </div>
+
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 float-anim">
+    <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+    </svg>
+  </div>
+</section>
+
+<!-- BIOGRAFIA -->
+<section id="biografia" class="py-20 section-mid">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+      <div>
+        <h2 class="font-cinzel text-4xl font-bold mb-6 text-yellow-500">Breus Dades Biogràfiques</h2>
+        <div class="space-y-4 text-gray-300 leading-relaxed">
+          <p>René Descartes va néixer el 1596 a <span class="text-yellow-500 font-semibold">La Haye</span>, una petita ciutat de la Bretanya francesa, en el si d'una família de la petita noblesa. Va estudiar al prestigiós col·legi jesuïta de <span class="text-yellow-500 font-semibold">La Flèche</span>, on va rebre una formació humanística i científica sòlida dins la tradició escolàstica.</p>
+          <p>Tot i llicenciar-se en dret, la seva independència econòmica li va permetre dedicar-se plenament a l'estudi. Va viure en diversos països europeus: França, els Països Baixos, Anglaterra, Dinamarca, Itàlia...</p>
+          <div class="descartes-quote p-4 rounded-r-lg my-4">
+            <p class="text-lg">"El contacte amb la nova ciència es va produir gràcies al savi holandès <strong>Isaac Beeckman</strong>, que el va introduir en la física matemàtica i la geometria."</p>
+          </div>
+          <p>El 1649, convidat per la reina Cristina de Suècia, es va instal·lar a Estocolm. Però la duresa del clima nòrdic li va provocar una pneumònia i va morir el 1650. Tenia 53 anys.</p>
+          <p class="text-yellow-400 font-semibold">És considerat el pare de la filosofia moderna per la seva influència en tota la filosofia posterior. A més, és el creador de la geometria analítica i l'òptica geomètrica.</p>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="concept-card p-6 rounded-xl">
+          <h3 class="font-cinzel text-xl font-bold text-yellow-500 mb-4">Obres Fonamentals</h3>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 border-b border-white/10 pb-3">
+              <span class="text-yellow-500 font-cinzel text-sm font-bold min-w-[40px]">1637</span>
+              <div>
+                <p class="text-white font-semibold">Discurs del mètode</p>
+                <p class="text-xs text-gray-400">Les quatre regles del mètode. Inici de la filosofia moderna.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 border-b border-white/10 pb-3">
+              <span class="text-yellow-500 font-cinzel text-sm font-bold min-w-[40px]">1641</span>
+              <div>
+                <p class="text-white font-semibold">Meditacions metafísiques</p>
+                <p class="text-xs text-gray-400">El text principal per a les PAU. Dubte, cogito, Déu, món material.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 border-b border-white/10 pb-3">
+              <span class="text-yellow-500 font-cinzel text-sm font-bold min-w-[40px]">1644</span>
+              <div>
+                <p class="text-white font-semibold">Principis de filosofia</p>
+                <p class="text-xs text-gray-400">Definició de substància i sistema filosòfic complet.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-yellow-500 font-cinzel text-sm font-bold min-w-[40px]">1649</span>
+              <div>
+                <p class="text-white font-semibold">Les passions de l'ànima</p>
+                <p class="text-xs text-gray-400">Relació entre cos i ànima. La glàndula pineal.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept-card p-6 rounded-xl border-red-600/30">
+          <h3 class="font-cinzel text-xl font-bold text-crimson-light mb-4" style="color: var(--crimson-light)">Els Filòsofs de la Modernitat</h3>
+          <p class="text-sm text-gray-300 mb-3">Descartes encapçala el <span class="text-yellow-400 font-bold">racionalisme modern</span>, corrent que considera la raó com a única font del coneixement vertader:</p>
+          <div class="grid grid-cols-3 gap-2 text-center text-xs mt-3">
+            <div class="bg-yellow-900/30 p-2 rounded">
+              <p class="text-yellow-400 font-bold mb-1">Descartes</p>
+              <p class="text-gray-400">Idees innates i deducció</p>
+            </div>
+            <div class="bg-yellow-900/20 p-2 rounded">
+              <p class="text-yellow-400 font-bold mb-1">Spinoza</p>
+              <p class="text-gray-400">Substància única (Déu-Natura)</p>
+            </div>
+            <div class="bg-yellow-900/20 p-2 rounded">
+              <p class="text-yellow-400 font-bold mb-1">Leibniz</p>
+              <p class="text-gray-400">Mònades i harmonia preestablerta</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTEXT -->
+<section id="context" class="py-20 section-dark relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-500">EL CONTEXT: LA CRISI DE L'ESCOLÀSTICA</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">"La filosofia escolàstica estava desacreditada del tot"</p>
+    </div>
+
+    <div class="max-w-4xl mx-auto mb-10 text-center">
+      <p class="text-gray-300 text-lg leading-relaxed">La publicació del <em>Discurs del mètode</em> (1637) marca l'inici de la filosofia moderna. La síntesi escolàstica de Tomàs d'Aquino —Aristòtil + teologia cristiana— havia entrat en crisi per diversos factors:</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8 mb-12">
+      <div class="lg:col-span-2 space-y-5">
+        <div class="timeline-item pb-5">
+          <h5 class="text-white font-bold mb-1">Nominalisme d'Occam (s. XIV)</h5>
+          <p class="text-sm text-gray-400">Guillem d'Occam (1290–1349) qüestiona els universals i soscava les bases metafísiques de l'escolàstica.</p>
+        </div>
+        <div class="timeline-item pb-5">
+          <h5 class="text-white font-bold mb-1">Humanisme renaixentista i escepticisme (ss. XV–XVI)</h5>
+          <p class="text-sm text-gray-400">Carrega contra l'intel·lectualisme aristotèlic. Es recuperen els arguments escèptics de l'hel·lenisme que posaven en qüestió la possibilitat de qualsevol certesa.</p>
+        </div>
+        <div class="timeline-item pb-5">
+          <h5 class="text-white font-bold mb-1">Reforma protestant</h5>
+          <p class="text-sm text-gray-400">Imposa la interpretació personal de la Bíblia, posant en qüestió l'Església com a autoritat última del saber.</p>
+        </div>
+        <div class="timeline-item">
+          <h5 class="text-white font-bold mb-1">Revolució científica</h5>
+          <p class="text-sm text-gray-400">Copèrnic, Kepler i Galileu elaboren teories molt més explicatives i precises. Descartes, seguidor de la nova ciència, pren la idea que la natura es pot comprendre a través de proporcions matemàtiques.</p>
+        </div>
+      </div>
+
+      <div class="space-y-5">
+        <div class="concept-card p-5 rounded-xl bg-gradient-to-b from-red-900/20 to-transparent">
+          <h4 class="font-cinzel text-lg font-bold text-red-400 mb-3">Els Dos Pilars en Crisi</h4>
+          <div class="space-y-3 text-sm text-gray-300">
+            <div class="bg-black/40 p-3 rounded">
+              <p class="font-bold text-white mb-1">1. El criteri de veritat</p>
+              <p class="text-gray-400">Fe en la veritat revelada + argument d'autoritat (Bíblia, Aristòtil, Tomàs). Ambdós posats en qüestió.</p>
+            </div>
+            <div class="bg-black/40 p-3 rounded">
+              <p class="font-bold text-white mb-1">2. El mètode</p>
+              <p class="text-gray-400">El sil·logisme aristotèlic: si la premissa major és falsa, tot el raonament cau. A més, no permet descobrir veritats noves.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept-card p-5 rounded-xl">
+          <h4 class="font-cinzel text-lg font-bold text-yellow-500 mb-3">L'Objectiu Cartesià</h4>
+          <p class="text-sm text-gray-300 leading-relaxed">Restablir l'edifici del saber sobre <span class="text-yellow-400 font-bold">bases sòlides i fermes</span>, definint un nou criteri de veritat i un nou mètode, i superant l'escepticisme hel·lenístic.</p>
+          <div class="mt-3 p-3 bg-yellow-900/20 rounded text-xs text-yellow-300 font-semibold">
+            💡 Inspiració matemàtica: el mètode de demostració geomètric com a ideal del saber rigorós.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILOSOFIA DEL FONAMENT — TABS -->
+<section id="fonament" class="py-20 section-mid relative">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-500">LA FILOSOFIA DEL FONAMENT</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">"Cercar una veritat totalment certa i indubtable des de la qual reconstruir el saber"</p>
+    </div>
+
+    <!-- TABS -->
+    <div class="flex flex-wrap justify-center gap-8 mb-12 border-b border-white/10 pb-4">
+      <button class="tab-btn active text-lg font-cinzel px-4 py-2" onclick="switchTab('dubte')">El Dubte Metòdic</button>
+      <button class="tab-btn text-lg font-cinzel px-4 py-2" onclick="switchTab('veritat')">Primeres Veritats</button>
+      <button class="tab-btn text-lg font-cinzel px-4 py-2" onclick="switchTab('deu')">Existència de Déu</button>
+    </div>
+
+    <!-- TAB: DUBTE -->
+    <div id="dubte" class="content-panel active">
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div class="space-y-6">
+          <h3 class="font-cinzel text-3xl font-bold text-yellow-500">El Dubte Metòdic</h3>
+          <div class="descartes-quote p-5 rounded-r-lg">
+            <p class="text-lg">"No cal provar que totes les opinions anteriors són falses: n'hi ha prou de trobar <strong>el més petit motiu de dubte</strong> per rebutjar-les."</p>
+          </div>
+          <p class="text-gray-300 leading-relaxed">El dubte metòdic no és escepticisme: és un instrument. Descartes l'usa de manera sistemàtica, dirigint-lo contra els <em>fonaments</em>, no contra cada creença particular. Si el fonament cau, s'enfonsa tot l'edifici.</p>
+
+          <div class="space-y-5 mt-4">
+            <!-- Pas 1 -->
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-yellow-600/30 border border-yellow-500/50 rounded-full flex items-center justify-center">
+                <span class="font-cinzel text-yellow-400 font-bold">1</span>
+              </div>
+              <div>
+                <h5 class="text-white font-bold mb-1">Desconfiança dels sentits</h5>
+                <p class="text-sm text-gray-400">Els sentits a vegades ens enganyen; no podem fiar-nos plenament d'ells. <span class="text-yellow-400">Però:</span> no permet dubtar de l'existència de les coses mateixes.</p>
+              </div>
+            </div>
+            <!-- Pas 2 -->
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-yellow-600/30 border border-yellow-500/50 rounded-full flex items-center justify-center">
+                <span class="font-cinzel text-yellow-400 font-bold">2</span>
+              </div>
+              <div>
+                <h5 class="text-white font-bold mb-1">Vetlla i somni</h5>
+                <p class="text-sm text-gray-400">Si en el somni la realitat és producció de la ment, podria passar el mateix en la vetlla? Permet dubtar de les coses materials. <span class="text-yellow-400">Però:</span> no afecta les veritats matemàtiques (despert o adormit, 2+3=5).</p>
+              </div>
+            </div>
+            <!-- Pas 3 -->
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-red-700/40 border border-red-500/50 rounded-full flex items-center justify-center">
+                <span class="font-cinzel text-red-400 font-bold">3</span>
+              </div>
+              <div>
+                <h5 class="text-white font-bold mb-1">La hipòtesi del geni maligne</h5>
+                <p class="text-sm text-gray-400">I si existís un ésser infinitament poderós que m'enganyés sempre, fins i tot quan raono sobre matemàtiques? Permet dubtar de <em>tot</em>, incloent-hi les matemàtiques i l'existència de Déu.</p>
+                <div class="mt-2 p-2 bg-red-900/20 rounded border-l-2 border-red-500 text-xs text-red-300">
+                  Resultat: <strong>suspensió total del judici</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="concept-card p-6 rounded-xl border-yellow-500/30">
+            <h4 class="font-cinzel text-xl font-bold text-yellow-400 mb-4">Utilitat del Dubte</h4>
+            <ul class="space-y-3 text-sm text-gray-300">
+              <li class="flex items-start gap-2"><span class="text-yellow-500 mt-0.5">▸</span><span>Ens allibera de prejudicis i falses creences rebudes per l'educació</span></li>
+              <li class="flex items-start gap-2"><span class="text-yellow-500 mt-0.5">▸</span><span>Acostuma l'esperit a allunyar-se dels sentits (font principal de l'error)</span></li>
+              <li class="flex items-start gap-2"><span class="text-yellow-500 mt-0.5">▸</span><span>El que resisteixi tots els criteris de dubte serà una veritat absolutament certa</span></li>
+            </ul>
+          </div>
+
+          <div class="concept-card p-6 rounded-xl">
+            <h4 class="font-cinzel text-xl font-bold text-white mb-4">Límit Important</h4>
+            <p class="text-sm text-gray-300 mb-3">El dubte s'aplica <span class="text-yellow-400 font-bold">només a l'àmbit del coneixement</span>, no al de l'acció pràctica. Per a la vida quotidiana, mentres es reconstrueix el saber, Descartes proposa:</p>
+            <div class="bg-black/40 p-3 rounded text-sm text-gray-300">
+              <span class="text-yellow-400 font-bold">Moral provisional:</span> conjunt de regles de moderació i mesura inspirades en l'intel·lectualisme moral socràtic i l'estoïcisme. Evita acusar-lo de lliberti.
+            </div>
+          </div>
+
+          <div class="descartes-quote p-5 rounded-r-lg">
+            <p class="text-sm text-gray-300">"Suposaré que hi ha un cert <strong>geni maligne</strong>, tan astut i entabanador com poderós, que ho ha fet tot per enganyar-me. Pensaré que el cel, l'aire, la terra, els colors, les figures, els sons no són més que il·lusions..."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: PRIMERES VERITATS -->
+    <div id="veritat" class="content-panel">
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div class="space-y-6">
+          <h3 class="font-cinzel text-3xl font-bold text-yellow-500">Les Primeres Veritats</h3>
+          <p class="text-gray-300 leading-relaxed">Aplicant el dubte fins al límit, Descartes es pregunta si pot dubtar fins i tot de la pròpia existència del jo. En aquest moment apareix la primera afirmació que resisteix tots els criteris de dubte:</p>
+
+          <div class="p-8 rounded-xl text-center" style="background: linear-gradient(135deg, rgba(123,30,46,.3), rgba(201,168,76,.1)); border: 1px solid rgba(201,168,76,.4); animation: pulse-glow 3s ease-in-out infinite;">
+            <p class="font-cinzel text-3xl font-black text-yellow-400 mb-2">«PENSO, ALESHORES EXISTEIXO»</p>
+            <p class="font-playfair italic text-silver text-lg">Cogito ergo sum</p>
+          </div>
+
+          <p class="text-gray-300 leading-relaxed">Si el geni maligne m'enganya, és perquè jo existeixo. No puc dubtar de l'acte de pensar sense que aquest acte ja pressuposi la meva existència.</p>
+
+          <div class="concept-card p-5 rounded-xl border-yellow-500/40">
+            <h4 class="font-cinzel text-lg font-bold text-yellow-400 mb-3">El Criteri de Veritat</h4>
+            <p class="text-sm text-gray-300">El <em>cogito</em> proporciona el criteri que buscava:</p>
+            <div class="mt-3 p-4 bg-yellow-900/30 rounded-lg border border-yellow-500/30">
+              <p class="text-yellow-200 text-sm font-semibold italic">"Només acceptaré com a vertader allò que la meva raó pugui concebre de manera <strong>clara i distinta</strong>."</p>
+            </div>
+            <p class="text-xs text-gray-400 mt-2">S'admetrà com a vertader allò que se'ns presenti a la raó amb el mateix grau de claredat i distinció que el <em>cogito</em>.</p>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="concept-card p-6 rounded-xl">
+            <h4 class="font-cinzel text-xl font-bold text-white mb-4">La Segona Veritat: Res Cogitans</h4>
+            <p class="text-sm text-gray-300 mb-3">Sé que existeixo, però no sé clarament <em>què</em> soc. Descartes examina els atributs del cos i de l'ànima:</p>
+            <ul class="space-y-2 text-sm text-gray-400">
+              <li class="flex gap-2"><span class="text-red-400">✗</span><span>Atributs del cos: dubte per la hipòtesi del geni maligne</span></li>
+              <li class="flex gap-2"><span class="text-red-400">✗</span><span>Caminar, nodrir-se: ocorren també en somnis</span></li>
+              <li class="flex gap-2"><span class="text-green-400">✓</span><span class="font-semibold text-white">L'acte de pensar: inseparable de mi, indubtable</span></li>
+            </ul>
+            <div class="mt-4 p-3 bg-white/5 rounded border-l-4 border-yellow-500">
+              <p class="text-yellow-300 text-sm font-bold">"No sóc més que una cosa que pensa" — <em>res cogitans</em></p>
+            </div>
+          </div>
+
+          <div class="concept-card p-6 rounded-xl">
+            <h4 class="font-cinzel text-xl font-bold text-white mb-4">L'Exemple de la Cera</h4>
+            <p class="text-sm text-gray-300 mb-3">Un tros de cera s'apropa al foc: canvien color, olor, forma i consistència. Però la cera és la mateixa. Allò que es manté —extensió, flexibilitat— <span class="text-yellow-400 font-bold">només ho coneixem per l'enteniment</span>, no pels sentits.</p>
+            <div class="grid grid-cols-2 gap-3 mt-3">
+              <div class="bg-yellow-900/20 p-3 rounded border border-yellow-500/30">
+                <p class="text-xs font-bold text-yellow-400 mb-1">QUALITATS PRIMÀRIES</p>
+                <p class="text-xs text-gray-400">Extensió, figura, nombre, moviment, durada. <span class="text-yellow-300">Objectives.</span> Conegudes per l'enteniment.</p>
+              </div>
+              <div class="bg-white/5 p-3 rounded">
+                <p class="text-xs font-bold text-gray-400 mb-1">QUALITATS SECUNDÀRIES</p>
+                <p class="text-xs text-gray-400">Colors, olors, sabors, sons. <span class="text-red-400">Subjectives.</span> Producte dels sentits.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: DÉU -->
+    <div id="deu" class="content-panel">
+      <div class="max-w-5xl mx-auto">
+        <h3 class="font-cinzel text-3xl font-bold text-yellow-500 mb-6 text-center">La Demostració de l'Existència de Déu</h3>
+        <div class="descartes-quote p-5 rounded-r-lg mb-8 max-w-3xl mx-auto">
+          <p class="text-lg">"Si aconseguíssim demostrar que Déu existeix i que és veraç —que no vol que m'enganyi quan raono correctament— podríem eliminar la hipòtesi del geni maligne."</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5 mb-10">
+          <div class="concept-card p-5 rounded-xl">
+            <h4 class="font-cinzel text-sm font-bold text-gray-400 mb-2 uppercase tracking-wider">Tipus 1</h4>
+            <h5 class="font-cinzel text-lg text-white mb-2">Idees Adventícies</h5>
+            <p class="text-sm text-gray-400">Provenen dels sentits; semblen venir de fora. No fiables: els sentits enganyen.</p>
+          </div>
+          <div class="concept-card p-5 rounded-xl">
+            <h4 class="font-cinzel text-sm font-bold text-gray-400 mb-2 uppercase tracking-wider">Tipus 2</h4>
+            <h5 class="font-cinzel text-lg text-white mb-2">Idees Factícies</h5>
+            <p class="text-sm text-gray-400">La imaginació les construeix a partir d'altres idees. Inventades (sirenes, centaures). Sense realitat pròpia.</p>
+          </div>
+          <div class="concept-card p-5 rounded-xl border-yellow-500/50" style="border-top:2px solid var(--gold)">
+            <h4 class="font-cinzel text-sm font-bold text-yellow-500 mb-2 uppercase tracking-wider">Tipus 3 — Clau ✦</h4>
+            <h5 class="font-cinzel text-lg text-yellow-300 mb-2">Idees Innates</h5>
+            <p class="text-sm text-gray-300">Han nascut amb mi. Formen part del pensament. Se'm imposen de manera immediata i evident. Les úniques fiables.</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+          <div class="space-y-5">
+            <h4 class="font-cinzel text-xl font-bold text-yellow-400">L'Argument Ontològic</h4>
+            <p class="text-sm text-gray-300 leading-relaxed">Descartes posseeix la idea innata de Déu com un <em>ésser summament perfecte</em>. Aquesta idea no pot ser adventícia (no l'hem vist pels sentits) ni factícia (un ésser imperfecte no pot produir la idea d'allò perfecte).</p>
+
+            <div class="space-y-3 text-sm">
+              <div class="flex items-start gap-3 bg-black/30 p-3 rounded">
+                <span class="text-yellow-500 font-bold mt-0.5">1.</span>
+                <span class="text-gray-300">Tot allò que concebo <strong>clara i distintament</strong> que pertany a una idea innata, efectivament li pertany.</span>
+              </div>
+              <div class="flex items-start gap-3 bg-black/30 p-3 rounded">
+                <span class="text-yellow-500 font-bold mt-0.5">2.</span>
+                <span class="text-gray-300">En la idea d'un ésser summament perfecte, concebo que l'existència li pertany necessàriament (la mancança seria imperfecció).</span>
+              </div>
+              <div class="flex items-start gap-3 bg-yellow-900/30 p-3 rounded border border-yellow-500/30">
+                <span class="text-yellow-500 font-bold mt-0.5">∴</span>
+                <span class="text-yellow-200 font-semibold">Déu existeix (<em>res infinita</em>).</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-5">
+            <h4 class="font-cinzel text-xl font-bold text-yellow-400">Déu com a Garantia del Saber</h4>
+            <p class="text-sm text-gray-300">Demostrada l'existència de Déu, Descartes pot reconstruir l'edifici del saber:</p>
+            <ul class="space-y-3 text-sm text-gray-300">
+              <li class="flex items-start gap-2"><span class="text-yellow-500">▸</span><span><strong>Elimina el geni maligne:</strong> Déu és summament perfecte i enganyar és una imperfecció.</span></li>
+              <li class="flex items-start gap-2"><span class="text-yellow-500">▸</span><span><strong>Restableix les matemàtiques:</strong> Déu veraç no permet l'engany quan fem un ús recte de la raó.</span></li>
+              <li class="flex items-start gap-2"><span class="text-yellow-500">▸</span><span><strong>Fonamenta el criteri:</strong> allò que concebo clara i distintament és vertader.</span></li>
+            </ul>
+
+            <div class="concept-card p-4 rounded-xl border-yellow-500/30">
+              <h5 class="font-cinzel text-sm font-bold text-yellow-400 mb-2">Per Què Ens Equivoquem?</h5>
+              <p class="text-xs text-gray-400">Déu ens ha fet lliures. L'<strong>enteniment</strong> concep les idees, però el <strong>judici</strong> (afirmar, negar) depèn de la <strong>voluntat</strong>. L'error sorgeix quan la voluntat lliure accepta allò que l'enteniment no concep amb prou claredat.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSTÀNCIES -->
+<section id="substancies" class="py-20 section-light relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-yellow-900/10 to-transparent pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-500">LES TRES SUBSTÀNCIES</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">"Una realitat que existeix de tal manera que no necessita cap altra realitat per existir"</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-0 border border-white/10 rounded-2xl overflow-hidden mb-12">
+      <!-- Res Infinita -->
+      <div class="p-8 border-r border-white/10" style="background: linear-gradient(135deg, rgba(0,0,0,.6), rgba(13,21,37,.8))">
+        <div class="mb-4">
+          <span class="font-cinzel text-xs tracking-widest bg-white/10 text-white px-3 py-1 rounded-full">RES INFINITA</span>
+        </div>
+        <h3 class="font-cinzel text-2xl font-bold text-white mb-1">Déu</h3>
+        <p class="font-playfair italic text-gray-500 text-sm mb-5">Substància infinita</p>
+        <ul class="space-y-3 text-sm text-gray-300">
+          <li class="border-t border-white/10 pt-2"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Naturalesa</span>No creada. Absolutament independent. Summament perfecta.</li>
+          <li class="border-t border-white/10 pt-2"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Atributs</span>Infinitud, eternitat, immutabilitat, omnisciència, omnipotència.</li>
+          <li class="border-t border-white/10 pt-2"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Modes</span>Cap. És l'única substància en sentit estricte.</li>
+        </ul>
+      </div>
+
+      <!-- Res Cogitans -->
+      <div class="p-8 border-r border-white/10" style="background: linear-gradient(135deg, rgba(123,30,46,.25), rgba(13,21,37,.8))">
+        <div class="mb-4">
+          <span class="font-cinzel text-xs tracking-widest px-3 py-1 rounded-full" style="background: var(--crimson); color:white">RES COGITANS</span>
+        </div>
+        <h3 class="font-cinzel text-2xl font-bold text-white mb-1">Ànima</h3>
+        <p class="font-playfair italic text-gray-500 text-sm mb-5">Substància pensant</p>
+        <ul class="space-y-3 text-sm text-gray-300">
+          <li class="border-t border-white/10 pt-2"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Naturalesa</span>Creada. Dependent de Déu. Independent de la res extensa. Finita, imperfecta.</li>
+          <li class="border-t border-white/10 pt-2"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Atribut</span>El pensament (indivisible, inextensa).</li>
+          <li class="border-t border-white/10 pt-2"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Modes</span>Enteniment i voluntat (dubtar, afirmar, negar, voler, imaginar, sentir...). Es regeix per la llibertat.</li>
+        </ul>
+      </div>
+
+      <!-- Res Extensa -->
+      <div class="p-8" style="background: linear-gradient(135deg, rgba(201,168,76,.15), rgba(13,21,37,.8))">
+        <div class="mb-4">
+          <span class="font-cinzel text-xs tracking-widest px-3 py-1 rounded-full" style="background: var(--gold); color:#060912">RES EXTENSA</span>
+        </div>
+        <h3 class="font-cinzel text-2xl font-bold text-white mb-1">Món Material</h3>
+        <p class="font-playfair italic text-gray-500 text-sm mb-5">Substància extensa</p>
+        <ul class="space-y-3 text-sm text-gray-300">
+          <li class="border-t border-white/10 pt-2"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Naturalesa</span>Creada. Dependent de Déu. Independent de la res cogitans. Finita, imperfecta.</li>
+          <li class="border-t border-white/10 pt-2"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Atribut</span>L'extensió (longitud, amplada, profunditat).</li>
+          <li class="border-t border-white/10 pt-2"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Modes</span>Qualitats primàries. Determinisme mecanicista.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cos i ànima -->
+    <div class="grid lg:grid-cols-2 gap-10 items-start">
+      <div class="space-y-5">
+        <h3 class="font-cinzel text-3xl font-bold text-yellow-400">Cos i Ànima: La Connexió</h3>
+        <p class="text-gray-300 leading-relaxed">L'ésser humà és <span class="text-yellow-400 font-bold">l'únic ésser</span> en el qual la res extensa (cos) i la res cogitans (ànima) estan en connexió. La resta dels éssers vius són pura extensió: autòmats governats per lleis mecanicistes.</p>
+        <div class="space-y-3 text-sm text-gray-300">
+          <div class="bg-black/40 p-4 rounded-lg border-l-4 border-yellow-500">
+            <p class="font-bold text-white mb-1">Cos (res extensa)</p>
+            <p class="text-gray-400">Cosa extensa, divisible, que no pensa. Regida per la necessitat i el mecanicisme. Comparable a una màquina d'ossos, nervis, músculs i venes.</p>
+          </div>
+          <div class="bg-black/40 p-4 rounded-lg border-l-4 border-red-600">
+            <p class="font-bold text-white mb-1">Ànima (res cogitans)</p>
+            <p class="text-gray-400">Cosa que pensa, indivisible, inextensa. Regida per la llibertat. Diferent del cos i independent d'ell — d'on se'n deriva la seva immortalitat.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-5">
+        <div class="concept-card p-6 rounded-xl">
+          <h4 class="font-cinzel text-xl font-bold text-white mb-4">La Glàndula Pineal</h4>
+          <p class="text-sm text-gray-300 mb-4">Cos i ànima interactuen a través de la <span class="text-yellow-400 font-bold">glàndula pineal</span>, estructura única del cervell que conté un fluid —els <em>esperits animals</em>— que corre pels nervis del cos.</p>
+          <div class="space-y-3 text-xs text-gray-400">
+            <div class="flex gap-2 bg-black/30 p-3 rounded">
+              <span class="text-yellow-500">→</span>
+              <span><strong class="text-white">Del cos a l'ànima:</strong> sensacions, percepcions i passions es transmeten per els esperits animals fins a la glàndula, que s'agita i afecta l'ànima.</span>
+            </div>
+            <div class="flex gap-2 bg-black/30 p-3 rounded">
+              <span class="text-yellow-500">←</span>
+              <span><strong class="text-white">De l'ànima al cos:</strong> en les accions voluntàries, l'ànima mou la glàndula per invertir el moviment dels esperits cap a la part del cos que vol moure.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept-card p-5 rounded-xl border-yellow-500/20">
+          <h4 class="font-cinzel text-lg font-bold text-yellow-400 mb-3">Implicació Cristiana</h4>
+          <p class="text-xs text-gray-400">Remarcar la independència entre cos i ànima tenia la funció cristiana de justificar la immortalitat de l'ànima: com que per existir no necessita el cos, pot continuar existint un cop el cos es destrueix. L'ànima és creada per Déu en cada ocasió (no preexistent com en Plató).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RACIONALISME -->
+<section id="racionalisme" class="py-20 section-dark relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-500">EL RACIONALISME CARTESIÀ</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Idees innates, intuïció i deducció</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-10 mb-12">
+      <div class="space-y-5">
+        <h3 class="font-cinzel text-2xl font-bold text-yellow-400">Intuïció i Idees Innates</h3>
+        <p class="text-gray-300 leading-relaxed">La raó proporciona uns primers principis —veritats indubtables— que Descartes concep com una <span class="text-yellow-400 font-bold">llum natural</span> que capta de manera immediata una veritat simple que s'imposa sense possibilitat de dubte. El paradigma és el <em>cogito</em>.</p>
+        <p class="text-gray-300 leading-relaxed">Cada una d'aquestes veritats s'identifica amb una <span class="text-yellow-400">idea innata</span> —posada per Déu en la raó humana en néixer—, a diferència de Plató on eren reminiscents d'una vida anterior.</p>
+
+        <div class="grid grid-cols-2 gap-3 mt-3">
+          <div class="concept-card p-4 rounded-lg">
+            <p class="font-cinzel text-sm text-yellow-500 mb-1">Idea de Déu</p>
+            <p class="text-xs text-gray-400">Innata. No pot venir dels sentits ni de la imaginació. Ésser perfecte, infinit, causa sui.</p>
+          </div>
+          <div class="concept-card p-4 rounded-lg">
+            <p class="font-cinzel text-sm text-yellow-500 mb-1">Idea del Jo (cogito)</p>
+            <p class="text-xs text-gray-400">Innata. La consciència del propi pensament. Fonament indubtable del saber.</p>
+          </div>
+          <div class="concept-card p-4 rounded-lg">
+            <p class="font-cinzel text-sm text-yellow-500 mb-1">Idees Matemàtiques</p>
+            <p class="text-xs text-gray-400">Triangle, cercle, nombres. No depenen de la percepció; formen part de l'estructura racional.</p>
+          </div>
+          <div class="concept-card p-4 rounded-lg">
+            <p class="font-cinzel text-sm text-yellow-500 mb-1">Idees Metafísiques</p>
+            <p class="text-xs text-gray-400">Substància, ment (res cogitans), cos (res extensa). Organitzen la realitat de manera natural.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-5">
+        <h3 class="font-cinzel text-2xl font-bold text-yellow-400">Deducció i More Geometrico</h3>
+        <p class="text-gray-300 leading-relaxed">A partir de la intuïció de les idees innates i de les connexions entre elles, la <span class="text-yellow-400 font-bold">deducció</span> és el segon mode de coneixement: en un moviment continu de la raó, recolzada en la memòria, s'elaboren les idees més complexes.</p>
+        <p class="text-gray-300 leading-relaxed">És el que Descartes fa a les <em>Meditacions</em>: una argumentació que emulen la manera de demostrar dels matemàtics i geòmetres (<em>more geometrico</em>), que per a ell constitueix l'ideal del saber rigorós.</p>
+
+        <div class="concept-card p-6 rounded-xl border-yellow-500/30">
+          <h4 class="font-cinzel text-lg font-bold text-white mb-4">Descartes vs. Plató: Idees Innates</h4>
+          <div class="space-y-3 text-sm text-gray-300">
+            <div class="flex gap-3 items-start">
+              <span class="text-purple-400 font-bold">Plató</span>
+              <span class="text-gray-400">Les idees són reminiscències d'una vida anterior: l'ànima les ha contemplades en el Món de les Idees.</span>
+            </div>
+            <div class="border-t border-white/10"></div>
+            <div class="flex gap-3 items-start">
+              <span class="text-yellow-400 font-bold">Descartes</span>
+              <span class="text-gray-400">Com a cristià, no pot acceptar la preexistència de l'ànima. Déu les posa en la raó en el moment del naixement. Qualsevol persona que pensi correctament les pot descobrir.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mecanicisme -->
+    <div class="border-t border-white/10 pt-12">
+      <h3 class="font-cinzel text-3xl font-bold text-yellow-400 text-center mb-8">El Mecanicisme Cartesià</h3>
+      <div class="max-w-4xl mx-auto text-center mb-8">
+        <p class="text-gray-300 leading-relaxed">Descartes concep l'univers com una enorme màquina regida per lleis precises, sense teleologisme ni voluntat. Combinat amb la geometria analítica que ell mateix va crear, va fonamentar la física clàssica newtoniana.</p>
+      </div>
+      <div class="grid md:grid-cols-4 gap-5">
+        <div class="concept-card p-5 rounded-xl text-center">
+          <div class="text-3xl mb-3">📐</div>
+          <h4 class="font-cinzel text-sm font-bold text-yellow-500 mb-2">Matèria = Extensió</h4>
+          <p class="text-xs text-gray-400">Tot el físic ocupa un espai i es pot dividir en parts més petites.</p>
+        </div>
+        <div class="concept-card p-5 rounded-xl text-center">
+          <div class="text-3xl mb-3">⚡</div>
+          <h4 class="font-cinzel text-sm font-bold text-yellow-500 mb-2">Lleis Universals</h4>
+          <p class="text-xs text-gray-400">Lleis fixes i immutables que governen el comportament de tot el que existeix.</p>
+        </div>
+        <div class="concept-card p-5 rounded-xl text-center">
+          <div class="text-3xl mb-3">➡️</div>
+          <h4 class="font-cinzel text-sm font-bold text-yellow-500 mb-2">Principi d'Inèrcia</h4>
+          <p class="text-xs text-gray-400">Un objecte en moviment continua en línia recta si cap força l'atura.</p>
+        </div>
+        <div class="concept-card p-5 rounded-xl text-center">
+          <div class="text-3xl mb-3">🔒</div>
+          <h4 class="font-cinzel text-sm font-bold text-yellow-500 mb-2">Conservació del Moviment</h4>
+          <p class="text-xs text-gray-400">La quantitat total de moviment d'un sistema tancat es manté constant.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREGUNTES PER REPASSAR -->
+<section id="repassar" class="py-20 section-mid">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="font-cinzel text-4xl font-bold text-white mb-4">PREGUNTES PER REPASSAR</h2>
+      <p class="text-gray-400">Descartes ens convida a fonamentar</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Teoria del Coneixement -->
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-xl font-bold text-yellow-500 border-b border-yellow-500/30 pb-2 mb-4">Teoria del Coneixement</h3>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Podem fiar-nos dels sentits?</p>
+          <p class="text-xs text-gray-400">Descartes diu que no: els sentits ens enganyen. Tot el saber vertader prové de la raó, no de la percepció sensible.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Existeixen les idees innates?</p>
+          <p class="text-xs text-gray-400">Per a Descartes sí: Déu les posa en la raó al néixer. Per a l'empirisme (Locke, Hume), la ment és una pissarra en blanc i tot coneixement ve de l'experiència.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Podem distingir vetlla i somni?</p>
+          <p class="text-xs text-gray-400">La memòria coherent i contínua ens ho permet: els somnis no es poden encadenar amb el curs de la vida com sí que ho fan les experiències reals.</p>
+        </div>
+      </div>
+
+      <!-- Metafísica -->
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-xl font-bold text-red-400 border-b border-red-500/30 pb-2 mb-4">Metafísica</h3>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">L'argument ontològic és vàlid?</p>
+          <p class="text-xs text-gray-400">Kant el criticarà: l'existència no és un predicat. Del fet de concebre un ésser perfecte no es deriva que existeixi. Descartes respon que en Déu essència i existència són inseparables.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">El criteri de veritat és circular?</p>
+          <p class="text-xs text-gray-400">Objecció clàssica: Descartes usa el cogito (que és clar i distint) per fonamentar el criteri de claredat i distinció, que al seu torn usa per demostrar Déu, que garanteix el criteri. Cercle cartesià.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Som alguna cosa més que pensament?</p>
+          <p class="text-xs text-gray-400">"Penso, aleshores existeixo" ens diu que existim mentre pensem. Però del pensar, Descartes dedueix que som <em>una cosa</em> que pensa. Pot ser discutible.</p>
+        </div>
+      </div>
+
+      <!-- Antropologia -->
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-xl font-bold text-purple-400 border-b border-purple-500/30 pb-2 mb-4">Antropologia</h3>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Cos i ànima poden existir separadament?</p>
+          <p class="text-xs text-gray-400">Per a Descartes sí: l'ànima és independent del cos i pot existir sense ell. Però el problema és explicar com interactuen si són tan radicalment distints. La glàndula pineal és una solució poc convincent.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Els animals no pensen?</p>
+          <p class="text-xs text-gray-400">Per a Descartes, els animals no tenen ànima i són purs autòmats. No tenen capacitat de pensar ni intel·ligència. ¿És tan radical la diferència entre humans i animals?</p>
+        </div>
+      </div>
+
+      <!-- Ciència i Moral -->
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-xl font-bold text-green-400 border-b border-green-500/30 pb-2 mb-4">Ciència i Herència</h3>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Descartes és un escèptic o un dogmàtic?</p>
+          <p class="text-xs text-gray-400">Usa l'escepticisme com a eina, però la seva finalitat és superar-lo i reconstruir el saber. La seva actitud final és dogmàtica: creu haver trobat les bases certes de tot coneixement.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Quin és el seu llegat?</p>
+          <p class="text-xs text-gray-400">El nou enfocament gnoseològic (pensar el coneixement abans que la realitat) marcarà tota la filosofia moderna: Spinoza, Leibniz, Locke, Hume, Kant i fins a la fenomenologia del s. XX.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Coneixem les coses o les idees de les coses?</p>
+          <p class="text-xs text-gray-400">Per a Descartes, coneixem idees i no directament les coses. És el que es dirà "idealisme cartesià": la idea del món com a representació mental.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSICIÓ -->
+<div class="py-20 text-center bg-gradient-to-b from-gray-900 to-gray-800">
+  <p class="text-gray-400 uppercase tracking-widest text-sm mb-4">
+    I després de la construcció del sistema cartesià...
+  </p>
+  <h3 class="text-2xl md:text-2xl font-bold text-yellow-100">
+    La gran batalla del coneixement modern
+  </h3>
+</div>
+
+<!-- COMPARATIVA RACIONALISME vs EMPIRISME -->
+<section class="py-20 section-light">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="font-cinzel text-4xl font-bold text-white mb-4">RACIONALISME vs EMPIRISME</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-yellow-500 to-red-600 mx-auto"></div>
+      <p class="mt-4 text-gray-400 text-sm max-w-3xl mx-auto">La gran disputa de la filosofia moderna: d'on prové el coneixement vertader? El debat que condicionarà tota la filosofia fins a Kant.</p>
+    </div>
+
+    <div class="overflow-hidden rounded-2xl border border-white/10">
+      <div class="grid md:grid-cols-2">
+        <!-- RACIONALISME -->
+        <div class="bg-gradient-to-br from-yellow-900/40 to-black p-8 border-r border-white/10">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="font-cinzel text-2xl font-bold text-yellow-500">RACIONALISME</h3>
+            <span class="text-3xl">🧠</span>
+          </div>
+          <p class="text-xs text-yellow-600 mb-4 font-bold tracking-wider">Descartes · Spinoza · Leibniz</p>
+
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-gray-400">Font del coneixement</span>
+              <span class="text-yellow-400 font-semibold">La raó</span>
+            </div>
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-gray-400">Idees innates</span>
+              <span class="text-yellow-400 font-semibold">Sí, posades per Déu</span>
+            </div>
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-gray-400">Rol dels sentits</span>
+              <span class="text-yellow-400 font-semibold">Font d'error</span>
+            </div>
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-gray-400">Mètode</span>
+              <span class="text-yellow-400 font-semibold">Intuïció + Deducció</span>
+            </div>
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-gray-400">Model de saber</span>
+              <span class="text-yellow-400 font-semibold">Matemàtiques (more geometrico)</span>
+            </div>
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-gray-400">Veritat</span>
+              <span class="text-yellow-400 font-semibold">Clara i distinta a la raó</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-400">Ment al néixer</span>
+              <span class="text-yellow-400 font-semibold">Dotada d'idees innates</span>
+            </div>
+          </div>
+
+          <div class="mt-6 p-4 bg-yellow-500/10 rounded-lg border border-yellow-500/30">
+            <p class="text-xs text-yellow-200 italic">"Tot allò que concebo de manera clara i distinta és vertader. La raó és la mesura de tota certesa."</p>
+          </div>
+        </div>
+
+        <!-- EMPIRISME -->
+        <div class="bg-gradient-to-bl from-red-900/30 to-black p-8">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="font-cinzel text-2xl font-bold text-red-400">EMPIRISME</h3>
+            <span class="text-3xl">👁️</span>
+          </div>
+          <p class="text-xs text-red-600 mb-4 font-bold tracking-wider">Locke · Berkeley · Hume</p>
+
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-gray-400">Font del coneixement</span>
+              <span class="text-red-400 font-semibold">L'experiència sensible</span>
+            </div>
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-gray-400">Idees innates</span>
+              <span class="text-red-400 font-semibold">No, la ment és una pissarra en blanc</span>
+            </div>
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-gray-400">Rol dels sentits</span>
+              <span class="text-red-400 font-semibold">Única font de coneixement</span>
+            </div>
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-gray-400">Mètode</span>
+              <span class="text-red-400 font-semibold">Observació + Inducció</span>
+            </div>
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-gray-400">Model de saber</span>
+              <span class="text-red-400 font-semibold">Ciències naturals (Newton)</span>
+            </div>
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-gray-400">Veritat</span>
+              <span class="text-red-400 font-semibold">Contrastada amb l'experiència</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-400">Ment al néixer</span>
+              <span class="text-red-400 font-semibold">Buida (tabula rasa)</span>
+            </div>
+          </div>
+
+          <div class="mt-6 p-4 bg-red-500/10 rounded-lg border border-red-500/30">
+            <p class="text-xs text-red-200 italic">"No hi ha res a l'enteniment que no hagi estat abans als sentits." (Locke, contra Descartes)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SÍNTESI: KANT -->
+      <div class="bg-gradient-to-r from-purple-900/40 via-black to-purple-900/40 p-8 border-t border-white/10 text-center">
+        <div class="flex items-center justify-center space-x-4 mb-4">
+          <div class="w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-400 font-bold text-lg">⚡</div>
+          <h4 class="font-cinzel text-xl text-purple-300 font-bold">La síntesi de KANT (1781)</h4>
+        </div>
+        <p class="text-gray-300 text-sm max-w-3xl mx-auto leading-relaxed">
+          Kant "es va despertar del son dogmàtic" gràcies a Hume. La seva <em>Crítica de la Raó Pura</em> intenta superar ambdós corrents: <span class="text-yellow-400">la raó aporta les formes a priori</span> (racionalisme), però <span class="text-red-400">sense experiència no hi ha contingut</span> (empirisme). "Conceptes sense intuïcions són buits; intuïcions sense conceptes són cegues."
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SÍNTESI FINAL -->
+<section class="py-20 section-dark relative">
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-yellow-900/5 to-transparent pointer-events-none"></div>
+  <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+    <h2 class="font-cinzel text-4xl font-bold text-white mb-10">SÍNTESI FINAL</h2>
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <div class="concept-card p-6 rounded-xl border-yellow-500/30">
+        <div class="text-3xl mb-3">🔍</div>
+        <h3 class="font-cinzel text-lg font-bold text-yellow-400 mb-2">El Problema</h3>
+        <p class="text-xs text-gray-400">L'escolàstica havia perdut els seus dos pilars: el criteri de veritat i el mètode. L'escepticisme amenaçava qualsevol nou sistema filosòfic.</p>
+      </div>
+      <div class="concept-card p-6 rounded-xl border-red-600/30">
+        <div class="text-3xl mb-3">🔨</div>
+        <h3 class="font-cinzel text-lg font-bold text-red-400 mb-2">El Mètode</h3>
+        <p class="text-xs text-gray-400">Dubte metòdic radical per trobar una veritat indubtable. El cogito resisteix tots els criteris, fins i tot el geni maligne.</p>
+      </div>
+      <div class="concept-card p-6 rounded-xl border-yellow-500/50">
+        <div class="text-3xl mb-3">🏛️</div>
+        <h3 class="font-cinzel text-lg font-bold text-yellow-300 mb-2">La Reconstrucció</h3>
+        <p class="text-xs text-gray-400">Des del cogito: criteri de veritat → Déu → matemàtiques → món material → tres substàncies. L'edifici del saber reconstruït.</p>
+      </div>
+    </div>
+    <p class="font-playfair italic text-gray-400 mb-6 text-lg">Cercar, dubtar, fonamentar: el recorregut d'una filosofia que vol fer del coneixement quelcom absolutament cert.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gradient-to-b from-black via-blue-950/30 to-black border-t border-white/10 py-16">
+  <div class="max-w-5xl mx-auto px-4 text-center">
+    <div class="flex flex-col items-center mb-8">
+      <span class="font-cinzel text-yellow-500 text-xl tracking-widest font-bold">DESCARTES Experience</span>
+      <span class="font-playfair italic text-gray-400 text-lg block mt-3">"I fins aquí el filòsof del fonament"</span>
+    </div>
+    <p class="text-gray-600 text-xs uppercase tracking-wider mb-8">Dubte metòdic · Cogito ergo sum · Racionalisme modern</p>
+
+    <div class="descartes-quote p-8 rounded-xl text-center max-w-4xl mx-auto">
+      <p class="text-xl font-playfair italic text-gray-200 mb-4">"Em calia emprendre seriosament, una vegada en la vida, la tasca de desfer-me de totes les opinions adoptades fins aleshores i tornar a començar-ho tot des dels fonaments, si és que volia establir alguna cosa ferma i constant en les ciències."</p>
+      <p class="text-sm text-gray-500">— René Descartes, Meditació Primera</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 mt-12 text-left">
+      <div>
+        <h4 class="font-cinzel text-yellow-500 font-bold mb-3 text-sm">Conceptes Clau</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Dubte metòdic</li>
+          <li>• Cogito ergo sum</li>
+          <li>• Criteri de veritat (claredat i distinció)</li>
+          <li>• Idees innates, adventícies, factícies</li>
+          <li>• Argument ontològic</li>
+          <li>• Qualitats primàries i secundàries</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-cinzel text-yellow-500 font-bold mb-3 text-sm">Les Tres Substàncies</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Res cogitans (ànima)</li>
+          <li>• Res extensa (món material)</li>
+          <li>• Res infinita (Déu)</li>
+          <li>• Glàndula pineal</li>
+          <li>• Esperits animals</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-cinzel text-yellow-500 font-bold mb-3 text-sm">Obres per a les PAU</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Discurs del mètode (1637)</li>
+          <li>• Meditacions metafísiques (1641)</li>
+          <li>• Principis de filosofia (1644)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .home-btn {
+    margin-left:10px; padding:5px 10px; font-size:12px;
+    border:1px solid rgba(255,255,255,.2); border-radius:8px;
+    color: var(--gold); text-decoration:none;
+    background:rgba(0,0,0,.3); backdrop-filter:blur(6px);
+    transition: all .2s ease;
+  }
+  .home-btn:hover {
+    background:rgba(201,168,76,.1);
+    border-color:rgba(201,168,76,.4);
+    transform:translateY(-1px);
+  }
+</style>
+
+<script>
+  // ── Progress bar ──────────────────────────────────────────
+  window.addEventListener('scroll', () => {
+    const s = document.body.scrollTop || document.documentElement.scrollTop;
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progressBar').style.width = (s / h * 100) + '%';
+  });
+
+  // ── Tab switching ─────────────────────────────────────────
+  function switchTab(tabId) {
+    document.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
+    lastFonamentTab = tabId;
+  }
+
+  // ── Scroll-spy: active nav link ───────────────────────────
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  // Maps sub-anchors → parent nav href
+  const parentMap = {
+    context:     'biografia',
+    dubte:       'fonament',
+    veritat:     'fonament',
+    deu:         'fonament',
+    substancies: 'substancies',
+    racionalisme:'racionalisme',
+    repassar:    'repassar',
+  };
+
+  let ignoreScroll = false;
+  let lastFonamentTab = 'dubte';
+
+  function setActive(id) {
+    const parentId = id ? (parentMap[id] || id) : null;
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      const isActive = parentId && (href === '#' + parentId || href === '#' + id);
+      link.classList.toggle('active-section', !!isActive);
+    });
+    // Keep tab buttons in sync
+    if (id === 'fonament' || parentMap[id] === 'fonament') {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        const oc = btn.getAttribute('onclick') || '';
+        btn.classList.toggle('active', oc.includes(lastFonamentTab));
+      });
+    }
+  }
+
+  function getCurrentSection() {
+    const scrollPos = window.scrollY + window.innerHeight * 0.3;
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.offsetTop <= scrollPos) current = s;
+      else break;
+    }
+    const id = current?.getAttribute('id');
+    const hasLink = Array.from(navLinks).some(l => l.getAttribute('href') === '#' + id);
+    return hasLink ? id : (parentMap[id] ? id : null);
+  }
+
+  window.addEventListener('scroll', () => {
+    if (ignoreScroll) return;
+    setActive(getCurrentSection());
+  }, { passive: true });
+
+  // ── Nav link clicks ────────────────────────────────────────
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      const target = link.getAttribute('href').replace('#', '');
+      ignoreScroll = true;
+
+      // If link targets a tab panel inside #fonament
+      if (['dubte', 'veritat', 'deu'].includes(target)) {
+        e.preventDefault();
+        lastFonamentTab = target;
+        document.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById(target)?.classList.add('active');
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector(`.tab-btn[onclick="switchTab('${target}')"]`)?.classList.add('active');
+        const offset = 90;
+        const y = document.getElementById('fonament').getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        e.preventDefault();
+      }
+
+      setActive(target);
+      setTimeout(() => {
+        ignoreScroll = false;
+        setActive(getCurrentSection());
+      }, 700);
+    });
+  });
+
+  // ── Tab buttons → update nav highlight ───────────────────
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const m = (btn.getAttribute('onclick') || '').match(/switchTab\('(.+?)'\)/);
+      if (m) {
+        lastFonamentTab = m[1];
+        setActive(m[1]);
+      }
+    });
+  });
+
+  // ── Smooth scroll for all anchor links ────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      const t = document.querySelector(href);
+      if (t && !['dubte','veritat','deu'].includes(href.replace('#',''))) {
+        e.preventDefault();
+        t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ── Intersection Observer: card fade-in ───────────────────
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0 });
+
+  document.querySelectorAll('.concept-card:not(.no-anim)').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(8px)';
+    el.style.transition = `all .8s ease ${i * 0.04}s`;
+    obs.observe(el);
+  });
+
+  // ── Init ──────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => setActive(getCurrentSection()));
+</script>
+</body>
+</html>
