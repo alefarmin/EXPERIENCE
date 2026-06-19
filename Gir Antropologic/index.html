@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Gir Antropològic · S.V a.C.</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep:   #040608;
+    --mid:    #080E16;
+    --slate:  #101E2E;
+    --ocean:  #162840;
+    --terrac: #8C3B1A;
+    --ember:  #B85C28;
+    --amber:  #C9913A;
+    --gold:   #D4AF6A;
+    --sage:   #4A7C5A;
+    --sage-light:#6AAD7A;
+    --ivory:  #F0EBE3;
+    --silver: #A8B4C0;
+    --crimson:#6B1A2A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;background:var(--deep);color:var(--ivory);overflow-x:hidden;}
+  .font-cinzel{font-family:'Cinzel',serif;}
+  .font-playfair{font-family:'Playfair Display',serif;}
+
+  /* Progress */
+  .progress-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--terrac),var(--amber),var(--sage));z-index:1000;transition:width .1s;box-shadow:0 0 8px rgba(180,90,40,.5);}
+
+  /* Animations */
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  .float-anim{animation:float 5s ease-in-out infinite;}
+  @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+  .shimmer-text{
+    background:linear-gradient(90deg,var(--ivory) 0%,var(--amber) 40%,var(--gold) 55%,var(--ivory) 100%);
+    background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    animation:shimmer 5s linear infinite;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes orb1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.1)}66%{transform:translate(-15px,25px) scale(.95)}}
+  @keyframes orb2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-20px,15px) scale(.92)}}
+  .orb1{animation:orb1 14s ease-in-out infinite;}
+  .orb2{animation:orb2 18s ease-in-out infinite;}
+
+  /* Sections */
+  .section-dark {background:linear-gradient(160deg,#040608 0%,#080E16 100%);position:relative;overflow:hidden;}
+  .section-mid  {background:linear-gradient(160deg,#080E16 0%,#101E2E 100%);}
+  .section-light{background:linear-gradient(160deg,#101E2E 0%,#162840 100%);}
+  .section-warm {background:linear-gradient(160deg,#100804 0%,#1C1008 60%,#080E16 100%);}
+  .section-sage {background:linear-gradient(160deg,#060E08 0%,#0E1C12 60%,#080E16 100%);}
+
+  /* Cards */
+  .concept-card{
+    background:rgba(255,255,255,.025);border:1px solid rgba(180,90,40,.18);
+    backdrop-filter:blur(12px);transition:all .4s cubic-bezier(.4,0,.2,1);border-radius:12px;
+  }
+  .concept-card:hover{
+    transform:translateY(-6px) scale(1.015);border-color:rgba(180,90,40,.5);
+    box-shadow:0 20px 48px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05);
+    background:rgba(255,255,255,.04);
+  }
+  .concept-card.no-anim:hover{transform:none;box-shadow:none;}
+
+  /* Quote */
+  .quote-block{
+    border-left:3px solid var(--ember);
+    background:linear-gradient(90deg,rgba(140,59,26,.14) 0%,rgba(140,59,26,.04) 60%,transparent 100%);
+    font-style:italic;position:relative;
+  }
+  .quote-block.sage{border-left-color:var(--sage);background:linear-gradient(90deg,rgba(74,124,90,.14) 0%,transparent 80%);}
+  .big-q{
+    position:absolute;top:-12px;left:10px;
+    font-family:'Playfair Display',serif;font-size:5rem;line-height:1;
+    color:rgba(180,90,40,.15);pointer-events:none;user-select:none;
+  }
+  .big-q.sage-q{color:rgba(74,124,90,.15);}
+
+  /* Tabs */
+  .tab-btn{transition:all .3s;border-bottom:2px solid transparent;color:var(--silver);}
+  .tab-btn.active{border-bottom-color:var(--amber);color:var(--amber);}
+  .content-panel{display:none;animation:fadeIn .5s;}
+  .content-panel.active{display:block;}
+
+  /* Phil selector */
+  .phil-tab{
+    position:relative;padding:.9rem 1.2rem;border:1px solid rgba(180,90,40,.15);
+    border-radius:12px;background:rgba(255,255,255,.02);cursor:pointer;
+    transition:all .35s;text-align:center;overflow:hidden;
+  }
+  .phil-tab::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(180,90,40,.12),transparent);opacity:0;transition:opacity .35s;}
+  .phil-tab:hover::before,.phil-tab.active::before{opacity:1;}
+  .phil-tab.active{border-color:rgba(180,90,40,.5);box-shadow:0 0 24px rgba(180,90,40,.15);}
+  .phil-tab.sage-tab{border-color:rgba(74,124,90,.15);}
+  .phil-tab.sage-tab::before{background:linear-gradient(135deg,rgba(74,124,90,.12),transparent);}
+  .phil-tab.sage-tab.active{border-color:rgba(74,124,90,.5);box-shadow:0 0 24px rgba(74,124,90,.15);}
+  .phil-panel{display:none;animation:fadeIn .45s ease;}
+  .phil-panel.active{display:block;}
+
+  /* Timeline */
+  .tl-item{position:relative;padding-left:2rem;border-left:1px solid rgba(180,90,40,.25);}
+  .tl-item::before{content:"";position:absolute;left:-5px;top:4px;width:9px;height:9px;background:var(--ember);border-radius:50%;box-shadow:0 0 8px rgba(180,90,40,.5);}
+  .tl-item.sage::before{background:var(--sage);box-shadow:0 0 8px rgba(74,124,90,.5);}
+
+  /* Badge */
+  .badge{display:inline-block;padding:3px 12px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(180,90,40,.1);border:1px solid rgba(180,90,40,.28);color:var(--amber);font-family:'Cinzel',serif;}
+  .badge.sage{background:rgba(74,124,90,.1);border-color:rgba(74,124,90,.28);color:var(--sage-light);}
+
+  /* Glow divider */
+  .glow-div{height:1px;background:linear-gradient(90deg,transparent,rgba(180,90,40,.5) 40%,rgba(180,90,40,.6) 50%,rgba(180,90,40,.5) 60%,transparent);position:relative;}
+  .glow-div::before{content:"";position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:60px;height:5px;background:radial-gradient(ellipse,rgba(180,90,40,.5) 0%,transparent 70%);border-radius:50%;}
+
+  /* Scrollbar */
+  ::-webkit-scrollbar{width:6px;}
+  ::-webkit-scrollbar-track{background:var(--deep);}
+  ::-webkit-scrollbar-thumb{background:rgba(180,90,40,.4);border-radius:3px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--ember);}
+
+  /* Active nav */
+  .active-section{color:var(--amber)!important;border-bottom:2px solid var(--amber);padding-bottom:2px;}
+  nav a.nav-link{transition:color .2s;color:var(--silver);}
+  nav a.nav-link:hover{color:var(--amber);}
+
+  /* Section eyebrow */
+  .eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(180,90,40,.6);}
+
+  /* VS block */
+  .vs-circle{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--terrac),var(--crimson));display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:13px;font-weight:900;color:white;flex-shrink:0;box-shadow:0 0 16px rgba(140,59,26,.4);}
+
+  /* Grain overlay */
+  body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-repeat:repeat;background-size:200px;opacity:.3;}
+
+  /* Home btn */
+  .home-btn{padding:5px 12px;font-size:11px;border:1px solid rgba(180,90,40,.25);border-radius:20px;color:var(--amber);text-decoration:none;background:rgba(180,90,40,.06);transition:all .2s;font-family:'Cinzel',serif;letter-spacing:.04em;}
+  .home-btn:hover{background:rgba(180,90,40,.15);border-color:rgba(180,90,40,.5);transform:translateY(-1px);}
+
+  /* Contrast boxes */
+  .sofist-box{background:linear-gradient(135deg,rgba(140,59,26,.15),transparent);border:1px solid rgba(140,59,26,.3);border-radius:10px;}
+  .socrat-box{background:linear-gradient(135deg,rgba(74,124,90,.15),transparent);border:1px solid rgba(74,124,90,.3);border-radius:10px;}
+
+  /* Equation */
+  .eq-block{display:flex;align-items:center;justify-content:center;gap:.75rem;flex-wrap:wrap;}
+  .eq-term{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:var(--sage-light);padding:.4rem 1rem;border:1px solid rgba(74,124,90,.35);border-radius:8px;background:rgba(74,124,90,.08);}
+  .eq-op{color:var(--gold);font-size:1.3rem;font-weight:900;}
+
+  @media(max-width:768px){.hidden-mobile{display:none!important;}}
+</style>
+</head>
+<body class="antialiased">
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full z-50" style="background:rgba(4,6,8,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(180,90,40,.12);box-shadow:0 4px 24px rgba(0,0,0,.4);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+      <a href="#inici" class="flex items-center space-x-3 group">
+        <svg class="w-6 h-6 text-amber-600 group-hover:scale-110 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+        </svg>
+        <span class="font-cinzel text-base font-bold text-amber-600 group-hover:text-white transition" style="letter-spacing:.12em;">GIR ANTROPOLÒGIC</span>
+      </a>
+      <div class="hidden md:flex space-x-5 items-center text-sm">
+        <a href="../index.html" class="home-btn">← Experience</a>
+        <div class="relative group">
+          <a href="#context" class="nav-link flex items-center gap-1">Context <span class="text-xs">▼</span></a>
+          <div class="absolute left-0 top-full mt-0 pt-2 w-52 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+            <a href="#context"  class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">El Segle de Pèricles</a>
+            <a href="#nomosphy" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Nomos vs. Physis</a>
+          </div>
+        </div>
+        <div class="relative group">
+          <a href="#sofistes" class="nav-link flex items-center gap-1">Sofistes <span class="text-xs">▼</span></a>
+          <div class="absolute left-0 top-full mt-0 pt-2 w-52 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+            <a href="#sofistes"   class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Els Sofistes</a>
+            <a href="#protagores" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Protàgores</a>
+            <a href="#gorgies"    class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Gòrgies</a>
+          </div>
+        </div>
+        <div class="relative group">
+          <a href="#socrates" class="nav-link flex items-center gap-1">Sòcrates <span class="text-xs">▼</span></a>
+          <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+            <a href="#socrates"   class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Biografia i Context</a>
+            <a href="#metode"     class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">El Mètode Socràtic</a>
+            <a href="#universalisme" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Universalisme Moral</a>
+          </div>
+        </div>
+        <a href="#plato"    class="nav-link">Plató</a>
+        <a href="#repassar" class="nav-link">Repassar</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inici" class="relative min-h-screen flex items-center section-dark pt-16">
+  <!-- Orbs animats -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="orb1 absolute" style="top:15%;left:5%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(140,59,26,.14) 0%,transparent 70%);filter:blur(50px);"></div>
+    <div class="orb2 absolute" style="bottom:20%;right:5%;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(74,124,90,.12) 0%,transparent 70%);filter:blur(50px);"></div>
+  </div>
+  <!-- Grid -->
+  <svg class="absolute inset-0 w-full h-full opacity-[0.035]" xmlns="http://www.w3.org/2000/svg">
+    <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#B85C28" stroke-width="0.5"/></pattern></defs>
+    <rect width="100%" height="100%" fill="url(#grid)"/>
+  </svg>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-6 w-full">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+      <!-- TEXT -->
+      <div>
+        <div class="mb-5 inline-block">
+          <span class="font-cinzel text-xs border border-amber-700/50 text-amber-600 px-5 py-2 rounded-full tracking-widest uppercase">Segle V a.C. · Atenes</span>
+        </div>
+        <p class="font-cinzel text-2xl md:text-3xl text-amber-600 tracking-[0.18em] mb-3">EL GIR ANTROPOLÒGIC</p>
+        <h1 class="font-cinzel text-5xl md:text-6xl font-black mb-6 leading-tight shimmer-text">
+          DE LA<br>PHYSIS<br>A L'HOME
+        </h1>
+        <p class="font-playfair text-lg text-gray-300 mb-8 italic leading-relaxed">
+          Al s.V a.C., la filosofia abandona l'estudi de la naturalesa i gira la mirada cap a l'ésser humà: la política, l'ètica, el llenguatge i la virtut. 
+          La democràcia atenesa transforma radicalment el que significa <strong class="text-amber-500 not-italic">saber</strong> i <strong class="text-amber-500 not-italic">ser virtuós</strong>.
+        </p>
+        <div class="flex flex-wrap gap-3 text-xs text-amber-700 font-cinzel tracking-wider mb-8">
+          <span class="border border-amber-700/25 px-3 py-1 rounded-full">NOMOS</span>
+          <span class="border border-amber-700/25 px-3 py-1 rounded-full">ARETÉ</span>
+          <span class="border border-amber-700/25 px-3 py-1 rounded-full">RETÒRICA</span>
+          <span class="border border-amber-700/25 px-3 py-1 rounded-full">MAIÈUTICA</span>
+          <span class="border border-amber-700/25 px-3 py-1 rounded-full">LOGOS</span>
+          <span class="border border-sage-light/25 px-3 py-1 rounded-full" style="border-color:rgba(74,124,90,.3);color:var(--sage-light)">UNIVERSALISME</span>
+        </div>
+        <div class="quote-block p-4 rounded-r-lg max-w-sm" style="position:relative;">
+          <span class="big-q">"</span>
+          <p class="font-playfair text-base italic text-gray-300 leading-relaxed relative z-10">"L'home és la mesura de totes les coses." — Protàgores</p>
+        </div>
+      </div>
+      <!-- DRETA: Contrast sofistes/Sòcrates + mini timeline -->
+      <div class="hidden lg:flex flex-col gap-4">
+        <!-- Contrast -->
+        <div class="concept-card p-5 rounded-xl no-anim" style="border:none;background:transparent;">
+          <div class="grid grid-cols-2 gap-3">
+            <div class="sofist-box p-4 rounded-xl">
+              <p class="font-cinzel text-xs text-amber-600 tracking-wider mb-2 uppercase">Sofistes</p>
+              <ul class="text-xs text-gray-300 space-y-1">
+                <li>• Relativisme · "tot val?"</li>
+                <li>• Virtut = èxit social</li>
+                <li>• Ensenyen a canvi de diners</li>
+                <li>• Retòrica i persuasió</li>
+                <li>• Monòleg</li>
+              </ul>
+            </div>
+            <div class="socrat-box p-4 rounded-xl">
+              <p class="font-cinzel text-xs tracking-wider mb-2 uppercase" style="color:var(--sage-light)">Sòcrates</p>
+              <ul class="text-xs text-gray-300 space-y-1">
+                <li>• Universalisme moral</li>
+                <li>• Virtut = saber</li>
+                <li>• No cobra mai</li>
+                <li>• Ironia i maièutica</li>
+                <li>• Diàleg</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- Mini timeline -->
+        <div class="concept-card p-5 rounded-xl no-anim">
+          <p class="eyebrow mb-4">Evolució del pensament al s. V a.C.</p>
+          <div class="space-y-3 text-xs">
+            <div class="flex gap-3 items-start">
+              <span class="text-amber-600 font-cinzel font-bold min-w-[65px]">~500 a.C.</span>
+              <span class="text-gray-400">Guerres Mèdiques. Victòria atenesa sobre Pèrsia.</span>
+            </div>
+            <div class="flex gap-3 items-start">
+              <span class="text-amber-600 font-cinzel font-bold min-w-[65px]">~461 a.C.</span>
+              <span class="text-gray-400">Pèricles lidera les reformes democràtiques.</span>
+            </div>
+            <div class="flex gap-3 items-start">
+              <span class="text-amber-600 font-cinzel font-bold min-w-[65px]">~450 a.C.</span>
+              <span class="text-gray-400">Els Sofistes arriben a Atenes. Gir Antropològic.</span>
+            </div>
+            <div class="flex gap-3 items-start">
+              <span class="text-amber-600 font-cinzel font-bold min-w-[65px]">~470 a.C.</span>
+              <span class="text-gray-400">Neix Sòcrates. Mètode dialèctic vs. sofístic.</span>
+            </div>
+            <div class="flex gap-3 items-start">
+              <span class="text-amber-600 font-cinzel font-bold min-w-[65px]">399 a.C.</span>
+              <span class="text-gray-400">Mort de Sòcrates. Plató hereta el seu llegat.</span>
+            </div>
+          </div>
+        </div>
+        <!-- Equació socràtica -->
+        <div class="concept-card p-4 rounded-xl no-anim" style="border-color:rgba(74,124,90,.3);">
+          <p class="eyebrow text-center mb-3" style="color:rgba(74,124,90,.7)">L'equació de Sòcrates</p>
+          <div class="eq-block">
+            <span class="eq-term">SABER</span>
+            <span class="eq-op">=</span>
+            <span class="eq-term">VIRTUT</span>
+            <span class="eq-op">=</span>
+            <span class="eq-term">FELICITAT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 float-anim">
+    <svg class="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+    </svg>
+  </div>
+</section>
+
+<!-- CONTEXT: SEGLE DE PÈRICLES -->
+<section id="context" class="py-20 section-mid">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3">Context Històric · Atenes · s. V a.C.</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-amber-600">EL SEGLE DE PÈRICLES</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Del triomf militar a la revolució cultural i democràtica</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <div class="space-y-5 text-gray-300 leading-relaxed">
+        <p>La victòria d'Atenes sobre els perses a les <strong class="text-amber-500">Guerres Mèdiques</strong> li va atorgar un poder econòmic i polític sense precedents. Pèricles va aprofitar aquest auge per impulsar reformes democràtiques profundes que van transformar radicalment la vida pública.</p>
+        <p>En aquest nou context, <strong>el centre de la vida ciutadana passa a ser el debat i la discussió política</strong> a les assemblees. El bon ús del discurs i la capacitat de persuadir es converteixen en les habilitats fonamentals del nou ciutadà atenenc.</p>
+        <div class="quote-block p-5 rounded-r-lg my-4" style="position:relative;">
+          <span class="big-q">"</span>
+          <p class="text-lg relative z-10">"S'abandonà l'estudi de la Physis, i l'atenció filosòfica passà a centrar-se en el propi home i les qüestions derivades de la seva actuació social: la política, l'ètica, l'art..."</p>
+        </div>
+        <p>Això es coneix com el <strong class="text-amber-400">Gir Antropològic</strong>: el desplaçament del focus filosòfic des de la naturalesa (<em>Physis</em>) cap a l'ésser humà i les seves institucions (<em>Nomos</em>).</p>
+      </div>
+
+      <div class="space-y-5">
+        <div class="concept-card p-6 rounded-xl">
+          <h3 class="font-cinzel text-xl font-bold text-amber-500 mb-4">La Democràcia com a Motor</h3>
+          <div class="space-y-3 text-sm text-gray-300">
+            <div class="flex gap-3 items-start bg-black/30 p-3 rounded-lg">
+              <span class="text-amber-500 text-lg">🏛️</span>
+              <div><p class="font-bold text-white mb-1">Nova forma de govern</p><p class="text-gray-400">La democràcia exigeix una creixent participació política de tots els ciutadans. Cal participar, opinar, debatre.</p></div>
+            </div>
+            <div class="flex gap-3 items-start bg-black/30 p-3 rounded-lg">
+              <span class="text-amber-500 text-lg">🗣️</span>
+              <div><p class="font-bold text-white mb-1">El poder del discurs</p><p class="text-gray-400">La capacitat de parlar bé i persuadir l'assemblea determina qui obté poder i èxit. La retòrica es converteix en l'eina clau.</p></div>
+            </div>
+            <div class="flex gap-3 items-start bg-black/30 p-3 rounded-lg">
+              <span class="text-amber-500 text-lg">📚</span>
+              <div><p class="font-bold text-white mb-1">Una nova educació</p><p class="text-gray-400">El ciutadà necessita habilitats que es poden aprendre. Apareix una demanda d'educació que els Sofistes satisfaran.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept-card p-5 rounded-xl border-amber-700/30">
+          <h4 class="font-cinzel text-lg font-bold text-amber-400 mb-3">La Transformació de la Virtut</h4>
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="bg-black/40 p-3 rounded-lg">
+              <p class="text-gray-500 uppercase tracking-wider mb-2 font-cinzel">Abans (aristocràcia)</p>
+              <p class="text-gray-300">La <strong>virtut</strong> era hereditària. Cosa de nobles i guerrers. S'expressava en el camp de batalla: valentia, força, lideratge.</p>
+            </div>
+            <div class="bg-black/40 p-3 rounded-lg">
+              <p class="text-amber-600 uppercase tracking-wider mb-2 font-cinzel text-xs">Ara (democràcia)</p>
+              <p class="text-gray-300">La <strong>virtut</strong> = èxit social. S'expressa a l'assemblea. Qualsevol la pot aprendre. Els sofistes la venen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOMOS vs PHYSIS -->
+<section id="nomosphy" class="py-20 section-dark relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3">Conceptes Fonamentals</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-amber-600">NOMOS vs. PHYSIS</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">La gran distinció que estructura el pensament del Gir Antropològic</p>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-0 overflow-hidden rounded-2xl border border-white/10">
+        <!-- PHYSIS -->
+        <div class="p-8 border-r border-white/10" style="background:linear-gradient(135deg,rgba(22,40,64,.5),rgba(4,6,8,.8))">
+          <div class="text-4xl mb-4">🌊</div>
+          <h3 class="font-cinzel text-2xl font-bold text-blue-400 mb-2">PHYSIS</h3>
+          <p class="font-playfair italic text-gray-400 text-sm mb-5">La Naturalesa · Allò incondicional</p>
+          <ul class="space-y-3 text-sm text-gray-300">
+            <li class="border-t border-white/10 pt-3"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Naturalesa</span>Allò absolut, universal, que existeix per si mateix independentment de la voluntat humana.</li>
+            <li class="border-t border-white/10 pt-3"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Caràcter</span>Necessari, invariable, igual a tot arreu i en tot moment. És sempre incondicional</li>
+            <li class="border-t border-white/10 pt-3"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Exemple</span>"Les femelles pareixen." No depèn de cap cultura ni decisió humana.</li>
+            <li class="border-t border-white/10 pt-3"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Postura sofista</span>El que és per Physis no pot ser relativitzat. Aquí no hi ha debat possible.</li>
+          </ul>
+        </div>
+        <!-- NOMOS -->
+        <div class="p-8" style="background:linear-gradient(135deg,rgba(140,59,26,.2),rgba(4,6,8,.8))">
+          <div class="text-4xl mb-4">⚖️</div>
+          <h3 class="font-cinzel text-2xl font-bold text-amber-500 mb-2">NOMOS</h3>
+          <p class="font-playfair italic text-gray-400 text-sm mb-5">Legislació, costums, tradicions etc. · Allò convencional</p>
+          <ul class="space-y-3 text-sm text-gray-300">
+            <li class="border-t border-white/10 pt-3"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Naturalesa</span>Allò relatiu, convencional, creat per la voluntat humana i sotmès al context històric i cultural.</li>
+            <li class="border-t border-white/10 pt-3"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Caràcter</span>Canviant, particular, diferent d'una cultura a l'altra i d'una època a l'altra.</li>
+            <li class="border-t border-white/10 pt-3"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Exemple</span>Les lleis polítiques, els valors morals, les tradicions, els costums.</li>
+            <li class="border-t border-white/10 pt-3"><span class="block text-xs text-gray-500 uppercase tracking-wider mb-1">Postura sofista</span>El Nomos és sempre relatiu. Podria ser diferent. No hi ha valors morals absoluts, ni lleis o institucions inamovibles.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-6 concept-card p-5 rounded-xl text-center no-anim">
+        <p class="text-sm text-gray-300 leading-relaxed">Els sofistes apliquen el <strong class="text-amber-400">relativisme</strong> a tot allò que és <em>Nomos</em>: política, ètica, moral, tradicions. I l'<strong class="text-amber-400">escepticisme</strong> com a postura epistemològica: no hi pot haver un coneixement objectiu de la Fisis; el llenguatge s'interposa sempre entre nosaltres i la realitat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOFISTES -->
+<div id="sofistes" class="h-0 overflow-hidden" aria-hidden="true"></div>
+<section class="py-20 section-warm relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3">Atenes · s. V a.C. · Mestres de la Persuasió</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-amber-600">ELS SOFISTES</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Els primers educadors professionals de la democràcia</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 mb-14">
+      <div class="space-y-5 text-gray-300 leading-relaxed">
+        <p>Els sofistes van sorgir a Atenes com un grup variat d'educadors que, tot i no compartir una ideologia comuna, ensenyaven les habilitats essencials del nou ciutadà democràtic: <strong class="text-amber-400">l'art de parlar en públic i defensar idees</strong>.</p>
+        <p>El terme "sofista" avui té connotació negativa, però a l'antiga Grècia significava simplement "<strong>persona hàbil i experta</strong>". Es relacionava principalment amb la formació en oratòria, retòrica i estilística — les habilitats necessàries per participar en les assemblees democràtiques.</p>
+        <div class="quote-block p-5 rounded-r-lg" style="position:relative;">
+          <span class="big-q">"</span>
+          <p class="text-lg relative z-10">El bon maneig del discurs, des de l'aspecte formal —no tant del contingut— era clau en la nova tasca del ciutadà d'Atenes.</p>
+        </div>
+        <p>La capacitat de persuadir l'assemblea es va mostrar com una poderosa eina per obtenir poder i èxit. <strong>I tot això era ensenyable.</strong> Els sofistes ho sabien i en feien negoci.</p>
+      </div>
+
+      <div class="space-y-5">
+        <div class="concept-card p-6 rounded-xl">
+          <h3 class="font-cinzel text-xl font-bold text-amber-500 mb-5">Trets Definitoris dels Sofistes</h3>
+          <div class="space-y-3">
+            <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4 border-amber-700">
+              <span class="text-xl flex-shrink-0">💰</span>
+              <div><h5 class="text-white font-bold text-sm mb-1">Cobren per ensenyar</h5><p class="text-xs text-gray-400">Primers educadors professionals. S'enriqueixen ensenyant habilitats retòriques a qui pugui pagar.</p></div>
+            </div>
+            <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4 border-amber-700">
+              <span class="text-xl flex-shrink-0">🎭</span>
+              <div><h5 class="text-white font-bold text-sm mb-1">El contingut no importa, la forma sí</h5><p class="text-xs text-gray-400">L'objectiu no és la veritat sinó la persuasió. Allò que importa és <em>com</em> es diu, no <em>què</em> es diu.</p></div>
+            </div>
+            <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4 border-amber-700">
+              <span class="text-xl flex-shrink-0">🔄</span>
+              <div><h5 class="text-white font-bold text-sm mb-1">Relativisme i escepticisme</h5><p class="text-xs text-gray-400">No hi ha veritats absolutes en l'àmbit humà. La veritat depèn de qui jutja, quan i on.</p></div>
+            </div>
+            <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4 border-amber-700">
+              <span class="text-xl flex-shrink-0">🎤</span>
+              <div><h5 class="text-white font-bold text-sm mb-1">Monòleg, no diàleg</h5><p class="text-xs text-gray-400">Transmeten el saber als alumnes a través de discursos i lliçons magistrals. No busquen la veritat conjuntament.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Selector Sofistes -->
+    <div class="glow-div mb-10"></div>
+    <div class="grid grid-cols-2 gap-4 max-w-lg mx-auto mb-10">
+      <button class="phil-tab active" onclick="switchSofista('protagores', this)" id="protagores">
+        <span style="font-size:2rem;display:block;margin-bottom:.3rem">🎯</span>
+        <span class="font-cinzel text-xs font-bold" style="color:var(--amber);letter-spacing:.06em;">PROTÀGORES</span>
+        <span style="display:block;font-size:.65rem;color:var(--silver);margin-top:.2rem;">El Relativisme</span>
+      </button>
+      <button class="phil-tab" onclick="switchSofista('gorgies', this)" id="gorgies">
+        <span style="font-size:2rem;display:block;margin-bottom:.3rem">🗡️</span>
+        <span class="font-cinzel text-xs font-bold" style="color:var(--amber);letter-spacing:.06em;">GÒRGIES</span>
+        <span style="display:block;font-size:.65rem;color:var(--silver);margin-top:.2rem;">L'Escepticisme Radical</span>
+      </button>
+    </div>
+
+    <!-- PANEL PROTÀGORES -->
+    <div id="sof-protagores" class="phil-panel active">
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div class="space-y-5">
+          <span class="badge">Abdera · ~490–420 a.C.</span>
+          <h3 class="font-cinzel text-3xl font-bold text-amber-400 mt-2">PROTÀGORES</h3>
+          <p class="font-cinzel text-sm tracking-wider text-gray-400">El Pare del Relativisme</p>
+          <div class="text-gray-300 space-y-4 leading-relaxed">
+            <p>Protàgores va ser el sofista més influent i el primer a cobrar per les seves lliçons. Va expressar el cor del pensament sofista en una de les frases més citades de la filosofia antiga:</p>
+            <div class="quote-block p-6 rounded-r-lg" style="position:relative;">
+              <span class="big-q">"</span>
+              <p class="text-xl font-playfair italic relative z-10 text-amber-200">"L'home és la mesura de totes les coses: de les que existeixen, en tant que existeixen; de les que no existeixen, en tant que no existeixen."</p>
+              <p class="text-xs text-gray-500 mt-2 relative z-10">— Protàgores</p>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-5">
+          <div class="concept-card p-6 rounded-xl">
+            <h4 class="font-cinzel text-lg font-bold text-amber-400 mb-4">Implicacions de la Frase</h4>
+            <div class="space-y-3 text-sm text-gray-300">
+              <div class="bg-black/40 p-3 rounded-lg">
+                <p class="font-bold text-white mb-1">No hi ha valors en si</p>
+                <p class="text-gray-400">El valor de les coses depèn de qui judica. No existeix una veritat objectiva independent del subjecte que percep.</p>
+              </div>
+              <div class="bg-black/40 p-3 rounded-lg">
+                <p class="font-bold text-white mb-1">El perill moral</p>
+                <p class="text-gray-400">En termes morals, el relativisme porta a un "tot val" on l'únic criteri és l'interès particular. La demagògia i la corrupció s'obren pas.</p>
+              </div>
+              <div class="bg-black/40 p-3 rounded-lg">
+                <p class="font-bold text-white mb-1">La virtut és ensenyable</p>
+                <p class="text-gray-400">Si no hi ha una veritat absoluta, la virtut no és un do hereditari sinó una habilitat. Qualsevol pot aprendre-la — i pagar per fer-ho.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL GÒRGIES -->
+    <div id="sof-gorgies" class="phil-panel">
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div class="space-y-5">
+          <span class="badge">Leontins, Sicília · ~483–375 a.C.</span>
+          <h3 class="font-cinzel text-3xl font-bold text-amber-400 mt-2">GÒRGIES</h3>
+          <p class="font-cinzel text-sm tracking-wider text-gray-400">L'Escepticisme Absolut</p>
+          <div class="text-gray-300 space-y-4 leading-relaxed">
+            <p>Gòrgies va portar l'escepticisme fins al seu límit més extrem amb una de les formulacions més radicals de la filosofia antiga:</p>
+            <div class="quote-block p-6 rounded-r-lg" style="position:relative;">
+              <span class="big-q">"</span>
+              <div class="relative z-10 space-y-2">
+                <p class="font-playfair italic text-lg text-amber-200">"Res no existeix;"</p>
+                <p class="font-playfair italic text-lg text-amber-200">"si existís, no fora cognoscible;"</p>
+                <p class="font-playfair italic text-lg text-amber-200">"i si fos cognoscible, no fora comunicable."</p>
+              </div>
+              <p class="text-xs text-gray-500 mt-3 relative z-10">— Gòrgies</p>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-5">
+          <div class="concept-card p-6 rounded-xl">
+            <h4 class="font-cinzel text-lg font-bold text-amber-400 mb-4">Les Tres Tesis de Gòrgies</h4>
+            <div class="space-y-3 text-sm">
+              <div class="flex gap-3 bg-black/40 p-3 rounded-lg border-l-3" style="border-left:3px solid var(--terrac)">
+                <span class="text-amber-500 font-bold min-w-[20px]">1.</span>
+                <div><p class="text-white font-bold">Res no existeix</p><p class="text-gray-400 text-xs">Nihilisme ontològic: cap realitat és cognoscible en si mateixa.</p></div>
+              </div>
+              <div class="flex gap-3 bg-black/40 p-3 rounded-lg" style="border-left:3px solid var(--ember)">
+                <span class="text-amber-500 font-bold min-w-[20px]">2.</span>
+                <div><p class="text-white font-bold">Si existís, no ho podríem conèixer</p><p class="text-gray-400 text-xs">El llenguatge s'interposa sempre entre nosaltres i la realitat, fent de mitjancer que distorsiona.</p></div>
+              </div>
+              <div class="flex gap-3 bg-black/40 p-3 rounded-lg" style="border-left:3px solid var(--amber)">
+                <span class="text-amber-500 font-bold min-w-[20px]">3.</span>
+                <div><p class="text-white font-bold">Si ho coneguéssim, no ho podríem comunicar</p><p class="text-gray-400 text-xs">Les paraules no capturen la realitat; cada receptor les interpreta diferent.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="concept-card p-5 rounded-xl border-amber-700/40">
+            <h4 class="font-cinzel text-base font-bold text-amber-400 mb-3">El Doble Discurs</h4>
+            <p class="text-sm text-gray-300">Gòrgies era famós per defensar qualsevol tesi i la seva contrària amb la mateixa solvència. Demostrava que <strong>allò que realment importava no era el <em>què</em> es deia, sinó el <em>com</em></strong>. El secret de l'èxit era la manipulació del sentiment de l'audiència a través de la retòrica.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSICIÓ -->
+<div class="py-14 text-center" style="background:linear-gradient(180deg,rgba(28,16,4,.8) 0%,rgba(6,14,8,.8) 100%);border-top:1px solid rgba(180,90,40,.1);border-bottom:1px solid rgba(74,124,90,.1);">
+  <div class="max-w-3xl mx-auto px-4">
+    <p class="eyebrow mb-3">Davant el relativisme sofista...</p>
+    <h3 class="text-2xl font-bold text-ivory mb-3" style="font-family:'Cinzel',serif;">Sorgeix la resposta de Sòcrates</h3>
+    <p class="text-gray-400 text-sm leading-relaxed">Si els sofistes diuen que "tot val", Sòcrates respon que hi ha valors universals i absoluts. Si els sofistes venen saviesa, Sòcrates declara la seva ignorància. Si els sofistes fan monòlegs, Sòcrates inicia diàlegs.</p>
+  </div>
+</div>
+
+<!-- SÒCRATES -->
+<div id="socrates" class="h-0 overflow-hidden" aria-hidden="true"></div>
+<section class="py-20 section-sage relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3" style="color:rgba(74,124,90,.7)">Atenes · 470–399 a.C.</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4" style="color:var(--sage-light)">SÒCRATES</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">El filòsof que sabia que no sabia res</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 mb-14">
+      <div class="space-y-5 text-gray-300 leading-relaxed">
+        <p>Sòcrates, nascut a Atenes, és la figura central del Gir Antropològic. <strong>No va deixar cap obra escrita</strong>, però la seva influència ha donat forma a tota la filosofia occidental posterior. El coneixem a través dels diàlegs del seu deixeble Plató.</p>
+        <p>Era conegut per la seva habilitat en la conversa i va reunir figures prominents al seu voltant <strong>sense cobrar mai pels seus ensenyaments</strong>. La seva actitud crítica i impertinent cap als que es creien savis el va fer guanyar enemics poderosos.</p>
+        <div class="quote-block sage p-5 rounded-r-lg" style="position:relative;">
+          <span class="big-q sage-q">"</span>
+          <p class="text-lg relative z-10">"Només sé que no sé res."</p>
+          <p class="text-xs text-gray-500 mt-2 relative z-10">— Sòcrates</p>
+        </div>
+        <p>Jutjat sota acusacions absolutament falses d'impietat i corrupció de la joventut, va ser condemnat a mort als 70 anys. Podent escapar, va optar per donar una lliçó d'integritat i de coherència: va morir bevent cicuta.</p>
+        <div class="concept-card p-4 rounded-xl" style="border-color:rgba(74,124,90,.3);">
+          <p class="text-xs text-gray-400 leading-relaxed">La mort de Sòcrates va impactar profundament el seu deixeble Plató, que la interpretà com la prova definitiva que una societat sense saviesa moral és incapaç de fer justícia.</p>
+        </div>
+      </div>
+
+      <div class="space-y-5">
+        <div class="concept-card p-6 rounded-xl" style="border-color:rgba(74,124,90,.25);">
+          <h3 class="font-cinzel text-xl font-bold mb-5" style="color:var(--sage-light)">Sòcrates vs. Sofistes</h3>
+          <div class="space-y-2 text-sm">
+            <div class="grid grid-cols-3 bg-black/60 text-xs font-cinzel uppercase tracking-wider px-3 py-2 rounded-t-lg" style="color:var(--silver);">
+              <span></span><span class="text-center text-amber-600">Sofistes</span><span class="text-center" style="color:var(--sage-light)">Sòcrates</span>
+            </div>
+            <div class="grid grid-cols-3 px-3 py-2 border-b border-white/5 text-xs">
+              <span class="text-gray-500">Actitud</span><span class="text-center text-amber-400">Es presenten com a savis</span><span class="text-center text-green-400">Declara la seva ignorància</span>
+            </div>
+            <div class="grid grid-cols-3 px-3 py-2 border-b border-white/5 text-xs">
+              <span class="text-gray-500">Mètode</span><span class="text-center text-amber-400">Monòleg · lliçó</span><span class="text-center text-green-400">Diàleg · pregunta</span>
+            </div>
+            <div class="grid grid-cols-3 px-3 py-2 border-b border-white/5 text-xs">
+              <span class="text-gray-500">Objectiu</span><span class="text-center text-amber-400">Persuadir</span><span class="text-center text-green-400">Cercar la veritat</span>
+            </div>
+            <div class="grid grid-cols-3 px-3 py-2 border-b border-white/5 text-xs">
+              <span class="text-gray-500">Veritat</span><span class="text-center text-amber-400">Relativa</span><span class="text-center text-green-400">Universal · absoluta</span>
+            </div>
+            <div class="grid grid-cols-3 px-3 py-2 border-b border-white/5 text-xs">
+              <span class="text-gray-500">Pagament</span><span class="text-center text-amber-400">Cobren</span><span class="text-center text-green-400">Mai no cobra</span>
+            </div>
+            <div class="grid grid-cols-3 px-3 py-2 text-xs">
+              <span class="text-gray-500">Virtut</span><span class="text-center text-amber-400">= èxit social</span><span class="text-center text-green-400">= saber · coneixement</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EL MÈTODE SOCRÀTIC -->
+<section id="metode" class="py-20 section-mid relative">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3" style="color:rgba(74,124,90,.7)">Epistemologia · Mètode</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4" style="color:var(--sage-light)">EL MÈTODE SOCRÀTIC</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Ironia i Maièutica: les dues fases del diàleg filosòfic</p>
+    </div>
+
+    <div class="max-w-4xl mx-auto mb-12 text-center">
+      <p class="text-gray-300 leading-relaxed">El mètode socràtic consistia en un procés de dues fases que permetia a Sòcrates conduir els seus interlocutors des de la falsa certesa fins a la recerca honesta de la veritat. Contrastava radicalment amb els monòlegs retòrics dels sofistes.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-12">
+      <!-- IRONIA -->
+      <div class="concept-card p-8 rounded-2xl" style="border-color:rgba(74,124,90,.3);background:linear-gradient(135deg,rgba(74,124,90,.08),rgba(4,6,8,.9))">
+        <div class="flex items-center gap-3 mb-5">
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--sage),var(--sage-light));display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:900;color:white;flex-shrink:0;">I</div>
+          <div>
+            <h3 class="font-cinzel text-2xl font-bold" style="color:var(--sage-light)">IRONIA</h3>
+            <p class="text-xs text-gray-500 font-cinzel tracking-wider">Primera fase · "Dissimular per qüestionar"</p>
+          </div>
+        </div>
+        <div class="space-y-4 text-gray-300 text-sm leading-relaxed">
+          <p>Sòcrates s'aproximava a un interlocutor que es creia saber, formulava una pregunta aparentment simple: <em>"Però, exactament, <strong>què és la justícia</strong>?"</em> o <em>"Què és la valentia?"</em></p>
+          <p>L'interlocutor donava una resposta convençut de saber-la. Sòcrates llavors la qüestionava amb noves preguntes cada cop més precises, fins que quedava clar que la resposta inicial no podia ser defensada.</p>
+          <div class="quote-block sage p-4 rounded-r-lg" style="position:relative;">
+            <span class="big-q sage-q" style="font-size:3rem">"</span>
+            <p class="relative z-10">El resultat era la <strong>perplexitat</strong> (aporia): l'interlocutor que es creia saber descobria que en realitat no sabia.</p>
+          </div>
+          <div class="bg-black/40 p-3 rounded-lg" style="border-left:3px solid var(--sage)">
+            <p class="text-xs text-gray-400"><strong class="text-white">Funció:</strong> No ridiculitzar, sinó alliberar l'interlocutor dels seus prejudicis. La perplexitat és el punt de partida necessari per a la recerca sincera.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIÈUTICA -->
+      <div class="concept-card p-8 rounded-2xl" style="border-color:rgba(74,124,90,.4);background:linear-gradient(135deg,rgba(74,124,90,.12),rgba(4,6,8,.9))">
+        <div class="flex items-center gap-3 mb-5">
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--sage-light),#8ACA9A);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:900;color:white;flex-shrink:0;">M</div>
+          <div>
+            <h3 class="font-cinzel text-2xl font-bold" style="color:var(--sage-light)">MAIÈUTICA</h3>
+            <p class="text-xs text-gray-500 font-cinzel tracking-wider">Segona fase · "L'art d'ajudar a donar a llum"</p>
+          </div>
+        </div>
+        <div class="space-y-4 text-gray-300 text-sm leading-relaxed">
+          <p>Quan l'interlocutor acceptava la seva ignorància, era possible iniciar una <strong>investigació conjunta</strong>. Sòcrates guiava el diàleg amb preguntes successives per ajudar l'altre a "donar a llum" la veritat que ja portava dins.</p>
+          <p>El terme "maièutica" fa referència a l'art de les llevadores (la mare de Sòcrates n'era una). <strong>Com una llevadora, Sòcrates no donava la veritat: assistia el procés de trobar-la.</strong></p>
+          <div class="quote-block sage p-4 rounded-r-lg" style="position:relative;">
+            <span class="big-q sage-q" style="font-size:3rem">"</span>
+            <p class="relative z-10">"<strong>Coneix-te a tu mateix</strong>": tothom ja té la veritat dins seu. Sòcrates només ajuda a fer-la aflorar.</p>
+          </div>
+          <div class="bg-black/40 p-3 rounded-lg" style="border-left:3px solid var(--sage-light)">
+            <p class="text-xs text-gray-400"><strong class="text-white">Diferència amb els sofistes:</strong> Ells transmeten un saber extern als alumnes. Sòcrates entén que el saber és interior i que el diàleg és l'única via per trobar-lo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Diagrama del procés -->
+    <div class="max-w-3xl mx-auto">
+      <div class="concept-card p-6 rounded-xl no-anim" style="border-color:rgba(74,124,90,.25);">
+        <p class="eyebrow text-center mb-6" style="color:rgba(74,124,90,.7)">El diàleg socràtic pas a pas</p>
+        <div class="flex flex-col gap-2 text-sm">
+          <div class="flex gap-4 items-start bg-black/30 p-3 rounded-lg">
+            <span class="font-cinzel text-xs text-amber-600 min-w-[28px] font-bold mt-0.5">1.</span>
+            <p class="text-gray-300"><strong class="text-white">Pregunta inicial</strong> — Sòcrates pregunta: "Què és la justícia?" L'interlocutor creu saber-ho.</p>
+          </div>
+          <div class="text-center text-gray-600">↓</div>
+          <div class="flex gap-4 items-start bg-black/30 p-3 rounded-lg">
+            <span class="font-cinzel text-xs text-amber-600 min-w-[28px] font-bold mt-0.5">2.</span>
+            <p class="text-gray-300"><strong class="text-white">Ironia</strong> — Sòcrates qüestiona la resposta amb noves preguntes. L'interlocutor es queda sense arguments.</p>
+          </div>
+          <div class="text-center text-gray-600">↓</div>
+          <div class="flex gap-4 items-start bg-black/30 p-3 rounded-lg">
+            <span class="font-cinzel text-xs text-amber-600 min-w-[28px] font-bold mt-0.5">3.</span>
+            <p class="text-gray-300"><strong class="text-white">Aporia</strong> — L'interlocutor reconeix la seva ignorància. Ara és possible un diàleg real.</p>
+          </div>
+          <div class="text-center text-gray-600">↓</div>
+          <div class="flex gap-4 items-start p-3 rounded-lg" style="background:rgba(74,124,90,.1);border:1px solid rgba(74,124,90,.2)">
+            <span class="font-cinzel text-xs min-w-[28px] font-bold mt-0.5" style="color:var(--sage-light)">4.</span>
+            <p class="text-gray-300"><strong style="color:var(--sage-light)">Maièutica</strong> — Investigació conjunta a través de preguntes i respostes. Gradual acostament a la veritat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIVERSALISME MORAL -->
+<section id="universalisme" class="py-20 section-dark relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3" style="color:rgba(74,124,90,.7)">Ètica · Epistemologia</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4" style="color:var(--sage-light)">UNIVERSALISME MORAL</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">La resposta de Sòcrates al relativisme sofista</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 mb-12">
+      <div class="space-y-6">
+        <h3 class="font-cinzel text-2xl font-bold" style="color:var(--sage-light)">El Bé és Universal i Absolut</h3>
+        <div class="space-y-4 text-gray-300 leading-relaxed">
+          <p>Sòcrates mai no va acceptar el relativisme sofista. Davant del "tot val", va afirmar que els <strong class="text-green-400">valors morals són absoluts i iguals per a totes les persones</strong>, en tot moment i en tot lloc.</p>
+          <div class="quote-block sage p-5 rounded-r-lg" style="position:relative;">
+            <span class="big-q sage-q">"</span>
+            <p class="text-lg relative z-10">Si tothom pogués conèixer veritablement <strong>què és el bé</strong>, ens adonaríem que és el mateix per a tots. Les diferències d'opinió neixen de la <strong>ignorància</strong>, no de la pluralitat de la veritat.</p>
+          </div>
+          <p>Només podem tenir ciència (autèntic saber) en relació a allò <strong>universal</strong>. No pot haver ciència d'allò particular, d'allò que ara és i ara no és.</p>
+        </div>
+        <!-- La connexió amb la política -->
+        <div class="concept-card p-5 rounded-xl" style="border-color:rgba(74,124,90,.3);">
+          <h4 class="font-cinzel text-base font-bold mb-3" style="color:var(--sage-light)">Per Què Importa en la Política</h4>
+          <p class="text-sm text-gray-400 leading-relaxed">Quan "tot val", la demagògia i l'interès particular s'imposen per sobre del bé comú. La corrupció s'obre pas. <strong class="text-white">Sense valors universals, no hi pot haver justícia real a la polis.</strong> Aquesta és la connexió profunda entre l'ètica socràtica i la política.</p>
+        </div>
+      </div>
+
+      <div class="space-y-5">
+        <!-- Intel·lectualisme moral -->
+        <div class="concept-card p-7 rounded-2xl" style="border-color:rgba(74,124,90,.4);background:linear-gradient(135deg,rgba(74,124,90,.1),rgba(4,6,8,.9))">
+          <h3 class="font-cinzel text-xl font-bold mb-5" style="color:var(--sage-light)">L'Intel·lectualisme Moral</h3>
+          <div class="space-y-4 text-sm text-gray-300">
+            <p>Sòcrates identifica <strong>el bé amb el coneixement</strong> i el mal amb la <strong>ignorància</strong>. Qui sap veritablement en que consisteix el bé, necessàriament s'hi comporta d'acord.</p>
+            <div class="space-y-2 mt-4">
+              <div class="flex gap-3 bg-black/40 p-3 rounded-lg">
+                <span style="color:var(--sage-light)">▸</span>
+                <p><strong class="text-white">Qui actua malament</strong> no és un "malvat" sinó un ignorant que comet un error perquè no sap en que consisteix el bé.</p>
+              </div>
+              <div class="flex gap-3 bg-black/40 p-3 rounded-lg">
+                <span style="color:var(--sage-light)">▸</span>
+                <p><strong class="text-white">La filosofia és fonamental</strong>: només amb l'ajuda de la filosofia serem capaços de descobrir el bé veritable.</p>
+              </div>
+              <div class="flex gap-3 bg-black/40 p-3 rounded-lg">
+                <span style="color:var(--sage-light)">▸</span>
+                <p><strong class="text-white">La virtut s'identifica amb el saber</strong>: no es pot ser valent si no saps que és la valentia. Un sabater no pot fer sabates si no sap que és una sabata.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- L'equació -->
+        <div class="concept-card p-6 rounded-xl text-center no-anim" style="border-color:rgba(74,124,90,.4);">
+          <p class="eyebrow mb-4" style="color:rgba(74,124,90,.7)">L'equació fonamental de Sòcrates</p>
+          <div class="eq-block mb-4">
+            <span class="eq-term">SABER</span>
+            <span class="eq-op">=</span>
+            <span class="eq-term">VIRTUT</span>
+            <span class="eq-op">=</span>
+            <span class="eq-term">FELICITAT</span>
+          </div>
+          <p class="text-xs text-gray-400 max-w-sm mx-auto">No hi ha felicitat sense virtut, i la virtut no és possible des de la ignorància. La filosofia, en tant que cerca del saber, és el camí cap a la felicitat.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATÓ (primera aproximació) -->
+<section id="plato" class="py-20 section-warm relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3">Herència Socràtica · ~427–347 a.C.</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-amber-600">PLATÓ</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Primera aproximació: el deixeble que va anar més enllà del mestre</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 mb-14">
+      <div class="space-y-5 text-gray-300 leading-relaxed">
+        <p>Plató era deixeble de Sòcrates i provenia d'una família aristòcrata — detall important per comprendre el seu rebuig a la democràcia. La condemna injusta de Sòcrates el va decebre profundament de la política.</p>
+        <p>La posterior guerra del Peloponnès i el breu règim dels Trenta Tirans van acabar de convèncer-lo: <strong class="text-amber-400">la ciudad necessitava un fonament filosòfic sòlid per ser justa</strong>.</p>
+        <div class="quote-block p-5 rounded-r-lg" style="position:relative;">
+          <span class="big-q">"</span>
+          <p class="text-lg relative z-10">Plató va escriure la cèlebre <strong>Carta Sèptima</strong>: <em>"Fins que els governants no siguin filòsofs (savis) o els filòsofs, els que saben del bé, siguin els governants, la ciutat no serà justa i no podrà haver felicitat."</em></p>
+        </div>
+        <p>Plató va escriure en forma de <strong>diàlegs</strong> — més d'una trentena — on el personatge principal és sempre Sòcrates. Va fundar l'<strong class="text-amber-400">Acadèmia</strong> a Atenes, la primera institució d'ensenyament superior d'Occident.</p>
+      </div>
+
+      <div class="space-y-5">
+        <!-- Idees que hereta -->
+        <div class="concept-card p-6 rounded-xl">
+          <h3 class="font-cinzel text-xl font-bold text-amber-500 mb-4">Idees que Hereta Plató</h3>
+          <div class="space-y-3 text-sm">
+            <div class="tl-item pb-3">
+              <p class="text-white font-bold text-xs font-cinzel tracking-wider mb-1">De Sòcrates</p>
+              <p class="text-gray-400">La recerca de l'universal. La maièutica com a model de coneixement. L'intel·lectualisme moral.</p>
+            </div>
+            <div class="tl-item pb-3">
+              <p class="text-white font-bold text-xs font-cinzel tracking-wider mb-1">De Parmènides</p>
+              <p class="text-gray-400">La immutabilitat de l'Ésser vertader. La desconfiança dels sentits.</p>
+            </div>
+            <div class="tl-item pb-3">
+              <p class="text-white font-bold text-xs font-cinzel tracking-wider mb-1">De Heràclit</p>
+              <p class="text-gray-400">El món sensible és canviant i impermanent.</p>
+            </div>
+            <div class="tl-item pb-3">
+              <p class="text-white font-bold text-xs font-cinzel tracking-wider mb-1">De Pitàgores</p>
+              <p class="text-gray-400">El dualisme cos-ànima (l'orfisme). La importància de les matemàtiques.</p>
+            </div>
+            <div class="tl-item">
+              <p class="text-white font-bold text-xs font-cinzel tracking-wider mb-1">Dels Sofistes</p>
+              <p class="text-gray-400">El perill del relativisme. La necessitat de superar-lo per salvar la justícia a la polis.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- El gran pas -->
+        <div class="concept-card p-5 rounded-xl border-amber-700/40" style="background:linear-gradient(135deg,rgba(140,59,26,.1),transparent)">
+          <h4 class="font-cinzel text-base font-bold text-amber-400 mb-3">El Gran Pas: dels Conceptes a les Idees</h4>
+          <div class="space-y-2 text-sm text-gray-300">
+            <div class="flex gap-3 bg-black/40 p-3 rounded">
+              <span class="text-gray-500 min-w-[60px] font-cinzel text-xs">Sòcrates</span>
+              <p class="text-gray-400">Busca conceptes universals (definicions): la Justícia, el Bé, la Valentia... Però per a ell són realitats del pensament o intel·lecte.</p>
+            </div>
+            <div class="flex gap-3 p-3 rounded" style="background:rgba(140,59,26,.15);border:1px solid rgba(140,59,26,.25)">
+              <span class="text-amber-500 min-w-[60px] font-cinzel text-xs">Plató</span>
+              <p class="text-gray-300">Va més lluny: dota de realitat independent a allò que en Sòcrates eren conceptes. Els anomena <strong class="text-amber-400">IDEES</strong>. Existeixen en un món separat: el Món de les Idees.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mite de la Caverna -->
+    <div class="glow-div mb-12"></div>
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-8">
+        <p class="eyebrow mb-2">Mite fundacional de la filosofia platònica</p>
+        <h3 class="font-cinzel text-3xl font-bold text-amber-500">EL MITE DE LA CAVERNA</h3>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div class="concept-card p-6 rounded-xl space-y-4">
+          <div class="space-y-3 text-sm text-gray-300 leading-relaxed">
+            <div class="flex gap-3 bg-black/40 p-3 rounded-lg">
+              <span class="text-2xl">⛓️</span>
+              <div><p class="font-bold text-white mb-1">Els presoners</p><p class="text-gray-400">Al fons d'una caverna, encadenats des del naixement, immobilitzats mirant endavant. Veuen únicament les ombres projectades al fons per figures que circulen darrere un mur il·luminat per una foguera.</p></div>
+            </div>
+            <div class="flex gap-3 bg-black/40 p-3 rounded-lg">
+              <span class="text-2xl">🚶</span>
+              <div><p class="font-bold text-white mb-1">L'alliberament</p><p class="text-gray-400">Un presoner s'allibera i passa a l'altra banda del mur. Descobreix que allò que creia real no eren més que ombres. Amb esforç, acaba sortint de la caverna.</p></div>
+            </div>
+            <div class="flex gap-3 bg-black/40 p-3 rounded-lg">
+              <span class="text-2xl">☀️</span>
+              <div><p class="font-bold text-white mb-1">El món exterior</p><p class="text-gray-400">A la llum del sol descobreix l'autèntic món: bell, immens, real. El sol representa la Idea del Bé, la realitat màxima.</p></div>
+            </div>
+            <div class="flex gap-3 bg-black/40 p-3 rounded-lg">
+              <span class="text-2xl">↩️</span>
+              <div><p class="font-bold text-white mb-1">El retorn</p><p class="text-gray-400">El presoner alliberat torna a la caverna a explicar la veritat als seus companys. Però aquests no el creuen i no en fan cap cas. Les cadenes també els empresonen l'esperit.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-5">
+          <div class="concept-card p-5 rounded-xl border-amber-700/30">
+            <h4 class="font-cinzel text-base font-bold text-amber-400 mb-3">Interpretació Filosòfica</h4>
+            <div class="space-y-2 text-sm text-gray-400">
+              <p><strong class="text-white">La caverna</strong> = el món sensible, les aparences</p>
+              <p><strong class="text-white">Les ombres</strong> = les opinions falses i els prejudicis</p>
+              <p><strong class="text-white">La foguera</strong> = la raó parcial (com els sofistes)</p>
+              <p><strong class="text-white">El món exterior</strong> = el Món de les Idees</p>
+              <p><strong class="text-white">El sol</strong> = la Idea del Bé, la realitat suprema</p>
+              <p><strong class="text-white">El presoner alliberat</strong> = el filòsof</p>
+              <p><strong class="text-white">El retorn</strong> = el deure del filòsof de governar la polis</p>
+            </div>
+          </div>
+          <div class="concept-card p-5 rounded-xl" style="border-color:rgba(74,124,90,.3);">
+            <h4 class="font-cinzel text-base font-bold mb-3" style="color:var(--sage-light)">El Dualisme Ontològic</h4>
+            <div class="grid grid-cols-2 gap-3 text-xs">
+              <div class="bg-black/40 p-3 rounded">
+                <p class="text-purple-400 font-cinzel font-bold mb-1">Món de les Idees</p>
+                <p class="text-gray-400">Ser (Parmènides). Perfecte, immutable, universal. Accessible a la raó.</p>
+              </div>
+              <div class="bg-black/40 p-3 rounded">
+                <p class="text-blue-400 font-cinzel font-bold mb-1">Món Sensible</p>
+                <p class="text-gray-400">Moviment (Heràclit). Variable, particular, corrompible. Percebut pels sentits.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSICIÓ 2 -->
+<div class="py-14 text-center" style="background:linear-gradient(180deg,rgba(28,16,4,.6) 0%,rgba(4,6,8,.9) 100%);border-top:1px solid rgba(180,90,40,.08);">
+  <p class="eyebrow mb-3">Sofistes vs. Sòcrates: el debat que dura fins avui</p>
+  <h3 class="font-cinzel text-2xl font-bold text-ivory">Relativisme o Universalisme?</h3>
+</div>
+
+<!-- COMPARATIVA FINAL -->
+<section class="py-20 section-light">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="font-cinzel text-4xl font-bold text-white mb-4">SOFISTES vs. SÒCRATES</h2>
+      <div class="w-24 h-px mx-auto" style="background:linear-gradient(90deg,var(--terrac),var(--sage));"></div>
+    </div>
+    <div class="overflow-hidden rounded-2xl border border-white/10">
+      <div class="grid md:grid-cols-2">
+        <div class="p-8 border-r border-white/10" style="background:linear-gradient(135deg,rgba(140,59,26,.2),rgba(4,6,8,.9))">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="font-cinzel text-2xl font-bold text-amber-500">SOFISTES</h3>
+            <span class="text-3xl">🎭</span>
+          </div>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Veritat</span><span class="text-amber-400 font-semibold">Relativa · subjectiva</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Virtut</span><span class="text-amber-400 font-semibold">Èxit social · poder</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Ensenyament</span><span class="text-amber-400 font-semibold">A canvi de diners</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Mètode</span><span class="text-amber-400 font-semibold">Monòleg · retòrica</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Nomos</span><span class="text-amber-400 font-semibold">Convencional · relatiu</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Perill</span><span class="text-amber-400 font-semibold">Demagògia · corrupció</span></div>
+          </div>
+          <div class="mt-6 p-4 bg-black/40 rounded-lg border border-amber-700/30">
+            <p class="text-xs text-gray-400 italic">"L'home és la mesura de totes les coses." — Protàgores</p>
+          </div>
+        </div>
+        <div class="p-8" style="background:linear-gradient(135deg,rgba(74,124,90,.2),rgba(4,6,8,.9))">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="font-cinzel text-2xl font-bold" style="color:var(--sage-light)">SÒCRATES</h3>
+            <span class="text-3xl">🔍</span>
+          </div>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Veritat</span><span class="font-semibold" style="color:var(--sage-light)">Universal · absoluta</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Virtut</span><span class="font-semibold" style="color:var(--sage-light)">Saber · coneixement</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Ensenyament</span><span class="font-semibold" style="color:var(--sage-light)">Gratuït · per vocació</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Mètode</span><span class="font-semibold" style="color:var(--sage-light)">Diàleg · ironia · maièutica</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Nomos</span><span class="font-semibold" style="color:var(--sage-light)">Ha de tenir fonament universal</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Ideal</span><span class="font-semibold" style="color:var(--sage-light)">Polis justa i feliç</span></div>
+          </div>
+          <div class="mt-6 p-4 bg-black/40 rounded-lg" style="border:1px solid rgba(74,124,90,.3)">
+            <p class="text-xs text-gray-400 italic">"Saber = Virtut = Felicitat." — Intel·lectualisme moral socràtic</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REPASSAR -->
+<section id="repassar" class="py-20 section-dark">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="font-cinzel text-4xl font-bold text-white mb-4">PREGUNTES PER REPASSAR</h2>
+      <p class="text-gray-400">El Gir Antropològic ens interpel·la fins avui</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-base font-bold text-amber-500 border-b border-amber-500/30 pb-2 mb-4">Context</h3>
+        <div class="concept-card p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">La democràcia fa necessari el discurs retòric?</p>
+          <p class="text-xs text-gray-400">La democràcia atenesa ho va demostrar: sense habilitat per parlar, no tens veu. Avui els mitjans i les xarxes han canviat l'arena, però la lògica és la mateixa.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">La virtut es pot aprendre?</p>
+          <p class="text-xs text-gray-400">Els sofistes diuen que sí i en fan negoci. Sòcrates diu que sí però que no es pot transmetre des de fora: cal descobrir-la des de dins.</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-base font-bold text-amber-500 border-b border-amber-500/30 pb-2 mb-4">Sofistes</h3>
+        <div class="concept-card p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Són els sofistes els "polítics actuals"?</p>
+          <p class="text-xs text-gray-400">El domini del discurs per persuadir sense que importi el contingut ressona amb molts polítics i comunicadors actuals. El "doble discurs" de Gòrgies és ben viu.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Existeixen valors absoluts o tot és relatiu?</p>
+          <p class="text-xs text-gray-400">El relativisme sofista és atractiu perquè sembla respectuós de la diversitat. Però, com advertia Sòcrates, sense un referent universal la justícia es converteix en una qüestió de poder.</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-base font-bold text-green-400 border-b border-green-500/30 pb-2 mb-4">Sòcrates</h3>
+        <div class="concept-card p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Qui actua malament és ignorant o malvat?</p>
+          <p class="text-xs text-gray-400">L'intel·lectualisme moral diu que és ignorant. Però, pot ser que algú <em>sàpiga</em> el que és bo i triï el mal? La psicologia moderna ho posa en qüestió.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">El diàleg és sempre possible?</p>
+          <p class="text-xs text-gray-400">Sòcrates creia que el diàleg honest porta a la veritat. Però, quan l'interlocutor no actua de bona fe, el mètode socràtic es trenca. Qui domina el discurs pot simular el diàleg.</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-base font-bold text-green-400 border-b border-green-500/30 pb-2 mb-4">Plató</h3>
+        <div class="concept-card p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Han de governar els més savis?</p>
+          <p class="text-xs text-gray-400">Plató ho defensa. Però, qui decideix qui és el més savi? I no implica això el risc d'una tecnocràcia o d'una dictadura "il·lustrada"?</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Vivim a la caverna?</p>
+          <p class="text-xs text-gray-400">Les xarxes socials, les bombolles d'informació i la desinformació fan el mite de la caverna més pertinent que mai. Quines són les "ombres" que prenem per realitat?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SÍNTESI -->
+<section class="py-20 section-mid relative">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="font-cinzel text-4xl font-bold text-white mb-10">SÍNTESI DEL GIR ANTROPOLÒGIC</h2>
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <div class="concept-card p-6 rounded-xl" style="border-color:rgba(180,90,40,.35);">
+        <div class="text-3xl mb-3">🏛️</div>
+        <h3 class="font-cinzel text-base font-bold text-amber-400 mb-2">La Democràcia</h3>
+        <p class="text-xs text-gray-400">El nou context polític d'Atenes transforma el que significa saber i ser virtuós. La retòrica es converteix en poder.</p>
+      </div>
+      <div class="concept-card p-6 rounded-xl" style="border-color:rgba(180,90,40,.35);">
+        <div class="text-3xl mb-3">🎭</div>
+        <h3 class="font-cinzel text-base font-bold text-amber-400 mb-2">Els Sofistes</h3>
+        <p class="text-xs text-gray-400">Relativisme i escepticisme. La veritat depèn del subjecte. La virtut = èxit. El discurs com a eina de poder.</p>
+      </div>
+      <div class="concept-card p-6 rounded-xl" style="border-color:rgba(74,124,90,.35);">
+        <div class="text-3xl mb-3">🔍</div>
+        <h3 class="font-cinzel text-base font-bold mb-2" style="color:var(--sage-light)">Sòcrates i Plató</h3>
+        <p class="text-xs text-gray-400">Universalisme moral. La veritat és absoluta. Saber = Virtut = Felicitat. La filosofia com a servei a la polis.</p>
+      </div>
+    </div>
+    <p class="font-playfair italic text-gray-400 text-lg">De la Physis a l'Home: el moment en que la filosofia descobreix la seva vocació política i moral.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:linear-gradient(180deg,#040608 0%,rgba(28,15,5,.3) 40%,#040608 100%);border-top:1px solid rgba(180,90,40,.12);padding:4rem 0;">
+  <div class="max-w-5xl mx-auto px-4 text-center">
+    <span class="font-cinzel text-amber-600 text-xl tracking-widest font-bold">GIR ANTROPOLÒGIC Experience</span>
+    <p class="font-playfair italic text-gray-400 text-lg block mt-3 mb-8">"De la Physis a l'Home: el moment fundacional de l'ètica i la política"</p>
+    <p class="text-gray-600 text-xs uppercase tracking-wider mb-8">Nomos · Relativisme · Ironia · Maièutica · Intel·lectualisme Moral</p>
+    <div class="quote-block p-8 rounded-xl text-center max-w-3xl mx-auto">
+      <p class="text-xl font-playfair italic text-gray-200 mb-4">"Fins que els governants no siguin filòsofs o els filòsofs governants, la ciutat no serà justa i no podrà haver felicitat."</p>
+      <p class="text-sm text-gray-500">— Plató, Carta Sèptima</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 mt-12 text-left">
+      <div>
+        <h4 class="font-cinzel text-amber-600 font-bold mb-3 text-sm">Conceptes Clau</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Gir Antropològic</li><li>• Nomos vs. Physis</li><li>• Areté (Virtut)</li>
+          <li>• Relativisme i Escepticisme</li><li>• Universalisme Moral</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-cinzel text-amber-600 font-bold mb-3 text-sm">Mètode Socràtic</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Ironia socràtica</li><li>• Maièutica</li><li>• Diàleg filosòfic</li>
+          <li>• Intel·lectualisme moral</li><li>• Saber = Virtut = Felicitat</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-cinzel text-amber-600 font-bold mb-3 text-sm">Figures Principals</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Protàgores: "L'home mesura"</li><li>• Gòrgies: Triple nihilisme</li>
+          <li>• Sòcrates: Universalisme</li><li>• Plató: Món de les Idees</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const s = document.body.scrollTop || document.documentElement.scrollTop;
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progressBar').style.width = (s / h * 100) + '%';
+  });
+
+  // Sofistes tab switcher
+  function switchSofista(id, btn) {
+    document.querySelectorAll('.phil-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.phil-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById('sof-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Nav links per als sofistes
+  ['protagores','gorgies'].forEach(id => {
+    const link = document.querySelector('a[href="#' + id + '"]');
+    if (link) link.addEventListener('click', e => {
+      e.preventDefault();
+      const btn = document.querySelector('.phil-tab[onclick*="' + id + '"]');
+      if (btn) switchSofista(id, btn);
+      const sec = document.getElementById('sofistes');
+      if (sec) { const y = sec.getBoundingClientRect().top + window.pageYOffset - 80; window.scrollTo({top: y, behavior: 'smooth'}); }
+    });
+  });
+
+  // Scroll-spy
+  const sections = Array.from(document.querySelectorAll('section[id], div[id]:not([aria-hidden])'));
+  const navLinks = document.querySelectorAll('.nav-link');
+  const parentMap = {
+    nomosphy:     'context',
+    protagores:   'sofistes',
+    gorgies:      'sofistes',
+    metode:       'socrates',
+    universalisme:'socrates',
+  };
+  let ignoreScroll = false;
+
+  function setActive(id) {
+    const parentId = id ? (parentMap[id] || id) : null;
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      const isActive = parentId && (href === '#' + parentId || href === '#' + id);
+      link.classList.toggle('active-section', !!isActive);
+    });
+  }
+
+  function getCurrentSection() {
+    const scrollPos = window.scrollY + window.innerHeight * 0.28;
+    let current = null;
+    document.querySelectorAll('section[id], div[id]').forEach(el => {
+      if (el.offsetTop <= scrollPos) current = el;
+    });
+    return current?.getAttribute('id') || null;
+  }
+
+  window.addEventListener('scroll', () => { if (!ignoreScroll) setActive(getCurrentSection()); }, { passive: true });
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      const target = link.getAttribute('href').replace('#', '');
+      if (!['protagores','gorgies'].includes(target)) {
+        ignoreScroll = true;
+        setActive(target);
+        setTimeout(() => { ignoreScroll = false; setActive(getCurrentSection()); }, 700);
+      }
+    });
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#' || ['#protagores','#gorgies'].includes(href)) return;
+      const t = document.querySelector(href);
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // Card fade-in
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+    });
+  }, { threshold: 0 });
+
+  document.querySelectorAll('.concept-card:not(.no-anim)').forEach((el, i) => {
+    el.style.opacity='0'; el.style.transform='translateY(8px)';
+    el.style.transition=`all .8s ease ${i*.04}s`;
+    obs.observe(el);
+  });
+
+  document.addEventListener('DOMContentLoaded', () => setActive(getCurrentSection()));
+</script>
+</body>
+</html>

@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aristòtil: El Filòsof de la Realitat</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep: #06090E;
+    --mid:  #0d1420;
+    --slate:#182235;
+    --bronze: #A97C35;
+    --bronze-light: #D4A855;
+    --olive: #4A6741;
+    --olive-light: #6B9462;
+    --crimson: #7B1E2E;
+    --ivory: #F5F0E8;
+    --silver: #9aaabf;
+  }
+
+  * { box-sizing: border-box; }
+  body { font-family:'Inter',sans-serif; background:var(--deep); color:var(--ivory); overflow-x:hidden; }
+  .font-cinzel   { font-family:'Cinzel',serif; }
+  .font-playfair { font-family:'Playfair Display',serif; }
+
+  /* Progress bar */
+  .progress-bar { position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--crimson),var(--bronze));z-index:1000;transition:width .1s; }
+
+  /* Float */
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
+  .float-anim { animation:float 5s ease-in-out infinite; }
+
+  /* Shimmer */
+  @keyframes shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
+  .shimmer-text {
+    background:linear-gradient(90deg,var(--ivory) 0%,var(--bronze-light) 50%,var(--ivory) 100%);
+    background-size:200% auto;
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    animation:shimmer 4s linear infinite;
+  }
+
+  /* Pulse glow */
+  @keyframes pulse-glow { 0%,100%{box-shadow:0 0 15px rgba(169,124,53,.25)} 50%{box-shadow:0 0 35px rgba(169,124,53,.55)} }
+
+  /* Sections */
+  .section-dark  { background:linear-gradient(135deg,#06090E 0%,#0d1420 100%); position:relative; overflow:hidden; }
+  .section-mid   { background:linear-gradient(135deg,#0d1420 0%,#182235 100%); }
+  .section-light { background:linear-gradient(135deg,#182235 0%,#1e2d40 100%); }
+
+  /* Cards */
+  .concept-card {
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(169,124,53,.2);
+    backdrop-filter:blur(8px);
+    transition:all .4s cubic-bezier(.4,0,.2,1);
+  }
+  .concept-card:hover {
+    transform:translateY(-8px) scale(1.02);
+    border-color:var(--bronze);
+    box-shadow:0 18px 36px rgba(74,103,65,.3);
+  }
+  .concept-card.no-anim:hover { transform:none; box-shadow:none; }
+
+  /* Quote */
+  .aristotil-quote {
+    border-left:4px solid var(--bronze);
+    background:linear-gradient(90deg,rgba(169,124,53,.15) 0%,transparent 100%);
+    font-style:italic;
+  }
+
+  /* Tabs */
+  .tab-btn { transition:all .3s; border-bottom:2px solid transparent; color:#9aaabf; }
+  .tab-btn.active { border-bottom-color:var(--bronze); color:var(--bronze-light); }
+  .content-panel { display:none; animation:fadeIn .5s; }
+  .content-panel.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+  /* Timeline */
+  .timeline-item { position:relative; padding-left:2rem; border-left:2px solid rgba(169,124,53,.3); }
+  .timeline-item::before { content:''; position:absolute; left:-6px; top:2px; width:10px; height:10px; background:var(--bronze); border-radius:50%; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width:8px; }
+  ::-webkit-scrollbar-track { background:var(--deep); }
+  ::-webkit-scrollbar-thumb { background:var(--crimson); border-radius:4px; }
+  ::-webkit-scrollbar-thumb:hover { background:var(--bronze); }
+
+  /* Active nav */
+  .active-section { color:var(--bronze-light)!important; border-bottom:2px solid var(--bronze-light); padding-bottom:2px; }
+
+  /* Home btn */
+  .home-btn { margin-left:10px;padding:5px 10px;font-size:12px;border:1px solid rgba(255,255,255,.2);border-radius:8px;color:var(--bronze);text-decoration:none;background:rgba(0,0,0,.3);backdrop-filter:blur(6px);transition:all .2s ease; }
+  .home-btn:hover { background:rgba(169,124,53,.1);border-color:rgba(169,124,53,.4);transform:translateY(-1px); }
+</style>
+</head>
+<body class="antialiased">
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full bg-black/60 backdrop-blur-md z-50 border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+      <a href="#inici" class="flex items-center space-x-3 group">
+        <svg class="w-7 h-7 text-yellow-600 group-hover:scale-110 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/>
+        </svg>
+        <span class="font-cinzel text-lg font-bold text-yellow-600 group-hover:text-white transition hover:tracking-widest">ARISTÒTIL Experience</span>
+      </a>
+      <div class="hidden md:flex space-x-5 items-center text-sm">
+        <a href="../index.html" class="home-btn">← Inici EXPERIENCE</a>
+
+        <div class="relative group">
+          <a href="#biografia" class="nav-link hover:text-yellow-600 transition flex items-center gap-1">Introducció <span class="text-xs">▼</span></a>
+          <div class="absolute left-0 top-full mt-0 pt-2 w-52 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+            <a href="#biografia" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Biografia i context</a>
+            <a href="#critica"   class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Crítica a Plató</a>
+          </div>
+        </div>
+
+        <div class="relative group">
+          <a href="#metafisica" class="nav-link hover:text-yellow-600 transition flex items-center gap-1">Metafísica <span class="text-xs">▼</span></a>
+          <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+            <a href="#substancia"  class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Substància i accidents</a>
+            <a href="#hilemorfisme" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Hilemorfisme</a>
+            <a href="#canvi"       class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Potència i acte</a>
+            <a href="#cosmologia"  class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Cosmologia</a>
+          </div>
+        </div>
+
+        <div class="relative group">
+          <a href="#antropologia" class="nav-link hover:text-yellow-600 transition flex items-center gap-1">Antropologia <span class="text-xs">▼</span></a>
+          <div class="absolute left-0 top-full mt-0 pt-2 w-52 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+            <a href="#cosanima"    class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Cos i ànima</a>
+            <a href="#coneixement" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Coneixement</a>
+          </div>
+        </div>
+
+        <a href="#etica"    class="nav-link hover:text-yellow-600 transition">Ètica</a>
+        <a href="#politica" class="nav-link hover:text-yellow-600 transition">Política</a>
+        <a href="#repassar" class="nav-link hover:text-yellow-600 transition">Repassar</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inici" class="relative min-h-screen flex items-center section-dark pt-16">
+  <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(circle at 25% 50%,#A97C35 0%,transparent 50%),radial-gradient(circle at 75% 20%,#4A6741 0%,transparent 45%)"></div>
+  <svg class="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
+    <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#A97C35" stroke-width="0.5"/></pattern></defs>
+    <rect width="100%" height="100%" fill="url(#grid)"/>
+  </svg>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 w-full">
+    <div class="max-w-3xl">
+      <div class="mb-6 inline-block">
+        <span class="font-cinzel text-sm border border-yellow-600/50 text-yellow-600 px-5 py-2 rounded-full tracking-widest uppercase">L'ésser es diu de moltes maneres</span>
+      </div>
+      <h2 class="font-cinzel text-3xl md:text-4xl text-yellow-600 tracking-[0.2em] mb-3">ARISTÒTIL</h2>
+      <h1 class="font-cinzel text-5xl md:text-7xl font-black mb-6 leading-tight shimmer-text">
+        EL FILÒSOF<br>DE LA REALITAT
+      </h1>
+      <p class="font-playfair text-xl md:text-2xl text-gray-300 mb-8 italic">
+        Una filosofia realista que rebutja el dualisme platònic i ancla la realitat en els individus particulars del món sensible.
+      </p>
+      <div class="flex flex-wrap gap-4 text-sm text-yellow-600/80 font-cinzel tracking-wider">
+        <span>• HILEMORFISME</span>
+        <span>• POTÈNCIA I ACTE</span>
+        <span>• TELEOLOGISME</span>
+        <span>• EUDAIMONIA</span>
+        <span>• ZOON POLITIKÓN</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute right-8 bottom-20 max-w-xs text-right hidden lg:block">
+    <p class="font-playfair text-base italic text-gray-300 leading-relaxed">
+      "L'ésser humà és per naturalesa un animal social. Qui viu fora de la societat per naturalesa i no per atzar, o és un ésser inferior o és un déu."
+    </p>
+    <div class="mt-2 h-[2px] bg-gradient-to-l from-yellow-600 via-green-700 to-transparent"></div>
+  </div>
+
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 float-anim">
+    <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+    </svg>
+  </div>
+</section>
+
+<!-- BIOGRAFIA -->
+<section id="biografia" class="py-20 section-mid">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+      <div>
+        <h2 class="font-cinzel text-4xl font-bold mb-6 text-yellow-600">Biografia i Context</h2>
+        <div class="space-y-4 text-gray-300 leading-relaxed">
+          <p>Aristòtil va néixer el 384 aC a <span class="text-yellow-500 font-semibold">Estagira</span>, una colònia grega de Macedònia. Fill d'un metge de la cort del rei de Macedònia, va ingressar a l'Acadèmia de Plató amb 17 anys i hi va romandre fins a la mort del seu mestre.</p>
+          <p>Després d'abandonar l'Acadèmia, va viatjar, va fundar una escola pròpia i va ser cridat per <span class="text-yellow-500 font-semibold">Filip II de Macedònia</span> per ser preceptor del seu fill: el jove <span class="text-yellow-500 font-semibold">Alexandre el Gran</span>.</p>
+          <div class="aristotil-quote p-4 rounded-r-lg my-4">
+            <p class="text-lg">"Filip II va aprofitar la feblesa de les polis gregues per dominar-les totes. En morir Alexandre, les ciutats estat lliures van passar a dependre dels reis: <strong>la polis com a ideal de vida havia entrat en decadència.</strong>"</p>
+          </div>
+          <p>El 335 aC va fundar a Atenes el seu propi centre, el <span class="text-yellow-500 font-semibold">Liceu</span>, on impartia classes passejant pels jardins — d'aquí el nom dels seus seguidors: <em>peripatètics</em>. Va morir el 322 aC, un any després que Alexandre el Gran.</p>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="concept-card p-6 rounded-xl">
+          <h3 class="font-cinzel text-xl font-bold text-yellow-500 mb-4">Obres Fonamentals</h3>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 border-b border-white/10 pb-3">
+              <span class="text-yellow-500 font-cinzel text-xs font-bold min-w-[80px]">Metafísica</span>
+              <p class="text-xs text-gray-400">La teoria de la substància, matèria i forma, potència i acte, motor immòbil.</p>
+            </div>
+            <div class="flex items-start gap-3 border-b border-white/10 pb-3">
+              <span class="text-yellow-500 font-cinzel text-xs font-bold min-w-[80px]">Física</span>
+              <p class="text-xs text-gray-400">La naturalesa, el canvi, el moviment i la cosmologia.</p>
+            </div>
+            <div class="flex items-start gap-3 border-b border-white/10 pb-3">
+              <span class="text-yellow-500 font-cinzel text-xs font-bold min-w-[80px]">Ètica Nic.</span>
+              <p class="text-xs text-gray-400">La felicitat (eudaimonia), la virtut com a terme mitjà, la prudència.</p>
+            </div>
+            <div class="flex items-start gap-3 border-b border-white/10 pb-3">
+              <span class="text-yellow-500 font-cinzel text-xs font-bold min-w-[80px]">Política</span>
+              <p class="text-xs text-gray-400">L'ésser humà com a animal social. Classificació dels règims polítics.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-yellow-500 font-cinzel text-xs font-bold min-w-[80px]">De Anima</span>
+              <p class="text-xs text-gray-400">L'ànima com a forma del cos. Les tres funcions: vegetativa, sensitiva, racional.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept-card p-6 rounded-xl border-yellow-700/30">
+          <h3 class="font-cinzel text-xl font-bold text-yellow-500 mb-3">Plató vs Aristòtil: Una Ullada</h3>
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="bg-purple-900/20 p-3 rounded border border-purple-500/20">
+              <p class="text-purple-300 font-bold mb-1">Plató</p>
+              <p class="text-gray-400">Idealisme. Dualisme: món sensible / món de les Idees. Les essències són transcendents.</p>
+            </div>
+            <div class="bg-yellow-900/20 p-3 rounded border border-yellow-500/20">
+              <p class="text-yellow-400 font-bold mb-1">Aristòtil</p>
+              <p class="text-gray-400">Realisme. Un sol món: el sensible. Les essències són immanents als individus.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRÍTICA A PLATÓ -->
+<section id="critica" class="py-20 section-dark relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-600">LA CRÍTICA A L'IDEALISME</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">"Plató és el meu amic, però la veritat és encara més amiga meva"</p>
+    </div>
+
+    <div class="max-w-4xl mx-auto mb-10 text-center">
+      <p class="text-gray-300 text-lg leading-relaxed">Tot i ser deixeble de Plató durant vint anys, Aristòtil va rebutjar la teoria de les Idees. Pensava que l'intent platònic d'entendre la realitat amb essències transcendents <strong class="text-yellow-400">creava dificultats majors que les que pretenia resoldre</strong>.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8 mb-12">
+      <div class="lg:col-span-2 space-y-5">
+        <div class="timeline-item pb-6">
+          <h5 class="text-white font-bold mb-1">El problema de la participació</h5>
+          <p class="text-sm text-gray-400">Plató diu que les coses sensibles <em>participen</em> de les Idees, però no explica com funciona exactament aquesta participació. Aristòtil considera que el concepte és tan confús i contradictori que no aclareix res.</p>
+        </div>
+        <div class="timeline-item pb-6">
+          <h5 class="text-white font-bold mb-1">Duplicació innecessària de la realitat</h5>
+          <p class="text-sm text-gray-400">En lloc d'explicar el món sensible, Plató en crea un segon (el món de les Idees) que necessita la mateixa explicació. En comptes d'aclarir les coses, dobla el problema.</p>
+        </div>
+        <div class="timeline-item pb-6">
+          <h5 class="text-white font-bold mb-1">Les essències no poden ser transcendents</h5>
+          <p class="text-sm text-gray-400">Si les essències es troben en un espai separat i independent de les coses, com poden explicar allò que les coses <em>són</em>? L'essència ha de ser immanent, present dins dels individus mateixos.</p>
+        </div>
+        <div class="timeline-item">
+          <h5 class="text-white font-bold mb-1">La proposta realista</h5>
+          <p class="text-sm text-gray-400">Aristòtil rebutja el dualisme ontològic. <span class="text-yellow-400 font-semibold">L'única realitat que existeix és la que podem trobar en els individus particulars del món sensible.</span> No hi ha cap món intel·ligible format per Idees transcendents.</p>
+        </div>
+      </div>
+
+      <div class="space-y-5">
+        <div class="concept-card p-5 rounded-xl bg-gradient-to-b from-purple-900/20 to-transparent">
+          <h4 class="font-cinzel text-lg font-bold text-purple-400 mb-3">El Dualisme Platònic</h4>
+          <div class="space-y-2 text-sm">
+            <div class="bg-black/40 p-3 rounded">
+              <p class="font-bold text-purple-300 mb-1">Món de les Idees</p>
+              <p class="text-gray-400">Etern, immutable, perfecte. Les essències vertaderes. Accessible a la raó.</p>
+            </div>
+            <div class="text-center text-gray-500 text-xs py-1">↕ participació (confusa)</div>
+            <div class="bg-black/40 p-3 rounded">
+              <p class="font-bold text-gray-300 mb-1">Món Sensible</p>
+              <p class="text-gray-400">Canviant, imperfecte. Còpies de les Idees. Accessible als sentits.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept-card p-5 rounded-xl bg-gradient-to-b from-yellow-900/20 to-transparent">
+          <h4 class="font-cinzel text-lg font-bold text-yellow-500 mb-3">El Realisme Aristotèlic</h4>
+          <div class="bg-black/40 p-4 rounded">
+            <p class="font-bold text-yellow-300 mb-1">Un sol món: el sensible</p>
+            <p class="text-gray-400 text-sm">Les essències <strong>estan en</strong> les coses particulars, no separades d'elles. La realitat autèntica és la que podem veure i tocar.</p>
+          </div>
+          <div class="mt-3 p-3 bg-yellow-900/20 rounded text-xs text-yellow-300 font-semibold">
+            💡 Essència immanent, no transcendent.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METAFÍSICA TABS -->
+<section id="metafisica" class="py-20 section-mid relative">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-600">METAFÍSICA</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">"L'ésser es diu de moltes maneres"</p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-8 mb-12 border-b border-white/10 pb-4">
+      <button class="tab-btn active text-lg font-cinzel px-4 py-2" onclick="switchTab('substancia')">Substància i Categories</button>
+      <button class="tab-btn text-lg font-cinzel px-4 py-2" onclick="switchTab('hilemorfisme')">Hilemorfisme i Causes</button>
+      <button class="tab-btn text-lg font-cinzel px-4 py-2" onclick="switchTab('canvi')">Potència, Acte i Canvi</button>
+    </div>
+
+    <!-- TAB: SUBSTÀNCIA -->
+    <div id="substancia" class="content-panel active">
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div class="space-y-6">
+          <h3 class="font-cinzel text-3xl font-bold text-yellow-500">Substància i Accidents</h3>
+          <div class="aristotil-quote p-5 rounded-r-lg">
+            <p class="text-lg">"Aristòtil defineix la substància com <strong>allò que existeix en si mateix i no en un altre</strong>. Els individus particulars del món sensible — aquesta taula, aquest gos, aquest ésser humà — són substàncies."</p>
+          </div>
+          <p class="text-gray-300 leading-relaxed">D'acord amb el realisme metafísic, allò que realment existeix són els individus particulars. La distinció fonamental:</p>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-yellow-900/20 border border-yellow-500/30 p-4 rounded-xl">
+              <h5 class="font-cinzel text-yellow-400 font-bold mb-2">Substància</h5>
+              <p class="text-sm text-gray-300">Existeix <strong>en si mateixa</strong>. Els individus particulars: aquest gos, aquesta taula, aquest arbre. Realitat primària.</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 p-4 rounded-xl">
+              <h5 class="font-cinzel text-gray-400 font-bold mb-2">Accidents</h5>
+              <p class="text-sm text-gray-300">Existeix <strong>en un altre</strong>. Les qualitats, propietats i atributs de la substància. El color blanc no existeix per si sol.</p>
+            </div>
+          </div>
+
+          <h4 class="font-cinzel text-xl font-bold text-yellow-400 mt-4">Les Deu Categories</h4>
+          <p class="text-sm text-gray-300">Aristòtil analitza els usos del verb "ésser" en el llenguatge i identifica les <strong>dimensions de l'existència</strong>. La primera i més important és la substància; les altres nou són accidents:</p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="concept-card p-6 rounded-xl">
+            <h4 class="font-cinzel text-lg font-bold text-yellow-500 mb-4">Les Categories amb Exemples</h4>
+            <div class="space-y-2 text-sm">
+              <div class="flex gap-3 border-b border-white/10 pb-2">
+                <span class="text-yellow-400 font-bold min-w-[100px]">Substància</span>
+                <span class="text-gray-300">El Youness <em>és</em> un ésser humà</span>
+              </div>
+              <div class="flex gap-3 border-b border-white/10 pb-2">
+                <span class="text-gray-400 min-w-[100px]">Qualitat</span>
+                <span class="text-gray-300">El Youness <em>és</em> intel·ligent</span>
+              </div>
+              <div class="flex gap-3 border-b border-white/10 pb-2">
+                <span class="text-gray-400 min-w-[100px]">Quantitat</span>
+                <span class="text-gray-300">El Youness <em>és</em> un de 18 anys</span>
+              </div>
+              <div class="flex gap-3 border-b border-white/10 pb-2">
+                <span class="text-gray-400 min-w-[100px]">Lloc</span>
+                <span class="text-gray-300">El Youness <em>és</em> català</span>
+              </div>
+              <div class="flex gap-3 border-b border-white/10 pb-2">
+                <span class="text-gray-400 min-w-[100px]">Temps</span>
+                <span class="text-gray-300">El Youness <em>és</em> de l'any 2007</span>
+              </div>
+              <div class="flex gap-3 border-b border-white/10 pb-2">
+                <span class="text-gray-400 min-w-[100px]">Relació</span>
+                <span class="text-gray-300">El Youness <em>és</em> més jove que el Romà</span>
+              </div>
+              <div class="flex gap-3 border-b border-white/10 pb-2">
+                <span class="text-gray-400 min-w-[100px]">Situació</span>
+                <span class="text-gray-300">El Youness <em>està</em> estudiant</span>
+              </div>
+              <div class="flex gap-3 border-b border-white/10 pb-2">
+                <span class="text-gray-400 min-w-[100px]">Condició</span>
+                <span class="text-gray-300">El Youness <em>està</em> assegut</span>
+              </div>
+              <div class="flex gap-3 border-b border-white/10 pb-2">
+                <span class="text-gray-400 min-w-[100px]">Acció</span>
+                <span class="text-gray-300">El Youness <em>està</em> parlant</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gray-400 min-w-[100px]">Passió</span>
+                <span class="text-gray-300">El Youness <em>està</em> patint</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="concept-card p-5 rounded-xl border-yellow-500/30">
+            <h4 class="font-cinzel text-sm font-bold text-yellow-400 mb-2">Substàncies 1ª i 2ª</h4>
+            <p class="text-xs text-gray-400 leading-relaxed">La <strong class="text-white">substància primera</strong> és l'individu concret (aquest gos, aquesta Anna). La <strong class="text-white">substància segona</strong> és l'espècie o gènere (gos, ésser humà): l'essència universal que l'enteniment abstreu dels individus i que existeix com a concepte a la ment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: HILEMORFISME -->
+    <div id="hilemorfisme" class="content-panel">
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div class="space-y-6">
+          <h3 class="font-cinzel text-3xl font-bold text-yellow-500">Hilemorfisme: Matèria i Forma</h3>
+          <p class="text-gray-300 leading-relaxed">Aristòtil admet que cada individu té una essència que el defineix. Per entendre-la, distingeix dos principis en tota substància:</p>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-yellow-900/20 border border-yellow-500/30 p-4 rounded-xl">
+              <h5 class="font-cinzel text-yellow-400 font-bold mb-2">Matèria (<em>hylé</em>)</h5>
+              <p class="text-sm text-gray-300">Allò <strong>de què</strong> és feta una cosa. El substrat, la potencialitat. La fusta de la taula.</p>
+            </div>
+            <div class="bg-olive/10 border border-green-700/40 p-4 rounded-xl">
+              <h5 class="font-cinzel text-green-400 font-bold mb-2">Forma (<em>morphé</em>)</h5>
+              <p class="text-sm text-gray-300">La manera com la matèria s'<strong>organitza</strong>. L'estructura que fa que la cosa sigui allò que és. L'essència immanent.</p>
+            </div>
+          </div>
+
+          <div class="aristotil-quote p-4 rounded-r-lg">
+            <p class="text-sm text-gray-300">La forma és justament allò que fa que una taula sigui una taula i no una cadira. En això consisteix l'essència: en allò que fa que alguna cosa sigui allò que és i no cap altra cosa diferent. Per a Aristòtil, essència = forma.</p>
+          </div>
+
+          <div class="concept-card p-5 rounded-xl border-green-700/30">
+            <h4 class="font-cinzel text-lg font-bold text-green-400 mb-3">Essència immanent, no transcendent</h4>
+            <p class="text-sm text-gray-300">A diferència de Plató, la forma aristotèlica no es troba en cap altre món. <strong class="text-yellow-400">Pertany al món sensible</strong>, perquè no és res més que la manera concreta com els individus estan configurats per tal de ser allò que són.</p>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <h4 class="font-cinzel text-xl font-bold text-yellow-400">Les Quatre Causes</h4>
+          <p class="text-sm text-gray-300">Per explicar completament una cosa, Aristòtil creu que cal identificar quatre principis o causes. <strong>Exemple: El Youness fa un vaixell de paper.</strong></p>
+
+          <div class="space-y-3">
+            <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4 border-yellow-500">
+              <div class="flex-shrink-0 w-9 h-9 bg-yellow-600/30 rounded-full flex items-center justify-center font-cinzel text-yellow-400 text-xs font-bold">MAT</div>
+              <div>
+                <h5 class="text-white font-bold text-sm mb-1">Causa Material</h5>
+                <p class="text-xs text-gray-400">Allò de <strong>què</strong> és fet un ésser. En l'exemple: el full de paper.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4 border-green-600">
+              <div class="flex-shrink-0 w-9 h-9 bg-green-700/30 rounded-full flex items-center justify-center font-cinzel text-green-400 text-xs font-bold">FOR</div>
+              <div>
+                <h5 class="text-white font-bold text-sm mb-1">Causa Formal</h5>
+                <p class="text-xs text-gray-400">La <strong>forma</strong> o essència. En l'exemple: la idea de vaixell de paper (el model).</p>
+              </div>
+            </div>
+            <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4 border-blue-500">
+              <div class="flex-shrink-0 w-9 h-9 bg-blue-700/30 rounded-full flex items-center justify-center font-cinzel text-blue-400 text-xs font-bold">EFI</div>
+              <div>
+                <h5 class="text-white font-bold text-sm mb-1">Causa Eficient</h5>
+                <p class="text-xs text-gray-400">L'<strong>agent</strong> que ha produït la cosa. En l'exemple: el Youness.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4 border-red-500">
+              <div class="flex-shrink-0 w-9 h-9 bg-red-700/30 rounded-full flex items-center justify-center font-cinzel text-red-400 text-xs font-bold">FIN</div>
+              <div>
+                <h5 class="text-white font-bold text-sm mb-1">Causa Final</h5>
+                <p class="text-xs text-gray-400">El <strong>propòsit o finalitat</strong>. En l'exemple: explicar la teoria de les quatre causes.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="concept-card p-4 rounded-xl border-yellow-500/30 mt-2">
+            <h5 class="font-cinzel text-sm font-bold text-yellow-400 mb-2">En els processos naturals</h5>
+            <p class="text-xs text-gray-400">Les quatre causes es redueixen a dues: matèria i forma. La forma és simultàniament causa formal, eficient i final: des de dins, dirigeix el canvi i marca el fi a assolir. Això fa la filosofia aristotèlica <strong class="text-yellow-300">teleològica</strong>: tot ésser tendeix a realitzar plenament la seva essència (<em>telos</em>).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: CANVI -->
+    <div id="canvi" class="content-panel">
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div class="space-y-6">
+          <h3 class="font-cinzel text-3xl font-bold text-yellow-500">Potència i Acte</h3>
+          <div class="aristotil-quote p-5 rounded-r-lg">
+            <p class="text-lg">"L'ésser es diu de moltes maneres. Cal distingir <strong>dues maneres d'ésser: l'ésser en potència i l'ésser en acte.</strong>"</p>
+          </div>
+          <p class="text-gray-300 leading-relaxed">El canvi era un dels grans problemes dels presocràtics. Parmènides negava que fos real. Aristòtil l'accepta i l'explica:</p>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-yellow-900/15 border border-yellow-700/30 p-4 rounded-xl">
+              <h5 class="font-cinzel text-yellow-600 font-bold mb-2">En Potència</h5>
+              <p class="text-sm text-gray-300">Té la <strong>capacitat</strong> de transformar-se, però encara no ho ha fet. La nou és una noguera en potència.</p>
+            </div>
+            <div class="bg-green-900/15 border border-green-700/30 p-4 rounded-xl">
+              <h5 class="font-cinzel text-green-400 font-bold mb-2">En Acte</h5>
+              <p class="text-sm text-gray-300">Ha <strong>realitzat plenament</strong> tot el que podia ser. La noguera és una noguera en acte.</p>
+            </div>
+          </div>
+
+          <div class="concept-card p-5 rounded-xl">
+            <h4 class="font-cinzel text-lg font-bold text-white mb-3">El Canvi com a Actualització</h4>
+            <p class="text-sm text-gray-300 mb-3">El canvi es produeix quan un ésser en potència passa a ser en acte: <strong class="text-yellow-400">actualització de les possibilitats latents</strong>.</p>
+            <ul class="space-y-2 text-sm text-gray-400">
+              <li class="flex gap-2"><span class="text-yellow-500">▸</span><span><strong class="text-white">Canvi substancial:</strong> els individus sorgeixen o desapareixen (generació i corrupció). Hi ha un canvi de forma.</span></li>
+              <li class="flex gap-2"><span class="text-yellow-500">▸</span><span><strong class="text-white">Canvi accidental:</strong> només canvien els accidents: qualitats, grandària o lloc (moviment local).</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <h4 class="font-cinzel text-xl font-bold text-yellow-400">El Motor Immòbil</h4>
+          <p class="text-sm text-gray-300 leading-relaxed">Per a Aristòtil, "tot allò que es mou és mogut per un altre". Cada moviment pressuposa un motor anterior. Però això no pot ser una cadena infinita: ha d'existir un <strong class="text-yellow-400">primer motor que mou sense ser mogut</strong>.</p>
+
+          <div class="space-y-3">
+            <div class="timeline-item pb-4">
+              <h5 class="text-white font-bold text-sm mb-1">Acte pur</h5>
+              <p class="text-xs text-gray-400">El motor immòbil és activitat pura, sense potencialitat. No pot ser mogut perquè no té res en potència que pugui actualitzar-se.</p>
+            </div>
+            <div class="timeline-item pb-4">
+              <h5 class="text-white font-bold text-sm mb-1">Causa final de tot moviment</h5>
+              <p class="text-xs text-gray-400">La resta de l'univers es mou perquè aspira a imitar la perfecció i bellesa d'aquest primer motor. El mou com a objecte d'amor i desig, no per contacte físic.</p>
+            </div>
+            <div class="timeline-item">
+              <h5 class="text-white font-bold text-sm mb-1">Déu aristotèlic</h5>
+              <p class="text-xs text-gray-400">Aristòtil identifica el motor immòbil amb Déu. Però no és una divinitat personal: és una força còsmica impersonal, perfecta i eterna. No el Déu del cristianisme.</p>
+            </div>
+          </div>
+
+          <div class="concept-card p-5 rounded-xl border-yellow-500/30">
+            <h4 class="font-cinzel text-sm font-bold text-yellow-400 mb-2">Matèria ↔ Potència / Forma ↔ Acte</h4>
+            <p class="text-xs text-gray-400">La matèria s'associa a la potència (allò que pot ser), la forma s'associa a l'acte (allò que és). Tot canvi és un procés de la matèria informant-se, de la potència actualitzant-se, guiat per la forma com a principi intern.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- COSMOLOGIA -->
+<section id="cosmologia" class="py-20 section-dark relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-600">COSMOLOGIA</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Un univers geocèntric, etern i heterogeni</p>
+    </div>
+    <div class="max-w-4xl mx-auto mb-10 text-center">
+      <p class="text-gray-300 text-lg leading-relaxed">Sense telescopis ni instruments moderns, els grecs basaven l'astronomia en l'observació a ull nu. Aristòtil va construir el seu model a partir del d'Eudox, afegint-hi elements propis.</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-10 mb-12">
+      <div class="space-y-5">
+        <h3 class="font-cinzel text-2xl font-bold text-yellow-400">Les Característiques del Cosmos</h3>
+        <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4 border-yellow-500">
+          <div class="text-2xl">🌍</div>
+          <div><h5 class="text-white font-bold mb-1">Geocèntric</h5><p class="text-sm text-gray-400">La Terra al centre. Al voltant hi giren tots els astres en òrbites circulars perfectes, encastats en esferes transparents.</p></div>
+        </div>
+        <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4 border-yellow-600">
+          <div class="text-2xl">♾️</div>
+          <div><h5 class="text-white font-bold mb-1">Etern en el temps</h5><p class="text-sm text-gray-400">El cosmos sempre ha existit i sempre existirà. No té origen ni fi temporal.</p></div>
+        </div>
+        <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4 border-green-600">
+          <div class="text-2xl">🔵</div>
+          <div><h5 class="text-white font-bold mb-1">Limitat en l'espai</h5><p class="text-sm text-gray-400">L'univers és finit, tancat per l'esfera exterior dels estels fixes. Més enllà no hi ha res.</p></div>
+        </div>
+        <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4 border-red-600">
+          <div class="text-2xl">⚡</div>
+          <div><h5 class="text-white font-bold mb-1">Heterogeni</h5><p class="text-sm text-gray-400">Es divideix en dues regions radicalment diferents regides per principis oposats.</p></div>
+        </div>
+      </div>
+      <div class="space-y-0 overflow-hidden rounded-xl border border-white/10">
+        <div class="bg-gradient-to-br from-yellow-900/30 to-black p-5 border-b border-white/10">
+          <h4 class="font-cinzel text-lg font-bold text-yellow-400 mb-3">⬆ Món Supralunar</h4>
+          <p class="text-xs text-gray-400 mb-3">Sol, planetes i estels (per sobre de la Lluna)</p>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li class="flex gap-2"><span class="text-yellow-400">▸</span><span><strong class="text-white">Perfecte, etern i immutable.</strong> Els astres no canvien ni es degraden.</span></li>
+            <li class="flex gap-2"><span class="text-yellow-400">▸</span><span><strong class="text-white">5è element: l'èter.</strong> Diví, immortal i immutable. Absent al món sublunar.</span></li>
+            <li class="flex gap-2"><span class="text-yellow-400">▸</span><span>Moviment <strong>circular i perfecte</strong>. Ordre de les esferes: Lluna → Mercuri → Venus → Sol → Mart → Júpiter → Saturn → Estels fixes.</span></li>
+            <li class="flex gap-2"><span class="text-yellow-400">▸</span><span>Els astres eren considerats <strong>éssers divins</strong> per la seva immutabilitat.</span></li>
+          </ul>
+        </div>
+        <div class="bg-gradient-to-br from-blue-900/20 to-black p-5">
+          <h4 class="font-cinzel text-lg font-bold text-blue-400 mb-3">⬇ Món Sublunar</h4>
+          <p class="text-xs text-gray-400 mb-3">La Terra i la seva superfície</p>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li class="flex gap-2"><span class="text-blue-400">▸</span><span><strong class="text-white">Imperfecte i canviant.</strong> Les coses neixen, canvien i moren.</span></li>
+            <li class="flex gap-2"><span class="text-blue-400">▸</span><span><strong class="text-white">4 elements:</strong> terra, aigua, aire i foc. Cada un tendeix al seu lloc natural (teleologia).</span></li>
+            <li class="flex gap-2"><span class="text-blue-400">▸</span><span>Moviment <strong>rectilini</strong> cap al lloc natural: la pedra cau, el foc puja.</span></li>
+            <li class="flex gap-2"><span class="text-blue-400">▸</span><span>La física d'aquest món és la que estudia la <em>Física</em> d'Aristòtil.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Motor immòbil -->
+    <div class="max-w-4xl mx-auto">
+      <div class="concept-card no-anim p-8 rounded-2xl border-yellow-500/40 text-center" style="animation:pulse-glow 3s ease-in-out infinite; background:linear-gradient(135deg,rgba(169,124,53,.1),rgba(6,9,14,.8))">
+        <div class="text-4xl mb-4">🌀</div>
+        <h3 class="font-cinzel text-2xl font-bold text-yellow-400 mb-4">El Motor Immòbil</h3>
+        <p class="text-gray-300 leading-relaxed mb-6">Si "tot allò que es mou és mogut per un altre", la cadena de motors no pot ser infinita: cal un <strong class="text-yellow-400">primer motor que mogui sense ser mogut</strong>. Aristòtil el identifica amb Déu.</p>
+        <div class="grid md:grid-cols-3 gap-4 text-sm mb-6">
+          <div class="bg-black/40 p-4 rounded-lg">
+            <p class="text-yellow-300 font-bold mb-2">Acte pur</p>
+            <p class="text-gray-400 text-xs">Sense cap potencialitat. No pot ser mogut perquè no té res en potència a actualitzar. Activitat pura i perfecta.</p>
+          </div>
+          <div class="bg-black/40 p-4 rounded-lg">
+            <p class="text-yellow-300 font-bold mb-2">Causa final còsmica</p>
+            <p class="text-gray-400 text-xs">Mou com a objecte d'amor i desig, no per contacte. L'univers aspira a imitar la seva perfecció i bellesa.</p>
+          </div>
+          <div class="bg-black/40 p-4 rounded-lg">
+            <p class="text-yellow-300 font-bold mb-2">Déu impersonal</p>
+            <p class="text-gray-400 text-xs">No és Zeus ni el Déu cristià. Força còsmica impersonal, perfecta i eterna. "Pensa el pensament": s'autocontempla.</p>
+          </div>
+        </div>
+        <div class="aristotil-quote p-4 rounded-r-lg text-left max-w-2xl mx-auto">
+          <p class="text-sm text-gray-300">"El primer motor mou com allò que és estimat. L'univers sencer aspira a imitar la perfecció d'aquest motor immòbil, i d'aquí neix tot el moviment còsmic."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSICIÓ -->
+<div class="py-16 text-center bg-gradient-to-b from-gray-900 to-gray-800">
+  <p class="text-gray-400 uppercase tracking-widest text-sm mb-3">De la metafísica a l'ésser humà...</p>
+  <h3 class="text-2xl font-bold text-yellow-100">Anthropos: qui som i com coneixem</h3>
+</div>
+
+<!-- ANTROPOLOGIA -->
+<section id="antropologia" class="py-20 section-light relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-green-900/10 to-transparent pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-600">ANTROPOLOGIA</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Cos i ànima: una unitat substancial inseparable</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-10 mb-14" id="cosanima">
+      <div class="space-y-5">
+        <h3 class="font-cinzel text-3xl font-bold text-yellow-400">Cos i Ànima</h3>
+        <p class="text-gray-300 leading-relaxed">D'acord amb l'hilemorfisme, l'ésser humà, com qualsevol substància, és un individu compost de <strong class="text-yellow-400">matèria (cos) i forma (ànima)</strong>. Però això no implica cap dualisme platònic.</p>
+
+        <div class="aristotil-quote p-5 rounded-r-lg">
+          <p class="text-lg">"L'ànima és a l'ésser humà el que la <strong>vista és a l'ull</strong>. Un ull que veu és un ull que funciona. De la mateixa manera, un cos viu és un cos 'animat', amb ànima."</p>
+        </div>
+
+        <div class="concept-card p-5 rounded-xl border-yellow-500/30">
+          <h4 class="font-cinzel text-lg font-bold text-yellow-400 mb-3">Diferència amb Plató</h4>
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="bg-purple-900/20 p-3 rounded">
+              <p class="text-purple-300 font-bold mb-1">Plató</p>
+              <p class="text-gray-400">L'ànima és presoner del cos. Dues realitats separades. Cos = obstacle. Ànima = immortal i preexistent.</p>
+            </div>
+            <div class="bg-yellow-900/20 p-3 rounded">
+              <p class="text-yellow-400 font-bold mb-1">Aristòtil</p>
+              <p class="text-gray-400">Cos i ànima formen una unitat substancial. L'ànima és la forma del cos. Mor amb el cos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-5">
+        <h4 class="font-cinzel text-xl font-bold text-yellow-400">Les Tres Funcions de l'Ànima</h4>
+        <p class="text-sm text-gray-300">L'ànima és el principi d'activitat vital. Aristòtil distingeix tres funcions o nivells, en ordre creixent de complexitat:</p>
+
+        <div class="space-y-3">
+          <div class="flex gap-4 bg-green-900/15 border border-green-700/30 p-4 rounded-xl">
+            <div class="flex-shrink-0 w-10 h-10 bg-green-700/30 rounded-full flex items-center justify-center text-green-400 text-lg">🌿</div>
+            <div>
+              <h5 class="text-white font-bold mb-1">Funció Vegetativa</h5>
+              <p class="text-xs text-gray-400">Nutrició, creixement i reproducció. Compartida per <strong>tots els éssers vius</strong>: plantes, animals i humans.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 bg-blue-900/15 border border-blue-700/30 p-4 rounded-xl">
+            <div class="flex-shrink-0 w-10 h-10 bg-blue-700/30 rounded-full flex items-center justify-center text-blue-400 text-lg">🐾</div>
+            <div>
+              <h5 class="text-white font-bold mb-1">Funció Sensitiva</h5>
+              <p class="text-xs text-gray-400">Percepció, desig i moviment local. Compartida per <strong>animals i humans</strong>. Permet percebre i interactuar amb el món.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 bg-yellow-900/20 border border-yellow-600/30 p-4 rounded-xl">
+            <div class="flex-shrink-0 w-10 h-10 bg-yellow-700/30 rounded-full flex items-center justify-center text-yellow-400 text-lg">🧠</div>
+            <div>
+              <h5 class="text-white font-bold mb-1">Funció Racional</h5>
+              <p class="text-xs text-gray-400">Parlar i raonar. <strong>Exclusiva de l'ésser humà</strong>. La funció que ens defineix com a espècie i fonament de la vida ètica.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept-card p-4 rounded-xl border-red-600/20 mt-2">
+          <h5 class="font-cinzel text-sm font-bold text-red-400 mb-1">La mort de l'ànima</h5>
+          <p class="text-xs text-gray-400">Si l'ànima és la forma del cos, quan l'organisme deixa de funcionar (mort), l'ànima no pot continuar existint. <strong class="text-white">L'ànima no és immortal</strong> — a diferència del que creia Plató.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coneixement -->
+    <div id="coneixement" class="border-t border-white/10 pt-14">
+      <div class="text-center mb-10">
+        <h3 class="font-cinzel text-3xl font-bold text-yellow-500 mb-3">La Teoria del Coneixement</h3>
+        <p class="text-gray-400 font-playfair italic">"No hi ha res en l'enteniment que abans no hagi estat en els sentits"</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div class="space-y-5">
+          <div class="concept-card p-5 rounded-xl bg-gradient-to-b from-blue-900/20 to-transparent">
+            <h4 class="font-cinzel text-lg font-bold text-blue-400 mb-3">Els Principis Empiristes d'Aristòtil</h4>
+            <ul class="space-y-3 text-sm text-gray-300">
+              <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">▸</span><span><strong>Negació de les idees innates.</strong> La ment en néixer és com un full en blanc que s'omple amb les dades dels sentits.</span></li>
+              <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">▸</span><span><strong>Origen sensible del coneixement.</strong> Tot coneixement té el seu origen en la percepció dels individus particulars.</span></li>
+              <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">▸</span><span><strong>Cos i ànima conjunts.</strong> Les funcions cognitives no es poden separar del cos: cosanima participen junts en el coneixement.</span></li>
+            </ul>
+          </div>
+
+          <div class="aristotil-quote p-5 rounded-r-lg">
+            <p>"Aristòtil fixa els principis bàsics de <strong>l'empirisme</strong> en la filosofia antiga. La crítica a l'idealisme platònic fa impossible que el coneixement hagi estat adquirit en cap preexistència prèvia: no hi ha reminiscència ni idees innates."</p>
+          </div>
+        </div>
+
+        <div class="space-y-5">
+          <h4 class="font-cinzel text-xl font-bold text-yellow-400">El Procés d'Abstracció Inductiva</h4>
+          <p class="text-sm text-gray-300">El coneixement universal (les essències) s'assoleix a partir dels particulars, no al revés. El procés és:</p>
+
+          <div class="space-y-2">
+            <div class="flex items-start gap-3 bg-black/30 p-3 rounded-lg">
+              <span class="text-yellow-500 font-bold mt-0.5 min-w-[20px]">1.</span>
+              <span class="text-sm text-gray-300"><strong class="text-white">Sentits:</strong> percebo individus concrets — el Pepito, la Treseta, el Lamine.</span>
+            </div>
+            <div class="flex items-start gap-3 bg-black/30 p-3 rounded-lg">
+              <span class="text-yellow-500 font-bold mt-0.5 min-w-[20px]">2.</span>
+              <span class="text-sm text-gray-300"><strong class="text-white">Imaginació:</strong> elaboro representacions mentals dels individus percebuts.</span>
+            </div>
+            <div class="flex items-start gap-3 bg-black/30 p-3 rounded-lg">
+              <span class="text-yellow-500 font-bold mt-0.5 min-w-[20px]">3.</span>
+              <span class="text-sm text-gray-300"><strong class="text-white">Memòria:</strong> record i comparo individus similars quan no estan presents.</span>
+            </div>
+            <div class="flex items-start gap-3 bg-yellow-900/30 p-3 rounded-lg border border-yellow-500/30">
+              <span class="text-yellow-500 font-bold mt-0.5 min-w-[20px]">4.</span>
+              <span class="text-sm text-gray-300"><strong class="text-yellow-300">Enteniment:</strong> prescindeixo dels trets secundaris i trobo allò que tots comparteixen → <strong>l'essència universal</strong>: "ésser humà".</span>
+            </div>
+          </div>
+
+          <div class="concept-card p-4 rounded-xl border-yellow-500/30">
+            <h5 class="font-cinzel text-sm font-bold text-yellow-400 mb-1">Realisme Gnoseològic</h5>
+            <p class="text-xs text-gray-400">Les essències que l'enteniment abstreu (substàncies segones o conceptes) <strong>existeixen realment en les coses</strong> com a forma substancial. No són invencions de la ment ni Idees transcendents: és un reflex fidel de la realitat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÈTICA -->
+<section id="etica" class="py-20 section-dark relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-600">ÈTICA: LA CERCA DE LA FELICITAT</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Una ètica eudemonista i teleològica</p>
+    </div>
+
+    <div class="max-w-4xl mx-auto mb-10 text-center">
+      <p class="text-gray-300 text-lg leading-relaxed">Tots els éssers humans aspirem a ser feliços (<em>eudaimonia</em>). Però la felicitat no és la simple satisfacció de necessitats bàsiques — és la realització plena de la nostra naturalesa racional a través de la <strong class="text-yellow-400">pràctica de la virtut</strong>.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8 mb-12">
+      <!-- Virtuts ètiques -->
+      <div class="lg:col-span-2 space-y-6">
+        <h3 class="font-cinzel text-2xl font-bold text-yellow-400">Les Virtuts Ètiques: el Terme Mitjà</h3>
+        <p class="text-gray-300 leading-relaxed">Les virtuts ètiques regulen el comportament en la relació amb els altres. Aristòtil les defineix com a <strong>hàbits selectius</strong> que s'adquireixen amb la pràctica i que modelen el caràcter. El criteri: <strong class="text-yellow-400">sempre el terme mitjà entre dos extrems viciosos</strong>.</p>
+
+        <!-- Taula terme mitjà -->
+        <div class="overflow-hidden rounded-xl border border-white/10">
+          <div class="grid grid-cols-3 bg-black/60 text-xs font-cinzel uppercase tracking-wider text-gray-400 px-4 py-2 border-b border-white/10">
+            <span class="text-red-400">Defecte (vici)</span>
+            <span class="text-center text-yellow-400">Virtut (terme mitjà)</span>
+            <span class="text-right text-red-400">Excés (vici)</span>
+          </div>
+          <div class="divide-y divide-white/5">
+            <div class="grid grid-cols-3 px-4 py-3 text-sm hover:bg-white/5 transition">
+              <span class="text-red-400">Covardia</span>
+              <span class="text-center text-yellow-300 font-semibold">Valor</span>
+              <span class="text-right text-red-400">Temeritat</span>
+            </div>
+            <div class="grid grid-cols-3 px-4 py-3 text-sm hover:bg-white/5 transition">
+              <span class="text-red-400">Avarícia</span>
+              <span class="text-center text-yellow-300 font-semibold">Generositat</span>
+              <span class="text-right text-red-400">Malbaratament</span>
+            </div>
+            <div class="grid grid-cols-3 px-4 py-3 text-sm hover:bg-white/5 transition">
+              <span class="text-red-400">Insensibilitat</span>
+              <span class="text-center text-yellow-300 font-semibold">Temperança</span>
+              <span class="text-right text-red-400">Intemperança</span>
+            </div>
+            <div class="grid grid-cols-3 px-4 py-3 text-sm hover:bg-white/5 transition">
+              <span class="text-red-400">Pusil·lanimitat</span>
+              <span class="text-center text-yellow-300 font-semibold">Magnanimitat</span>
+              <span class="text-right text-red-400">Vanitat</span>
+            </div>
+            <div class="grid grid-cols-3 px-4 py-3 text-sm hover:bg-white/5 transition">
+              <span class="text-red-400">Aïllament</span>
+              <span class="text-center text-yellow-300 font-semibold">Amistat</span>
+              <span class="text-right text-red-400">Adulació</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept-card p-5 rounded-xl">
+          <h4 class="font-cinzel text-lg font-bold text-white mb-3">Característiques del Terme Mitjà</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li class="flex items-start gap-2"><span class="text-yellow-500">▸</span><span>No és una mitjana aritmètica, sinó un punt d'equilibri i <strong>excel·lència</strong> (no mediocritat).</span></li>
+            <li class="flex items-start gap-2"><span class="text-yellow-500">▸</span><span>És <strong>relatiu a cada persona</strong> i les seves circumstàncies. La bona proporció al menjar no és igual per a un adolescent que per a una persona gran.</span></li>
+            <li class="flex items-start gap-2"><span class="text-yellow-500">▸</span><span>És <strong>fruit de l'hàbit</strong>: no és innat, es pot aprendre i educar.</span></li>
+            <li class="flex items-start gap-2"><span class="text-yellow-500">▸</span><span>A diferència de Sòcrates, <strong>no n'hi ha prou de conèixer el bé</strong>: cal la voluntat i la força de fer-lo.</span></li>
+            <li class="flex items-start gap-2"><span class="text-yellow-500">▸</span><span>Necessita condicions: llibertat, maduresa, béns materials bàsics, salut i vida en comunitat.</span></li>
+            <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>No totes les accions admeten terme mitjà: <strong>alguns actes són un mal en si mateixos</strong> (l'assassinat, la traïció).</span></li>
+          </ul>
+        </div>
+
+        <!-- Justícia -->
+        <div class="concept-card p-6 rounded-xl border-yellow-500/30">
+          <h4 class="font-cinzel text-xl font-bold text-yellow-400 mb-4">La Justícia: Virtut Fonamental</h4>
+          <p class="text-sm text-gray-300 mb-4">Aristòtil defineix la justícia com "donar a cadascú allò que li correspon". Distingeix dues formes:</p>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div class="bg-black/40 p-4 rounded-lg">
+              <h5 class="text-yellow-300 font-bold mb-2">Justícia Commutativa</h5>
+              <p class="text-gray-400">S'aplica als <strong>intercanvis</strong>. Exigeix equivalència entre allò que donem i allò que rebem. Igualtat aritmètica.</p>
+            </div>
+            <div class="bg-black/40 p-4 rounded-lg">
+              <h5 class="text-yellow-300 font-bold mb-2">Justícia Distributiva</h5>
+              <p class="text-gray-400">S'aplica al <strong>repartiment</strong>. Hi aporta més qui té més; en rep més qui s'ho mereix. Proporcionalitat. (Impostos progressius, etc.)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Virtuts dianoètiques -->
+      <div class="space-y-5">
+        <div class="concept-card p-6 rounded-xl bg-gradient-to-b from-yellow-900/20 to-transparent">
+          <h4 class="font-cinzel text-lg font-bold text-yellow-500 mb-4">Virtuts Dianoètiques</h4>
+          <p class="text-sm text-gray-300 mb-3">Virtuts de l'intel·lecte, associades a la raó teòrica i pràctica:</p>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li class="flex gap-2"><span class="text-yellow-500">▸</span><span><strong class="text-white">Saviesa (sophia):</strong> coneixement de les veritats universals.</span></li>
+            <li class="flex gap-2"><span class="text-yellow-500">▸</span><span><strong class="text-white">Intuïció (nous):</strong> captació dels primers principis.</span></li>
+            <li class="flex gap-2"><span class="text-yellow-500">▸</span><span><strong class="text-white">Ciència (episteme):</strong> coneixement demostratiu.</span></li>
+            <li class="flex gap-2 mt-3 bg-yellow-900/20 p-3 rounded border border-yellow-500/30"><span class="text-yellow-500 mt-0.5">⭐</span><span><strong class="text-yellow-300">Prudència (phronesis):</strong> la virtut intel·lectual clau per a l'ètica. Ens ajuda a determinar racionalment quina és la millor manera d'actuar en cada cas concret. La raó en ús deliberatiu.</span></li>
+          </ul>
+        </div>
+
+        <div class="concept-card p-5 rounded-xl">
+          <h4 class="font-cinzel text-lg font-bold text-white mb-3">Tres Tipus de Saber</h4>
+          <div class="space-y-2 text-xs text-gray-400">
+            <div class="bg-black/40 p-3 rounded">
+              <p class="text-yellow-400 font-bold">Theoria</p>
+              <p>Coneixement teòric: metafísica, física, matemàtiques. Cerca la veritat.</p>
+            </div>
+            <div class="bg-black/40 p-3 rounded">
+              <p class="text-green-400 font-bold">Praxi</p>
+              <p>Saber pràctic: com actuem en relació amb els altres. Ètica i política.</p>
+            </div>
+            <div class="bg-black/40 p-3 rounded">
+              <p class="text-blue-400 font-bold">Poiesi</p>
+              <p>Saber productiu: crear objectes útils. Art i tècnica.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POLÍTICA -->
+<section id="politica" class="py-20 section-mid relative">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-600">POLÍTICA</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">L'ésser humà és un animal social per naturalesa: <em>zoon politikón</em></p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-10 mb-12">
+      <div class="space-y-5">
+        <h3 class="font-cinzel text-2xl font-bold text-yellow-400">La Sociabilitat Natural</h3>
+        <p class="text-gray-300 leading-relaxed">Contra els sofistes (que pensaven que la societat era una creació artificial i convencional), Aristòtil defensa que la vida en comunitat forma part de la naturalesa humana. Els éssers humans no som autosuficients: necessitem els altres per sobreviure i per assolir la felicitat.</p>
+        <div class="aristotil-quote p-5 rounded-r-lg">
+          <p>"Qui viu fora de la societat per naturalesa —i no per atzar— <strong>o és un ésser inferior o és un déu</strong>: o li falta quelcom per ser humà, o li sobra."</p>
+        </div>
+        <p class="text-gray-300 leading-relaxed">Ètica i política formen una <strong class="text-yellow-400">unitat inseparable</strong>: la felicitat individual només és assolible dins de la comunitat. La virtut es practica en la polis.</p>
+      </div>
+
+      <div class="space-y-5">
+        <h3 class="font-cinzel text-2xl font-bold text-yellow-400">Plató vs Aristòtil en Política</h3>
+        <div class="grid grid-cols-2 gap-3 text-xs">
+          <div class="bg-purple-900/20 p-4 rounded border border-purple-500/20">
+            <p class="text-purple-300 font-bold mb-2">Plató (República)</p>
+            <p class="text-gray-400">Proposa una <em>polis ideal</em> basada en el Bé absolut. Governada per filòsofs-reis. Deductiu i utòpic.</p>
+          </div>
+          <div class="bg-yellow-900/20 p-4 rounded border border-yellow-500/20">
+            <p class="text-yellow-400 font-bold mb-2">Aristòtil (Política)</p>
+            <p class="text-gray-400">Estudia les constitucions reals de 158 polis. Empíric i comparatiu. No hi ha un sistema ideal universal.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sistemes polítics -->
+    <h3 class="font-cinzel text-2xl font-bold text-yellow-400 text-center mb-8">Classificació dels Sistemes Polítics</h3>
+    <div class="overflow-hidden rounded-2xl border border-white/10 mb-10">
+      <div class="grid grid-cols-3">
+        <div class="bg-black/40 p-4 text-center border-r border-white/10 border-b border-white/10">
+          <p class="font-cinzel text-xs text-gray-500 uppercase tracking-wider mb-2">Qui governa</p>
+        </div>
+        <div class="bg-green-900/20 p-4 text-center border-r border-white/10 border-b border-white/10">
+          <p class="font-cinzel text-sm font-bold text-green-400">SISTEMES JUSTOS</p>
+          <p class="text-xs text-gray-400">(Cerquen el bé comú)</p>
+        </div>
+        <div class="bg-red-900/20 p-4 text-center border-b border-white/10">
+          <p class="font-cinzel text-sm font-bold text-red-400">SISTEMES INJUSTOS</p>
+          <p class="text-xs text-gray-400">(Cerquen el bé particular)</p>
+        </div>
+
+        <div class="bg-black/30 p-4 text-center border-r border-white/10 border-b border-white/10">
+          <p class="text-sm text-gray-300 font-semibold">Un sol governant</p>
+        </div>
+        <div class="bg-green-900/10 p-4 text-center border-r border-white/10 border-b border-white/10">
+          <p class="text-green-300 font-bold">Monarquia</p>
+          <p class="text-xs text-gray-500 mt-1">Rei que governa per al poble</p>
+        </div>
+        <div class="bg-red-900/10 p-4 text-center border-b border-white/10">
+          <p class="text-red-400 font-bold">Tirania</p>
+          <p class="text-xs text-gray-500 mt-1">Governa per al seu benefici propi</p>
+        </div>
+
+        <div class="bg-black/30 p-4 text-center border-r border-white/10 border-b border-white/10">
+          <p class="text-sm text-gray-300 font-semibold">Un grup</p>
+        </div>
+        <div class="bg-green-900/10 p-4 text-center border-r border-white/10 border-b border-white/10">
+          <p class="text-green-300 font-bold">Aristocràcia</p>
+          <p class="text-xs text-gray-500 mt-1">Els millors governen per al poble</p>
+        </div>
+        <div class="bg-red-900/10 p-4 text-center border-b border-white/10">
+          <p class="text-red-400 font-bold">Oligarquia</p>
+          <p class="text-xs text-gray-500 mt-1">Els rics governen per als rics</p>
+        </div>
+
+        <div class="bg-black/30 p-4 text-center border-r border-white/10">
+          <p class="text-sm text-gray-300 font-semibold">El poble</p>
+        </div>
+        <div class="bg-green-900/10 p-4 text-center border-r border-white/10">
+          <p class="text-green-300 font-bold">Democràcia</p>
+          <p class="text-xs text-gray-500 mt-1">El poble governa per al bé comú</p>
+        </div>
+        <div class="bg-red-900/10 p-4 text-center">
+          <p class="text-red-400 font-bold">Demagògia</p>
+          <p class="text-xs text-gray-500 mt-1">La majoria s'aprofita de les minories</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="concept-card p-6 rounded-xl max-w-3xl mx-auto text-center">
+      <h4 class="font-cinzel text-xl font-bold text-yellow-400 mb-3">El Millor Règim Possible</h4>
+      <p class="text-sm text-gray-300 leading-relaxed mb-3">Aristòtil no creu en un sistema ideal universal. El millor depèn de cada context. Però si calgués triar, el govern ideal tindria <strong>grandària intermèdia</strong> (ni massa gran ni massa petita) i el poder a les mans de la <strong class="text-yellow-400">classe mitjana</strong>: ni tan rica que s'aprofiti, ni tan pobra que espoliï.</p>
+      <div class="descartes-quote p-4 rounded-r-lg text-left" style="border-left-color: var(--bronze)">
+        <p class="text-xs text-gray-400">"Qualsevol règim pot ser just si procura el bé comú. La legitimitat no depèn de qui governa, sinó de per a qui ho fa."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSICIÓ -->
+<div class="py-16 text-center bg-gradient-to-b from-gray-900 to-gray-800">
+  <p class="text-gray-400 uppercase tracking-widest text-sm mb-3">Plató vs Aristòtil: un debat que dura fins avui</p>
+  <h3 class="text-2xl font-bold text-yellow-100">Idealisme vs Realisme: la gran divisió</h3>
+</div>
+
+<!-- COMPARATIVA PLATÓ vs ARISTÒTIL -->
+<section class="py-20 section-light">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="font-cinzel text-4xl font-bold text-white mb-4">PLATÓ vs ARISTÒTIL</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-yellow-600 mx-auto"></div>
+      <p class="mt-4 text-gray-400 text-sm max-w-3xl mx-auto">La gran divisió de la filosofia occidental. Rafael ho va pintar a l'Escola d'Atenes: Plató assenyala cap amunt (el món de les Idees), Aristòtil assenyala cap avall (el món sensible).</p>
+    </div>
+
+    <div class="overflow-hidden rounded-2xl border border-white/10">
+      <div class="grid md:grid-cols-2">
+        <div class="bg-gradient-to-br from-purple-900/40 to-black p-8 border-r border-white/10">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="font-cinzel text-2xl font-bold text-purple-400">PLATÓ</h3>
+            <span class="text-3xl">☝️</span>
+          </div>
+          <p class="text-xs text-purple-600 mb-4 font-bold tracking-wider">Idealisme · Dualisme · Transcendència</p>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Ontologia</span><span class="text-purple-300 font-semibold">Idealisme / Dualisme</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Essències</span><span class="text-purple-300 font-semibold">Transcendents (Món de les Idees)</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Coneixement</span><span class="text-purple-300 font-semibold">Reminiscència. Idees innates.</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Sentits</span><span class="text-purple-300 font-semibold">Font d'error. Obstacle.</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Ànima</span><span class="text-purple-300 font-semibold">Immortal. Preexistent.</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Cos</span><span class="text-purple-300 font-semibold">Presó de l'ànima</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Ètica</span><span class="text-purple-300 font-semibold">Conèixer el Bé = ser virtuós</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Política</span><span class="text-purple-300 font-semibold">Polis ideal (filòsofs-reis)</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Cosmologia</span><span class="text-purple-300 font-semibold">Demiürg crea el cosmos</span></div>
+          </div>
+          <div class="mt-6 p-4 bg-purple-500/10 rounded-lg border border-purple-500/30">
+            <p class="text-xs text-purple-200 italic">"El que és vertaderament real no és allò que podem veure i tocar, sinó les Idees eternes i immutables."</p>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-bl from-yellow-900/40 to-black p-8">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="font-cinzel text-2xl font-bold text-yellow-500">ARISTÒTIL</h3>
+            <span class="text-3xl">👇</span>
+          </div>
+          <p class="text-xs text-yellow-700 mb-4 font-bold tracking-wider">Realisme · Monisme · Immanència</p>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Ontologia</span><span class="text-yellow-300 font-semibold">Realisme / Monisme</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Essències</span><span class="text-yellow-300 font-semibold">Immanents (dins els individus)</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Coneixement</span><span class="text-yellow-300 font-semibold">Abstracció inductiva. Empirisme.</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Sentits</span><span class="text-yellow-300 font-semibold">Punt de partida imprescindible</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Ànima</span><span class="text-yellow-300 font-semibold">Forma del cos. Mor amb ell.</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Cos</span><span class="text-yellow-300 font-semibold">Inseparable de l'ànima. Unitat.</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Ètica</span><span class="text-yellow-300 font-semibold">Hàbit + voluntat + prudència</span></div>
+            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-gray-400">Política</span><span class="text-yellow-300 font-semibold">Estudi empíric. Cap ideal absolut.</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Cosmologia</span><span class="text-yellow-300 font-semibold">Motor immòbil. Univers etern.</span></div>
+          </div>
+          <div class="mt-6 p-4 bg-yellow-500/10 rounded-lg border border-yellow-500/30">
+            <p class="text-xs text-yellow-200 italic">"L'autèntica realitat és la que podem veure i tocar. Les essències no estan separades de les coses: hi viuen dins."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Síntesi -->
+      <div class="bg-gradient-to-r from-purple-900/20 via-black to-yellow-900/20 p-8 border-t border-white/10 text-center">
+        <div class="flex items-center justify-center space-x-4 mb-4">
+          <div class="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 font-bold">⚡</div>
+          <h4 class="font-cinzel text-xl text-green-300 font-bold">El llegat: dues tradicions que arriben fins avui</h4>
+        </div>
+        <p class="text-gray-300 text-sm max-w-4xl mx-auto leading-relaxed">
+          El debat Plató-Aristòtil estructura tota la filosofia posterior. El <span class="text-purple-400">platonisme</span> inspira el neoplatonisme, Agustí d'Hipona, el misticisme medieval i el racionalisme modern (Descartes). El <span class="text-yellow-400">aristotelisme</span> inspira Tomàs d'Aquino, l'escolàstica, l'empirisme (Locke, Hume) i la ciència moderna. Kant intentarà sintetitzar ambdues tradicions a la <em>Crítica de la raó pura</em>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREGUNTES PER REPASSAR -->
+<section id="repassar" class="py-20 section-dark">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="font-cinzel text-4xl font-bold text-white mb-4">PREGUNTES PER REPASSAR</h2>
+      <p class="text-gray-400">Aristòtil ens convida a observar</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-xl font-bold text-yellow-500 border-b border-yellow-500/30 pb-2 mb-4">Metafísica</h3>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Les essències existeixen o les inventem?</p>
+          <p class="text-xs text-gray-400">Per a Aristòtil existeixen realment en les coses (realisme). El nominalisme medieval i modern ho posarà en qüestió: potser els universals són sols noms.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Tot canvi necessita un motor previ?</p>
+          <p class="text-xs text-gray-400">La física moderna (principi d'inèrcia de Newton) trenca amb això: un objecte en moviment es manté sense cap motor que l'impulsi.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">La teleologia s'aplica a la natura?</p>
+          <p class="text-xs text-gray-400">Darwin mostrarà que l'adaptació s'explica per selecció natural, sense cap finalitat prèvia. La natura "sembla" teleològica però potser no ho és.</p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-xl font-bold text-green-400 border-b border-green-500/30 pb-2 mb-4">Antropologia</h3>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">L'ànima mor amb el cos?</p>
+          <p class="text-xs text-gray-400">Per a Aristòtil sí: l'ànima és la forma del cos i no pot sobreviure'l. Implica que no hi ha vida després de la mort — contra el que creia Plató i el cristianisme.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Som fonamentalment racionals?</p>
+          <p class="text-xs text-gray-400">Aristòtil diu que sí: la raó ens defineix. Però Freud, Nietzsche i la psicologia cognitiva mostren que els impulsos irracionals tenen un pes enorme.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Tot coneixement ve dels sentits?</p>
+          <p class="text-xs text-gray-400">Aristòtil contra Plató: sí. Però Kant mostrarà que l'enteniment aporta formes a priori que no vénen de l'experiència. El debat continua.</p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-xl font-bold text-yellow-400 border-b border-yellow-500/30 pb-2 mb-4">Ètica</h3>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">La felicitat s'assoleix amb la virtut?</p>
+          <p class="text-xs text-gray-400">Per a Aristòtil, ser feliç = realitzar plenament la naturalesa racional. Però, és la raó realment la clau? Què passa amb qui viu bé però sense reflexió filosòfica?</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Les virtuts s'aprenen o es neixen amb elles?</p>
+          <p class="text-xs text-gray-400">Aristòtil: s'aprenen amb la pràctica (hàbit). Però, fins a quin punt el caràcter és modificable? La neurociència estudia avui fins on l'hàbit remodelа el cervell.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Hi ha accions sempre dolentes?</p>
+          <p class="text-xs text-gray-400">Aristòtil diu que sí (l'assassinat, la traïció). Però les ètiques conseqüencialistes modernes dirien que potser en algunes circumstàncies qualsevol acció pot ser justificada.</p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-xl font-bold text-red-400 border-b border-red-500/30 pb-2 mb-4">Política</h3>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Som socials per naturalesa?</p>
+          <p class="text-xs text-gray-400">Aristòtil diu sí. Però els liberals (Hobbes, Locke) diuen que la societat és un contracte. I Rousseau afegeix: l'ésser humà és bo per naturalesa però la societat el corrompeix.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Pot la democràcia degenerar en demagògia?</p>
+          <p class="text-xs text-gray-400">Aristòtil diu que sí. Avui ho veiem en populismes que exploten les masses amb missatges simples. La seva distinció democràcia/demagògia continua vigent.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Governa millor la classe mitjana?</p>
+          <p class="text-xs text-gray-400">La tesi aristotèlica es continua debatent avui: l'erosió de la classe mitjana correlaciona amb la inestabilitat política i el creixement del populisme.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SÍNTESI -->
+<section class="py-20 section-mid relative">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="font-cinzel text-4xl font-bold text-white mb-10">SÍNTESI FINAL</h2>
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <div class="concept-card p-6 rounded-xl border-yellow-500/30">
+        <div class="text-3xl mb-3">🌍</div>
+        <h3 class="font-cinzel text-lg font-bold text-yellow-400 mb-2">Realisme</h3>
+        <p class="text-xs text-gray-400">Contra el dualisme platònic: la realitat autèntica és el món sensible. Les essències són immanents als individus particulars, no transcendents.</p>
+      </div>
+      <div class="concept-card p-6 rounded-xl border-green-600/30">
+        <div class="text-3xl mb-3">⚖️</div>
+        <h3 class="font-cinzel text-lg font-bold text-green-400 mb-2">Teleologisme</h3>
+        <p class="text-xs text-gray-400">Tot ésser tendeix a realitzar plenament la seva essència. El canvi s'explica com a actualització de potències. La naturalesa és dinàmica, no estàtica.</p>
+      </div>
+      <div class="concept-card p-6 rounded-xl border-yellow-500/50">
+        <div class="text-3xl mb-3">🏛️</div>
+        <h3 class="font-cinzel text-lg font-bold text-yellow-300 mb-2">Eudemonisme</h3>
+        <p class="text-xs text-gray-400">La felicitat és la fi de la vida humana. S'assoleix realitzant la naturalesa racional a través de la virtut, la prudència i la vida en comunitat.</p>
+      </div>
+    </div>
+    <p class="font-playfair italic text-gray-400 mb-6 text-lg">Observar, distingir, fonamentar: el recorregut d'una filosofia que vol comprendre la realitat des de dins.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gradient-to-b from-black via-yellow-950/20 to-black border-t border-white/10 py-16">
+  <div class="max-w-5xl mx-auto px-4 text-center">
+    <div class="flex flex-col items-center mb-8">
+      <span class="font-cinzel text-yellow-600 text-xl tracking-widest font-bold">ARISTÒTIL Experience</span>
+      <span class="font-playfair italic text-gray-400 text-lg block mt-3">"I fins aquí el filòsof de la realitat"</span>
+    </div>
+    <p class="text-gray-600 text-xs uppercase tracking-wider mb-8">Hilemorfisme · Potència i Acte · Eudaimonia · Zoon Politikón</p>
+
+    <div class="aristotil-quote p-8 rounded-xl text-center max-w-4xl mx-auto">
+      <p class="text-xl font-playfair italic text-gray-200 mb-4">"La felicitat és l'activitat de l'ànima en conformitat amb la virtut. I si les virtuts n'hi ha de diverses, serà en conformitat amb la millor i la més perfecta d'elles."</p>
+      <p class="text-sm text-gray-500">— Aristòtil, Ètica Nicomaquea</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 mt-12 text-left">
+      <div>
+        <h4 class="font-cinzel text-yellow-600 font-bold mb-3 text-sm">Conceptes Clau</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Substància i accidents</li>
+          <li>• Hilemorfisme (matèria i forma)</li>
+          <li>• Les quatre causes</li>
+          <li>• Potència i acte</li>
+          <li>• Motor immòbil</li>
+          <li>• Teleologisme (telos)</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-cinzel text-yellow-600 font-bold mb-3 text-sm">Antropologia i Ètica</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Tres funcions de l'ànima</li>
+          <li>• Abstracció inductiva</li>
+          <li>• Eudaimonia (felicitat)</li>
+          <li>• Virtut com a terme mitjà</li>
+          <li>• Prudència (phronesis)</li>
+          <li>• Justícia commutativa/distributiva</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-cinzel text-yellow-600 font-bold mb-3 text-sm">Política</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Zoon politikón</li>
+          <li>• Monarquia / Tirania</li>
+          <li>• Aristocràcia / Oligarquia</li>
+          <li>• Democràcia / Demagògia</li>
+          <li>• Govern de la classe mitjana</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const s = document.body.scrollTop || document.documentElement.scrollTop;
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progressBar').style.width = (s / h * 100) + '%';
+  });
+
+  function switchTab(tabId) {
+    document.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
+    lastMetafisicaTab = tabId;
+  }
+
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+  const navLinks = document.querySelectorAll('.nav-link');
+  const parentMap = {
+    critica:     'biografia',
+    substancia:  'metafisica',
+    hilemorfisme:'metafisica',
+    canvi:       'metafisica',
+    cosmologia:  'metafisica',
+    cosanima:    'antropologia',
+    coneixement: 'antropologia',
+  };
+  let ignoreScroll = false;
+  let lastMetafisicaTab = 'substancia';
+
+  function setActive(id) {
+    const parentId = id ? (parentMap[id] || id) : null;
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      const isActive = parentId && (href === '#' + parentId || href === '#' + id);
+      link.classList.toggle('active-section', !!isActive);
+    });
+    if (parentMap[id] === 'metafisica' || id === 'metafisica') {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        const oc = btn.getAttribute('onclick') || '';
+        btn.classList.toggle('active', oc.includes(lastMetafisicaTab));
+      });
+    }
+  }
+
+  function getCurrentSection() {
+    const scrollPos = window.scrollY + window.innerHeight * 0.3;
+    let current = sections[0];
+    for (const s of sections) { if (s.offsetTop <= scrollPos) current = s; else break; }
+    const id = current?.getAttribute('id');
+    const hasLink = Array.from(navLinks).some(l => l.getAttribute('href') === '#' + id);
+    return (hasLink || parentMap[id]) ? id : null;
+  }
+
+  window.addEventListener('scroll', () => { if (!ignoreScroll) setActive(getCurrentSection()); }, { passive: true });
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      const target = link.getAttribute('href').replace('#', '');
+      ignoreScroll = true;
+      if (['substancia', 'hilemorfisme', 'canvi'].includes(target)) {
+        e.preventDefault();
+        lastMetafisicaTab = target;
+        document.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById(target)?.classList.add('active');
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector(`.tab-btn[onclick="switchTab('${target}')"]`)?.classList.add('active');
+        const y = document.getElementById('metafisica').getBoundingClientRect().top + window.pageYOffset - 90;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+      setActive(target);
+      setTimeout(() => { ignoreScroll = false; setActive(getCurrentSection()); }, 700);
+    });
+  });
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const m = (btn.getAttribute('onclick') || '').match(/switchTab\('(.+?)'\)/);
+      if (m) { lastMetafisicaTab = m[1]; setActive(m[1]); }
+    });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      const t = document.querySelector(href);
+      if (t && !['substancia','hilemorfisme','canvi'].includes(href.replace('#',''))) {
+        e.preventDefault();
+        t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+    });
+  }, { threshold: 0 });
+
+  document.querySelectorAll('.concept-card:not(.no-anim)').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(8px)';
+    el.style.transition = `all .8s ease ${i * 0.04}s`;
+    obs.observe(el);
+  });
+
+  document.addEventListener('DOMContentLoaded', () => setActive(getCurrentSection()));
+</script>
+</body>
+</html>

@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cristianisme i Edat Mitjana</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep:    #040306;
+    --mid:     #080610;
+    --slate:   #0F0C1C;
+    --ocean:   #161228;
+    --gold:    #B8922A;
+    --gold-l:  #D4AF6A;
+    --gold-xl: #EDD98A;
+    --crim:    #6B1A2E;
+    --crim-l:  #A03048;
+    --sage:    #2A4A3A;
+    --sage-l:  #5A9A7A;
+    --stone:   #4A4040;
+    --stone-l: #8A8080;
+    --ivory:   #F0EBE3;
+    --silver:  #A8B0C0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;background:var(--deep);color:var(--ivory);overflow-x:hidden;}
+  .font-cinzel{font-family:'Cinzel',serif;}
+  .font-playfair{font-family:'Playfair Display',serif;}
+
+  /* Progress */
+  .progress-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--crim),var(--gold),var(--sage-l));z-index:1000;transition:width .1s;box-shadow:0 0 8px rgba(184,146,42,.4);}
+
+  /* Anims */
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  .float-anim{animation:float 5s ease-in-out infinite;}
+  @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+  .shimmer-text{
+    background:linear-gradient(90deg,var(--ivory) 0%,var(--gold-l) 35%,var(--gold-xl) 55%,var(--ivory) 100%);
+    background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    animation:shimmer 5s linear infinite;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes orb1{0%,100%{transform:translate(0,0)}40%{transform:translate(28px,-20px)}80%{transform:translate(-14px,24px)}}
+  @keyframes orb2{0%,100%{transform:translate(0,0)}50%{transform:translate(-22px,16px)}}
+  .orb1{animation:orb1 16s ease-in-out infinite;}
+  .orb2{animation:orb2 20s ease-in-out infinite;}
+
+  /* Sections */
+  .section-dark {background:linear-gradient(160deg,#040306 0%,#080610 100%);position:relative;overflow:hidden;}
+  .section-mid  {background:linear-gradient(160deg,#080610 0%,#0F0C1C 100%);}
+  .section-light{background:linear-gradient(160deg,#0F0C1C 0%,#161228 100%);}
+  .section-gold {background:linear-gradient(160deg,#0A0700 0%,#1A1200 60%,#080610 100%);}
+  .section-sage {background:linear-gradient(160deg,#030A06 0%,#0A1810 60%,#080610 100%);}
+  .section-crim {background:linear-gradient(160deg,#0A0304 0%,#180608 60%,#080610 100%);}
+
+  /* Cards */
+  .concept-card{
+    background:rgba(255,255,255,.025);border:1px solid rgba(184,146,42,.15);
+    backdrop-filter:blur(10px);transition:all .4s cubic-bezier(.4,0,.2,1);border-radius:12px;
+  }
+  .concept-card:hover{
+    transform:translateY(-6px) scale(1.015);border-color:rgba(184,146,42,.45);
+    box-shadow:0 20px 48px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05);
+    background:rgba(255,255,255,.04);
+  }
+  .concept-card.no-anim:hover{transform:none;box-shadow:none;}
+  .card-gold{border-color:rgba(184,146,42,.25)!important;}
+  .card-gold:hover{border-color:var(--gold)!important;box-shadow:0 20px 48px rgba(107,80,20,.3)!important;}
+  .card-sage{border-color:rgba(90,154,122,.2)!important;}
+  .card-sage:hover{border-color:var(--sage-l)!important;box-shadow:0 20px 48px rgba(42,74,58,.3)!important;}
+  .card-crim{border-color:rgba(160,48,72,.2)!important;}
+  .card-crim:hover{border-color:var(--crim-l)!important;box-shadow:0 20px 48px rgba(107,26,46,.3)!important;}
+
+  /* Quotes */
+  .quote-block{border-left:3px solid var(--gold);background:linear-gradient(90deg,rgba(184,146,42,.1) 0%,transparent 80%);font-style:italic;position:relative;}
+  .quote-block.sage{border-left-color:var(--sage-l);background:linear-gradient(90deg,rgba(90,154,122,.1) 0%,transparent 80%);}
+  .quote-block.crim{border-left-color:var(--crim-l);background:linear-gradient(90deg,rgba(160,48,72,.1) 0%,transparent 80%);}
+  .big-q{position:absolute;top:-10px;left:8px;font-family:'Playfair Display',serif;font-size:4.5rem;line-height:1;color:rgba(184,146,42,.12);pointer-events:none;user-select:none;}
+
+  /* Timeline */
+  .tl-item{position:relative;padding-left:2.25rem;border-left:1px solid rgba(184,146,42,.22);}
+  .tl-item::before{content:"";position:absolute;left:-5px;top:4px;width:9px;height:9px;background:var(--gold);border-radius:50%;box-shadow:0 0 8px rgba(184,146,42,.5);}
+  .tl-item.sage::before{background:var(--sage-l);box-shadow:0 0 8px rgba(90,154,122,.5);}
+  .tl-item.crim::before{background:var(--crim-l);box-shadow:0 0 8px rgba(160,48,72,.5);}
+
+  /* Tabs */
+  .tab-btn{transition:all .3s;border-bottom:2px solid transparent;color:var(--silver);padding:.5rem 1rem;font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.06em;}
+  .tab-btn.active{border-bottom-color:var(--gold);color:var(--gold-l);}
+  .tab-panel{display:none;animation:fadeIn .45s ease;}
+  .tab-panel.active{display:block;}
+
+  /* Badge */
+  .badge{display:inline-block;padding:3px 12px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-family:'Cinzel',serif;}
+  .badge-gold{background:rgba(184,146,42,.1);border:1px solid rgba(184,146,42,.3);color:var(--gold-l);}
+  .badge-sage{background:rgba(90,154,122,.1);border:1px solid rgba(90,154,122,.3);color:var(--sage-l);}
+  .badge-crim{background:rgba(160,48,72,.1);border:1px solid rgba(160,48,72,.3);color:var(--crim-l);}
+
+  /* Glow divider */
+  .glow-div{height:1px;background:linear-gradient(90deg,transparent,rgba(184,146,42,.45) 40%,rgba(184,146,42,.6) 50%,rgba(184,146,42,.45) 60%,transparent);}
+  .glow-div::before{content:"";display:block;margin:0 auto;width:60px;height:5px;margin-top:-3px;background:radial-gradient(ellipse,rgba(184,146,42,.4) 0%,transparent 70%);border-radius:50%;}
+
+  /* Scrollbar */
+  ::-webkit-scrollbar{width:6px;}
+  ::-webkit-scrollbar-track{background:var(--deep);}
+  ::-webkit-scrollbar-thumb{background:rgba(184,146,42,.3);border-radius:3px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold);}
+
+  /* Nav */
+  .active-section{color:var(--gold-l)!important;border-bottom:2px solid var(--gold);padding-bottom:2px;}
+  nav a.nav-link{transition:color .2s;color:var(--silver);}
+  nav a.nav-link:hover{color:var(--gold-l);}
+  .home-btn{padding:5px 12px;font-size:11px;border:1px solid rgba(184,146,42,.25);border-radius:20px;color:var(--gold-l);text-decoration:none;background:rgba(184,146,42,.06);transition:all .2s;font-family:'Cinzel',serif;letter-spacing:.04em;}
+  .home-btn:hover{background:rgba(184,146,42,.15);border-color:rgba(184,146,42,.5);transform:translateY(-1px);}
+
+  /* Eyebrow */
+  .eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(184,146,42,.55);}
+
+  /* Fe/Raó bar */
+  .fer-bar{height:8px;border-radius:4px;position:relative;overflow:hidden;}
+  .fer-fe{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--crim),var(--crim-l));border-radius:4px;transition:width 1s ease;}
+  .fer-rao{position:absolute;top:0;right:0;height:100%;background:linear-gradient(90deg,var(--sage-l),var(--sage));border-radius:4px;transition:width 1s ease;}
+
+  /* Grain */
+  body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat:repeat;background-size:200px;opacity:.3;}
+</style>
+</head>
+<body class="antialiased">
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full z-50" style="background:rgba(4,3,6,.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(184,146,42,.1);box-shadow:0 4px 24px rgba(0,0,0,.5);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+      <a href="#inici" class="flex items-center gap-3 group">
+        <svg class="w-6 h-6 group-hover:scale-110 transition" style="color:var(--gold)" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18"/>
+        </svg>
+        <span class="font-cinzel text-base font-bold tracking-widest group-hover:text-white transition" style="color:var(--gold)">CRISTIANISME · EDAT MITJANA</span>
+      </a>
+      <div class="hidden md:flex items-center gap-5 text-sm">
+        <a href="../index.html" class="home-btn">← Experience</a>
+        <a href="#context"     class="nav-link">Orígens</a>
+        <div class="relative group">
+          <a href="#factors" class="nav-link flex items-center gap-1">Factors <span class="text-xs">▼</span></a>
+          <div class="absolute left-0 top-full pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+            <a href="#essenis"    class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Essenis i religions mistèriques</a>
+            <a href="#pau"        class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Pau de Tars</a>
+            <a href="#filo"       class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Filó i els gnòstics</a>
+            <a href="#pares"      class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Pares de l'Església</a>
+          </div>
+        </div>
+        <a href="#oficialitzacio" class="nav-link">Oficialització</a>
+        <div class="relative group">
+          <a href="#feirao" class="nav-link flex items-center gap-1">Fe i Raó <span class="text-xs">▼</span></a>
+          <div class="absolute left-0 top-full pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+            <a href="#agusti"     class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Sant Agustí (Alta E.M.)</a>
+            <a href="#tomas"      class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-400 transition">Tomàs d'Aquino (Baixa E.M.)</a>
+          </div>
+        </div>
+        <a href="#renaixement" class="nav-link">Renaixement</a>
+        <a href="#repassar"    class="nav-link">Repassar</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inici" class="relative min-h-screen flex items-center section-dark pt-16">
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="orb1 absolute" style="top:10%;left:5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(107,26,46,.18) 0%,transparent 70%);filter:blur(55px);"></div>
+    <div class="orb2 absolute" style="bottom:15%;right:6%;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(42,74,58,.18) 0%,transparent 70%);filter:blur(50px);"></div>
+  </div>
+  <svg class="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
+    <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0L0 0 0 60" fill="none" stroke="#B8922A" stroke-width="0.5"/></pattern></defs>
+    <rect width="100%" height="100%" fill="url(#grid)"/>
+  </svg>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-6 w-full">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+      <div>
+        <div class="mb-5 inline-block">
+          <span class="font-cinzel text-xs border px-5 py-2 rounded-full tracking-widest uppercase" style="border-color:rgba(184,146,42,.5);color:var(--gold)">S. I–XV d.C. · Occident cristià</span>
+        </div>
+        <p class="font-cinzel text-2xl tracking-[0.18em] mb-3" style="color:var(--gold)">CRISTIANISME I EDAT MITJANA</p>
+        <h1 class="font-cinzel text-5xl md:text-6xl font-black mb-6 leading-tight shimmer-text">
+          FE, RAÓ<br>I PODER
+        </h1>
+        <p class="font-playfair text-lg text-gray-300 mb-8 italic leading-relaxed">
+          Del moviment jueu marginal a religió oficial d'un imperi, i d'una
+          <strong class="not-italic" style="color:var(--gold-l)">raó subordinada a la fe</strong> 
+          a la lenta i difícil reconquesta de l'autonomia racional que obrirà el camí cap a la modernitat.
+        </p>
+        <div class="flex flex-wrap gap-3 mb-8 text-xs font-cinzel tracking-wider">
+          <span class="border px-3 py-1 rounded-full" style="border-color:rgba(184,146,42,.25);color:rgba(184,146,42,.7)">LOGOS</span>
+          <span class="border px-3 py-1 rounded-full" style="border-color:rgba(184,146,42,.25);color:rgba(184,146,42,.7)">CREDE UT INTELLIGAS</span>
+          <span class="border px-3 py-1 rounded-full" style="border-color:rgba(184,146,42,.25);color:rgba(184,146,42,.7)">ESCOLÀSTICA</span>
+          <span class="border px-3 py-1 rounded-full" style="border-color:rgba(184,146,42,.25);color:rgba(184,146,42,.7)">IL·LUMINACIÓ DIVINA</span>
+          <span class="border px-3 py-1 rounded-full" style="border-color:rgba(90,154,122,.25);color:rgba(90,154,122,.7)">FE I RAÓ</span>
+        </div>
+        <div class="quote-block p-4 rounded-r-lg max-w-md" style="position:relative;">
+          <span class="big-q">"</span>
+          <p class="font-playfair italic text-base text-gray-300 relative z-10">"No vagis fora; torna a tu mateix. En l'interior de l'home habita la veritat." — Sant Agustí</p>
+        </div>
+      </div>
+
+      <!-- Esquema cronològic -->
+      <div class="hidden lg:flex flex-col gap-4">
+        <div class="concept-card no-anim p-6 rounded-xl card-gold">
+          <p class="eyebrow mb-5">Esquema cronològic</p>
+          <div class="space-y-3 text-xs">
+            <div class="tl-item pb-3"><span class="font-cinzel font-bold" style="color:var(--gold)">S. I d.C.</span><span class="text-gray-400 ml-2">Cristianisme primitiu: pluralitat doctrinal, influències jueves i hel·lenístiques</span></div>
+            <div class="tl-item pb-3"><span class="font-cinzel font-bold" style="color:var(--gold)">48 d.C.</span><span class="text-gray-400 ml-2">Pau de Tars: ruptura amb el judaisme, universalització del missatge</span></div>
+            <div class="tl-item pb-3"><span class="font-cinzel font-bold" style="color:var(--gold)">SS. II–IV</span><span class="text-gray-400 ml-2">Lluita doctrinal, cànon, heretgies, Pares de l'Església</span></div>
+            <div class="tl-item crim pb-3"><span class="font-cinzel font-bold" style="color:var(--crim-l)">S. IV</span><span class="text-gray-400 ml-2">Oficialització imperial: unitat doctrinal, control ideològic</span></div>
+            <div class="tl-item pb-3"><span class="font-cinzel font-bold" style="color:var(--gold)">SS. V–XI</span><span class="text-gray-400 ml-2">Alta Edat Mitjana: raó subordinada a la fe (model agustinià)</span></div>
+            <div class="tl-item sage pb-3"><span class="font-cinzel font-bold" style="color:var(--sage-l)">SS. XII–XV</span><span class="text-gray-400 ml-2">Baixa Edat Mitjana: recuperació d'Aristòtil, autonomia parcial de la raó</span></div>
+            <div class="tl-item sage pb-3"><span class="font-cinzel font-bold" style="color:var(--sage-l)">SS. XV–XVI</span><span class="text-gray-400 ml-2">Renaixement: humanisme, separació progressiva entre fe i raó</span></div>
+            <div class="tl-item sage"><span class="font-cinzel font-bold" style="color:var(--sage-l)">S. XVII →</span><span class="text-gray-400 ml-2">Ciència moderna i filosofia moderna (Descartes)</span></div>
+          </div>
+        </div>
+        <!-- Fe/Raó visual -->
+        <div class="concept-card no-anim p-5 rounded-xl">
+          <p class="eyebrow mb-4">Evolució de la relació Fe / Raó</p>
+          <div class="space-y-3 text-xs">
+            <div>
+              <div class="flex justify-between mb-1"><span class="text-gray-400">Alta Edat Mitjana (Agustí)</span><span style="color:var(--crim-l)">Fe dominant</span></div>
+              <div class="fer-bar bg-white/5"><div class="fer-fe" style="width:85%"></div><div class="fer-rao" style="width:15%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1"><span class="text-gray-400">Baixa Edat Mitjana (Tomàs)</span><span style="color:var(--gold)">Equilibri jeràrquic</span></div>
+              <div class="fer-bar bg-white/5"><div class="fer-fe" style="width:55%"></div><div class="fer-rao" style="width:45%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1"><span class="text-gray-400">Renaixement</span><span style="color:var(--sage-l)">Raó progressiva</span></div>
+              <div class="fer-bar bg-white/5"><div class="fer-fe" style="width:30%"></div><div class="fer-rao" style="width:70%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1"><span class="text-gray-400">Modernitat (Descartes)</span><span style="color:var(--sage-l)">Raó autònoma</span></div>
+              <div class="fer-bar bg-white/5"><div class="fer-fe" style="width:10%"></div><div class="fer-rao" style="width:90%"></div></div>
+            </div>
+          </div>
+          <div class="flex gap-3 mt-3 text-xs">
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded" style="background:var(--crim-l);display:inline-block"></span><span class="text-gray-400">Fe</span></span>
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded" style="background:var(--sage-l);display:inline-block"></span><span class="text-gray-400">Raó</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 float-anim">
+    <svg class="w-6 h-6" style="color:var(--gold)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+    </svg>
+  </div>
+</section>
+
+<!-- CONTEXT / ORÍGENS -->
+<section id="context" class="py-20 section-mid">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3">Context · S. I d.C.</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4" style="color:var(--gold)">ELS ORÍGENS DEL CRISTIANISME</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Un moviment plural, inserit en el judaisme i influït per l'hel·lenisme</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <div class="space-y-5 text-gray-300 leading-relaxed">
+        <p>El cristianisme <strong class="text-yellow-400">no neix com una religió plenament definida ni homogènia</strong>, sinó com un moviment religiós plural, inserit en el complex context del judaisme del segle I i profundament influït pel món hel·lenístic. Durant els seus primers segles es caracteritza per una gran diversitat doctrinal, interpretativa i organitzativa.</p>
+        <p>No disposem de dades històriques rigoroses sobre Jesús de Natzaret ni sobre el contingut exacte de les seves ensenyances. <strong class="text-yellow-400">El que coneixem és el resultat d'elaboracions teològiques posteriors</strong> fetes per les primeres comunitats cristianes.</p>
+        <div class="quote-block p-5 rounded-r-lg" style="position:relative;">
+          <span class="big-q">"</span>
+          <p class="text-lg relative z-10">Aquesta pluralitat inicial, sovint conflictiva, explica tant la dificultat de delimitar els seus orígens com el <strong>procés posterior de definició dogmàtica, institucionalització i, finalment, imposició com a religió oficial de l'Imperi romà.</strong></p>
+        </div>
+      </div>
+      <div class="space-y-5">
+        <div class="concept-card card-gold p-6 rounded-xl">
+          <h3 class="font-cinzel text-xl font-bold mb-4" style="color:var(--gold)">El Judaisme del S. I: Un Mosaic de Corrents</h3>
+          <p class="text-sm text-gray-300 mb-4">El judaisme del període del Segon Temple no era una realitat monolítica, sinó un conjunt de corrents amb interpretacions diverses de la Llei, la figura del Messies i la relació amb Roma:</p>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="bg-black/40 p-3 rounded"><p class="font-bold text-yellow-400 mb-1">Fariseus</p><p class="text-gray-400">Interpretació estricta de la Llei oral i escrita. Creença en la resurrecció.</p></div>
+            <div class="bg-black/40 p-3 rounded"><p class="font-bold text-yellow-400 mb-1">Saduceus</p><p class="text-gray-400">Aristocràcia sacerdotal. Rebuig de la Llei oral. Col·laboració amb Roma.</p></div>
+            <div class="bg-black/40 p-3 rounded"><p class="font-bold text-yellow-400 mb-1">Zelots</p><p class="text-gray-400">Resistència armada contra l'ocupació romana. Esperança messiànica política.</p></div>
+            <div class="bg-black/40 p-3 rounded"><p class="font-bold text-yellow-400 mb-1">Essenis</p><p class="text-gray-400">Comunitat ascètica al desert. Manuscrits del Mar Mort. Esperança escatològica.</p></div>
+          </div>
+        </div>
+        <div class="concept-card card-sage p-5 rounded-xl">
+          <h4 class="font-cinzel text-base font-bold mb-3" style="color:var(--sage-l)">Influències Hel·lenístiques</h4>
+          <p class="text-sm text-gray-300">Conceptes filosòfics com <em>logos</em>, <em>ànima</em>, <em>esperit</em> o <em>salvació</em> ja circulaven en les filosofies platònica, neoplatònica i estoica, i en les "religions mistèriques" d'influència oriental. <strong>Aquest rerefons cultural facilitarà la irrupció i la posterior reinterpretació filosòfica del missatge cristià.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACTORS DOCTRINALS -->
+<div id="factors" class="h-0 overflow-hidden" aria-hidden="true"></div>
+<section class="py-20 section-crim relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3">Formació de la Doctrina · SS. I–IV d.C.</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4" style="color:var(--gold)">FACTORS EN LA FORMACIÓ DOCTRINAL</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Els elements que van modelar el cristianisme que va triomfar</p>
+    </div>
+
+    <!-- Tabs dels factors -->
+    <div class="flex flex-wrap justify-center gap-2 mb-10 border-b border-white/10 pb-3">
+      <button class="tab-btn active" onclick="switchTab('essenis', this)">Essenis i Mistèriques</button>
+      <button class="tab-btn" onclick="switchTab('pau', this)">Pau de Tars</button>
+      <button class="tab-btn" onclick="switchTab('filo', this)">Filó i Gnòstics</button>
+      <button class="tab-btn" onclick="switchTab('pares', this)">Pares de l'Església</button>
+    </div>
+
+    <!-- PANEL ESSENIS -->
+    <div id="tab-essenis" class="tab-panel active">
+      <div id="essenis" class="h-0" aria-hidden="true"></div>
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div class="space-y-5">
+          <span class="badge badge-gold">Influències Pre-cristianes</span>
+          <h3 class="font-cinzel text-2xl font-bold mt-2" style="color:var(--gold)">Els Essenis</h3>
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>Diverses coincidències doctrinals i geogràfiques suggereixen una possible influència del moviment esseni en el cristianisme primitiu: l'<strong class="text-yellow-400">ascetisme</strong>, l'esperança escatològica, la importància del <strong class="text-yellow-400">baptisme</strong> i la vida comunitària.</p>
+            <p>No es pot parlar d'una filiació directa, sinó d'un <strong>clima religiós compartit</strong> en el judaisme del segle I.</p>
+          </div>
+          <div class="concept-card card-gold p-5 rounded-xl">
+            <h4 class="font-cinzel text-sm font-bold mb-3" style="color:var(--gold)">Elements Comuns amb el Cristianisme Primitiu</h4>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="bg-black/40 p-3 rounded flex gap-2"><span style="color:var(--gold)">▸</span><span class="text-gray-300">Vida comunitària i compartiment de béns</span></div>
+              <div class="bg-black/40 p-3 rounded flex gap-2"><span style="color:var(--gold)">▸</span><span class="text-gray-300">Rituals de purificació / baptisme</span></div>
+              <div class="bg-black/40 p-3 rounded flex gap-2"><span style="color:var(--gold)">▸</span><span class="text-gray-300">Esperança en un final dels temps (escatologia)</span></div>
+              <div class="bg-black/40 p-3 rounded flex gap-2"><span style="color:var(--gold)">▸</span><span class="text-gray-300">Ascetisme i renúncia al món material</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-5">
+          <h3 class="font-cinzel text-2xl font-bold" style="color:var(--gold)">Les Religions Mistèriques</h3>
+          <div class="text-gray-300 leading-relaxed space-y-4">
+            <p>Les religions mistèriques ja presentaven elements que posteriorment reapareixeran en el cristianisme. Aquests paral·lelismes responen tant a influències directes com a necessitats religioses similars en un món marcat per la desorientació i la crisi.</p>
+          </div>
+          <div class="space-y-3">
+            <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4" style="border-left-color:var(--crim-l)">
+              <span class="text-2xl flex-shrink-0">☀️</span>
+              <div><p class="font-bold text-white text-sm mb-1">Déu que mor i reneix</p><p class="text-xs text-gray-400">Osiris (Egipte), Dionís (Grècia), Mitra (Pèrsia). La idea de la mort i resurrecció divines ja existia en el món mediterrani.</p></div>
+            </div>
+            <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4" style="border-left-color:var(--gold)">
+              <span class="text-2xl flex-shrink-0">🌟</span>
+              <div><p class="font-bold text-white text-sm mb-1">Promesa de salvació personal</p><p class="text-xs text-gray-400">Una relació íntima entre el fidel i la divinitat que garantia la vida eterna. Necessitat espiritual en un món incert.</p></div>
+            </div>
+            <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4" style="border-left-color:var(--sage-l)">
+              <span class="text-2xl flex-shrink-0">🍞</span>
+              <div><p class="font-bold text-white text-sm mb-1">Comunió ritual amb la divinitat</p><p class="text-xs text-gray-400">Repasts sagrats i rituals d'iniciació que establien un vincle especial entre el creient i el déu.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL PAU DE TARS -->
+    <div id="tab-pau" class="tab-panel">
+      <div id="pau" class="h-0" aria-hidden="true"></div>
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div class="space-y-5">
+          <span class="badge badge-crim">Figura Decisiva · S. I d.C.</span>
+          <h3 class="font-cinzel text-3xl font-bold mt-2" style="color:var(--crim-l)">PAU DE TARS</h3>
+          <p class="font-cinzel text-sm tracking-wider text-gray-400">El fundador teològic del cristianisme universal</p>
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>Antic fariseu i perseguidor dels cristians, Pau desenvolupa una interpretació teològica que <strong style="color:var(--gold-l)">desvincula el cristianisme de l'obligatorietat de la Llei jueva</strong>, obrint-lo als gentils (els no-jueus).</p>
+            <p>La <strong style="color:var(--gold-l)">victòria de les tesis paulines al Concili de Jerusalem (48 d.C.)</strong> marca la separació definitiva entre cristianisme i judaisme, transformant el que havia estat una secta jueva en una religió universal.</p>
+          </div>
+          <div class="quote-block crim p-5 rounded-r-lg" style="position:relative;">
+            <span class="big-q" style="color:rgba(160,48,72,.15)">"</span>
+            <p class="text-base relative z-10 font-playfair italic">"Ja no hi ha jueu ni grec, ni esclau ni lliure, ni home ni dona, perquè tots vosaltres sou u en Crist Jesús." — Pau de Tars (Ga 3,28)</p>
+          </div>
+        </div>
+        <div class="space-y-5">
+          <div class="concept-card card-crim p-6 rounded-xl">
+            <h4 class="font-cinzel text-lg font-bold mb-4" style="color:var(--crim-l)">Conceptes Teològics Clau de Pau</h4>
+            <div class="space-y-3 text-sm">
+              <div class="bg-black/40 p-3 rounded-lg border-l-4" style="border-left-color:var(--crim-l)">
+                <p class="font-bold text-white mb-1">Pecat Original</p>
+                <p class="text-gray-400 text-xs">Tota la humanitat neix en estat de pecat a causa de la desobediència d'Adam. La condició humana és de necessitat de redempció.</p>
+              </div>
+              <div class="bg-black/40 p-3 rounded-lg border-l-4" style="border-left-color:var(--gold)">
+                <p class="font-bold text-white mb-1">La Gràcia</p>
+                <p class="text-gray-400 text-xs">El do gratuït de Déu que permet la salvació. No es guanya amb les obres, sinó amb la fe en Crist com a salvador.</p>
+              </div>
+              <div class="bg-black/40 p-3 rounded-lg border-l-4" style="border-left-color:var(--sage-l)">
+                <p class="font-bold text-white mb-1">Redempció per la Fe</p>
+                <p class="text-gray-400 text-xs">La mort i resurrecció de Crist redimeixen el pecat de tota la humanitat. La fe en aquest acte salvífic —no la Llei jueva— és el camí a la salvació.</p>
+              </div>
+              <div class="bg-black/40 p-3 rounded-lg border-l-4" style="border-left-color:var(--crim-l)">
+                <p class="font-bold text-white mb-1">Crist Salvador Universal</p>
+                <p class="text-gray-400 text-xs">La missió de Crist és per a tota la humanitat, sense distinció d'origen, gènere o condició social. Ruptura decisiva amb el particularisme jueu.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL FILÓ I GNÒSTICS -->
+    <div id="tab-filo" class="tab-panel">
+      <div id="filo" class="h-0" aria-hidden="true"></div>
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div class="space-y-5">
+          <span class="badge badge-gold">Filosofia i Teologia · S. I–III d.C.</span>
+          <h3 class="font-cinzel text-2xl font-bold mt-2" style="color:var(--gold)">FILÓ D'ALEXANDRIA</h3>
+          <p class="font-cinzel text-sm tracking-wider text-gray-400">La síntesi entre judaisme i platonisme</p>
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>Filó d'Alexandria (s. I d.C.) introdueix una síntesi entre el judaisme i la filosofia platònica. La seva concepció del <strong style="color:var(--gold-l)">Logos</strong> com a intermediari entre Déu i el món influirà clarament en l'Evangeli de sant Joan i en la posterior teologia cristiana.</p>
+          </div>
+          <div class="concept-card card-gold p-5 rounded-xl">
+            <h4 class="font-cinzel text-sm font-bold mb-3" style="color:var(--gold)">El Logos de l'Evangeli de Joan</h4>
+            <div class="quote-block p-4 rounded-r-lg" style="position:relative;">
+              <p class="text-sm font-playfair italic text-gray-200 relative z-10">"Al principi era el Verb (Logos), la Paraula era amb Déu, i la Paraula era Déu. I el Verb s'ha fet carn i ha habitat entre nosaltres..."</p>
+              <p class="text-xs text-gray-500 mt-2">— Joan 1, 1-14</p>
+            </div>
+            <p class="text-xs text-gray-400 mt-3">El <em>Logos</em> platònic, principi racional de l'univers, és identificat amb Crist. Síntesi magistral entre filosofia grega i revelació cristiana.</p>
+          </div>
+        </div>
+        <div class="space-y-5">
+          <h3 class="font-cinzel text-2xl font-bold" style="color:var(--gold)">ELS GNÒSTICS</h3>
+          <p class="font-cinzel text-sm tracking-wider text-gray-400">El camí no triat</p>
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>Els corrents gnòstics representen una interpretació alternativa del cristianisme, fortament influïda pel pensament hel·lenístic. Defensaven que la salvació s'assolia mitjançant el <strong style="color:var(--gold-l)">coneixement</strong> (<em>gnosi</em>), no per la fe o els sacraments.</p>
+          </div>
+          <div class="concept-card card-crim p-5 rounded-xl">
+            <h4 class="font-cinzel text-sm font-bold mb-3" style="color:var(--crim-l)">La Derrota dels Gnòstics</h4>
+            <p class="text-sm text-gray-300 mb-3">La derrota doctrinal del gnosticisme mostra que el cristianisme que triomfa <strong>no era l'únic possible</strong>, sinó el que va aconseguir imposar-se institucionalment.</p>
+            <div class="bg-black/40 p-3 rounded text-xs text-gray-400">
+              <p class="font-bold text-white mb-1">Evangelis exclosos del cànon:</p>
+              <p>Evangelis de Tomàs, Pere, Maria Magdalena o Felip — oferien visions diverses de Jesús, sovint allunyades del relat sacrificial de l'Església oficial. Van ser declarats apòcrifs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL PARES DE L'ESGLÉSIA -->
+    <div id="tab-pares" class="tab-panel">
+      <div id="pares" class="h-0" aria-hidden="true"></div>
+      <div class="space-y-8">
+        <div class="grid lg:grid-cols-2 gap-10">
+          <div class="space-y-5">
+            <span class="badge badge-gold">SS. II–V d.C.</span>
+            <h3 class="font-cinzel text-2xl font-bold mt-2" style="color:var(--gold)">ELS PARES DE L'ESGLÉSIA</h3>
+            <div class="space-y-4 text-gray-300 leading-relaxed">
+              <p>Els "Pares de l'Església" van elaborar durant els primers segles d.C. el marc doctrinal definitiu: unificant el credo, combatent heretgies i fixant el cànon bíblic, amb un control institucional estricte.</p>
+              <p>Per aquesta tasca van fer ús de la filosofia que tenien més a mà. <strong style="color:var(--gold-l)">L'herència de Plató</strong> era la que millor s'hi acomodava: la distinció entre món sensible i intel·ligible, la superioritat de l'espiritual sobre el material.</p>
+            </div>
+          </div>
+          <div class="space-y-5">
+            <!-- Nicea i cànon -->
+            <div class="concept-card card-crim p-5 rounded-xl">
+              <h4 class="font-cinzel text-sm font-bold mb-3" style="color:var(--crim-l)">⚠️ La Construcció de l'Ortodòxia</h4>
+              <div class="space-y-3 text-xs text-gray-300">
+                <div class="bg-black/40 p-3 rounded">
+                  <p class="font-bold text-white mb-1">L'Arrianisme i el Concili de Nicea (325 d.C.)</p>
+                  <p class="text-gray-400">Ari defensava que el Fill no era coetern ni consubstancial amb el Pare. Va tenir un enorme suport. <strong>Nicea no "descobreix" una veritat teològica, sinó que estableix autoritàriament una ortodòxia</strong>, excloent interpretacions alternatives com a herètiques.</p>
+                </div>
+                <div class="bg-black/40 p-3 rounded">
+                  <p class="font-bold text-white mb-1">El Cànon Bíblic: una selecció interessada</p>
+                  <p class="text-gray-400">L'acceptació exclusiva dels quatre evangelis canònics no respon únicament a criteris d'autenticitat, sinó a una voluntat institucional: garantir una doctrina compatible amb una Església jeràrquica i centralitzada.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="concept-card no-anim p-5 rounded-xl text-center" style="border-color:rgba(184,146,42,.25);">
+          <p class="text-sm text-gray-300 leading-relaxed max-w-3xl mx-auto">El cristianisme que es va imposar <strong style="color:var(--gold-l)">no era l'únic possible</strong>, sinó el que millor s'adaptava a les necessitats de cohesió doctrinal, control ideològic i estabilitat política de l'Imperi. El pensament cristià és el resultat d'un <strong style="color:var(--gold-l)">procés de selecció històrica</strong>, no d'una revelació homogènia i unívoca.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFICIALITZACIÓ -->
+<section id="oficialitzacio" class="py-20 section-dark relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3">S. IV d.C. · Constantí i Teodosi</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4" style="color:var(--gold)">L'OFICIALITZACIÓ IMPERIAL</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">D'una religió perseguida a una religió que persegueix</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <div class="space-y-5 text-gray-300 leading-relaxed">
+        <p>Amb <strong style="color:var(--gold-l)">Constantí</strong> (Edicte de Milà, 313) i, sobretot, amb <strong style="color:var(--gold-l)">Teodosi</strong> (380), el cristianisme esdevé <strong>religió oficial de l'Imperi</strong>. Aquest fet transforma profundament la seva naturalesa.</p>
+        <div class="grid grid-cols-2 gap-3 text-xs my-4">
+          <div class="bg-black/40 p-4 rounded-lg border-l-4" style="border-left-color:var(--sage-l)">
+            <p class="font-bold text-white mb-2">ABANS</p>
+            <p class="text-gray-400">Religió perseguida. Minoria marginal. Pluralitat doctrinal interna. Sense poder polític.</p>
+          </div>
+          <div class="bg-black/40 p-4 rounded-lg border-l-4" style="border-left-color:var(--crim-l)">
+            <p class="font-bold text-white mb-2">DESPRÉS</p>
+            <p class="text-gray-400">Religió oficial. Poder institucional. Definició d'ortodòxia. Persecució de dissidències.</p>
+          </div>
+        </div>
+        <div class="concept-card card-crim p-5 rounded-xl">
+          <h4 class="font-cinzel text-sm font-bold mb-2" style="color:var(--crim-l)">👉 La Conseqüència Intel·lectual Fonamental</h4>
+          <p class="text-sm text-gray-300">La filosofia quedarà progressivament <strong>subordinada a la teologia</strong>. La recerca racional autònoma serà sovint vista amb sospita, i el coneixement es posarà al servei de la fe revelada. Aquest clima intel·lectual marcarà profundament la cultura de l'Alta Edat Mitjana.</p>
+        </div>
+      </div>
+      <div class="space-y-5">
+        <div class="concept-card card-gold p-6 rounded-xl">
+          <h4 class="font-cinzel text-lg font-bold mb-4" style="color:var(--gold)">Cronologia Clau de l'Oficialització</h4>
+          <div class="space-y-3 text-sm">
+            <div class="tl-item pb-3">
+              <p class="font-bold text-white">313 · Edicte de Milà (Constantí)</p>
+              <p class="text-gray-400 text-xs">Tolerància religiosa. Fi de les persecucions. Inici de la protecció imperial al cristianisme.</p>
+            </div>
+            <div class="tl-item pb-3">
+              <p class="font-bold text-white">325 · Concili de Nicea</p>
+              <p class="text-gray-400 text-xs">Primera definició dogmàtica oficial sobre la natura de Crist (contra l'arrianisme). Intervenció directa del poder imperial en doctrina teològica.</p>
+            </div>
+            <div class="tl-item pb-3">
+              <p class="font-bold text-white">380 · Edicte de Tessalònica (Teodosi)</p>
+              <p class="text-gray-400 text-xs">El cristianisme nicea esdevé religió oficial i obligatòria de l'Imperi. Altres cultes queden prohibits.</p>
+            </div>
+            <div class="tl-item crim">
+              <p class="font-bold text-white">391–392 · Prohibició dels cultes pagans</p>
+              <p class="text-gray-400 text-xs">Tancament de temples, prohibició de sacrificis. El paganisme passa a ser il·legal. L'Imperi i l'Església es fusionen institucionalment.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FE I RAÓ -->
+<div id="feirao" class="h-0 overflow-hidden" aria-hidden="true"></div>
+<section class="py-20 section-gold relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3">SS. V–XV · Alta i Baixa Edat Mitjana</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4" style="color:var(--gold)">FE I RAÓ A L'EDAT MITJANA</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Dos models: Agustí i Tomàs d'Aquino</p>
+    </div>
+
+    <!-- Selector -->
+    <div class="flex justify-center gap-4 mb-12 border-b border-white/10 pb-4">
+      <button class="tab-btn active" onclick="switchFeRao('agusti', this)">Sant Agustí · Alta Edat Mitjana</button>
+      <button class="tab-btn" onclick="switchFeRao('tomas', this)">Tomàs d'Aquino · Baixa Edat Mitjana</button>
+    </div>
+
+    <!-- AGUSTÍ -->
+    <div id="ferao-agusti" class="tab-panel active">
+      <div id="agusti" class="h-0" aria-hidden="true"></div>
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div class="space-y-5">
+          <span class="badge badge-gold">Sant Agustí d'Hipona · 354–430 d.C.</span>
+          <h3 class="font-cinzel text-3xl font-bold mt-2" style="color:var(--gold)">EL MODEL AGUSTINIÀ</h3>
+          <p class="font-cinzel text-sm tracking-wider text-gray-400">Fe i raó en complementarietat jeràrquica</p>
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>En el pensament agustinià no hi ha separació estricta entre fe i raó. La raó humana és <strong style="color:var(--gold-l)">limitada i incapaç, per si sola, d'assolir les veritats últimes</strong>, especialment les que concerneixen Déu i la salvació.</p>
+            <p>La relació s'expressa en la fórmula clàssica: <strong style="color:var(--gold-l)"><em>crede ut intelligas</em></strong> (creu per entendre), complementada per <strong style="color:var(--gold-l)"><em>intellige ut credas</em></strong> (entén per creure). La raó pot conduir al llindar de la fe, però un cop la fe és acceptada, la raó s'hi subordina.</p>
+          </div>
+          <div class="quote-block p-5 rounded-r-lg" style="position:relative;">
+            <span class="big-q">"</span>
+            <p class="text-lg relative z-10 font-playfair italic">"No vagis fora; torna a tu mateix. En l'interior de l'home habita la veritat."</p>
+            <p class="text-xs text-gray-500 mt-2 relative z-10">— Sant Agustí, <em>De vera religione</em></p>
+          </div>
+        </div>
+        <div class="space-y-5">
+          <div class="concept-card card-gold p-6 rounded-xl">
+            <h4 class="font-cinzel text-lg font-bold mb-5" style="color:var(--gold)">Elements Clau del Model Agustinià</h4>
+            <div class="space-y-3 text-sm">
+              <div class="bg-black/40 p-4 rounded-lg border-l-4" style="border-left-color:var(--gold)">
+                <p class="font-bold text-white mb-1">La Platon ització del Cristianisme</p>
+                <p class="text-gray-400 text-xs">Agustí adopta el neoplatonisme de Plotí: el món intel·ligible platònic = àmbit diví; les Idees eternes = pensaments de Déu. La recerca de la veritat és un procés d'interiorització.</p>
+              </div>
+              <div class="bg-black/40 p-4 rounded-lg border-l-4" style="border-left-color:var(--crim-l)">
+                <p class="font-bold text-white mb-1">La Il·luminació Divina</p>
+                <p class="text-gray-400 text-xs">El coneixement veritable és possible gràcies a la <strong>llum de Déu present en l'ànima</strong>. No és un procés purament racional: requereix la gràcia divina.</p>
+              </div>
+              <div class="bg-black/40 p-4 rounded-lg border-l-4" style="border-left-color:var(--sage-l)">
+                <p class="font-bold text-white mb-1">Conseqüència Cultural</p>
+                <p class="text-gray-400 text-xs">Una concepció del saber centrada en la <strong>interioritat</strong>, la vida espiritual i la dependència de l'autoritat (Escriptura, Pares), més que en l'observació empírica o en l'autonomia de la raó.</p>
+              </div>
+            </div>
+          </div>
+          <div class="concept-card no-anim p-4 rounded-xl text-center" style="border-color:rgba(184,146,42,.2)">
+            <p class="eyebrow mb-2">Model dominant a l'Alta Edat Mitjana</p>
+            <div class="fer-bar bg-white/5 my-3"><div class="fer-fe" style="width:85%"></div><div class="fer-rao" style="width:15%"></div></div>
+            <p class="text-xs text-gray-400">La raó com a <em>via preparatòria</em> cap a la fe, no com a instrument autònom.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOMÀS D'AQUINO -->
+    <div id="ferao-tomas" class="tab-panel">
+      <div id="tomas" class="h-0" aria-hidden="true"></div>
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div class="space-y-5">
+          <span class="badge badge-sage">Tomàs d'Aquino · 1225–1274 d.C.</span>
+          <h3 class="font-cinzel text-3xl font-bold mt-2" style="color:var(--sage-l)">EL GIR ARISTOTÈLIC</h3>
+          <p class="font-cinzel text-sm tracking-wider text-gray-400">Escolàstica i autonomia relativa de la raó</p>
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>A partir del <strong style="color:var(--sage-l)">segle XII</strong>, la recuperació massiva de les obres d'Aristòtil a través del <strong style="color:var(--sage-l)">món islàmic</strong> (al-Àndalus, Sicília, Orient) provoca una commoció intel·lectual sense precedents. <strong>Avicenna</strong> i <strong>Averroes</strong> n'havien conservat i comentat els textos.</p>
+            <p>Aristòtil apareix com el pensador que ha construït el sistema racional més complet: una filosofia que explica la realitat sense recórrer directament a la revelació. Aristòtil passa a ser anomenat simplement <strong style="color:var(--gold-l)"><em>el Filòsof</em></strong>.</p>
+            <p>Tomàs d'Aquino, com anteriorment Agustí havia platonitzat la doctrina cristiana, <strong style="color:var(--sage-l)">aristotelitza el cristianisme</strong>: la gran síntesi entre aristotelisme i fe.</p>
+          </div>
+        </div>
+        <div class="space-y-5">
+          <div class="concept-card card-sage p-6 rounded-xl">
+            <h4 class="font-cinzel text-lg font-bold mb-4" style="color:var(--sage-l)">Distincions Fonamentals de Tomàs</h4>
+            <div class="space-y-3 text-sm">
+              <div class="grid grid-cols-2 gap-3">
+                <div class="bg-black/40 p-3 rounded border-l-4" style="border-left-color:var(--crim-l)">
+                  <p class="font-bold text-white text-xs mb-1">Àmbit de la Fe</p>
+                  <p class="text-gray-400 text-xs">Veritats sobrenaturals: Trinitat, Encarnació, Gràcia. No accessibles a la raó sola.</p>
+                </div>
+                <div class="bg-black/40 p-3 rounded border-l-4" style="border-left-color:var(--sage-l)">
+                  <p class="font-bold text-white text-xs mb-1">Àmbit de la Raó</p>
+                  <p class="text-gray-400 text-xs">Veritats naturals: món físic, causalitat, certs atributs de Déu. Accessibles per la raó.</p>
+                </div>
+              </div>
+              <div class="bg-black/40 p-4 rounded">
+                <p class="font-bold text-white mb-1 text-xs">Compatibilitat Fe i Raó</p>
+                <p class="text-gray-400 text-xs">Ambdues procedeixen de Déu i no poden contradir-se. Però la fe manté la preeminència en cas de conflicte. La raó guanya una <strong>autonomia relativa</strong>, especialment en l'estudi de la natura.</p>
+              </div>
+            </div>
+          </div>
+          <div class="concept-card card-sage p-5 rounded-xl">
+            <h4 class="font-cinzel text-sm font-bold mb-3" style="color:var(--sage-l)">L'Escolàstica</h4>
+            <p class="text-xs text-gray-300 mb-3">El gran moviment intel·lectual de la Baixa Edat Mitjana, desenvolupat a les universitats medievals (París, Bolonya, Oxford, Salamanca):</p>
+            <div class="grid grid-cols-3 gap-2 text-xs">
+              <div class="bg-black/40 p-2 rounded text-center"><p class="text-yellow-400 font-bold mb-1">Lectio</p><p class="text-gray-400">Lectura comentada dels textos canònics</p></div>
+              <div class="bg-black/40 p-2 rounded text-center"><p class="text-yellow-400 font-bold mb-1">Quaestio</p><p class="text-gray-400">Formulació de preguntes i problemes</p></div>
+              <div class="bg-black/40 p-2 rounded text-center"><p class="text-yellow-400 font-bold mb-1">Disputatio</p><p class="text-gray-400">Debat racional entre posicions oposades</p></div>
+            </div>
+          </div>
+          <div class="concept-card no-anim p-4 rounded-xl text-center" style="border-color:rgba(90,154,122,.2)">
+            <p class="eyebrow mb-2" style="color:rgba(90,154,122,.55)">Model de la Baixa Edat Mitjana</p>
+            <div class="fer-bar bg-white/5 my-3"><div class="fer-fe" style="width:55%"></div><div class="fer-rao" style="width:45%"></div></div>
+            <p class="text-xs text-gray-400">Equilibri jeràrquic: la raó guanya autonomia en l'àmbit natural, però la fe manté la preeminència.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RENAIXEMENT -->
+<section id="renaixement" class="py-20 section-sage relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3" style="color:rgba(90,154,122,.55)">SS. XIV–XVI · Cap a la Modernitat</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4" style="color:var(--sage-l)">EL RENAIXEMENT</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Crisi del model medieval i revalorització de la raó</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 mb-12">
+      <div class="space-y-5">
+        <h3 class="font-cinzel text-2xl font-bold" style="color:var(--sage-l)">La Crisi de l'Escolàstica</h3>
+        <p class="text-gray-300 leading-relaxed">A partir del segle XIV, el model intel·lectual medieval entra progressivament en crisi per múltiples factors:</p>
+        <div class="space-y-2">
+          <div class="tl-item sage pb-3"><p class="text-sm text-gray-300"><strong class="text-white">Crisi del papat</strong> — Cisma d'Occident (1378–1417): tres papes simultanis. Pèrdua d'autoritat moral.</p></div>
+          <div class="tl-item sage pb-3"><p class="text-sm text-gray-300"><strong class="text-white">Transformacions econòmiques</strong> — Creixement urbà, burgesia comercial. Nous valors no feudals.</p></div>
+          <div class="tl-item sage pb-3"><p class="text-sm text-gray-300"><strong class="text-white">La Pesta Negra</strong> (1347–1351) — Mort d'un terç de la població europea. Crisi existencial profunda.</p></div>
+          <div class="tl-item sage"><p class="text-sm text-gray-300"><strong class="text-white">Recepció crítica de l'aristotelisme</strong> — L'escolàstica s'havia rigiditzat en subtileses formals allunyades de la realitat.</p></div>
+        </div>
+      </div>
+      <div class="space-y-5">
+        <div class="concept-card card-sage p-6 rounded-xl">
+          <h3 class="font-cinzel text-xl font-bold mb-4" style="color:var(--sage-l)">L'Humanisme Renaixentista</h3>
+          <p class="text-sm text-gray-300 mb-4">El Renaixement es caracteritza per la recuperació de la <strong>centralitat i la dignitat humana</strong> i el retorn als textos clàssics grecollatins des d'una perspectiva filosòfica i filològica, no subordinada a la teologia.</p>
+          <div class="space-y-2 text-xs">
+            <div class="flex gap-2 bg-black/30 p-3 rounded"><span style="color:var(--sage-l)">▸</span><span class="text-gray-300">Revalorització de l'ésser humà com a centre de reflexió</span></div>
+            <div class="flex gap-2 bg-black/30 p-3 rounded"><span style="color:var(--sage-l)">▸</span><span class="text-gray-300">Nova concepció de la dignitat humana (Pico della Mirandola)</span></div>
+            <div class="flex gap-2 bg-black/30 p-3 rounded"><span style="color:var(--sage-l)">▸</span><span class="text-gray-300">Actitud oberta envers la natura, l'art i la ciència</span></div>
+            <div class="flex gap-2 bg-black/30 p-3 rounded"><span style="color:var(--sage-l)">▸</span><span class="text-gray-300">Els autors antics es llegeixen per si mateixos, no com a instruments doctrinals</span></div>
+          </div>
+        </div>
+        <div class="concept-card no-anim p-4 rounded-xl" style="border-color:rgba(90,154,122,.25)">
+          <p class="eyebrow mb-2" style="color:rgba(90,154,122,.55)">Nova relació Fe / Raó</p>
+          <div class="fer-bar bg-white/5 my-3"><div class="fer-fe" style="width:30%"></div><div class="fer-rao" style="width:70%"></div></div>
+          <p class="text-xs text-gray-400">La fe pertany principalment a l'esfera religiosa i personal. La raó reclama autonomia en l'estudi de la natura, la història i l'ésser humà.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cap a la modernitat -->
+    <div class="glow-div mb-10"></div>
+    <div class="max-w-4xl mx-auto">
+      <div class="concept-card card-sage p-8 rounded-2xl text-center no-anim">
+        <h3 class="font-cinzel text-2xl font-bold mb-5" style="color:var(--sage-l)">El Camí cap a la Modernitat</h3>
+        <p class="text-gray-300 leading-relaxed mb-6">El pas del món medieval al modern no és sobtat. El Renaixement representa un punt d'inflexió: el llarg procés iniciat amb l'oficialització del cristianisme —caracteritzat per la subordinació del pensament racional a l'autoritat religiosa— comença a invertir-se.</p>
+        <div class="grid md:grid-cols-3 gap-4 text-xs">
+          <div class="bg-black/40 p-4 rounded-xl">
+            <div class="text-2xl mb-2">🔭</div>
+            <p class="font-cinzel text-yellow-500 font-bold mb-1 text-xs">Revolució Científica</p>
+            <p class="text-gray-400">Copèrnic, Galileu, Kepler. Observació i matemàtiques contra l'autoritat aristotèlica.</p>
+          </div>
+          <div class="bg-black/40 p-4 rounded-xl">
+            <div class="text-2xl mb-2">🧭</div>
+            <p class="font-cinzel text-yellow-500 font-bold mb-1 text-xs">Reforma Protestant</p>
+            <p class="text-gray-400">Luter (1517). Ruptura de la unitat religiosa d'Occident. Autonomia de consciència.</p>
+          </div>
+          <div class="bg-black/40 p-4 rounded-xl">
+            <div class="text-2xl mb-2">📚</div>
+            <p class="font-cinzel text-yellow-500 font-bold mb-1 text-xs">Descartes (s. XVII)</p>
+            <p class="text-gray-400">Educat en l'escolàstica, la supera buscant un mètode nou. La raó autònoma com a fonament.</p>
+          </div>
+        </div>
+        <div class="quote-block sage p-5 rounded-r-lg mt-6 text-left" style="position:relative;">
+          <span class="big-q sage-q" style="color:rgba(90,154,122,.12)">"</span>
+          <p class="font-playfair italic text-base text-gray-300 relative z-10">Sense l'emancipació parcial de la raó respecte de la teologia que va operar l'escolàstica i el Renaixement, no s'entendrien ni la nova física dels segles XVI i XVII ni el projecte filosòfic de Descartes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REPASSAR -->
+<section id="repassar" class="py-20 section-dark">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="font-cinzel text-4xl font-bold text-white mb-4">PREGUNTES PER REPASSAR</h2>
+      <p class="text-gray-400">Qüestions que travessen els segles i arriben fins avui</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-sm font-bold border-b pb-2 mb-4" style="color:var(--gold);border-color:rgba(184,146,42,.3)">Orígens</h3>
+        <div class="concept-card card-gold p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">El cristianisme és una religió "nova"?</p>
+          <p class="text-xs text-gray-400">El document mostra que recull elements del judaisme, l'hel·lenisme, les religions mistèriques i el neoplatonisme. Fins a quin punt el seu "missatge" és original?</p>
+        </div>
+        <div class="concept-card card-gold p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Hi hauria pogut haver un christianisme gràstic o arià?</p>
+          <p class="text-xs text-gray-400">El document mostra que el cristianisme que va triomfar no era l'únic possible. Quins valors o estructures van fer que s'imposés el model jeràrquic i institucional?</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-sm font-bold border-b pb-2 mb-4" style="color:var(--crim-l);border-color:rgba(160,48,72,.3)">Poder i Doctrina</h3>
+        <div class="concept-card card-crim p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">La religió oficial beneficia la religió?</p>
+          <p class="text-xs text-gray-400">El cristianisme va guanyar poder polític però va perdre la seva pluralitat original. Pot una religió mantenir la seva autenticitat espiritual quan disposa de poder coercitiu?</p>
+        </div>
+        <div class="concept-card card-crim p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Qui decideix la "veritat" en matèria de fe?</p>
+          <p class="text-xs text-gray-400">El Concili de Nicea mostra que la definició dogmàtica és un acte polític tant com teològic. Qui té l'autoritat per dir el que és ortodox i el que és heretgia?</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-sm font-bold border-b pb-2 mb-4" style="color:var(--gold);border-color:rgba(184,146,42,.3)">Fe i Raó</h3>
+        <div class="concept-card card-gold p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Pot la raó conduir a la fe?</p>
+          <p class="text-xs text-gray-400">Agustí diu que sí (les idees platòniques mostren la necessitat d'una veritat transcendent). Però, és aquesta argumentació circular? La raó ja pressuposa el que hauria de demostrar?</p>
+        </div>
+        <div class="concept-card card-gold p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Fe i raó es contradiuen?</p>
+          <p class="text-xs text-gray-400">Tomàs diu que no. Però, quan la ciència moderna contradiu afirmacions bíbliques (geocentrisme, creació), quin dels dos àmbits cedeix? I per quin criteri?</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-sm font-bold border-b pb-2 mb-4" style="color:var(--sage-l);border-color:rgba(90,154,122,.3)">Vigència</h3>
+        <div class="concept-card card-sage p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Vivim en un món "post-medieval"?</p>
+          <p class="text-xs text-gray-400">La laïcitat és una conquesta recent i fràgil. En molts contextos, autoritats religioses continuen reclamant un rol en la definició de veritats morals i científiques. Hem superat realment el model medieval?</p>
+        </div>
+        <div class="concept-card card-sage p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Quin llegat positiu queda de l'Edat Mitjana?</p>
+          <p class="text-xs text-gray-400">Les universitats medievals, la conservació dels textos clàssics, l'art romànic i gòtic, i la tradició escolàstica del debat racional. El medievo no és només obscurantisme.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SÍNTESI -->
+<section class="py-20 section-mid">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="font-cinzel text-4xl font-bold text-white mb-10">SÍNTESI</h2>
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <div class="concept-card card-crim p-6 rounded-xl">
+        <div class="text-3xl mb-3">✝️</div>
+        <h3 class="font-cinzel text-sm font-bold mb-2" style="color:var(--crim-l)">Orígens i Formació</h3>
+        <p class="text-xs text-gray-400">Un moviment plural que es va unificar per imposició. La doctrina és el resultat d'un procés de selecció històrica, no d'una revelació homogènia.</p>
+      </div>
+      <div class="concept-card card-gold p-6 rounded-xl">
+        <div class="text-3xl mb-3">📖</div>
+        <h3 class="font-cinzel text-sm font-bold mb-2" style="color:var(--gold)">Fe i Raó Medieval</h3>
+        <p class="text-xs text-gray-400">Dos models successius: Agustí (raó subordinada) i Tomàs (autonomia relativa). Tots dos mantenen la primacia de la fe, però obren espais creixents per al pensament racional.</p>
+      </div>
+      <div class="concept-card card-sage p-6 rounded-xl">
+        <div class="text-3xl mb-3">🌅</div>
+        <h3 class="font-cinzel text-sm font-bold mb-2" style="color:var(--sage-l)">Cap a la Modernitat</h3>
+        <p class="text-xs text-gray-400">El Renaixement i la crisi escolàstica alliberen progressivament la raó. Sense aquest procés, no hi hauria ciència moderna ni la filosofia de Descartes.</p>
+      </div>
+    </div>
+    <p class="font-playfair italic text-gray-400 text-lg">Del monjo que copia textos al laboratori científic: un mil·lenni d'emancipació lenta i difícil de la raó.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:linear-gradient(180deg,#040306 0%,rgba(18,10,5,.4) 40%,#040306 100%);border-top:1px solid rgba(184,146,42,.1);padding:4rem 0;">
+  <div class="max-w-5xl mx-auto px-4 text-center">
+    <span class="font-cinzel text-xl tracking-widest font-bold" style="color:var(--gold)">CRISTIANISME I EDAT MITJANA · Experience</span>
+    <p class="font-playfair italic text-gray-400 text-lg block mt-3 mb-8">"Fe, raó i poder: un mil·lenni que va forjar Occident"</p>
+    <div class="quote-block p-8 rounded-xl text-center max-w-3xl mx-auto mb-10">
+      <p class="text-xl font-playfair italic text-gray-200 mb-4">"La veritat cristiana es va construir sobre la filosofia grega: Plató i Aristòtil van ser els pilars sobre els quals s'va aixecar la catedral medieval del pensament."</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 text-left">
+      <div>
+        <h4 class="font-cinzel font-bold mb-3 text-sm" style="color:var(--gold)">Orígens</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Judaisme del S. I: fariseus, saduceus, zelots, essenis</li>
+          <li>• Influències hel·lenístiques: logos, ànima, salvació</li>
+          <li>• Religions mistèriques: mort i resurrecció del déu</li>
+          <li>• Pau de Tars: universalització, pecat original, gràcia</li>
+          <li>• Filó: logos com a intermediari</li>
+          <li>• Pares de l'Església: dogma i cànon</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-cinzel font-bold mb-3 text-sm" style="color:var(--gold)">Fe i Raó</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Sant Agustí (354–430): crede ut intelligas</li>
+          <li>• Il·luminació divina i neoplatonisme</li>
+          <li>• Tomàs d'Aquino (1225–1274): síntesi aristotèlica</li>
+          <li>• Escolàstica: lectio, quaestio, disputatio</li>
+          <li>• Avicenna i Averroes: transmissió d'Aristòtil</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-cinzel font-bold mb-3 text-sm" style="color:var(--sage-l)">Cap a la Modernitat</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Crisi de l'escolàstica (S. XIV)</li>
+          <li>• Humanisme renaixentista</li>
+          <li>• Reforma Protestant (Luter, 1517)</li>
+          <li>• Revolució científica (Copèrnic, Galileu)</li>
+          <li>• Descartes: inici de la filosofia moderna</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Progress bar ─────────────────────────────────
+window.addEventListener('scroll', () => {
+  const s = document.body.scrollTop || document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  document.getElementById('progressBar').style.width = (s / h * 100) + '%';
+});
+
+// ── Tab switcher (Factors) ───────────────────────
+const FACTORS = ['essenis','pau','filo','pares'];
+let lastFactor = 'essenis';
+
+function switchTab(id, btn) {
+  FACTORS.forEach(f => {
+    const p = document.getElementById('tab-' + f);
+    if (p) p.classList.toggle('active', f === id);
+  });
+  document.querySelectorAll('[onclick^="switchTab"]').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  lastFactor = id;
+}
+
+// ── Tab switcher (Fe/Raó) ────────────────────────
+const FERAO = ['agusti','tomas'];
+let lastFeRao = 'agusti';
+
+function switchFeRao(id, btn) {
+  FERAO.forEach(f => {
+    const p = document.getElementById('ferao-' + f);
+    if (p) p.classList.toggle('active', f === id);
+  });
+  document.querySelectorAll('[onclick^="switchFeRao"]').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  lastFeRao = id;
+}
+
+// ── Scroll-spy ───────────────────────────────────
+const navLinks = document.querySelectorAll('.nav-link');
+let ignoreScroll = false;
+
+const parentMap = {
+  essenis: 'factors', pau: 'factors', filo: 'factors', pares: 'factors',
+  agusti:  'feirao',  tomas: 'feirao',
+};
+
+function setActive(id) {
+  const parentId = id ? (parentMap[id] || id) : null;
+  navLinks.forEach(link => {
+    const target = link.getAttribute('href').replace('#','');
+    const isActive = parentId && (target === parentId || target === id);
+    link.classList.toggle('active-section', !!isActive);
+  });
+}
+
+function getScrollId() {
+  const pos = window.scrollY + window.innerHeight * 0.28;
+  let cur = null;
+  document.querySelectorAll('section[id], div[id]:not([aria-hidden])').forEach(el => {
+    if (el.offsetTop <= pos) cur = el;
+  });
+  return cur?.getAttribute('id') || null;
+}
+
+window.addEventListener('scroll', () => {
+  if (!ignoreScroll) setActive(getScrollId());
+}, { passive: true });
+
+// ── Nav clicks ───────────────────────────────────
+navLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    const id = link.getAttribute('href').replace('#','');
+
+    // Sub-panells de Factors
+    if (FACTORS.includes(id)) {
+      e.preventDefault();
+      const btn = document.querySelector(`[onclick="switchTab('${id}', this)"]`);
+      switchTab(id, btn);
+      const sec = document.getElementById('factors');
+      if (sec) window.scrollTo({ top: sec.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+      ignoreScroll = true; setActive('factors');
+      setTimeout(() => { ignoreScroll = false; setActive(getScrollId()); }, 800);
+      return;
+    }
+
+    // Sub-panells de Fe/Raó
+    if (FERAO.includes(id)) {
+      e.preventDefault();
+      const btn = document.querySelector(`[onclick="switchFeRao('${id}', this)"]`);
+      switchFeRao(id, btn);
+      const sec = document.getElementById('feirao');
+      if (sec) window.scrollTo({ top: sec.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+      ignoreScroll = true; setActive('feirao');
+      setTimeout(() => { ignoreScroll = false; setActive(getScrollId()); }, 800);
+      return;
+    }
+
+    ignoreScroll = true;
+    setActive(id);
+    setTimeout(() => { ignoreScroll = false; setActive(getScrollId()); }, 800);
+  });
+});
+
+// ── Tab buttons → nav bidirecció ─────────────────
+document.querySelectorAll('[onclick^="switchTab"]').forEach(btn => {
+  btn.addEventListener('click', () => setActive('factors'));
+});
+document.querySelectorAll('[onclick^="switchFeRao"]').forEach(btn => {
+  btn.addEventListener('click', () => setActive('feirao'));
+});
+
+// ── Smooth scroll ────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    const id = href.replace('#','');
+    if ([...FACTORS, ...FERAO].includes(id)) return;
+    const t = document.querySelector(href);
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+// ── Card fade-in ─────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  });
+}, { threshold: 0 });
+
+document.querySelectorAll('.concept-card:not(.no-anim)').forEach((el, i) => {
+  el.style.opacity = '0'; el.style.transform = 'translateY(8px)';
+  el.style.transition = `all .8s ease ${i * 0.035}s`;
+  obs.observe(el);
+});
+
+document.addEventListener('DOMContentLoaded', () => setActive(getScrollId()));
+</script>
+</body>
+</html>

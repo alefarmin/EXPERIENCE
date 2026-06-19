@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presocràtics: Els Primers Filòsofs de la Fisis</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep: #03060C;
+    --abyss: #060D18;
+    --mid:   #0B1525;
+    --slate: #132238;
+    --ocean: #1A3654;
+    --ember: #C4702A;
+    --ember-light: #E8A04A;
+    --ember-glow:  #F5C87A;
+    --copper: #8B5E3C;
+    --copper-light:#B8865A;
+    --silver: #A8B8C8;
+    --mist:   #D0D8E0;
+    --ivory:  #F0EBE3;
+    --void:   #020408;
+    --fire:   #B8321A;
+    --fire-glow: #E85D3A;
+    --gold:   #C9A84C;
+    --gold-dim:#7A6030;
+  }
+
+  * { box-sizing:border-box; margin:0; padding:0; }
+
+  body {
+    font-family: "Inter", sans-serif;
+    background: var(--deep);
+    color: var(--ivory);
+    overflow-x: hidden;
+  }
+
+  .font-cinzel   { font-family:"Cinzel", serif; }
+  .font-playfair { font-family:"Playfair Display", serif; }
+
+  /* ── Progress bar ─────────────────── */
+  .progress-bar {
+    position:fixed; top:0; left:0; height:2px;
+    background: linear-gradient(90deg, var(--ember) 0%, var(--gold) 50%, var(--ocean) 100%);
+    z-index:1000; transition:width .1s;
+    box-shadow: 0 0 8px rgba(196,112,42,.6);
+  }
+
+  /* ── Animations ───────────────────── */
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+  .float-anim { animation:float 5s ease-in-out infinite; }
+
+  @keyframes shimmer {
+    0%  { background-position:-200% center }
+    100%{ background-position: 200% center }
+  }
+  .shimmer-text {
+    background: linear-gradient(90deg, var(--ivory) 0%, var(--ember-light) 45%, var(--gold) 55%, var(--ivory) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 5s linear infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%,100%{ box-shadow:0 0 15px rgba(196,112,42,.2) }
+    50%    { box-shadow:0 0 40px rgba(196,112,42,.5) }
+  }
+
+  @keyframes fadeIn {
+    from{ opacity:0; transform:translateY(14px) }
+    to  { opacity:1; transform:translateY(0) }
+  }
+
+  @keyframes flow {
+    0%  { background-position:0% 50% }
+    50% { background-position:100% 50% }
+    100%{ background-position:0% 50% }
+  }
+
+  /* ── Sections ─────────────────────── */
+  .section-dark {
+    background: linear-gradient(160deg, #03060C 0%, #0B1525 100%);
+    position: relative; overflow: hidden;
+  }
+  .section-mid   { background: linear-gradient(160deg, #0B1525 0%, #132238 100%); }
+  .section-light { background: linear-gradient(160deg, #132238 0%, #1A3654 100%); }
+  .section-ember { background: linear-gradient(160deg, #0D0502 0%, #261008 50%, #0B1525 100%); }
+  .section-volcanic { background: linear-gradient(160deg, #080302 0%, #1A0805 50%, #03060C 100%); }
+
+  /* ── Cards ────────────────────────── */
+  .concept-card {
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(196,112,42,.18);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all .45s cubic-bezier(.4,0,.2,1);
+    border-radius: 12px;
+  }
+  .concept-card:hover {
+    transform: translateY(-6px) scale(1.015);
+    border-color: rgba(196,112,42,.55);
+    box-shadow: 0 20px 48px rgba(0,0,0,.5), 0 0 0 1px rgba(196,112,42,.15), inset 0 1px 0 rgba(255,255,255,.06);
+    background: rgba(255,255,255,.045);
+  }
+  .concept-card.no-anim:hover { transform:none; box-shadow:none; background:rgba(255,255,255,.025); }
+
+  /* ── Quotes ───────────────────────── */
+  .presocratic-quote {
+    border-left: 3px solid var(--ember);
+    background: linear-gradient(90deg, rgba(196,112,42,.12) 0%, rgba(196,112,42,.03) 60%, transparent 100%);
+    font-style: italic;
+    position: relative;
+  }
+  .presocratic-quote::before {
+    content: "C";
+    position: absolute;
+    top: -10px; left: 12px;
+    font-size: 3rem;
+    color: rgba(196,112,42,.25);
+    font-family: "Playfair Display", serif;
+    line-height: 1;
+  }
+
+  /* ── Tabs ─────────────────────────── */
+  .tab-btn {
+    transition: all .3s;
+    border-bottom: 2px solid transparent;
+    color: var(--silver);
+    letter-spacing: 0.03em;
+  }
+  .tab-btn.active {
+    border-bottom-color: var(--ember);
+    color: var(--ember-light);
+  }
+  .content-panel { display:none; animation:fadeIn .5s; }
+  .content-panel.active { display:block; }
+
+  /* ── Timeline ─────────────────────── */
+  .timeline-item {
+    position: relative;
+    padding-left: 2rem;
+    border-left: 1px solid rgba(196,112,42,.25);
+  }
+  .timeline-item::before {
+    content: "";
+    position: absolute; left: -5px; top: 4px;
+    width: 9px; height: 9px;
+    background: var(--ember);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(196,112,42,.5);
+  }
+
+  /* ── Scrollbar ────────────────────── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep); }
+  ::-webkit-scrollbar-thumb { background: rgba(196,112,42,.4); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--ember); }
+
+  /* ── Active nav ───────────────────── */
+  .active-section {
+    color: var(--ember-light) !important;
+    border-bottom: 2px solid var(--ember);
+    padding-bottom: 2px;
+  }
+
+  /* ── Home btn ─────────────────────── */
+  .home-btn {
+    margin-left: 10px; padding: 5px 12px; font-size: 11px;
+    border: 1px solid rgba(196,112,42,.25); border-radius: 20px;
+    color: var(--ember-light); text-decoration: none;
+    background: rgba(196,112,42,.06); backdrop-filter: blur(8px);
+    transition: all .2s ease; letter-spacing: 0.04em;
+    font-family: "Cinzel", serif;
+  }
+  .home-btn:hover {
+    background: rgba(196,112,42,.15);
+    border-color: rgba(196,112,42,.5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(196,112,42,.2);
+  }
+
+  /* ── Element card variants ────────── */
+  .element-water {
+    border-color: rgba(59,130,246,.35) !important;
+    background: linear-gradient(135deg, rgba(59,130,246,.07), transparent) !important;
+  }
+  .element-water:hover { border-color: #3B82F6 !important; box-shadow: 0 16px 40px rgba(59,130,246,.2) !important; }
+  .element-fire {
+    border-color: rgba(232,90,58,.35) !important;
+    background: linear-gradient(135deg, rgba(232,90,58,.07), transparent) !important;
+  }
+  .element-fire:hover { border-color: #E85D3A !important; box-shadow: 0 16px 40px rgba(232,90,58,.2) !important; }
+  .element-air {
+    border-color: rgba(168,184,200,.35) !important;
+    background: linear-gradient(135deg, rgba(168,184,200,.07), transparent) !important;
+  }
+  .element-air:hover { border-color: #A8B8C8 !important; box-shadow: 0 16px 40px rgba(168,184,200,.2) !important; }
+  .element-earth {
+    border-color: rgba(139,94,60,.35) !important;
+    background: linear-gradient(135deg, rgba(139,94,60,.07), transparent) !important;
+  }
+  .element-earth:hover { border-color: #8B5E3C !important; box-shadow: 0 16px 40px rgba(139,94,60,.2) !important; }
+
+  /* ── Arkhe badge ──────────────────── */
+  .arkhe-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    background: rgba(196,112,42,.1);
+    border: 1px solid rgba(196,112,42,.28);
+    color: var(--ember-light);
+    font-family: "Cinzel", serif;
+  }
+
+  /* ── Dialectic pair ───────────────── */
+  .dialectic-pair { display:flex; align-items:center; gap:1rem; }
+  .dialectic-left  { text-align:right; flex:1; }
+  .dialectic-right { text-align:left;  flex:1; }
+  .dialectic-vs {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--ember), var(--fire));
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Cinzel", serif; font-size: 13px; font-weight: 900;
+    color: white; flex-shrink: 0;
+    box-shadow: 0 0 16px rgba(196,112,42,.4);
+  }
+
+  /* ── Flow bg ──────────────────────── */
+  .flow-bg {
+    background: linear-gradient(270deg, rgba(196,112,42,.08), rgba(59,130,246,.08), rgba(196,112,42,.08));
+    background-size: 200% 200%;
+    animation: flow 10s ease infinite;
+  }
+
+  /* ── Conflict line ────────────────── */
+  .conflict-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ember) 30%, var(--silver) 50%, var(--ember) 70%, transparent);
+  }
+
+  /* ── Section headers ──────────────── */
+  .section-eyebrow {
+    font-family: "Cinzel", serif;
+    font-size: 10px; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(196,112,42,.6);
+  }
+
+  /* ── Subtle grain overlay ─────────── */
+  body::before {
+    content: "";
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.35;
+  }
+
+  /* ── Nav glow on hover ────────────── */
+  nav a.nav-link:hover { color: var(--ember-light); }
+  nav a.nav-link { transition: color .2s; color: var(--silver); }
+
+  /* ── Divider transitions ──────────── */
+  .transition-block {
+    background: linear-gradient(180deg, transparent 0%, rgba(196,112,42,.04) 50%, transparent 100%);
+    border-top: 1px solid rgba(196,112,42,.08);
+    border-bottom: 1px solid rgba(196,112,42,.08);
+  }
+</style>
+
+</head>
+<body class="antialiased">
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="fixed top-0 w-full z-50" style="background:rgba(3,6,12,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(196,112,42,.12);box-shadow:0 1px 0 rgba(196,112,42,.06),0 4px 24px rgba(0,0,0,.4);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+      <a href="#inici" class="flex items-center space-x-3 group">
+        <svg class="w-7 h-7 text-amber-600 group-hover:scale-110 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+        <span class="font-cinzel text-lg font-bold text-amber-600 group-hover:text-white transition hover:tracking-widest">PRESOCRÀTICS Experience</span>
+      </a>
+      <div class="hidden md:flex space-x-5 items-center text-sm">
+        <a href="../index.html" class="home-btn">← Inici EXPERIENCE</a>
+        <div class="relative group">
+          <a href="#context" class="nav-link hover:text-amber-600 transition flex items-center gap-1"><span>Fisis i Arkhé </span></a>
+          </div>
+        </div>
+        <div class="relative group">
+          <a href="#filosofs" class="nav-link hover:text-amber-600 transition flex items-center gap-1">Filòsofs de Milet<span class="text-xs">▼</span></a>
+          <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+            <a href="#tales" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Tales i l'Aigua</a>
+            <a href="#anaximandre" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Anaximandre i l'Apeiron</a>
+            <a href="#anaximenes" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Anaxímenes i l'Aire</a>
+
+          </div>
+        </div>
+        <div class="relative group">
+          <a href="#pitagores" class="nav-link hover:text-amber-600 transition flex items-center gap-1">Pitàgores <span class="text-xs"></a>
+        </div>
+        <div class="relative group">
+          <a href="#conflicte" class="nav-link hover:text-amber-600 transition flex items-center gap-1">El Gran Conflicte <span class="text-xs">▼</span></a>
+          <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+            <a href="#heraclit" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Heràclit: Tot Flueix</a>
+            <a href="#parmenides" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Parmènides: El Ser Immutable</a>
+            <a href="#dialektiki" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Dialektikí: El Debat</a>
+          </div>
+        </div>
+        <a href="#pluralistes" class="nav-link hover:text-amber-600 transition">Pluralistes</a>
+        <a href="#repassar" class="nav-link hover:text-amber-600 transition">Repassar</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section id="inici" class="relative min-h-screen flex items-center section-dark pt-16">
+  <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(ellipse at 20% 60%,rgba(196,112,42,.18) 0%,transparent 55%),radial-gradient(ellipse at 78% 25%,rgba(27,58,92,.25) 0%,transparent 45%),radial-gradient(ellipse at 50% 100%,rgba(196,112,42,.06) 0%,transparent 40%)"></div>
+  <svg class="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+    <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#C4702A" stroke-width="0.5"/></pattern></defs>
+    <rect width="100%" height="100%" fill="url(#grid)"/>
+  </svg>
+  <div class="relative z-10 max-w-5xl mx-auto px-6 w-full">
+    <div class="max-w-3xl">
+      <div class="mb-6 inline-block">
+        <span class="font-cinzel text-sm border border-amber-600/50 text-amber-600 px-5 py-2 rounded-full tracking-widest uppercase">Del mite al logos</span>
+      </div>
+      <h2 class="font-cinzel text-3xl md:text-4xl text-amber-600 tracking-[0.2em] mb-3">PRESOCRÀTICS</h2>
+      <h1 class="font-cinzel text-5xl md:text-7xl font-black mb-6 leading-tight shimmer-text">
+        ELS PRIMERS<br>FILÒSOFS DE LA FISIS
+      </h1>
+      <p class="font-playfair text-xl md:text-2xl text-gray-300 mb-8 italic">
+        Del s.VI a.C., quan la raó va desplaçar els mites per explicar l'ordre del cosmos. 
+        La recerca de l'Arkhé: l'última causa darrere tota la multiplicitat.
+      </p>
+      <div class="flex flex-wrap gap-4 text-sm text-amber-600/80 font-cinzel tracking-wider">
+        <span>• FISIS</span><span>• ARKHÉ</span><span>• LOGOS</span><span>• COSMOS</span><span>• APEIRON</span><span>• ÀTOMS</span>
+      </div>
+    </div>
+  </div>
+  <div class="absolute right-8 bottom-20 max-w-xs text-right hidden lg:block">
+    <p class="font-playfair text-base italic text-gray-300 leading-relaxed">"El món és un cosmos, no pas un caos."</p>
+    <div class="mt-2 h-[2px] bg-gradient-to-l from-amber-600 via-blue-700 to-transparent"></div>
+  </div>
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 float-anim">
+    <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+    </svg>
+  </div>
+</section>
+
+<section id="context" class="py-20 section-mid">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-14">
+      <p class="section-eyebrow mb-3">Filosofia de la Naturalesa · s. VI a.C.</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-amber-600">FISIS I ARKHÉ</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">"La diversitat de la natura és només aparent"</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-12 items-start mb-16">
+      <div>
+        <h3 class="font-cinzel text-3xl font-bold mb-6 text-amber-500">El Pas del Mite al Logos</h3>
+        <div class="space-y-4 text-gray-300 leading-relaxed">
+          <p>Durant el <span class="text-amber-500 font-semibold">s. VI a.C.</span>, els anomenats filòsofs presocràtics es van interessar per les qüestions lligades especialment a la natura —la <strong>"fisis"</strong> en grec— i creien que per comprendre-la calia distingir l'aparença de la realitat.</p>
+          <p>Els múltiples éssers de la realitat semblen molt diferents, però l'ordre al qual obeeixen només pot explicar-se suposant un mateix origen. Segons aquesta interpretació, <strong class="text-amber-400">la diversitat de la natura és només aparent</strong>, i han de ser manifestacions d'un principi original únic.</p>
+          <div class="presocratic-quote p-4 rounded-r-lg my-4">
+            <p class="text-lg">"Comprendre l'ordre i la regularitat de la fisis passava per indagar aquesta última causa de tot allò real, <strong>l'Arkhé de totes les coses...</strong>"</p>
+          </div>
+          <p>La recerca passa definitivament per la indagació i el descobriment de les lleis que governen l'esdevenir; i aquesta recerca s'efectua des de la <span class="text-amber-400 font-semibold">raó</span>.</p>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <div class="concept-card p-6 rounded-xl">
+          <h3 class="font-cinzel text-xl font-bold text-amber-500 mb-4">Conceptes Fonamentals</h3>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4 border-b border-white/10 pb-4">
+              <span class="text-amber-500 font-cinzel text-lg font-bold min-w-[80px]">FISIS</span>
+              <div>
+                <p class="text-sm text-gray-300 font-semibold">Naturalesa</p>
+                <p class="text-xs text-gray-400">Els primers filòsofs inauguren la filosofia preguntant-se per la Fisis. Cerquen la possibilitat d'una última causa darrere tota la multiplicitat que la caracteritza.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="text-amber-500 font-cinzel text-lg font-bold min-w-[80px]">ARKHÉ</span>
+              <div>
+                <p class="text-sm text-gray-300 font-semibold">Principi / Origen</p>
+                <p class="text-xs text-gray-400">Transcrit també com "arjé" o "arché". És la manera de denominar aquesta última causa, l'últim perquè de totes les coses, el principi explicatiu de tota la fisis.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="concept-card p-6 rounded-xl border-amber-700/30">
+          <h3 class="font-cinzel text-xl font-bold text-amber-500 mb-3">El Cosmos vs. el Caos</h3>
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="bg-blue-900/20 p-3 rounded border border-blue-500/20">
+              <p class="text-blue-300 font-bold mb-1">🌍 COSMOS</p>
+              <p class="text-gray-400">Ordre, regularitat, necessitat. El món obeeix lleis que la raó pot descobrir. Les coses succeeixen perquè han de succeir.</p>
+            </div>
+            <div class="bg-red-900/20 p-3 rounded border border-red-500/20">
+              <p class="text-red-400 font-bold mb-1">⚡ CAOS</p>
+              <p class="text-gray-400">Caprici, voluntat de déus, màgia. Tot és possible. Impredictible. Pensament prefilosòfic.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-4xl mx-auto">
+      <div class="concept-card p-8 rounded-2xl text-center">
+        <h3 class="font-cinzel text-2xl font-bold text-amber-400 mb-6">La "Necessitat" com a Clau</h3>
+        <div class="grid md:grid-cols-2 gap-6 text-sm">
+          <div class="bg-black/40 p-5 rounded-lg border-l-4 border-amber-500">
+            <p class="text-amber-300 font-bold mb-2 text-lg">Necessari</p>
+            <p class="text-gray-400">"Ha de ser". Les coses succeeixen perquè han de succeir. Ordre de lleis. El fonament de la ciència: relacions causa-efecte.</p>
+          </div>
+          <div class="bg-black/40 p-5 rounded-lg border-l-4 border-gray-500">
+            <p class="text-gray-300 font-bold mb-2 text-lg">Contingent</p>
+            <p class="text-gray-400">"Que tant pot ser com no ser". El que depèn del caprici. Característic del pensament màgic i prefilosòfic.</p>
+          </div>
+        </div>
+        <p class="mt-6 text-gray-300 text-sm">En entendre el món des de la "necessitat", el que s'està prefigurant és un dels conceptes imprescindibles perquè pugui constituir-se la Ciència com a tal: el concepte de <strong class="text-amber-400">causa</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="filosofs" class="h-0 overflow-hidden" aria-hidden="true"></div>
+<section id="tales" class="py-20 section-light relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-900/10 to-transparent pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-10 items-start">
+      <div class="space-y-6">
+        <div class="flex items-center gap-3 mb-2"><span class="arkhe-badge">Primer Filòsof</span></div>
+        <h2 class="font-cinzel text-4xl font-bold text-blue-400">TALES DE MILET</h2>
+        <p class="text-gray-300 text-sm font-cinzel tracking-wider">Segle VI a.C. · Arkhé: <span class="text-blue-400 font-bold">L'AIGUA</span></p>
+        <div class="space-y-4 text-gray-300 leading-relaxed">
+          <p>Considerat el primer filòsof, en ell podem constatar d'una manera clara <strong class="text-blue-400">l'abandonament de les llegendes i els mites</strong> que tradicionalment explicaven la realitat. Dedicat a buscar el saber racionalment, efectua el que s'ha donat per titular com <strong>"el pas del mite al logos"</strong> (Logos = raó, llei...).</p>
+          <div class="presocratic-quote p-5 rounded-r-lg">
+            <p class="text-lg">"Tales comença a pensar des de la <strong>necessitat</strong>: les coses succeeixen perquè han de succeir, i aquest ordre de necessitat es reflecteix en una sèrie de lleis que es tractaria d'anar descobrint."</p>
+          </div>
+          <p>L'esdevenir ja no és pas per la voluntat de déus, herois màgics i forces vives en general. Amb ell, la recerca passa definitivament per la <strong class="text-blue-400">indagació i el descobriment de les lleis</strong> que governen aquest esdevenir.</p>
+        </div>
+        <div class="concept-card p-5 rounded-xl element-water">
+          <h4 class="font-cinzel text-lg font-bold text-blue-400 mb-3">💧 Per què l'Aigua?</h4>
+          <p class="text-sm text-gray-300">Per Tales, l'Arkhé hauria estat l'aigua. Tot i que les seves raons concretes representen la part més anecdòtica del seu pensament, l'elecció no és casual: l'aigua és essencial per a la vida, present en tota la natura, i pot adoptar les tres formes (líquid, sòlid, gas).</p>
+          <p class="text-xs text-gray-500 mt-2 italic">Allò essencial és la manera que té Tales d'aproximar-se al coneixement del món, des de la idea de la "necessitat" i no ja des del caprici.</p>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <div class="concept-card p-6 rounded-xl">
+          <h4 class="font-cinzel text-xl font-bold text-amber-500 mb-4">Aportacions Científiques</h4>
+          <div class="space-y-4">
+            <div class="flex gap-3 border-b border-white/10 pb-3">
+              <span class="text-blue-400 text-xl">🔭</span>
+              <div><p class="text-sm text-white font-semibold">Astronomia</p><p class="text-xs text-gray-400">Es creu que va predir un eclipsi solar.</p></div>
+            </div>
+            <div class="flex gap-3 border-b border-white/10 pb-3">
+              <span class="text-blue-400 text-xl">📐</span>
+              <div><p class="text-sm text-white font-semibold">Geometria</p><p class="text-xs text-gray-400">Va calcular l'alçada de les piràmides d'Egipte basant-se en la seva ombra. Desenvolupà el teorema de Tales.</p></div>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-blue-400 text-xl">💰</span>
+              <div><p class="text-sm text-white font-semibold">Economia</p><p class="text-xs text-gray-400">Va predir una època de bona collita i va enriquir invertint en magatzems, demostrant que els filòsofs poden fer-se rics si ho desitgen.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="concept-card p-5 rounded-xl border-blue-500/30">
+          <h4 class="font-cinzel text-lg font-bold text-blue-400 mb-3">El Concepte de Causa</h4>
+          <p class="text-sm text-gray-300">La nova manera d'entendre i pensar la realitat ens permet aspirar a tenir un control efectiu de l'esdevenir. Amb el pensament racional queda clar que <strong class="text-blue-400">només es pot manejar l'esdevenir si es coneix els seus mecanismes interns de funcionament</strong>, podent actuar llavors sobre les causes reals vinculades a aquells efectes concrets que mirem de controlar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="anaximandre" class="py-20 section-dark relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-10 items-start">
+      <div class="space-y-6">
+        <div class="flex items-center gap-3 mb-2"><span class="arkhe-badge">Deixeble de Tales</span></div>
+        <h2 class="font-cinzel text-4xl font-bold text-gray-300">ANAXIMANDRE</h2>
+        <p class="text-gray-300 text-sm font-cinzel tracking-wider">Milet · Arkhé: <span class="text-gray-300 font-bold">APEIRON (L'IL·LIMITAT)</span></p>
+        <div class="space-y-4 text-gray-300 leading-relaxed">
+          <p>Anaximandre, nascut a Milet, va ser deixeble i company de Tales. A ell se li atribueixen diverses troballes i activitats científiques: va liderar expedicions, va introduir l'ús del <strong>gnòmon</strong> a Grècia, i va ser el primer a traçar un mapa del món, representant-lo com un disc circular envoltat per un riu anomenat Oceà.</p>
+          <div class="presocratic-quote p-5 rounded-r-lg">
+            <p class="text-lg">"Anaximandre també va elaborar una explicació racional sobre l'origen humà. Creia que els éssers humans provenien de zones humides i originalment tenien una closca espinosa que va desaparèixer a mesura que es van traslladar a zones més seques, anticipant certes idees de la <strong>Teoria Evolutiva</strong>."</p>
+          </div>
+        </div>
+        <div class="concept-card p-5 rounded-xl">
+          <h4 class="font-cinzel text-lg font-bold text-gray-300 mb-3">El Problema de l'Arkhé Concreta</h4>
+          <p class="text-sm text-gray-300 mb-3">Anaximandre divergia del seu mestre, Tales. Pensava que el principi no podia ser un element concret:</p>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li class="flex gap-2"><span class="text-amber-500">▸</span><span>L'aigua és massa específica i no és prou útil per donar raó de la <strong>diversitat i multiplicitat</strong>.</span></li>
+            <li class="flex gap-2"><span class="text-amber-500">▸</span><span>La multiplicitat de la Fisis es pot classificar des de l'<strong>oposició de contraris</strong> (jove/vell, gran/petit, calent/fred).</span></li>
+            <li class="flex gap-2"><span class="text-amber-500">▸</span><span>Si l'Arkhé fos una part de la Fisis (com l'aigua), seria <strong>limitat per la seva pròpia definició</strong> i no podria explicar el seu contrari.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <div class="concept-card p-6 rounded-xl border-gray-500/30">
+          <h4 class="font-cinzel text-xl font-bold text-gray-300 mb-4">∞ L'APEIRON</h4>
+          <p class="text-sm text-gray-300 mb-4">L'Arkhé ha de ser <strong>previ a tota definició</strong>. Des de la no-definició resta habilitat per poder-ho ser tot consecutivament: una cosa i el seu contrari. D'aquí que Anaximandre anomeni a l'Arkhé <strong class="text-gray-300 text-lg">"Apeiron"</strong> (= il·limitat, en el sentit d'in-definit).</p>
+          <div class="bg-black/40 p-4 rounded-lg mb-4">
+            <p class="text-xs text-gray-400 italic">"Ser algo és tenir una o altra definició, aquella que el fa ser això i no allò, i en aquest mateix moment ha de ser limitat. El seu límit ve, precisament, de tenir una o altra definició."</p>
+          </div>
+        </div>
+        <div class="concept-card p-5 rounded-xl">
+          <h4 class="font-cinzel text-lg font-bold text-amber-500 mb-3">De la Indeterminació a la Determinació</h4>
+          <p class="text-sm text-gray-300 mb-3">Anaximandre explicava el pas de la indeterminació a la determinació a través de la <strong>separació de contraris</strong>:</p>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3 bg-black/30 p-3 rounded">
+              <span class="text-2xl">∞</span>
+              <div><p class="text-white font-bold text-sm">Apeiron</p><p class="text-xs text-gray-400">L'indeterminat, l'origen</p></div>
+            </div>
+            <div class="text-center text-amber-500 text-lg">↓ Separació</div>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="bg-blue-900/20 p-2 rounded text-center text-xs text-blue-300">Fred</div>
+              <div class="bg-red-900/20 p-2 rounded text-center text-xs text-red-300">Calent</div>
+              <div class="bg-cyan-900/20 p-2 rounded text-center text-xs text-cyan-300">Humit</div>
+              <div class="bg-orange-900/20 p-2 rounded text-center text-xs text-orange-300">Sec</div>
+            </div>
+            <div class="text-center text-amber-500 text-lg">↓ Cicle infinit</div>
+            <div class="bg-black/30 p-3 rounded text-center">
+              <p class="text-xs text-gray-400">Els oposats s'alternen constantment. El món està destinat a desaparèixer per tornar a l'origen, repetint el procés infinites vegades.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="anaximenes" class="py-20 section-mid relative overflow-hidden">
+  <div class="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-slate-800/20 to-transparent pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-10 items-start">
+      <div class="space-y-6">
+        <div class="flex items-center gap-3 mb-2"><span class="arkhe-badge">Darrer de Milet</span></div>
+        <h2 class="font-cinzel text-4xl font-bold text-slate-300">ANAXÍMENES</h2>
+        <p class="text-gray-300 text-sm font-cinzel tracking-wider">Milet · Arkhé: <span class="text-slate-300 font-bold">L'AIRE</span></p>
+        <div class="space-y-4 text-gray-300 leading-relaxed">
+          <p>Anaxímenes, deixeble d'Anaximandre, és considerat el tercer i darrer filòsof de l'escola de Milet. Va escriure un llibre del qual han arribat alguns fragments a través de filòsofs posteriors.</p>
+          <p>A diferència dels seus predecessors, Anaxímenes va construir una teoria diferent, encara que amb similituds. Igual que Anaximandre, creia que l'Arkhé era <strong>infinit i il·limitat</strong>, però a diferència d'ell, pensava que havia de ser una <strong class="text-slate-300">substància determinada</strong>.</p>
+          <div class="presocratic-quote p-5 rounded-r-lg">
+            <p class="text-lg">"Anaxímenes va concloure que aquesta substància era <strong>l'aire</strong>."</p>
+          </div>
+        </div>
+        <div class="concept-card p-5 rounded-xl element-air">
+          <h4 class="font-cinzel text-lg font-bold text-slate-300 mb-3">💨 Per què l'Aire?</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li class="flex gap-2"><span class="text-slate-400">▸</span><span>L'aire és <strong>essencial per a la vida</strong>.</span></li>
+            <li class="flex gap-2"><span class="text-slate-400">▸</span><span>El va relacionar amb l'<strong>ànima humana</strong>: l'ànima abandonava el cos a través de l'alè en morir.</span></li>
+            <li class="flex gap-2"><span class="text-slate-400">▸</span><span>L'aire està en <strong>moviment constant</strong> i canvia, formant altres elements.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <div class="concept-card p-6 rounded-xl">
+          <h4 class="font-cinzel text-xl font-bold text-amber-500 mb-4">Rarefacció i Condensació</h4>
+          <p class="text-sm text-gray-300 mb-4">Anaxímenes va introduir els conceptes de <strong>"procés"</strong> que relliga els elements. L'aire està en constant moviment i canvia formant la resta d'elements del cosmos:</p>
+          <div class="space-y-4">
+            <div class="bg-black/40 p-4 rounded-lg border-l-4 border-slate-400">
+              <h5 class="text-slate-300 font-bold text-sm mb-1">⬆ Rarefacció</h5>
+              <p class="text-xs text-gray-400">L'aire es torna més subtil i lleuger → es forma el <strong class="text-red-400">foc</strong>.</p>
+            </div>
+            <div class="text-center text-2xl text-slate-500">💨</div>
+            <div class="bg-black/40 p-4 rounded-lg border-l-4 border-amber-700">
+              <h5 class="text-amber-600 font-bold text-sm mb-1">⬇ Condensació</h5>
+              <p class="text-xs text-gray-400">L'aire es torna més dens i pesant → es forma la <strong class="text-amber-700">terra</strong> i les <strong class="text-gray-500">pedres</strong>.</p>
+            </div>
+          </div>
+          <div class="mt-4 p-3 bg-slate-900/30 rounded text-xs text-gray-400">
+            <strong class="text-slate-300">Aportació clau:</strong> A més d'introduir els conceptes de "causa" i "principi", ara s'afegeix la idea de "procés" que relliga els elements entre si.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="py-14 text-center transition-block">
+  <div class="max-w-3xl mx-auto px-4">
+    <p class="text-amber-600 uppercase tracking-widest text-xs font-cinzel mb-3">Magna Grècia · Itàlia del Sud · s. VI a.C.</p>
+    <h3 class="text-2xl font-bold text-ivory mb-3">Més enllà de Milet: l'escola de la Magna Grècia</h3>
+    <p class="text-gray-400 text-sm leading-relaxed">Paral·lelament a l'escola de Milet, a les colònies gregues del sud d'Itàlia i Sicília va sorgir una tradició filosòfica diferent. Mentre els milesians buscaven l'Arkhé en substàncies materials, la Magna Grècia explorarà principis més abstractes: els números, la unitat de l'Ser, i les primeres respostes a la pregunta pel canvi.</p>
+  </div>
+</div>
+
+<section id="pitagores" class="py-20 section-volcanic relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <p class="section-eyebrow mb-3">Magna Grècia · Crotona, Itàlia del Sud · s. VI a.C.</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-amber-600">PITÀGORES</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">"L'Arkhé de la Physis són els Números"</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-10 items-start mb-12">
+      <div class="space-y-6">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="arkhe-badge">Crotona, Magna Grècia</span>
+          <span class="arkhe-badge">s. VI a.C.</span>
+        </div>
+        <div class="space-y-4 text-gray-300 leading-relaxed">
+          <p>Al segle VI aC, a la ciutat de Crotona (sud d'Itàlia), va sorgir una escola de pensament racional única: els <strong class="text-amber-400">pitagòrics</strong>. Liderats per Pitàgores de Samos, van combinar elements de matemàtiques, filosofia, religió i mística.</p>
+          <div class="presocratic-quote p-5 rounded-r-lg">
+            <p class="text-lg">"Adonar-se que la Physis és un ordre, que presenta patrons de comportament i que aquests són <strong>matematitzables</strong>, porta a entendre la natura com formada per <strong class="text-amber-400">números</strong>."</p>
+          </div>
+          <p>El seu pensament va tenir un gran impacte en la història de la filosofia, tant la seva concepció dualista del ser humà, com especialment el fet de comprendre la realitat a partir de les matemàtiques. L'Arkhé de la Physis, per Pitàgores, seran justament <strong class="text-amber-400">els números</strong>.</p>
+        </div>
+        <div class="concept-card p-5 rounded-xl">
+          <h4 class="font-cinzel text-lg font-bold text-amber-500 mb-3">Una Visió que Arriba a Galileu</h4>
+          <div class="bg-black/40 p-4 rounded-lg">
+            <p class="text-xs text-gray-400 italic leading-relaxed">"La filosofia està escrita en aquest gran llibre que contínuament està obert davant els nostres ulls (vull dir l'Univers), però no es pot entendre si primer no s'aprèn a comprendre la seva llengua i a llegir els caràcters en què està escrit. Està escrit en <strong class="text-amber-400">llenguatge matemàtic</strong>, i els caràcters són triangles, cercles i altres figures geomètriques..."</p>
+            <p class="text-xs text-gray-500 mt-2 text-right">— Galileu Galilei, s. XVI-XVII</p>
+          </div>
+          <p class="text-xs text-gray-500 mt-2">Aquesta intuïció pitagòrica serà una peça clau per al desenvolupament de la Ciència Moderna.</p>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <div class="concept-card p-6 rounded-xl border-amber-700/30">
+          <h4 class="font-cinzel text-xl font-bold text-amber-500 mb-4">L'Orfisme Pitagòric</h4>
+          <p class="text-sm text-gray-300 mb-4">La comunitat de pitagòrics professava un conjunt de creences anomenades <strong>ORFISME</strong>, basades en un dualisme antropològic Cos-Ànima:</p>
+          <div class="space-y-3">
+            <div class="bg-black/40 p-3 rounded">
+              <p class="text-amber-300 font-bold text-sm mb-1">Dualisme Cos / Ànima</p>
+              <p class="text-xs text-gray-400">El cos és una <strong>presó</strong> per a l'ànima. A la mort del cos, l'ànima pot alliberar-se i transmigrar a un altre cos.</p>
+            </div>
+            <div class="bg-black/40 p-3 rounded">
+              <p class="text-amber-300 font-bold text-sm mb-1">Transmigració i Purificació</p>
+              <p class="text-xs text-gray-400">L'ànima ha de distanciar-se del cos i reencarnar-se en formes de vida més elevades i pures.</p>
+            </div>
+            <div class="bg-black/40 p-3 rounded">
+              <p class="text-amber-300 font-bold text-sm mb-1">Ascetisme</p>
+              <p class="text-xs text-gray-400">Esforç de contenció i distanciament en la relació amb el cos i les seves exigències sensibles. Cal abstenir-se de certs plaers per assolir la saviesa i la proximitat amb el diví.</p>
+            </div>
+          </div>
+        </div>
+        <div class="concept-card p-5 rounded-xl">
+          <h4 class="font-cinzel text-lg font-bold text-amber-500 mb-3">Les Matemàtiques com a Via Ascètica</h4>
+          <p class="text-sm text-gray-300">Les matemàtiques, en tant tenen lloc des de la raó i la seva naturalesa no és sensible sinó intel·ligible, són una via practicable per a aquest procés ascètic que no té altra voluntat que la <strong class="text-amber-400">purificació de l'ànima</strong>.</p>
+          <div class="mt-3 p-3 bg-amber-900/20 rounded border border-amber-500/30">
+            <p class="text-xs text-amber-300">💡 Els pitagòrics es van horroritzar amb el descobriment de la irracionalitat de la √2... i van intentar mantenir-lo en secret!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="py-16 text-center transition-block">
+  <p class="text-gray-400 uppercase tracking-widest text-sm mb-3">De l'Arkhé al conflicte fonamental...</p>
+  <h3 class="text-2xl font-bold text-amber-100">El Gran Conflicte: Canvi vs. Permanència</h3>
+</div>
+
+<div id="conflicte" class="h-0 overflow-hidden" aria-hidden="true"></div>
+<section id="heraclit" class="py-20 section-ember relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-fire-glow">HERÀCLIT</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">"El Fosc" · Efes, Jònia · s. VI a.C.</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-10 items-start mb-12">
+      <div class="space-y-6">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="arkhe-badge">"Tot flueix"</span>
+          <span class="arkhe-badge">Arkhé: EL FOC</span>
+        </div>
+        <div class="space-y-4 text-gray-300 leading-relaxed">
+          <p>Heràclit, conegut com <strong>"el fosc"</strong>, expressà el seu pensament amb un to enigmàtic i un llenguatge sovint difícil d'interpretar. Va viure al segle VI aC a Efes, Jònia.</p>
+          <div class="presocratic-quote p-5 rounded-r-lg" style="border-left-color: var(--fire)">
+            <p class="text-lg">"<strong>Tot flueix</strong>. Mai et banyes en el mateix riu."</p>
+          </div>
+          <p>La seva filosofia es centrava en el concepte del <strong class="text-fire-glow">canvi constant</strong>. Feia servir la metàfora de l'aigua per explicar aquest canvi, argumentant que tot a l'univers està en constant moviment i transformació. Creia que l'estabilitat és una il·lusió, i que la veritable essència de les coses està oculta als sentits i es revela només a la raó.</p>
+        </div>
+        <div class="concept-card p-5 rounded-xl element-fire">
+          <h4 class="font-cinzel text-lg font-bold text-fire-glow mb-3">🔥 L'Arkhé: El Foc</h4>
+          <p class="text-sm text-gray-300">Posats a suggerir un Arkhé, per Heràclit seria <strong>el foc</strong> en tant representació del ser de les coses: el moviment incessant, la transformació permanent. El foc simbolitza el canvi continu i l'equilibri dinàmic del cosmos.</p>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <div class="concept-card p-6 rounded-xl border-fire/30">
+          <h4 class="font-cinzel text-xl font-bold text-fire-glow mb-4">La Dialèctica</h4>
+          <p class="text-sm text-gray-300 mb-4">Heràclit introdueix la <strong>Dialèctica</strong>: un mètode de raonament que accepta la contradicció i cerca comprendre la realitat a través dels oposats.</p>
+          <div class="space-y-3">
+            <div class="bg-black/40 p-3 rounded">
+              <p class="text-fire-glow font-bold text-sm mb-1">La contradicció és el fonament últim</p>
+              <p class="text-xs text-gray-400">Cal atènyer a les coses des d'aquesta contradicció. La presència de "l'un" remet a la presència de "l'altre".</p>
+            </div>
+            <div class="bg-black/40 p-3 rounded">
+              <p class="text-fire-glow font-bold text-sm mb-1">Els contraris s'inclouen mútuament</p>
+              <p class="text-xs text-gray-400">No podem entendre allò calent sense allò fred. Es necessiten l'un a l'altre.</p>
+            </div>
+            <div class="bg-black/40 p-3 rounded">
+              <p class="text-fire-glow font-bold text-sm mb-1">Tensió i harmonia</p>
+              <p class="text-xs text-gray-400">La tensió entre els contraris es resol en una harmonia subjacent (com la tensió d'un arc).</p>
+            </div>
+          </div>
+        </div>
+        <div class="concept-card p-5 rounded-xl">
+          <h4 class="font-cinzel text-lg font-bold text-amber-500 mb-3">El Logos</h4>
+          <p class="text-sm text-gray-300 mb-3">Aquest moviment no es produeix de manera caòtica. És un moviment harmònic i equilibrat governat pel <strong class="text-fire-glow">Logos</strong> (= Raó, llei):</p>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li class="flex gap-2"><span class="text-fire">▸</span><span>Principi ordenador que regula el canvi.</span></li>
+            <li class="flex gap-2"><span class="text-fire">▸</span><span>Manté l'equilibri al cosmos.</span></li>
+            <li class="flex gap-2"><span class="text-fire">▸</span><span>Dóna sentit al canvi i a l'ordre enmig del caos.</span></li>
+            <li class="flex gap-2"><span class="text-fire">▸</span><span>És ocult als sentits; només la Raó el pot comprendre.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-4xl mx-auto">
+      <div class="concept-card p-8 rounded-2xl text-center flow-bg">
+        <h3 class="font-cinzel text-2xl font-bold text-fire-glow mb-6">La Physis com a Conflicte Permanent</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mb-6">
+          <div class="bg-black/40 p-4 rounded-lg"><p class="text-fire font-bold">Guerra</p><p class="text-gray-500 text-xs">vs</p><p class="text-blue-400 font-bold">Pau</p></div>
+          <div class="bg-black/40 p-4 rounded-lg"><p class="text-fire font-bold">Harmonia</p><p class="text-gray-500 text-xs">vs</p><p class="text-blue-400 font-bold">Discòrdia</p></div>
+          <div class="bg-black/40 p-4 rounded-lg"><p class="text-fire font-bold">Calent</p><p class="text-gray-500 text-xs">vs</p><p class="text-blue-400 font-bold">Fred</p></div>
+          <div class="bg-black/40 p-4 rounded-lg"><p class="text-fire font-bold">Jove</p><p class="text-gray-500 text-xs">vs</p><p class="text-blue-400 font-bold">Vell</p></div>
+        </div>
+        <p class="text-gray-300 text-sm">La Physis és inherentment contradicció. No hi ha res que no estigui constantment sotmès al canvi. Darrere l'aparent quietud hi ha una tensió entre contraris que és la causa d'aquest moviment permanent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="parmenides" class="py-20 section-dark relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-gray-300">PARMÈNIDES</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">"El Ser és, el no-Ser no-és" · Elea, Magna Grècia</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-10 items-start mb-12">
+      <div class="space-y-6">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="arkhe-badge">Escola d'Elea</span>
+          <span class="arkhe-badge">s. VI a.C.</span>
+        </div>
+        <div class="space-y-4 text-gray-300 leading-relaxed">
+          <p>Parmènides va ser un filòsof presocràtic que va viure al segle VI aC i és considerat l'iniciador i el pensador més influent de l'escola d'Elea (Magna Grècia, sud d'Itàlia).</p>
+          <p>És conegut per la seva única obra en forma de <strong>poema</strong>, originalment dividida en tres parts: un proemi i dues estrofes. Les interpretacions de la seva obra han estat objecte de controvèrsia al llarg de la història.</p>
+          <div class="presocratic-quote p-5 rounded-r-lg" style="border-left-color: #888">
+            <p class="text-lg">"Al proemi del seu poema, Parmènides descriu un viatge imaginari en què unes egües el condueixen a través de les portes del dia i de la nit cap a la presència d'una deessa que li revelarà el coneixement."</p>
+          </div>
+        </div>
+        <div class="concept-card p-5 rounded-xl">
+          <h4 class="font-cinzel text-lg font-bold text-gray-300 mb-3">Dos Fonts de Saber</h4>
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="bg-gray-900/40 p-3 rounded border border-gray-500/30">
+              <p class="text-gray-300 font-bold mb-1">🧠 Raó</p>
+              <p class="text-gray-400">Lloc on s'esdevé el veritable coneixement. Accedir al que és realment la Physis és accedir a alguna cosa oculta als sentits i només desvelada per la raó.</p>
+            </div>
+            <div class="bg-red-900/20 p-3 rounded border border-red-500/20">
+              <p class="text-red-400 font-bold mb-1">👁️ Sentits</p>
+              <p class="text-gray-400">Els sentits ens enganyen. Ofereixen una visió aparent i enganyosa de la realitat.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <div class="concept-card p-6 rounded-xl border-gray-500/30">
+          <h4 class="font-cinzel text-xl font-bold text-gray-300 mb-4">Les Dues Vies</h4>
+          <p class="text-sm text-gray-300 mb-4">Parmènides estableix dos camins contradictoris i excloents:</p>
+          <div class="space-y-4">
+            <div class="bg-green-900/20 p-4 rounded-lg border-l-4 border-green-500">
+              <h5 class="text-green-400 font-bold text-sm mb-2">→ Via de la Veritat (Raó)</h5>
+              <p class="text-xs text-gray-400">"El ser és, el no ser no és." El Ser és allò que es pot pensar i dir. El No-Ser no es pot pensar, no es pot dir, i en definitiva, <strong>no pot ser</strong>.</p>
+            </div>
+            <div class="bg-red-900/20 p-4 rounded-lg border-l-4 border-red-500">
+              <h5 class="text-red-400 font-bold text-sm mb-2">→ Via de l'Opinió / Doxa</h5>
+              <p class="text-xs text-gray-400">"El ser és, i el no ser també és." Aquesta via és pròpia dels homes ignorants. No és factible conèixer i pensar el que no és.</p>
+            </div>
+          </div>
+        </div>
+        <div class="concept-card p-5 rounded-xl">
+          <h4 class="font-cinzel text-lg font-bold text-gray-300 mb-3">Conseqüències: El Canvi és Impossible</h4>
+          <div class="space-y-2 text-sm text-gray-400">
+            <div class="flex gap-2"><span class="text-gray-300">➔</span><span>El moviment implica el pas del Ser al no-Ser.</span></div>
+            <div class="flex gap-2"><span class="text-gray-300">➔</span><span>La via de la veritat nega el moviment perquè el no-Ser no és.</span></div>
+            <div class="flex gap-2"><span class="text-gray-300">➔</span><span>Tota idea de canvi és pura <strong class="text-red-400">doxa</strong>, mera opinió.</span></div>
+            <div class="flex gap-2"><span class="text-gray-300">➔</span><span>El Ser és: <strong class="text-green-400">immutable, il·limitat, infinit, únic, indivisible</strong>.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-3xl mx-auto">
+      <div class="concept-card p-8 rounded-2xl text-center" style="background:linear-gradient(135deg,rgba(100,100,100,.1),rgba(6,9,14,.8))">
+        <div class="text-4xl mb-4">⚪</div>
+        <h3 class="font-cinzel text-2xl font-bold text-gray-300 mb-4">El Ser de Parmènides</h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm mb-6">
+          <div class="bg-black/40 p-3 rounded-lg"><p class="text-gray-300 font-bold">Immutable</p><p class="text-xs text-gray-500">No canvia</p></div>
+          <div class="bg-black/40 p-3 rounded-lg"><p class="text-gray-300 font-bold">Il·limitat</p><p class="text-xs text-gray-500">Sense fronteres</p></div>
+          <div class="bg-black/40 p-3 rounded-lg"><p class="text-gray-300 font-bold">Infinit</p><p class="text-xs text-gray-500">Sense fi</p></div>
+          <div class="bg-black/40 p-3 rounded-lg"><p class="text-gray-300 font-bold">Únic</p><p class="text-xs text-gray-500">Un sol ésser</p></div>
+          <div class="bg-black/40 p-3 rounded-lg"><p class="text-gray-300 font-bold">Indivisible</p><p class="text-xs text-gray-500">Sense parts</p></div>
+          <div class="bg-black/40 p-3 rounded-lg"><p class="text-gray-300 font-bold">Permanent</p><p class="text-xs text-gray-500">Etern</p></div>
+        </div>
+        <p class="text-gray-400 text-sm italic">"El canvi o moviment no és possible, i només seria una aparença dels sentits."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dialektiki" class="py-20 section-mid relative">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-amber-600">DIALEKTIKÍ</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Heràclit vs. Parmènides: el debat que estructura tota la filosofia posterior</p>
+    </div>
+    <div class="max-w-4xl mx-auto mb-12">
+      <div class="dialectic-pair mb-8">
+        <div class="dialectic-left">
+          <div class="concept-card p-5 rounded-xl element-fire inline-block text-left">
+            <h4 class="font-cinzel text-lg font-bold text-fire-glow mb-2">HERÀCLIT</h4>
+            <p class="text-sm text-gray-300">El canvi és real. Tot flueix. Els sentits detecten el flux permanent.</p>
+            <p class="text-xs text-amber-500 mt-2 font-cinzel">ARKHÉ: El Foc</p>
+          </div>
+        </div>
+        <div class="dialectic-vs">VS</div>
+        <div class="dialectic-right">
+          <div class="concept-card p-5 rounded-xl inline-block text-left" style="border-color:rgba(150,150,150,.3)">
+            <h4 class="font-cinzel text-lg font-bold text-gray-300 mb-2">PARMÈNIDES</h4>
+            <p class="text-sm text-gray-300">El canvi és impossible. El Ser és immutable. Els sentits enganyen.</p>
+            <p class="text-xs text-gray-400 mt-2 font-cinzel">ARKHÉ: El Ser</p>
+          </div>
+        </div>
+      </div>
+      <div class="conflict-line mb-8"></div>
+      <div class="concept-card p-6 rounded-xl text-center">
+        <h4 class="font-cinzel text-xl font-bold text-amber-500 mb-4">El Problema del Canvi</h4>
+        <p class="text-gray-300 text-sm leading-relaxed mb-4">Parmènides nega el canvi perquè implica el pas del Ser al no-Ser. Heràclit l'afirma com l'essència mateixa de la realitat. Com reconciliar ambdues visions? Aquest és el problema que els filòsofs posteriors hauran de resoldre.</p>
+        <div class="grid md:grid-cols-3 gap-4 text-xs">
+          <div class="bg-black/40 p-3 rounded">
+            <p class="text-amber-400 font-bold mb-1">Empèdocles</p>
+            <p class="text-gray-400">Reconcilia amb 4 elements + Amor/Odi</p>
+          </div>
+          <div class="bg-black/40 p-3 rounded">
+            <p class="text-amber-400 font-bold mb-1">Anaxàgores</p>
+            <p class="text-gray-400">Reconcilia amb homeomeries + Nous</p>
+          </div>
+          <div class="bg-black/40 p-3 rounded">
+            <p class="text-amber-400 font-bold mb-1">Demòcrit</p>
+            <p class="text-gray-400">Reconcilia amb àtoms + buit</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pluralistes" class="py-20 section-dark relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-amber-600">ELS PLURALISTES</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Reconciliar Parmènides i Heràclit: múltiples principis per explicar l'un</p>
+    </div>
+
+    <div class="mb-16" id="empedocles">
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+        <div class="space-y-6">
+          <div class="flex items-center gap-3 mb-2"><span class="arkhe-badge">Agrigent, Sicília</span></div>
+          <h3 class="font-cinzel text-3xl font-bold text-amber-400">EMPÈDOCLES</h3>
+          <p class="text-gray-300 text-sm font-cinzel tracking-wider">4 Elements + Amor i Odi</p>
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>Empèdocles, un destacat filòsof i polític d'Agrigent, Sicília, va pertànyer al grup de filòsofs <strong>pluralistes</strong>. Acceptà la inexistència del no-ser i la immutabilitat de l'ésser de Parmènides, així com l'existència de l'esdevenir i del canvi d'Heràclit.</p>
+            <div class="presocratic-quote p-5 rounded-r-lg">
+              <p class="text-lg">"La realitat està formada per <strong>quatre elements bàsics</strong>: foc, aire, aigua i terra, els quals són substàncies invariables i eternes."</p>
+            </div>
+            <p>Els elements també es consideren divinitats fonamentals, les <strong>"arrels de tot"</strong>. Empèdocles va explicar que la variabilitat a l'univers es deu a les diferents combinacions d'aquests elements, similars a com els pintors creen colors barrejant colors bàsics.</p>
+          </div>
+        </div>
+        <div class="space-y-6">
+          <div class="concept-card p-6 rounded-xl">
+            <h4 class="font-cinzel text-xl font-bold text-amber-500 mb-4">❤️‍🔥 Amor i Odi</h4>
+            <p class="text-sm text-gray-300 mb-4">Per explicar el canvi, Empèdocles va introduir dues forces poèticament traduïdes com <strong>"l'amor i l'odi"</strong> (o discòrdia):</p>
+            <div class="space-y-3">
+              <div class="flex gap-4 bg-pink-900/20 p-4 rounded-lg border-l-4 border-pink-500">
+                <div class="text-2xl">❤️</div>
+                <div>
+                  <h5 class="text-pink-300 font-bold text-sm mb-1">Amor (Filía)</h5>
+                  <p class="text-xs text-gray-400">Fa que els elements s'uneixin i es barregin. Tendència a la unió.</p>
+                </div>
+              </div>
+              <div class="flex gap-4 bg-purple-900/20 p-4 rounded-lg border-l-4 border-purple-500">
+                <div class="text-2xl">⚡</div>
+                <div>
+                  <h5 class="text-purple-300 font-bold text-sm mb-1">Odi / Discòrdia (Neikos)</h5>
+                  <p class="text-xs text-gray-400">En provoca la separació. Tendència a la disgregació.</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 p-3 bg-amber-900/20 rounded border border-amber-500/30">
+              <p class="text-xs text-amber-300"><strong>Cicle còsmic:</strong> Quan predomina l'amor, els elements s'uneixen en una esfera compacta (com el Ser de Parmènides). Amb el temps, l'odi els separa fins a una disgregació completa. El procés es repeteix infinitament.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-4 gap-2">
+            <div class="bg-red-900/30 p-3 rounded text-center element-fire"><p class="text-2xl mb-1">🔥</p><p class="text-xs text-red-300 font-bold">FOC</p></div>
+            <div class="bg-slate-800/50 p-3 rounded text-center element-air"><p class="text-2xl mb-1">💨</p><p class="text-xs text-slate-300 font-bold">AIRE</p></div>
+            <div class="bg-blue-900/30 p-3 rounded text-center element-water"><p class="text-2xl mb-1">💧</p><p class="text-xs text-blue-300 font-bold">AIGUA</p></div>
+            <div class="bg-amber-900/30 p-3 rounded text-center element-earth"><p class="text-2xl mb-1">🪨</p><p class="text-xs text-amber-600 font-bold">TERRA</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="conflict-line mb-16"></div>
+
+    <div class="mb-16" id="anaxagores">
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+        <div class="space-y-6">
+          <div class="flex items-center gap-3 mb-2"><span class="arkhe-badge">Clazòmenes / Atenes</span></div>
+          <h3 class="font-cinzel text-3xl font-bold text-blue-400">ANAXÀGORES</h3>
+          <p class="text-gray-300 text-sm font-cinzel tracking-wider">Homeomeries + Nous</p>
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>Nascut a Clazòmenes però resident a Atenes durant la major part de la seva vida, va ensenyar a figures prominents com <strong>Pèricles</strong> i va compartir idees amb filòsofs com Empèdocles, Heràclit i Parmènides.</p>
+            <p>Com Empèdocles, és un filòsof pluralista. Però en el seu cas la Physis està composada per <strong class="text-blue-400">molts més elements</strong> que no pas 4. De fet en són <strong>infinits</strong>, i serien una espècie de <strong>llavors últimes</strong>.</p>
+          </div>
+          <div class="concept-card p-5 rounded-xl element-water">
+            <h4 class="font-cinzel text-lg font-bold text-blue-400 mb-3">🌱 Homeomeries</h4>
+            <p class="text-sm text-gray-300 mb-2">Terme acunyat per Aristòtil per anomenar aquestes llavors. Són els elements constitutius de tota la realitat, de caràcter qualitatiu i infinits en número.</p>
+            <div class="bg-black/40 p-3 rounded">
+              <p class="text-xs text-gray-400 italic">"Tot està en tot. Però en cada cosa hi predomina una homeomeria que és la que fa que cada cosa sigui el que és."</p>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-6">
+          <div class="concept-card p-6 rounded-xl border-blue-500/30">
+            <h4 class="font-cinzel text-xl font-bold text-blue-400 mb-4">🧠 El Nous</h4>
+            <p class="text-sm text-gray-300 mb-4">Anaxàgores estableix el <strong>Nous</strong> (= intel·ligència o ment) com un principi ordenador:</p>
+            <div class="space-y-3">
+              <div class="bg-black/40 p-3 rounded">
+                <p class="text-blue-300 font-bold text-sm mb-1">Principi de discerniment</p>
+                <p class="text-xs text-gray-400">Allò que estaria darrere de tot l'ordre que expressa la Physis.</p>
+              </div>
+              <div class="bg-black/40 p-3 rounded">
+                <p class="text-blue-300 font-bold text-sm mb-1">Organitzador, no creador</p>
+                <p class="text-xs text-gray-400">Organitza les combinacions i separacions de les llavors per crear un univers ordenat interferint amb el caos inicial.</p>
+              </div>
+              <div class="bg-black/40 p-3 rounded">
+                <p class="text-blue-300 font-bold text-sm mb-1">Sense voluntat</p>
+                <p class="text-xs text-gray-400">No és un principi creador com el Déu judeo-cristià. El Nous només és enteniment i discerniment.</p>
+              </div>
+            </div>
+          </div>
+          <div class="concept-card p-5 rounded-xl">
+            <h4 class="font-cinzel text-sm font-bold text-amber-500 mb-2">⏳ Temps Circular vs. Lineal</h4>
+            <p class="text-xs text-gray-400">Per la cultura grega el món no havia estat creat i maneja una concepció del temps <strong>circular</strong>, no pas lineal. Després, amb la religió cristiana, Déu sí és creador i té voluntat. Llavors el temps passarà a concebre's com a lineal.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="conflict-line mb-16"></div>
+
+    <div id="democrit">
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+        <div class="space-y-6">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="arkhe-badge">Abdera</span>
+            <span class="arkhe-badge">Deixeble de Leucip</span>
+          </div>
+          <h3 class="font-cinzel text-3xl font-bold text-gray-300">DEMÒCRIT</h3>
+          <p class="text-gray-300 text-sm font-cinzel tracking-wider">Àtoms i Buit</p>
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>Demòcrit, un influent filòsof pluralista de l'antiga Grècia, va basar les seves teories en els ensenyaments del seu suposat mestre, <strong>Leucip</strong>, incorporant a la història del pensament el concepte d'"<strong class="text-gray-300">àtoms</strong>".</p>
+            <p>La seva filosofia es va centrar en la idea que la realitat està formada per una pluralitat de principis. Seguint Parmènides, va acceptar la immutabilitat i eternitat de l'ésser. Tot i això, també creia en l'existència del moviment i el canvi, seguint Heràclit.</p>
+            <div class="presocratic-quote p-5 rounded-r-lg" style="border-left-color: #666">
+              <p class="text-lg">"La realitat està dividida en dues maneres de ser: <strong>allò ple</strong> (el Ser) i <strong>allò buit</strong> (el no-Ser)."</p>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-6">
+          <div class="concept-card p-6 rounded-xl border-gray-500/30">
+            <h4 class="font-cinzel text-xl font-bold text-gray-300 mb-4">⚛️ La Teoria Atòmica</h4>
+            <p class="text-sm text-gray-300 mb-4">Va argumentar que l'existència del buit era necessària per explicar el moviment:</p>
+            <div class="space-y-3">
+              <div class="bg-black/40 p-3 rounded border-l-4 border-gray-500">
+                <h5 class="text-gray-300 font-bold text-sm mb-1">Àtoms</h5>
+                <p class="text-xs text-gray-400">Les veritables unitats de l'ésser. <strong>Indivisibles</strong> ("àtom" vol dir "indivisible"). Diminutes partícules, infinites en formes i mides, completament plenes.</p>
+              </div>
+              <div class="bg-black/40 p-3 rounded border-l-4 border-slate-600">
+                <h5 class="text-slate-300 font-bold text-sm mb-1">El Buit</h5>
+                <p class="text-xs text-gray-400">Allò buit equival al no-Ser. És necessari perquè els àtoms es puguin moure i xocar. Sense buit, no hi ha moviment.</p>
+              </div>
+              <div class="bg-black/40 p-3 rounded border-l-4 border-amber-600">
+                <h5 class="text-amber-300 font-bold text-sm mb-1">Moviment i Formació</h5>
+                <p class="text-xs text-gray-400">Els àtoms es mouen eternament a l'espai buit i, en xocar entre si, formen els cossos que percebem: <strong>conglomerats d'àtoms</strong>.</p>
+              </div>
+            </div>
+          </div>
+          <div class="concept-card p-5 rounded-xl">
+            <h4 class="font-cinzel text-lg font-bold text-amber-500 mb-3">L'Ànima Atòmica</h4>
+            <p class="text-sm text-gray-300">Demòcrit va postular que l'ànima estava composta per <strong>àtoms lleugers</strong> que es movien constantment, donant vida al cos. El cos era simplement el recipient de l'ànima. La vida de l'ànima depenia de la respiració: quan cessava, els àtoms es dispersaven i l'ànima moria.</p>
+          </div>
+          <div class="concept-card p-4 rounded-xl border-gray-500/30">
+            <p class="text-xs text-gray-400"><strong class="text-gray-300">Reconciliació:</strong> Els àtoms serien el Ser de Parmènides (immutables, eterns). Però ara, en l'atomisme, el no-ser també és: és el buit. Així es salva tant la permanència (els àtoms) com el canvi (el seu moviment al buit).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 section-mid relative">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-amber-600">L'EVOLUCIÓ DE L'ARKHÉ</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">De l'aigua concreta als àtoms invisibles: un camí de refinament conceptual</p>
+    </div>
+    <div class="overflow-hidden rounded-2xl border border-white/10">
+      <div class="grid grid-cols-1 md:grid-cols-7 bg-black/60 text-xs font-cinzel uppercase tracking-wider text-gray-400 px-4 py-3 border-b border-white/10 text-center">
+        <span class="text-blue-400">Tales</span>
+        <span class="text-gray-300">Anaxim.</span>
+        <span class="text-slate-300">Anaxim.</span>
+        <span class="text-amber-400">Pitàgor.</span>
+        <span class="text-fire">Heràclit</span>
+        <span class="text-gray-300">Parmèn.</span>
+        <span class="text-gray-300">Demòcr.</span>
+      </div>
+      <div class="divide-y divide-white/5">
+        <div class="grid grid-cols-1 md:grid-cols-7 px-4 py-4 text-sm hover:bg-white/5 transition text-center items-center">
+          <div class="p-2"><span class="text-3xl">💧</span><p class="text-blue-400 font-bold mt-1">Aigua</p></div>
+          <div class="p-2"><span class="text-3xl">∞</span><p class="text-gray-300 font-bold mt-1">Apeiron</p></div>
+          <div class="p-2"><span class="text-3xl">💨</span><p class="text-slate-300 font-bold mt-1">Aire</p></div>
+          <div class="p-2"><span class="text-3xl">🔢</span><p class="text-amber-400 font-bold mt-1">Números</p></div>
+          <div class="p-2"><span class="text-3xl">🔥</span><p class="text-fire font-bold mt-1">Foc</p></div>
+          <div class="p-2"><span class="text-3xl">⚪</span><p class="text-gray-300 font-bold mt-1">Ser</p></div>
+          <div class="p-2"><span class="text-3xl">⚛️</span><p class="text-gray-300 font-bold mt-1">Àtoms</p></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-7 px-4 py-3 text-xs text-gray-500 text-center">
+          <div class="p-1">Element concret</div>
+          <div class="p-1">Indefinit / Abstracte</div>
+          <div class="p-1">Element + procés</div>
+          <div class="p-1">Abstracte matemàtic</div>
+          <div class="p-1">Moviment / Canvi</div>
+          <div class="p-1">Ésser immutable</div>
+          <div class="p-1">Partícules + buit</div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-7 px-4 py-3 text-xs text-gray-400 text-center">
+          <div class="p-1">Mític-pragmàtic</div>
+          <div class="p-1">Primera abstracció</div>
+          <div class="p-1">Mecanisme físic</div>
+          <div class="p-1">Místic-matemàtic</div>
+          <div class="p-1">Dialèctic</div>
+          <div class="p-1">Lògic-deductiu</div>
+          <div class="p-1">Mecanicista</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="repassar" class="py-20 section-dark">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="font-cinzel text-4xl font-bold text-white mb-4">PREGUNTES PER REPASSAR</h2>
+      <p class="text-gray-400">Els presocràtics ens conviden a preguntar-nos per l'origen</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-xl font-bold text-blue-400 border-b border-blue-500/30 pb-2 mb-4">Escola de Milet</h3>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Per què Tales escull l'aigua?</p>
+          <p class="text-xs text-gray-400">Perquè és essencial per a la vida, present arreu, i pot adoptar tres formes. Però la resposta concreta és menys important que el mètode: pensar des de la necessitat, no des del mite.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">En què millora Anaximandre?</p>
+          <p class="text-xs text-gray-400">Salta a l'abstracció: l'Arkhé no pot ser un element concret perquè estaria limitat i no podria explicar els seus contraris. Proposa l'Apeiron, l'indeterminat.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Què aporta Anaxímenes?</p>
+          <p class="text-xs text-gray-400">Torna a una substància concreta (l'aire) però hi afegeix el concepte de procés: rarefacció i condensació. A més, vincula l'aire amb l'ànima.</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-xl font-bold text-fire border-b border-fire/30 pb-2 mb-4">El Gran Conflicte</h3>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Heràclit o Parmènides: qui té raó?</p>
+          <p class="text-xs text-gray-400">El debat no té resolució fàcil. Heràclit prioritza l'experiència del canvi; Parmènides prioritza la coherència lògica. Ambdós tenen arguments poderosos.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Què és el Logos per a Heràclit?</p>
+          <p class="text-xs text-gray-400">És la raó o llei natural que governa l'univers, que dóna sentit al canvi i manté l'equilibri. És ocult als sentits i només accessible a la raó.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Com reconcilia Parmènides el canvi?</p>
+          <p class="text-xs text-gray-400">No el reconcilia: el nega. El canvi és pura aparença dels sentits. El Ser és immutable perquè el no-Ser no existeix, i tot canvi implicaria passar del Ser al no-Ser.</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-xl font-bold text-amber-400 border-b border-amber-500/30 pb-2 mb-4">Pluralistes</h3>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Com salva Empèdocles els dos mons?</p>
+          <p class="text-xs text-gray-400">Els 4 elements són immutables (Parmènides) però les seves combinacions canvien (Heràclit). Les forces d'Amor i Odi expliquen aquest canvi.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Què és el Nous d'Anaxàgores?</p>
+          <p class="text-xs text-gray-400">Un principi d'intel·ligència que ordena les homeomeries. No és creador ni té voluntat: només organitza el caos inicial.</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg bg-white/5">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Per què el buit és revolucionari en Demòcrit?</p>
+          <p class="text-xs text-gray-400">Perquè accepta el "no-Ser" com a real (el buit), cosa que Parmènides negava. Així salva tant l'immutabilitat (els àtoms) com el moviment (al buit).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 section-mid relative">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="font-cinzel text-4xl font-bold text-white mb-10">SÍNTESI FINAL</h2>
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <div class="concept-card p-6 rounded-xl border-blue-500/30">
+        <div class="text-3xl mb-3">💧</div>
+        <h3 class="font-cinzel text-lg font-bold text-blue-400 mb-2">Del Mite al Logos</h3>
+        <p class="text-xs text-gray-400">L'abandonament de les explicacions mítiques per la recerca racional de causes. El món és un cosmos, no un caos.</p>
+      </div>
+      <div class="concept-card p-6 rounded-xl border-fire/30">
+        <div class="text-3xl mb-3">⚖️</div>
+        <h3 class="font-cinzel text-lg font-bold text-fire mb-2">Canvi vs. Permanència</h3>
+        <p class="text-xs text-gray-400">El debat fonamental entre Heràclit (tot flueix) i Parmènides (el Ser immutable). Estructura tota la metafísica posterior.</p>
+      </div>
+      <div class="concept-card p-6 rounded-xl border-amber-500/50">
+        <div class="text-3xl mb-3">⚛️</div>
+        <h3 class="font-cinzel text-lg font-bold text-amber-300 mb-2">L'Arkhé</h3>
+        <p class="text-xs text-gray-400">De l'aigua als àtoms, passant per l'Apeiron, els números i el foc. La recerca de l'última causa darrere la multiplicitat.</p>
+      </div>
+    </div>
+    <p class="font-playfair italic text-gray-400 mb-6 text-lg">"El món és un cosmos, no pas un caos."</p>
+  </div>
+</section>
+
+<footer style="background:linear-gradient(180deg,#03060C 0%,rgba(28,15,5,.4) 40%,#03060C 100%);border-top:1px solid rgba(196,112,42,.15);padding:4rem 0;">
+  <div class="max-w-5xl mx-auto px-4 text-center">
+    <div class="flex flex-col items-center mb-8">
+      <span class="font-cinzel text-amber-600 text-xl tracking-widest font-bold">PRESOCRÀTICS Experience</span>
+      <span class="font-playfair italic text-gray-400 text-lg block mt-3">"Del mite al logos: el naixement de la filosofia"</span>
+    </div>
+    <p class="text-gray-600 text-xs uppercase tracking-wider mb-8">Fisis · Arkhé · Logos · Cosmos · Apeiron · Àtoms</p>
+    <div class="presocratic-quote p-8 rounded-xl text-center max-w-4xl mx-auto">
+      <p class="text-xl font-playfair italic text-gray-200 mb-4">"Mai et podràs banyar dues vegades al mateix riu."</p>
+      <p class="text-sm text-gray-500">— Heràclit d'Efes</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 mt-12 text-left">
+      <div>
+        <h4 class="font-cinzel text-amber-600 font-bold mb-3 text-sm">Escola de Milet</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Tales: Aigua</li>
+          <li>• Anaximandre: Apeiron</li>
+          <li>• Anaxímenes: Aire</li>
+          <li>• Necessitat vs. Contingent</li>
+          <li>• Pas del mite al logos</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-cinzel text-amber-600 font-bold mb-3 text-sm">Magna Grècia &amp; El Gran Conflicte</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Pitàgores: Números</li>
+          <li>• Heràclit: Tot flueix · Logos</li>
+          <li>• Parmènides: L'Ésser immutable</li>
+          <li>• Dialèctica · Via de la Veritat</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-cinzel text-amber-600 font-bold mb-3 text-sm">Pluralistes</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Empèdocles: 4 Elements</li>
+          <li>• Anaxàgores: Homeomeries + Nous</li>
+          <li>• Demòcrit: Àtoms i buit</li>
+          <li>• Amor i Odi com a forces</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const s = document.body.scrollTop || document.documentElement.scrollTop;
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progressBar').style.width = (s / h * 100) + '%';
+  });
+
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+  const navLinks = document.querySelectorAll('.nav-link');
+  const parentMap = {
+    tales:       'filosofs',
+    anaximandre: 'filosofs',
+    anaximenes:  'filosofs',
+    pitagores:   'pitagores',
+    heraclit:    'conflicte',
+    parmenides:  'conflicte',
+    dialektiki:  'conflicte',
+    empedocles:  'pluralistes',
+    anaxagores:  'pluralistes',
+    democrit:    'pluralistes',
+  };
+  let ignoreScroll = false;
+
+  function setActive(id) {
+    const parentId = id ? (parentMap[id] || id) : null;
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      const isActive = parentId && (href === '#' + parentId || href === '#' + id);
+      link.classList.toggle('active-section', !!isActive);
+    });
+  }
+
+  function getCurrentSection() {
+    const scrollPos = window.scrollY + window.innerHeight * 0.3;
+    let current = sections[0];
+    for (const s of sections) { if (s.offsetTop <= scrollPos) current = s; else break; }
+    const id = current?.getAttribute('id');
+    const hasLink = Array.from(navLinks).some(l => l.getAttribute('href') === '#' + id);
+    return (hasLink || parentMap[id]) ? id : null;
+  }
+
+  window.addEventListener('scroll', () => { if (!ignoreScroll) setActive(getCurrentSection()); }, { passive: true });
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      const target = link.getAttribute('href').replace('#', '');
+      ignoreScroll = true;
+      setActive(target);
+      setTimeout(() => { ignoreScroll = false; setActive(getCurrentSection()); }, 700);
+    });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      const t = document.querySelector(href);
+      if (t) {
+        e.preventDefault();
+        t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+    });
+  }, { threshold: 0 });
+
+  document.querySelectorAll('.concept-card:not(.no-anim)').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(8px)';
+    el.style.transition = `all .8s ease ${i * 0.04}s`;
+    obs.observe(el);
+  });
+
+  document.addEventListener('DOMContentLoaded', () => setActive(getCurrentSection()));
+</script>
+</body>
+</html>

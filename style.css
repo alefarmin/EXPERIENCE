@@ -25,9 +25,10 @@ body {
   }
   
   /* CONTENIDOR */
-  .container {
-    padding: 30px;
-  }
+.container {
+  padding: 30px;
+  transform: translateY(40px);
+}
   
   /* TITOL */
   h1 {
@@ -299,51 +300,59 @@ a.home-experience-btn:hover::after {
   opacity: 1;
 }
 
-/* CONSTEL·LACIONS */
+/* =========================
+   CONSTEL·LACIONS
+   ========================= */
 
-.constellations {
-  margin-top: 80px;
-  text-align: center;
-}
-
-.constellation-title {
-  font-size: 0.7rem;
-  letter-spacing: 0.3em;
-  opacity: 0.4;
-  margin-bottom: 20px;
-}
-
-.constellation-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-}
-
-.constellation {
-  font-size: 0.85rem;
-  padding: 6px 12px;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 20px;
-  opacity: 0.5;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.constellation:hover {
-  opacity: 1;
-  border-color: rgba(255,255,255,0.4);
-}
-
-.constellation {
-  text-decoration: none;
-  color: inherit;
-}
-
-.constellation {
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  opacity: 0.45;
-}
-
+   .constellations {
+    margin-top: 85px;
+    text-align: center;
+  }
+  
+  .constellation-title {
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    opacity: 0.5;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  
+  .constellation-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+  }
+  
+  .constellation {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    padding: 8px 16px;
+  
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+  
+    text-decoration: none;
+    color: white;
+  
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(6px);
+  
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 22px;
+  
+    opacity: 0.6;
+  
+    transition: all 0.3s ease;
+  }
+  
+  .constellation:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.35);
+  }
 

@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hel·lenisme · Les Escoles Filosòfiques del s. III aC</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep:    #050408;
+    --mid:     #0A0810;
+    --slate:   #120F1E;
+    --ocean:   #1A1530;
+    --epicur:  #6B3A1F;   /* terracotta càlida */
+    --epicur-l:#C4854A;
+    --stoic:   #1A3A4A;   /* blau profund */
+    --stoic-l: #4A9EC4;
+    --cynic:   #2A3A1A;   /* verd fosc */
+    --cynic-l: #7ABF5A;
+    --gold:    #C9A84C;
+    --gold-l:  #E8C96A;
+    --ivory:   #F0EBE3;
+    --silver:  #A8B4C0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;background:var(--deep);color:var(--ivory);overflow-x:hidden;}
+  .font-cinzel{font-family:'Cinzel',serif;}
+  .font-playfair{font-family:'Playfair Display',serif;}
+
+  /* ── Progress bar ───────── */
+  .progress-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--epicur-l),var(--gold),var(--stoic-l),var(--cynic-l));z-index:1000;transition:width .1s;box-shadow:0 0 8px rgba(196,133,74,.4);}
+
+  /* ── Animations ─────────── */
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  .float-anim{animation:float 5s ease-in-out infinite;}
+  @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+  .shimmer-text{
+    background:linear-gradient(90deg,var(--ivory) 0%,var(--epicur-l) 30%,var(--gold) 55%,var(--stoic-l) 75%,var(--ivory) 100%);
+    background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    animation:shimmer 6s linear infinite;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes orb1{0%,100%{transform:translate(0,0)}40%{transform:translate(25px,-18px)}80%{transform:translate(-12px,22px)}}
+  @keyframes orb2{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,14px)}}
+  @keyframes orb3{0%,100%{transform:translate(0,0)}60%{transform:translate(18px,-25px)}}
+  .orb1{animation:orb1 16s ease-in-out infinite;}
+  .orb2{animation:orb2 20s ease-in-out infinite;}
+  .orb3{animation:orb3 13s ease-in-out infinite;}
+
+  /* ── Sections ───────────── */
+  .section-dark {background:linear-gradient(160deg,#050408 0%,#0A0810 100%);position:relative;overflow:hidden;}
+  .section-mid  {background:linear-gradient(160deg,#0A0810 0%,#120F1E 100%);}
+  .section-light{background:linear-gradient(160deg,#120F1E 0%,#1A1530 100%);}
+  .section-epicur{background:linear-gradient(160deg,#0D0703 0%,#1C1008 60%,#0A0810 100%);}
+  .section-stoic {background:linear-gradient(160deg,#030A10 0%,#0A1820 60%,#0A0810 100%);}
+  .section-cynic {background:linear-gradient(160deg,#030803 0%,#0A1408 60%,#0A0810 100%);}
+
+  /* ── Cards ──────────────── */
+  .concept-card{
+    background:rgba(255,255,255,.025);border:1px solid rgba(201,168,76,.15);
+    backdrop-filter:blur(10px);transition:all .4s cubic-bezier(.4,0,.2,1);border-radius:12px;
+  }
+  .concept-card:hover{
+    transform:translateY(-6px) scale(1.015);
+    box-shadow:0 20px 48px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05);
+    background:rgba(255,255,255,.04);
+  }
+  .concept-card.no-anim:hover{transform:none;box-shadow:none;}
+  .card-epicur{border-color:rgba(196,133,74,.25)!important;}
+  .card-epicur:hover{border-color:var(--epicur-l)!important;box-shadow:0 20px 48px rgba(107,58,31,.3)!important;}
+  .card-stoic{border-color:rgba(74,158,196,.2)!important;}
+  .card-stoic:hover{border-color:var(--stoic-l)!important;box-shadow:0 20px 48px rgba(26,58,74,.3)!important;}
+  .card-cynic{border-color:rgba(122,191,90,.2)!important;}
+  .card-cynic:hover{border-color:var(--cynic-l)!important;box-shadow:0 20px 48px rgba(42,58,26,.3)!important;}
+
+  /* ── Quotes ─────────────── */
+  .quote-block{border-left:3px solid var(--gold);background:linear-gradient(90deg,rgba(201,168,76,.1) 0%,transparent 80%);font-style:italic;position:relative;}
+  .quote-block.epicur{border-left-color:var(--epicur-l);background:linear-gradient(90deg,rgba(196,133,74,.12) 0%,transparent 80%);}
+  .quote-block.stoic{border-left-color:var(--stoic-l);background:linear-gradient(90deg,rgba(74,158,196,.12) 0%,transparent 80%);}
+  .quote-block.cynic{border-left-color:var(--cynic-l);background:linear-gradient(90deg,rgba(122,191,90,.12) 0%,transparent 80%);}
+  .big-q{position:absolute;top:-10px;left:8px;font-family:'Playfair Display',serif;font-size:4.5rem;line-height:1;color:rgba(201,168,76,.12);pointer-events:none;user-select:none;}
+
+  /* ── Phil tabs ──────────── */
+  .phil-tab{
+    position:relative;padding:.9rem 1rem;border:1px solid rgba(201,168,76,.15);
+    border-radius:12px;background:rgba(255,255,255,.02);cursor:pointer;
+    transition:all .35s;text-align:center;overflow:hidden;
+  }
+  .phil-tab::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .35s;}
+  .phil-tab.ep-tab::before{background:linear-gradient(135deg,rgba(196,133,74,.15),transparent);}
+  .phil-tab.st-tab::before{background:linear-gradient(135deg,rgba(74,158,196,.15),transparent);}
+  .phil-tab.cy-tab::before{background:linear-gradient(135deg,rgba(122,191,90,.15),transparent);}
+  .phil-tab:hover::before,.phil-tab.active::before{opacity:1;}
+  .phil-tab.ep-tab.active{border-color:rgba(196,133,74,.55);box-shadow:0 0 24px rgba(196,133,74,.15);}
+  .phil-tab.st-tab.active{border-color:rgba(74,158,196,.55);box-shadow:0 0 24px rgba(74,158,196,.15);}
+  .phil-tab.cy-tab.active{border-color:rgba(122,191,90,.55);box-shadow:0 0 24px rgba(122,191,90,.15);}
+  .phil-panel{display:none;animation:fadeIn .45s ease;}
+  .phil-panel.active{display:block;}
+
+  /* ── Timeline ───────────── */
+  .tl-item{position:relative;padding-left:2rem;border-left:1px solid rgba(201,168,76,.2);}
+  .tl-item::before{content:"";position:absolute;left:-5px;top:4px;width:9px;height:9px;background:var(--gold);border-radius:50%;box-shadow:0 0 8px rgba(201,168,76,.4);}
+
+  /* ── Badge ──────────────── */
+  .badge{display:inline-block;padding:3px 12px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-family:'Cinzel',serif;}
+  .badge-ep{background:rgba(196,133,74,.1);border:1px solid rgba(196,133,74,.3);color:var(--epicur-l);}
+  .badge-st{background:rgba(74,158,196,.1);border:1px solid rgba(74,158,196,.3);color:var(--stoic-l);}
+  .badge-cy{background:rgba(122,191,90,.1);border:1px solid rgba(122,191,90,.3);color:var(--cynic-l);}
+
+  /* ── Glow divider ───────── */
+  .glow-div{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.45) 40%,rgba(201,168,76,.6) 50%,rgba(201,168,76,.45) 60%,transparent);position:relative;}
+  .glow-div::before{content:"";position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:60px;height:5px;background:radial-gradient(ellipse,rgba(201,168,76,.5) 0%,transparent 70%);border-radius:50%;}
+
+  /* ── Scrollbar ──────────── */
+  ::-webkit-scrollbar{width:6px;}
+  ::-webkit-scrollbar-track{background:var(--deep);}
+  ::-webkit-scrollbar-thumb{background:rgba(201,168,76,.3);border-radius:3px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold);}
+
+  /* ── Nav ────────────────── */
+  .active-section{color:var(--gold-l)!important;border-bottom:2px solid var(--gold);padding-bottom:2px;}
+  nav a.nav-link{transition:color .2s;color:var(--silver);}
+  nav a.nav-link:hover{color:var(--gold-l);}
+  .home-btn{padding:5px 12px;font-size:11px;border:1px solid rgba(201,168,76,.25);border-radius:20px;color:var(--gold-l);text-decoration:none;background:rgba(201,168,76,.06);transition:all .2s;font-family:'Cinzel',serif;letter-spacing:.04em;}
+  .home-btn:hover{background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.5);transform:translateY(-1px);}
+
+  /* ── Eyebrow ────────────── */
+  .eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,168,76,.55);}
+
+  /* ── Comparison grid ────── */
+  .cmp-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.75rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.05);}
+  .cmp-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--silver);text-align:center;}
+  .cmp-ep{text-align:right;font-size:.8rem;color:var(--epicur-l);}
+  .cmp-st{text-align:left;font-size:.8rem;color:var(--stoic-l);}
+
+  /* ── Grain ──────────────── */
+  body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat:repeat;background-size:200px;opacity:.3;}
+
+  /* ── Desire meter ───────── */
+  .desire-bar{height:6px;border-radius:3px;margin-top:4px;}
+  .desire-bar.good{background:linear-gradient(90deg,var(--cynic-l),#4CAF50);}
+  .desire-bar.neutral{background:linear-gradient(90deg,var(--gold),#FFC107);}
+  .desire-bar.bad{background:linear-gradient(90deg,var(--epicur),#E53935);}
+
+  /* ── Control/No-control ─── */
+  .ctrl-box{padding:1rem 1.2rem;border-radius:10px;}
+  .ctrl-yes{background:rgba(74,158,196,.1);border:1px solid rgba(74,158,196,.25);}
+  .ctrl-no{background:rgba(196,133,74,.08);border:1px solid rgba(196,133,74,.2);}
+</style>
+</head>
+<body class="antialiased">
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ══════════════════════════════════════════════════
+     NAV
+══════════════════════════════════════════════════ -->
+<nav class="fixed top-0 w-full z-50" style="background:rgba(5,4,8,.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,.1);box-shadow:0 4px 24px rgba(0,0,0,.5);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+      <a href="#inici" class="flex items-center gap-3 group">
+        <svg class="w-6 h-6 text-yellow-600 group-hover:scale-110 transition" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1M4.22 4.22l.707.707m12.02 12.02.708.708M3 12H4m16 0h1M4.22 19.78l.707-.707m12.02-12.02.708-.708M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+        </svg>
+        <span class="font-cinzel text-base font-bold text-yellow-600 tracking-widest group-hover:text-white transition">HEL·LENISME</span>
+      </a>
+      <div class="hidden md:flex items-center gap-5 text-sm">
+        <a href="../index.html" class="home-btn">← Experience</a>
+
+        <a href="#context" class="nav-link">Context</a>
+
+        <!-- Escoles dropdown -->
+        <div class="relative group">
+          <a href="#escoles" class="nav-link flex items-center gap-1">Escoles <span class="text-xs">▼</span></a>
+          <div class="absolute left-0 top-full pt-2 w-52 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
+            <a href="#epicureisme" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-yellow-400 transition">🍃 Epicureisme</a>
+            <a href="#estoicisme"  class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-blue-500/10  hover:text-blue-300 transition">⚖️ Estoïcisme</a>
+            <a href="#cinisme"     class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-green-500/10 hover:text-green-300 transition">🐕 Cinisme</a>
+          </div>
+        </div>
+
+        <a href="#comparativa" class="nav-link">Comparativa</a>
+        <a href="#repassar"    class="nav-link">Repassar</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════ -->
+<section id="inici" class="relative min-h-screen flex items-center section-dark pt-16">
+  <!-- Orbs -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="orb1 absolute" style="top:15%;left:5%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(107,58,31,.18) 0%,transparent 70%);filter:blur(50px);"></div>
+    <div class="orb2 absolute" style="top:45%;right:8%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(26,58,74,.2) 0%,transparent 70%);filter:blur(50px);"></div>
+    <div class="orb3 absolute" style="bottom:15%;left:45%;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(42,58,26,.16) 0%,transparent 70%);filter:blur(45px);"></div>
+  </div>
+  <!-- Grid -->
+  <svg class="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
+    <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0L0 0 0 60" fill="none" stroke="#C9A84C" stroke-width="0.5"/></pattern></defs>
+    <rect width="100%" height="100%" fill="url(#grid)"/>
+  </svg>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-6 w-full">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+      <!-- TEXT -->
+      <div>
+        <div class="mb-5 inline-block">
+          <span class="font-cinzel text-xs border border-yellow-700/50 text-yellow-600 px-5 py-2 rounded-full tracking-widest uppercase">S. III a.C. · Món Hel·lenístic</span>
+        </div>
+        <p class="font-cinzel text-2xl text-yellow-600 tracking-[0.18em] mb-3">HEL·LENISME</p>
+        <h1 class="font-cinzel text-5xl md:text-6xl font-black mb-6 leading-tight shimmer-text">
+          FILOSOFIA<br>COM A<br>TERÀPIA
+        </h1>
+        <p class="font-playfair text-lg text-gray-300 mb-8 italic leading-relaxed">
+          Quan la polis va desaparèixer i l'individu es va quedar sol davant un món immens i incert, 
+          la filosofia es va convertir en una <strong class="text-yellow-500 not-italic">taula de salvació</strong>: 
+          tres escoles, tres camins cap a la felicitat.
+        </p>
+        <div class="flex flex-wrap gap-3 mb-8 text-xs font-cinzel tracking-wider">
+          <span class="border border-yellow-700/25 text-yellow-600/70 px-3 py-1 rounded-full">ATARÀXIA</span>
+          <span class="border border-yellow-700/25 text-yellow-600/70 px-3 py-1 rounded-full">APATHEIA</span>
+          <span class="border border-yellow-700/25 text-yellow-600/70 px-3 py-1 rounded-full">AUTARQUIA</span>
+          <span class="border border-yellow-700/25 text-yellow-600/70 px-3 py-1 rounded-full">AMOR FATI</span>
+          <span class="border border-yellow-700/25 text-yellow-600/70 px-3 py-1 rounded-full">LOGOS</span>
+        </div>
+        <div class="quote-block p-4 rounded-r-lg max-w-md" style="position:relative;">
+          <span class="big-q">"</span>
+          <p class="font-playfair italic text-base text-gray-300 relative z-10">"La mort no és res per a nosaltres. Mentre vivim, la mort no hi és; i quan la mort arriba, nosaltres ja no hi som." — Epicur</p>
+        </div>
+      </div>
+
+      <!-- DRETA: tres escoles cards + línea temps -->
+      <div class="hidden lg:flex flex-col gap-4">
+        <!-- Tres escoles mini -->
+        <div class="grid grid-cols-3 gap-3">
+          <div class="concept-card card-epicur p-4 rounded-xl text-center no-anim">
+            <div class="text-3xl mb-2">🍃</div>
+            <p class="font-cinzel text-xs font-bold mb-1" style="color:var(--epicur-l)">EPICUREISME</p>
+            <p class="text-xs text-gray-400">Recerca intel·ligent del plaer</p>
+            <p class="text-xs text-gray-500 mt-1">Epicur · 341 aC</p>
+          </div>
+          <div class="concept-card card-stoic p-4 rounded-xl text-center no-anim">
+            <div class="text-3xl mb-2">⚖️</div>
+            <p class="font-cinzel text-xs font-bold mb-1" style="color:var(--stoic-l)">ESTOÏCISME</p>
+            <p class="text-xs text-gray-400">Virtut i acceptació del destí</p>
+            <p class="text-xs text-gray-500 mt-1">Zenó · 300 aC</p>
+          </div>
+          <div class="concept-card card-cynic p-4 rounded-xl text-center no-anim">
+            <div class="text-3xl mb-2">🐕</div>
+            <p class="font-cinzel text-xs font-bold mb-1" style="color:var(--cynic-l)">CINISME</p>
+            <p class="text-xs text-gray-400">Retorn a la vida natural</p>
+            <p class="text-xs text-gray-500 mt-1">Diògenes · 412 aC</p>
+          </div>
+        </div>
+        <!-- La pregunta central -->
+        <div class="concept-card p-5 rounded-xl no-anim text-center" style="border-color:rgba(201,168,76,.25);">
+          <p class="eyebrow mb-3">La pregunta que les uneix</p>
+          <p class="font-cinzel text-2xl font-bold text-yellow-500 mb-3">Com ser feliç en un món que no controlem?</p>
+          <div class="grid grid-cols-3 gap-2 text-xs mt-3">
+            <div class="p-2 rounded" style="background:rgba(196,133,74,.1)">
+              <p style="color:var(--epicur-l)" class="font-semibold mb-1">Epicur</p>
+              <p class="text-gray-400">Gestiona els plaers amb saviesa</p>
+            </div>
+            <div class="p-2 rounded" style="background:rgba(74,158,196,.1)">
+              <p style="color:var(--stoic-l)" class="font-semibold mb-1">Zenó</p>
+              <p class="text-gray-400">Accepta el que no pots canviar</p>
+            </div>
+            <div class="p-2 rounded" style="background:rgba(122,191,90,.1)">
+              <p style="color:var(--cynic-l)" class="font-semibold mb-1">Diògenes</p>
+              <p class="text-gray-400">Desfés-te de tot el que és superflu</p>
+            </div>
+          </div>
+        </div>
+        <!-- Línia temps -->
+        <div class="concept-card p-5 rounded-xl no-anim">
+          <p class="eyebrow mb-4">Cronologia</p>
+          <div class="space-y-2 text-xs">
+            <div class="tl-item pb-2"><span class="text-yellow-500 font-cinzel font-bold">s. IV aC</span><span class="text-gray-400 ml-2">Alexandre el Gran. Fi de la polis.</span></div>
+            <div class="tl-item pb-2"><span class="text-yellow-500 font-cinzel font-bold">412 aC</span><span class="text-gray-400 ml-2">Neix Diògenes de Sinope (cinisme)</span></div>
+            <div class="tl-item pb-2"><span class="text-yellow-500 font-cinzel font-bold">341 aC</span><span class="text-gray-400 ml-2">Neix Epicur de Samos</span></div>
+            <div class="tl-item pb-2"><span class="text-yellow-500 font-cinzel font-bold">~300 aC</span><span class="text-gray-400 ml-2">Zenó funda l'estoïcisme</span></div>
+            <div class="tl-item"><span class="text-yellow-500 font-cinzel font-bold">s. I–II dC</span><span class="text-gray-400 ml-2">Estoïcisme a Roma: Sèneca, Epictet, Marc Aureli</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 float-anim">
+    <svg class="w-6 h-6 text-yellow-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CONTEXT
+══════════════════════════════════════════════════ -->
+<section id="context" class="py-20 section-mid">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3">Context Històric · S. IV–III a.C.</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-500">LA FI DE LA POLIS</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Quan el món conegut s'esfondra, la filosofia es reinventa</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <div class="space-y-5 text-gray-300 leading-relaxed">
+        <p>La <strong class="text-yellow-400">polis</strong>, com a comunitat política autònoma, havia estat el cor de la vida grega clàssica. Ser ciutadà significava participar activament en els afers públics, en la democràcia i en la recerca del bé comú. La ciutadania conferia identitat, sentit i vincle col·lectiu.</p>
+        <p>Amb les conquestes d'<strong class="text-yellow-400">Alexandre el Gran</strong> (s. IV aC), els límits del món grec van ser completament superats. Es va crear un immens imperi que abastava Egipte, Mesopotàmia i Pèrsia. Aquest nou escenari va desintegrar les estructures polítiques de la polis: els habitants van deixar de ser ciutadans per convertir-se en <strong>súbdits d'un sistema imperial distant i impersonal.</strong></p>
+        <div class="quote-block p-5 rounded-r-lg" style="position:relative;">
+          <span class="big-q">"</span>
+          <p class="text-lg relative z-10">Les persones quedaven "<strong>atomitzades</strong>", sense connexions significatives amb el vast conglomerat de pobles i territoris del nou imperi. La filosofia havia de donar-hi resposta.</p>
+        </div>
+      </div>
+
+      <div class="space-y-5">
+        <div class="concept-card p-6 rounded-xl">
+          <h3 class="font-cinzel text-xl font-bold text-yellow-500 mb-5">Del Col·lectiu a l'Individual</h3>
+          <div class="space-y-3">
+            <div class="flex gap-4 bg-black/30 p-4 rounded-lg border-l-4 border-yellow-700">
+              <span class="text-2xl flex-shrink-0">🏛️</span>
+              <div><p class="font-bold text-white text-sm mb-1">Filosofia clàssica (Plató, Aristòtil)</p><p class="text-xs text-gray-400">Centrada en la polis, el bé comú, la política i la participació ciutadana. L'individu es realitza en comunitat.</p></div>
+            </div>
+            <div class="text-center text-gray-500 text-sm py-1">↓ La polis s'enfonsa ↓</div>
+            <div class="flex gap-4 p-4 rounded-lg border-l-4 border-yellow-500" style="background:rgba(201,168,76,.08)">
+              <span class="text-2xl flex-shrink-0">🧍</span>
+              <div><p class="font-bold text-yellow-400 text-sm mb-1">Filosofia hel·lenística</p><p class="text-xs text-gray-300">Centrada en l'individu i la felicitat personal. La filosofia com a <strong>teràpia de l'ànima</strong>. El savi és autosuficient.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept-card p-5 rounded-xl" style="border-color:rgba(201,168,76,.25);">
+          <h4 class="font-cinzel text-base font-bold text-yellow-400 mb-3">Una Pregunta Eterna</h4>
+          <p class="text-sm text-gray-300 leading-relaxed">Les escoles hel·lenístiques anticipen una de les grans qüestions de la humanitat: <strong class="text-yellow-300">com trobar sentit en un món globalitzat i impersonal?</strong> En l'època hel·lenística com avui, la filosofia ofereix als individus la possibilitat de recuperar el control sobre la seva vida, més enllà de les circumstàncies externes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SELECTOR D'ESCOLES
+══════════════════════════════════════════════════ -->
+<div id="escoles" class="h-0 overflow-hidden" aria-hidden="true"></div>
+<section class="py-20 section-dark relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-12">
+      <p class="eyebrow mb-3">Tres respostes · Un mateix repte</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-500">LES TRES ESCOLES</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Selecciona una escola per explorar-la en profunditat</p>
+    </div>
+
+    <!-- Selector -->
+    <div class="grid grid-cols-3 gap-5 max-w-2xl mx-auto mb-14">
+      <button class="phil-tab ep-tab active" onclick="switchEscola('epicureisme', this)">
+        <span style="font-size:2.2rem;display:block;margin-bottom:.4rem">🍃</span>
+        <span class="font-cinzel text-xs font-bold tracking-wider block" style="color:var(--epicur-l)">EPICUREISME</span>
+        <span class="block text-xs mt-1" style="color:var(--silver)">Epicur · Ataràxia</span>
+      </button>
+      <button class="phil-tab st-tab" onclick="switchEscola('estoicisme', this)">
+        <span style="font-size:2.2rem;display:block;margin-bottom:.4rem">⚖️</span>
+        <span class="font-cinzel text-xs font-bold tracking-wider block" style="color:var(--stoic-l)">ESTOÏCISME</span>
+        <span class="block text-xs mt-1" style="color:var(--silver)">Zenó · Apatheia</span>
+      </button>
+      <button class="phil-tab cy-tab" onclick="switchEscola('cinisme', this)">
+        <span style="font-size:2.2rem;display:block;margin-bottom:.4rem">🐕</span>
+        <span class="font-cinzel text-xs font-bold tracking-wider block" style="color:var(--cynic-l)">CINISME</span>
+        <span class="block text-xs mt-1" style="color:var(--silver)">Diògenes · Autarquia</span>
+      </button>
+    </div>
+
+    <!-- ── PANEL EPICUREISME ───────────────────── -->
+    <div id="panel-epicureisme" class="phil-panel active">
+      <div id="epicureisme" class="h-0 overflow-hidden" aria-hidden="true"></div>
+
+      <!-- Intro -->
+      <div class="grid lg:grid-cols-2 gap-10 mb-12">
+        <div class="space-y-5">
+          <span class="badge badge-ep">Epicur de Samos · 341–270 aC</span>
+          <h3 class="font-cinzel text-4xl font-black mt-2" style="color:var(--epicur-l)">EPICUREISME</h3>
+          <p class="font-cinzel text-sm tracking-wider text-gray-400">L'hedonisme dins un càlcul intel·ligent de plaers i dolors</p>
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>Epicur proposa que la felicitat s'assoleix a través de la recerca del plaer (<em>hedoné</em>) i l'evitació del dolor. Però el seu <strong class="text-yellow-400">hedonisme</strong> no és desenfrenat: es fonamenta en la moderació, la reflexió i el <strong>càlcul intel·ligent</strong> dels plaers i dolors.</p>
+            <p>Epicur entén la filosofia com una <strong class="text-yellow-400">teràpia de l'ànima</strong>, destinada a alliberar-nos de les pertorbacions que impedeixen viure serenament.</p>
+          </div>
+          <div class="quote-block epicur p-5 rounded-r-lg" style="position:relative;">
+            <span class="big-q" style="color:rgba(196,133,74,.15)">"</span>
+            <p class="text-base relative z-10 font-playfair italic">"La filosofia és una activitat que, amb discursos i raonaments, procura la vida feliç." — Epicur</p>
+          </div>
+        </div>
+        <div class="space-y-5">
+          <!-- Els tres tipus de desitjos -->
+          <div class="concept-card card-epicur p-6 rounded-xl">
+            <h4 class="font-cinzel text-lg font-bold mb-5" style="color:var(--epicur-l)">Els Tres Tipus de Desitjos</h4>
+            <div class="space-y-4">
+              <div class="bg-black/40 p-4 rounded-lg border-l-4" style="border-left-color:var(--cynic-l)">
+                <div class="flex items-center justify-between mb-1">
+                  <p class="text-white font-bold text-sm">✅ Naturals i necessaris</p>
+                  <span class="text-xs text-green-400">SATISFER</span>
+                </div>
+                <p class="text-xs text-gray-400">Menjar, beure, dormir, refugi. Necessitats bàsiques. La seva satisfacció simple és essencial per al benestar.</p>
+                <div class="desire-bar good mt-2" style="width:30%"></div>
+              </div>
+              <div class="bg-black/40 p-4 rounded-lg border-l-4" style="border-left-color:var(--gold)">
+                <div class="flex items-center justify-between mb-1">
+                  <p class="text-white font-bold text-sm">⚠️ Naturals i no necessaris</p>
+                  <span class="text-xs text-yellow-400">MODERACIÓ</span>
+                </div>
+                <p class="text-xs text-gray-400">Menjar delicat, gaudi de la bellesa. Naturals però no indispensables. Satisfer amb moderació.</p>
+                <div class="desire-bar neutral mt-2" style="width:60%"></div>
+              </div>
+              <div class="bg-black/40 p-4 rounded-lg border-l-4" style="border-left-color:var(--epicur)">
+                <div class="flex items-center justify-between mb-1">
+                  <p class="text-white font-bold text-sm">❌ No naturals i no necessaris</p>
+                  <span class="text-xs text-red-400">RENUNCIAR</span>
+                </div>
+                <p class="text-xs text-gray-400">Luxe, fama, poder. Artificials i insaciables. Generen frustració i ansietat. Cal abandonar-los.</p>
+                <div class="desire-bar bad mt-2" style="width:100%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Càlcul hedonista -->
+      <div class="glow-div mb-10"></div>
+      <div class="grid lg:grid-cols-3 gap-6 mb-10">
+        <div class="concept-card card-epicur p-5 rounded-xl">
+          <h4 class="font-cinzel text-sm font-bold mb-3" style="color:var(--epicur-l)">⚡ Plaers immediats vs. llarg termini</h4>
+          <p class="text-sm text-gray-300">Evita plaers immediats que porten dolors futurs. L'excés al menjar dóna plaer ara però malestar després.</p>
+        </div>
+        <div class="concept-card card-epicur p-5 rounded-xl">
+          <h4 class="font-cinzel text-sm font-bold mb-3" style="color:var(--epicur-l)">💪 Dolors necessaris per a plaers majors</h4>
+          <p class="text-sm text-gray-300">Alguns dolors són acceptables si condueixen a plaers duradors. L'exercici físic és molest però contribueix al benestar general.</p>
+        </div>
+        <div class="concept-card card-epicur p-5 rounded-xl">
+          <h4 class="font-cinzel text-sm font-bold mb-3" style="color:var(--epicur-l)">🚫 Renúncia a plaers perjudicials</h4>
+          <p class="text-sm text-gray-300">Cal renunciar a plaers que generen més dolor que beneficis. El luxe sembla atractiu però comporta preocupació i dependència.</p>
+        </div>
+      </div>
+
+      <!-- Ataràxia i pors -->
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div class="concept-card card-epicur p-7 rounded-xl" style="background:linear-gradient(135deg,rgba(107,58,31,.15),rgba(5,4,8,.9))">
+          <h3 class="font-cinzel text-2xl font-bold mb-5" style="color:var(--epicur-l)">🕊️ L'Ataràxia</h3>
+          <p class="text-sm text-gray-300 mb-4">La <strong class="text-yellow-400">felicitat màxima</strong> d'Epicur: la pau interior i la tranquil·litat de l'ànima, lliure de pertorbacions i pors. El resultat d'aplicar correctament el càlcul intel·ligent dels plaers.</p>
+          <div class="space-y-2 text-sm text-gray-300">
+            <div class="flex gap-2 bg-black/30 p-3 rounded"><span style="color:var(--epicur-l)">▸</span><span>Llibertat de les pertorbacions emocionals</span></div>
+            <div class="flex gap-2 bg-black/30 p-3 rounded"><span style="color:var(--epicur-l)">▸</span><span>Serenitat i equilibri interior constant</span></div>
+            <div class="flex gap-2 bg-black/30 p-3 rounded"><span style="color:var(--epicur-l)">▸</span><span>L'<strong>amistat</strong> com a un dels majors plaers: protecció, comprensió i acompanyament</span></div>
+            <div class="flex gap-2 bg-black/30 p-3 rounded"><span style="color:var(--epicur-l)">▸</span><span><strong>Autarquia</strong>: autosuficiència, llibertat de dependències externes</span></div>
+          </div>
+        </div>
+
+        <div class="concept-card card-epicur p-7 rounded-xl">
+          <h3 class="font-cinzel text-2xl font-bold mb-5" style="color:var(--epicur-l)">💊 La Funció Terapèutica</h3>
+          <p class="text-sm text-gray-300 mb-4">Gran part de la infelicitat humana neix de dues pors irracionals que la filosofia pot eliminar:</p>
+          <div class="space-y-4">
+            <div class="bg-black/40 p-4 rounded-lg border-l-4" style="border-left-color:var(--epicur-l)">
+              <p class="font-bold text-white text-sm mb-2">1. La por als déus</p>
+              <p class="text-xs text-gray-400">Els déus existeixen però viuen en beatitud perfecta i <strong>no intervenen en els afers humans</strong>. Témer el càstig diví és absurd i genera angoixa innecessària.</p>
+            </div>
+            <div class="bg-black/40 p-4 rounded-lg border-l-4" style="border-left-color:var(--gold)">
+              <p class="font-bold text-white text-sm mb-2">2. La por a la mort</p>
+              <div class="quote-block epicur p-3 rounded-r-lg mt-2" style="position:relative;">
+                <p class="text-sm font-playfair italic relative z-10">"La mort no és res per a nosaltres. Mentre vivim, la mort no hi és; i quan la mort arriba, nosaltres ja no hi som."</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PANEL ESTOÏCISME ────────────────────── -->
+    <div id="panel-estoicisme" class="phil-panel">
+      <div id="estoicisme" class="h-0 overflow-hidden" aria-hidden="true"></div>
+
+      <div class="grid lg:grid-cols-2 gap-10 mb-12">
+        <div class="space-y-5">
+          <span class="badge badge-st">Zenó de Cítion · ~334–262 aC</span>
+          <h3 class="font-cinzel text-4xl font-black mt-2" style="color:var(--stoic-l)">ESTOÏCISME</h3>
+          <p class="font-cinzel text-sm tracking-wider text-gray-400">Impertorbabilitat i virtut com a camí a la felicitat</p>
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>L'estoïcisme sorgeix a Grècia (~300 aC) amb <strong class="text-blue-400">Zenó de Cítion</strong> i assoleix la seva màxima expressió a Roma amb <strong class="text-blue-400">Epictet</strong>, <strong class="text-blue-400">Sèneca</strong> i l'emperador <strong class="text-blue-400">Marc Aureli</strong>.</p>
+            <p>Es fonamenta en una visió del món governada per una raó universal o <strong class="text-blue-400">logos</strong>, que estableix un ordre racional i necessari a tot l'univers. La felicitat no depèn de les circumstàncies externes, sinó de <strong>viure d'acord amb la raó i la virtut.</strong></p>
+          </div>
+          <div class="quote-block stoic p-5 rounded-r-lg" style="position:relative;">
+            <span class="big-q" style="color:rgba(74,158,196,.15)">"</span>
+            <p class="text-base relative z-10 font-playfair italic">"No patim per les coses sinó pels judicis que fem sobre les coses." — Epictet</p>
+          </div>
+        </div>
+        <div class="space-y-5">
+          <!-- Logos i destí -->
+          <div class="concept-card card-stoic p-6 rounded-xl">
+            <h4 class="font-cinzel text-lg font-bold mb-4" style="color:var(--stoic-l)">El Logos i l'Amor Fati</h4>
+            <p class="text-sm text-gray-300 mb-4">L'univers estoic és <strong>determinista</strong> però racional: res passa per atzar. Tot forma part de l'ordre establert pel logos. Comprendre això és alliberador.</p>
+            <div class="bg-black/40 p-4 rounded-lg" style="border:1px solid rgba(74,158,196,.25)">
+              <p class="font-cinzel text-sm font-bold mb-2" style="color:var(--stoic-l)">AMOR FATI · Amor al Destí</p>
+              <p class="text-xs text-gray-400">Saber i comprendre que el que ens passa no podia no-haver-passat és alliberador. Res del que succeeix està fora de l'ordre racional. Per això no té sentit resistir-s'hi: cal acceptar-ho amb serenitat.</p>
+            </div>
+          </div>
+          <!-- Figures romanes -->
+          <div class="concept-card card-stoic p-5 rounded-xl">
+            <h4 class="font-cinzel text-sm font-bold mb-3" style="color:var(--stoic-l)">Figures Clau de l'Estoïcisme Romà</h4>
+            <div class="grid grid-cols-3 gap-2 text-xs text-center">
+              <div class="bg-black/40 p-3 rounded"><p class="text-blue-300 font-bold mb-1">EPICTET</p><p class="text-gray-400">Esclau filòsof. "Enchiridion".</p></div>
+              <div class="bg-black/40 p-3 rounded"><p class="text-blue-300 font-bold mb-1">SÈNECA</p><p class="text-gray-400">Polític i tràgic. "Cartes a Lucili".</p></div>
+              <div class="bg-black/40 p-3 rounded"><p class="text-blue-300 font-bold mb-1">MARC AURELI</p><p class="text-gray-400">Emperador. "Meditacions".</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glow-div mb-10"></div>
+
+      <!-- Dicotomia control/no-control -->
+      <div class="max-w-3xl mx-auto mb-10">
+        <h3 class="font-cinzel text-2xl font-bold text-center mb-6" style="color:var(--stoic-l)">La Distinció Fonamental d'Epictet</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="ctrl-box ctrl-yes p-6 rounded-xl">
+            <h4 class="font-cinzel text-base font-bold mb-3" style="color:var(--stoic-l)">✅ Allò que depèn de nosaltres</h4>
+            <ul class="space-y-2 text-sm text-gray-300">
+              <li class="flex gap-2"><span style="color:var(--stoic-l)">▸</span>Els nostres pensaments</li>
+              <li class="flex gap-2"><span style="color:var(--stoic-l)">▸</span>Els nostres desitjos</li>
+              <li class="flex gap-2"><span style="color:var(--stoic-l)">▸</span>Les nostres accions</li>
+              <li class="flex gap-2"><span style="color:var(--stoic-l)">▸</span>Les nostres actituds</li>
+            </ul>
+            <div class="mt-4 p-3 rounded text-xs text-blue-200 font-semibold" style="background:rgba(74,158,196,.1)">→ Aquí rau la llibertat interior</div>
+          </div>
+          <div class="ctrl-box ctrl-no p-6 rounded-xl">
+            <h4 class="font-cinzel text-base font-bold mb-3" style="color:var(--epicur-l)">❌ Allò que NO depèn de nosaltres</h4>
+            <ul class="space-y-2 text-sm text-gray-300">
+              <li class="flex gap-2"><span style="color:var(--epicur-l)">▸</span>La riquesa i la salut</li>
+              <li class="flex gap-2"><span style="color:var(--epicur-l)">▸</span>La fama i la reputació</li>
+              <li class="flex gap-2"><span style="color:var(--epicur-l)">▸</span>Les accions dels altres</li>
+              <li class="flex gap-2"><span style="color:var(--epicur-l)">▸</span>Els esdeveniments naturals</li>
+            </ul>
+            <div class="mt-4 p-3 rounded text-xs text-amber-200 font-semibold" style="background:rgba(196,133,74,.1)">→ Assumir-ho amb calma: <em>amor fati</em></div>
+          </div>
+        </div>
+        <div class="mt-4 concept-card p-4 rounded-xl text-center no-anim" style="border-color:rgba(74,158,196,.25)">
+          <p class="text-sm text-gray-300"><strong style="color:var(--stoic-l)">L'error humà</strong> neix de confondre aquests dos àmbits. Si ens aferrem al que no depèn de nosaltres, inevitablement patirem. La llibertat interior s'assoleix centrant-nos <em>exclusivament</em> en el primer àmbit.</p>
+        </div>
+      </div>
+
+      <!-- Apatheia i Virtut -->
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div class="concept-card card-stoic p-7 rounded-xl" style="background:linear-gradient(135deg,rgba(26,58,74,.15),rgba(5,4,8,.9))">
+          <h3 class="font-cinzel text-2xl font-bold mb-5" style="color:var(--stoic-l)">🧊 L'Apatheia</h3>
+          <p class="text-sm text-gray-300 mb-4">No significa absència d'emocions ni fredor. Significa <strong>alliberament de les passions descontrolades</strong> que ens esclavitzen (pathos).</p>
+          <div class="space-y-2 text-sm">
+            <div class="bg-black/40 p-3 rounded"><p class="text-red-400 font-bold text-xs mb-1">Passions a superar:</p><p class="text-gray-400">Cobdícia, ira, enveja. Reaccions irracionals basades en judicis equivocats sobre el que és bo o dolent.</p></div>
+            <div class="bg-black/40 p-3 rounded"><p class="text-blue-300 font-bold text-xs mb-1">Adiaphora (indiferents):</p><p class="text-gray-400">La riquesa, la salut, la fama no són ni bones ni dolentes en si mateixes. Prenen significat en com les gestionem.</p></div>
+          </div>
+        </div>
+        <div class="concept-card card-stoic p-7 rounded-xl">
+          <h3 class="font-cinzel text-2xl font-bold mb-5" style="color:var(--stoic-l)">⚖️ La Virtut com a Bé Suprem</h3>
+          <p class="text-sm text-gray-300 mb-4">La felicitat no es troba en els plaers ni les possessions, sinó en la <strong class="text-blue-400">virtut entesa com a viure d'acord amb la raó</strong>.</p>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="bg-black/40 p-3 rounded text-center"><p class="text-blue-300 font-bold mb-1">Justícia</p><p class="text-gray-400">Donar a cadascú el que li correspon</p></div>
+            <div class="bg-black/40 p-3 rounded text-center"><p class="text-blue-300 font-bold mb-1">Prudència</p><p class="text-gray-400">Saber discernir en cada situació</p></div>
+            <div class="bg-black/40 p-3 rounded text-center"><p class="text-blue-300 font-bold mb-1">Valentia</p><p class="text-gray-400">Afrontar les dificultats amb fermesa</p></div>
+            <div class="bg-black/40 p-3 rounded text-center"><p class="text-blue-300 font-bold mb-1">Moderació</p><p class="text-gray-400">Autodomini sobre impulsos i desitjos</p></div>
+          </div>
+          <div class="mt-4 p-3 rounded text-xs" style="background:rgba(74,158,196,.1);border:1px solid rgba(74,158,196,.2)">
+            <p class="text-blue-200">L'estoïcisme és una filosofia especialment útil en <strong>moments de crisi</strong>: ens ajuda a mantenir la calma, acceptar el que no podem canviar i concentrar-nos en el que importa.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PANEL CINISME ───────────────────────── -->
+    <div id="panel-cinisme" class="phil-panel">
+      <div id="cinisme" class="h-0 overflow-hidden" aria-hidden="true"></div>
+
+      <div class="grid lg:grid-cols-2 gap-10 mb-12">
+        <div class="space-y-5">
+          <span class="badge badge-cy">Diògenes de Sinope · ~412–323 aC</span>
+          <h3 class="font-cinzel text-4xl font-black mt-2" style="color:var(--cynic-l)">CINISME</h3>
+          <p class="font-cinzel text-sm tracking-wider text-gray-400">Retorn a la vida natural i rebuig de convencions socials</p>
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>Els cínics adopten la perspectiva més <strong class="text-green-400">radical</strong>: proposen un retorn a la simplicitat natural i rebutgen les convencions socials, els béns materials i les jerarquies com a elements que corrompen la vida humana.</p>
+            <p>El terme "cínic" prové del grec <em>kynikos</em> (semblant a un gos): vivien amb la mateixa senzillesa i naturalitat que els animals, sense vergonyes artificials.</p>
+            <p>Tot el que és <em>nomos</em> és un conjunt de convencions arbitràries. La natura, en canvi, marca criteris fonamentals sobre el que és necessari per a la vida. L'objectiu: <strong class="text-green-400">recuperar una vida més directa i sincera</strong>, on el criteri no sigui "què pensa la gent?" sinó "què demana realment la natura humana per ser lliure?"</p>
+          </div>
+          <div class="quote-block cynic p-5 rounded-r-lg" style="position:relative;">
+            <span class="big-q" style="color:rgba(122,191,90,.15)">"</span>
+            <p class="text-base relative z-10 font-playfair italic">"No és més ric qui més té, sinó qui menys necessita." — Diògenes</p>
+          </div>
+        </div>
+        <div class="space-y-5">
+          <!-- Diògenes i les anècdotes -->
+          <div class="concept-card card-cynic p-6 rounded-xl">
+            <h4 class="font-cinzel text-lg font-bold mb-5" style="color:var(--cynic-l)">🐕 Diògenes: el Cínic Paradigmàtic</h4>
+            <div class="space-y-3">
+              <div class="flex gap-4 bg-black/30 p-3 rounded-lg">
+                <span class="text-xl flex-shrink-0">🛢️</span>
+                <div><p class="font-bold text-white text-sm mb-1">El barril com a llar</p><p class="text-xs text-gray-400">Vivia en un barril. Demostrava que el luxe és innecessari per ser feliç.</p></div>
+              </div>
+              <div class="flex gap-4 bg-black/30 p-3 rounded-lg">
+                <span class="text-xl flex-shrink-0">🔦</span>
+                <div><p class="font-bold text-white text-sm mb-1">La recerca d'un home honest</p><p class="text-xs text-gray-400">En plena llum del dia, amb una llanterna, buscava un home honest. Crítica a la corrupció i la falsedat social.</p></div>
+              </div>
+              <div class="flex gap-4 bg-black/30 p-3 rounded-lg">
+                <span class="text-xl flex-shrink-0">👑</span>
+                <div><p class="font-bold text-white text-sm mb-1">L'encontre amb Alexandre el Gran</p><p class="text-xs text-gray-400">Alexandre li va oferir complir qualsevol desig. Diògenes va respondre: <em>"Aparta't, que em tapes el sol."</em> Autosuficiència absoluta davant el poder.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glow-div mb-10"></div>
+
+      <!-- Principis -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+        <div class="concept-card card-cynic p-5 rounded-xl">
+          <div class="text-3xl mb-3">🌿</div>
+          <h4 class="font-cinzel text-sm font-bold mb-2" style="color:var(--cynic-l)">Autarquia</h4>
+          <p class="text-xs text-gray-400">La felicitat no depèn de possessions ni reconeixements. Viure d'acord amb la natura i ser autosuficient.</p>
+        </div>
+        <div class="concept-card card-cynic p-5 rounded-xl">
+          <div class="text-3xl mb-3">🏕️</div>
+          <h4 class="font-cinzel text-sm font-bold mb-2" style="color:var(--cynic-l)">La vida natural</h4>
+          <p class="text-xs text-gray-400">La societat ha corromput els humans amb normes artificials. Retornar a una existència simple i lliure de dependències.</p>
+        </div>
+        <div class="concept-card card-cynic p-5 rounded-xl">
+          <div class="text-3xl mb-3">💥</div>
+          <h4 class="font-cinzel text-sm font-bold mb-2" style="color:var(--cynic-l)">Crítica radical</h4>
+          <p class="text-xs text-gray-400">Rebuig del matrimoni, la política, la religió organitzada i la riquesa. Desemmascarar la hipocresia social.</p>
+        </div>
+        <div class="concept-card card-cynic p-5 rounded-xl">
+          <div class="text-3xl mb-3">🪞</div>
+          <h4 class="font-cinzel text-sm font-bold mb-2" style="color:var(--cynic-l)">L'exemple com a lliçó</h4>
+          <p class="text-xs text-gray-400">No escrits teòrics, sinó vida exemplar. L'estil de vida de Diògenes era, en si mateix, una lliçó pràctica de filosofia.</p>
+        </div>
+      </div>
+
+      <!-- Llegat del cinisme -->
+      <div class="concept-card card-cynic p-7 rounded-xl max-w-3xl mx-auto">
+        <h3 class="font-cinzel text-xl font-bold mb-4" style="color:var(--cynic-l)">El Llegat del Cinisme</h3>
+        <p class="text-sm text-gray-300 leading-relaxed mb-4">Avui el terme "cínic" sovint es refereix a una actitud de desconfiança o menyspreu, però l'original filosofia cínica promou valors com la <strong>simplicitat</strong>, l'<strong>autenticitat</strong> i la <strong>llibertat personal</strong>.</p>
+        <div class="quote-block cynic p-4 rounded-r-lg" style="position:relative;">
+          <span class="big-q" style="color:rgba(122,191,90,.12);font-size:3rem">"</span>
+          <p class="text-sm font-playfair italic relative z-10">El cinisme ens recorda que la felicitat no es troba en l'acumulació de possessions ni en l'acceptació acrítica de les normes socials, sinó en la llibertat d'esperit, el retorn a la natura i l'autosuficiència.</p>
+        </div>
+        <p class="text-xs text-gray-500 mt-4">💡 El cinisme va influir directament en l'estoïcisme: Zenó de Cítion, fundador de l'estoïcisme, va estudiar amb els cínics.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     COMPARATIVA
+══════════════════════════════════════════════════ -->
+<section id="comparativa" class="py-20 section-light relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-14">
+      <p class="eyebrow mb-3">Tres escoles · Un mateix repte</p>
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-yellow-500">COMPARATIVA</h2>
+      <p class="text-xl text-gray-400 font-playfair italic">Epicureisme, Estoïcisme i Cinisme cara a cara</p>
+    </div>
+
+    <!-- Taula comparativa gran -->
+    <div class="overflow-hidden rounded-2xl border border-white/10 mb-12">
+      <!-- Capçalera -->
+      <div class="grid grid-cols-4 border-b border-white/10">
+        <div class="p-4 bg-black/40"></div>
+        <div class="p-4 text-center" style="background:rgba(107,58,31,.2)">
+          <div class="text-2xl mb-1">🍃</div>
+          <p class="font-cinzel text-sm font-bold" style="color:var(--epicur-l)">EPICUREISME</p>
+        </div>
+        <div class="p-4 text-center" style="background:rgba(26,58,74,.2)">
+          <div class="text-2xl mb-1">⚖️</div>
+          <p class="font-cinzel text-sm font-bold" style="color:var(--stoic-l)">ESTOÏCISME</p>
+        </div>
+        <div class="p-4 text-center" style="background:rgba(42,58,26,.2)">
+          <div class="text-2xl mb-1">🐕</div>
+          <p class="font-cinzel text-sm font-bold" style="color:var(--cynic-l)">CINISME</p>
+        </div>
+      </div>
+
+      <!-- Files -->
+      <div class="divide-y divide-white/5">
+        <div class="grid grid-cols-4 hover:bg-white/5 transition">
+          <div class="p-4 text-xs text-gray-500 font-cinzel uppercase tracking-wider flex items-center">Felicitat</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(107,58,31,.08)">Ataràxia: pau interior lliure de pertorbacions</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(26,58,74,.08)">Virtut i harmonia amb el logos universal</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(42,58,26,.08)">Autarquia: autosuficiència total</div>
+        </div>
+        <div class="grid grid-cols-4 hover:bg-white/5 transition">
+          <div class="p-4 text-xs text-gray-500 font-cinzel uppercase tracking-wider flex items-center">Mètode</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(107,58,31,.08)">Càlcul intel·ligent de plaers i dolors</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(26,58,74,.08)">Acceptació del destí; focus en el que depèn de mi</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(42,58,26,.08)">Rebuig radical de les convencions socials</div>
+        </div>
+        <div class="grid grid-cols-4 hover:bg-white/5 transition">
+          <div class="p-4 text-xs text-gray-500 font-cinzel uppercase tracking-wider flex items-center">Plaer</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(107,58,31,.08)">Central, però gestionat amb saviesa</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(26,58,74,.08)">Indiferent (adiaphora); no és el bé suprem</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(42,58,26,.08)">Rebutjat quan és artificial o superflu</div>
+        </div>
+        <div class="grid grid-cols-4 hover:bg-white/5 transition">
+          <div class="p-4 text-xs text-gray-500 font-cinzel uppercase tracking-wider flex items-center">Riquesa</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(107,58,31,.08)">Acceptable si no genera dependència</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(26,58,74,.08)">Indiferent; no és ni bona ni dolenta</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(42,58,26,.08)">Obstacle per a la llibertat. Rebutjada.</div>
+        </div>
+        <div class="grid grid-cols-4 hover:bg-white/5 transition">
+          <div class="p-4 text-xs text-gray-500 font-cinzel uppercase tracking-wider flex items-center">Societat</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(107,58,31,.08)">Comunitat d'amics al marge del poder</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(26,58,74,.08)">Cosmopolitisme: tots som part d'una gran comunitat</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(42,58,26,.08)">Crítica radical a les institucions socials</div>
+        </div>
+        <div class="grid grid-cols-4 hover:bg-white/5 transition">
+          <div class="p-4 text-xs text-gray-500 font-cinzel uppercase tracking-wider flex items-center">Por a la mort</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(107,58,31,.08)">"La mort no és res per a nosaltres"</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(26,58,74,.08)">Part natural del logos. Cal acceptar-la.</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(42,58,26,.08)">Indiferència: la mort és natural, com tot.</div>
+        </div>
+        <div class="grid grid-cols-4 hover:bg-white/5 transition">
+          <div class="p-4 text-xs text-gray-500 font-cinzel uppercase tracking-wider flex items-center">Concepte clau</div>
+          <div class="p-4 text-xs font-bold" style="background:rgba(107,58,31,.08);color:var(--epicur-l)">ATARÀXIA</div>
+          <div class="p-4 text-xs font-bold" style="background:rgba(26,58,74,.08);color:var(--stoic-l)">APATHEIA</div>
+          <div class="p-4 text-xs font-bold" style="background:rgba(42,58,26,.08);color:var(--cynic-l)">AUTARQUIA</div>
+        </div>
+        <div class="grid grid-cols-4 hover:bg-white/5 transition">
+          <div class="p-4 text-xs text-gray-500 font-cinzel uppercase tracking-wider flex items-center">Influència</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(107,58,31,.08)">Psicologia hedonista moderna; filosofia del benestar</div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(26,58,74,.08)">Psicologia cognitiva; <em>Cognitive Behavioral Therapy</em></div>
+          <div class="p-4 text-xs text-gray-300" style="background:rgba(42,58,26,.08)">Minimalisme; crítica del consumisme</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- El que les uneix -->
+    <div class="concept-card p-7 rounded-xl no-anim text-center max-w-3xl mx-auto" style="border-color:rgba(201,168,76,.3);">
+      <p class="eyebrow mb-4">Allò que comparteixen les tres escoles</p>
+      <div class="grid grid-cols-3 gap-4 text-sm">
+        <div class="bg-black/40 p-4 rounded-xl">
+          <div class="text-2xl mb-2">🎯</div>
+          <p class="font-cinzel text-xs font-bold text-yellow-500 mb-1">PRÀCTIQUES</p>
+          <p class="text-gray-400 text-xs">No teoria abstracta sinó guia per viure. La filosofia com a art de vida.</p>
+        </div>
+        <div class="bg-black/40 p-4 rounded-xl">
+          <div class="text-2xl mb-2">🧍</div>
+          <p class="font-cinzel text-xs font-bold text-yellow-500 mb-1">INDIVIDUALS</p>
+          <p class="text-gray-400 text-xs">La felicitat es construeix des de dins, no depèn de la polis ni del col·lectiu.</p>
+        </div>
+        <div class="bg-black/40 p-4 rounded-xl">
+          <div class="text-2xl mb-2">🔐</div>
+          <p class="font-cinzel text-xs font-bold text-yellow-500 mb-1">AUTOSUFICIENTS</p>
+          <p class="text-gray-400 text-xs">El savi és independent dels factors externs. La llibertat interior és l'única llibertat veritable.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     REPASSAR
+══════════════════════════════════════════════════ -->
+<section id="repassar" class="py-20 section-dark">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="font-cinzel text-4xl font-bold text-white mb-4">PREGUNTES PER REPASSAR</h2>
+      <p class="text-gray-400">Les escoles hel·lenístiques interpel·len el present</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-base font-bold border-b pb-2 mb-4" style="color:var(--epicur-l);border-color:rgba(196,133,74,.3)">🍃 Epicureisme</h3>
+        <div class="concept-card card-epicur p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">El plaer és el fi de la vida?</p>
+          <p class="text-xs text-gray-400">Epicur diria que sí, però no qualsevol plaer. El plaer d'una conversa amistosa val més que el d'un festí: és més durador i no genera dependència.</p>
+        </div>
+        <div class="concept-card card-epicur p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Podem "calcular" la felicitat?</p>
+          <p class="text-xs text-gray-400">L'economia hedonista d'Epicur anticipa la psicologia cognitiva moderna: les nostres decisions es basen en projeccions de plaer i dolor futur. Però, és sempre racional aquesta projecció?</p>
+        </div>
+        <div class="concept-card card-epicur p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">La por a la mort és irracional?</p>
+          <p class="text-xs text-gray-400">Epicur diu que sí, perquè quan la mort arriba, jo ja no hi soc. Però, és la por a la mort por al no-ser, o por a perdre el que estimo?</p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-base font-bold border-b pb-2 mb-4" style="color:var(--stoic-l);border-color:rgba(74,158,196,.3)">⚖️ Estoïcisme</h3>
+        <div class="concept-card card-stoic p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Podem realment separar el que "depèn de mi"?</p>
+          <p class="text-xs text-gray-400">Epictet diu que els nostres pensaments i actituds depenen de nosaltres. Però la neurociència mostra que molts processos mentals són automàtics i difícils de controlar. On és la línia?</p>
+        </div>
+        <div class="concept-card card-stoic p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">L'amor fati és resignació o saviesa?</p>
+          <p class="text-xs text-gray-400">Acceptar el destí pot semblar passivitat, però els estoics dirien que és la condició per actuar lliurement: primer acceptar el que no puc canviar, llavors transformar el que sí depèn de mi.</p>
+        </div>
+        <div class="concept-card card-stoic p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">La CBT és estoïcisme modern?</p>
+          <p class="text-xs text-gray-400">La Cognitive Behavioral Therapy (Teràpia Cognitiva) es basa en una idea estoica: no patim per les coses, sinó pels judicis que fem sobre les coses. Aaron Beck va reconèixer l'herència estoica.</p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-base font-bold border-b pb-2 mb-4" style="color:var(--cynic-l);border-color:rgba(122,191,90,.3)">🐕 Cinisme</h3>
+        <div class="concept-card card-cynic p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">El minimalisme modern és cinisme?</p>
+          <p class="text-xs text-gray-400">El moviment minimalista contemporani (Marie Kondo, "less is more") recull l'esperit cínic: alliberar-se de possessions innecessàries per viure amb més llibertat i autenticitat.</p>
+        </div>
+        <div class="concept-card card-cynic p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Podem viure sense convencions socials?</p>
+          <p class="text-xs text-gray-400">Diògenes ho va fer de manera radical. Però sense cap convenció, és possible la vida en comunitat? El cinisme assenyala el problema però no sempre ofereix una alternativa social viable.</p>
+        </div>
+        <div class="concept-card card-cynic p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Qui és el "cínic" veritable?</p>
+          <p class="text-xs text-gray-400">Avui "cínic" vol dir desconfiat i manipulador. Però el cínic original era el contrari: honest fins a l'extrem, disposat a dir la veritat davant del poder. Diògenes davant Alexandre és la imatge oposada al cinisme modern.</p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="font-cinzel text-base font-bold text-yellow-500 border-b border-yellow-500/30 pb-2 mb-4">Comparativa i Vigència</h3>
+        <div class="concept-card p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Quina escola té més sentit avui?</p>
+          <p class="text-xs text-gray-400">Cada escola respon a un perfil diferent. L'epicureisme per qui busca benestar; l'estoïcisme per qui afronta adversitat; el cinisme per qui vol desafiar el sistema. Potser les tres juntes?</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Vivim en una nova època hel·lenística?</p>
+          <p class="text-xs text-gray-400">La globalització, la pèrdua de referents col·lectius, l'individualisme i la recerca de "mindfulness" recorden sorprenentment el context hel·lenístic. Les respostes antigues continuen sent pertinents?</p>
+        </div>
+        <div class="concept-card p-4 rounded-lg">
+          <p class="text-sm text-gray-300 font-semibold mb-2">Pot la filosofia ser una teràpia?</p>
+          <p class="text-xs text-gray-400">Les tres escoles ho afirmen. Avui la "filosofia pràctica" i el coaching recuperen aquesta idea. Però, és diferent la teràpia filosòfica de la psicològica? Quin és el límit?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SÍNTESI -->
+<section class="py-20 section-mid">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="font-cinzel text-4xl font-bold text-white mb-10">SÍNTESI</h2>
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <div class="concept-card card-epicur p-6 rounded-xl">
+        <div class="text-3xl mb-3">🍃</div>
+        <h3 class="font-cinzel text-base font-bold mb-2" style="color:var(--epicur-l)">Epicureisme</h3>
+        <p class="text-xs text-gray-400">Gestiona els desitjos amb saviesa. Busca l'ataràxia: pau interior lliure de pertorbacions. Elimina la por als déus i a la mort. Cultiva l'amistat.</p>
+      </div>
+      <div class="concept-card card-stoic p-6 rounded-xl">
+        <div class="text-3xl mb-3">⚖️</div>
+        <h3 class="font-cinzel text-base font-bold mb-2" style="color:var(--stoic-l)">Estoïcisme</h3>
+        <p class="text-xs text-gray-400">Distingeix el que depèn de tu del que no. Viu virtuosament d'acord amb el logos. Accepta el destí amb amor fati. Mantén l'apatheia davant les passions.</p>
+      </div>
+      <div class="concept-card card-cynic p-6 rounded-xl">
+        <div class="text-3xl mb-3">🐕</div>
+        <h3 class="font-cinzel text-base font-bold mb-2" style="color:var(--cynic-l)">Cinisme</h3>
+        <p class="text-xs text-gray-400">Allibera't de tot el que és superflu. Retorna a la vida natural. Desafia les convencions socials. L'autarquia radical com a camí cap a la llibertat.</p>
+      </div>
+    </div>
+    <p class="font-playfair italic text-gray-400 text-lg">Tres camins, un únic repte: com ser feliç en un món que no controlem.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:linear-gradient(180deg,#050408 0%,rgba(20,15,5,.4) 40%,#050408 100%);border-top:1px solid rgba(201,168,76,.1);padding:4rem 0;">
+  <div class="max-w-5xl mx-auto px-4 text-center">
+    <span class="font-cinzel text-yellow-600 text-xl tracking-widest font-bold">HEL·LENISME Experience</span>
+    <p class="font-playfair italic text-gray-400 text-lg block mt-3 mb-8">"Filosofia com a teràpia: tres escoles per a un món incert"</p>
+    <div class="quote-block p-8 rounded-xl text-center max-w-3xl mx-auto mb-10">
+      <p class="text-xl font-playfair italic text-gray-200 mb-4">"La filosofia no ensenya a parlar, sinó a actuar." — Sèneca</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 text-left">
+      <div>
+        <h4 class="font-cinzel font-bold mb-3 text-sm" style="color:var(--epicur-l)">Epicureisme</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Epicur de Samos (341–270 aC)</li>
+          <li>• Hedoné · Plaer com a guia</li>
+          <li>• Tres tipus de desitjos</li>
+          <li>• Ataràxia i autarquia</li>
+          <li>• Eliminació de la por als déus i a la mort</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-cinzel font-bold mb-3 text-sm" style="color:var(--stoic-l)">Estoïcisme</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Zenó de Cítion (~300 aC)</li>
+          <li>• Logos · Raó universal</li>
+          <li>• Amor fati · Acceptació del destí</li>
+          <li>• Apatheia · Impertorbabilitat</li>
+          <li>• Epictet, Sèneca, Marc Aureli</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-cinzel font-bold mb-3 text-sm" style="color:var(--cynic-l)">Cinisme</h4>
+        <ul class="space-y-1 text-xs text-gray-500">
+          <li>• Diògenes de Sinope (412–323 aC)</li>
+          <li>• Kynikos · Semblant a un gos</li>
+          <li>• Autarquia radical</li>
+          <li>• Rebuig de les convencions</li>
+          <li>• L'exemple personal com a filosofia</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Progress bar ─────────────────────────────────
+window.addEventListener('scroll', () => {
+  const s = document.body.scrollTop || document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  document.getElementById('progressBar').style.width = (s / h * 100) + '%';
+});
+
+// ── School tab switcher ──────────────────────────
+const ESCOLES = ['epicureisme','estoicisme','cinisme'];
+let lastEscolaTab = 'epicureisme';
+
+function switchEscola(id, btn) {
+  ESCOLES.forEach(e => {
+    const p = document.getElementById('panel-' + e);
+    if (p) p.classList.toggle('active', e === id);
+  });
+  document.querySelectorAll('.phil-tab').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  lastEscolaTab = id;
+}
+
+// ── Scroll-spy ───────────────────────────────────
+const navLinks = document.querySelectorAll('.nav-link');
+let ignoreScroll = false;
+
+const parentMap = {
+  epicureisme: 'escoles',
+  estoicisme:  'escoles',
+  cinisme:     'escoles',
+};
+
+function idFromHash(href) { return href.replace('#',''); }
+
+function setActive(id) {
+  const parentId = id ? (parentMap[id] || id) : null;
+  navLinks.forEach(link => {
+    const target = idFromHash(link.getAttribute('href'));
+    const isActive = parentId && (target === parentId || target === id);
+    link.classList.toggle('active-section', !!isActive);
+  });
+  // Si estem a la zona escoles, ressalta el tab actiu al nav
+  if (id === 'escoles' || parentMap[id] === 'escoles') {
+    document.querySelectorAll('.phil-tab').forEach(btn => {
+      const m = (btn.getAttribute('onclick') || '').match(/'(\w+)'/);
+      btn.classList.toggle('active', m && m[1] === lastEscolaTab);
+    });
+  }
+}
+
+function getScrollSection() {
+  const pos = window.scrollY + window.innerHeight * 0.28;
+  let cur = null;
+  document.querySelectorAll('section[id], div[id]:not([aria-hidden])').forEach(el => {
+    if (el.offsetTop <= pos) cur = el;
+  });
+  return cur?.getAttribute('id') || null;
+}
+
+window.addEventListener('scroll', () => {
+  if (!ignoreScroll) setActive(getScrollSection());
+}, { passive: true });
+
+// ── Nav link clicks (bidireccional) ─────────────
+navLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    const id = idFromHash(link.getAttribute('href'));
+
+    if (ESCOLES.includes(id)) {
+      e.preventDefault();
+      const btn = document.querySelector(`.phil-tab[onclick*="'${id}'"]`);
+      switchEscola(id, btn);
+      const sec = document.getElementById('escoles');
+      if (sec) {
+        const y = sec.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+      ignoreScroll = true;
+      setActive('escoles');
+      setTimeout(() => { ignoreScroll = false; setActive(getScrollSection()); }, 800);
+      return;
+    }
+
+    ignoreScroll = true;
+    setActive(id);
+    setTimeout(() => { ignoreScroll = false; setActive(getScrollSection()); }, 800);
+  });
+});
+
+// ── Tabs → actualitzen el nav ────────────────────
+document.querySelectorAll('.phil-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const m = (btn.getAttribute('onclick') || '').match(/'(\w+)'/);
+    if (m) { lastEscolaTab = m[1]; setActive('escoles'); }
+  });
+});
+
+// ── Smooth scroll general ────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    const id = idFromHash(href);
+    if (ESCOLES.includes(id)) return;
+    const t = document.querySelector(href);
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+// ── Card fade-in ─────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0 });
+
+document.querySelectorAll('.concept-card:not(.no-anim)').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(8px)';
+  el.style.transition = `all .8s ease ${i * 0.035}s`;
+  obs.observe(el);
+});
+
+document.addEventListener('DOMContentLoaded', () => setActive(getScrollSection()));
+</script>
+</body>
+</html>

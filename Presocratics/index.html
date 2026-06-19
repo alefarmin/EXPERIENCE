@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ca" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Els Presocràtics: La Recerca de l'Arkhé</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cosmic: {
+                            950: '#070a13',
+                            900: '#0f1423',
+                            800: '#1d243d',
+                            100: '#e2e8f0',
+                        },
+                        ocean: '#0ea5e9',  /* Tales: L'Aigua */
+                        pyre: '#f97316',   /* Heràclit: El Foc */
+                        aurora: '#eab308'  /* Pitàgores: El Nombre */
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #070a13; }
+        ::-webkit-scrollbar-thumb { background: #1d243d; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
+        
+        /* Shimmer Effect per als títols */
+        .shimmer-text {
+            background: linear-gradient(to right, #0ea5e9 20%, #f97316 40%, #eab308 60%, #0ea5e9 80%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 6s linear infinite;
+        }
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+    </style>
+</head>
+<body class="bg-cosmic-950 text-cosmic-100 font-sans antialiased selection:bg-ocean selection:text-cosmic-950">
+
+    <!-- Barra de Progrés Superior -->
+    <div id="progress-bar" class="fixed top-0 left-0 h-1 bg-gradient-to-right from-ocean via-pyre to-aurora transition-all duration-100 z-50" style="width: 0%"></div>
+
+    <!-- Navegació Superior -->
+    <nav class="fixed top-0 w-full bg-cosmic-950/80 backdrop-blur-md border-b border-cosmic-800/50 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <span class="text-lg font-bold tracking-wider uppercase text-cosmic-100">
+                <span class="text-ocean">Φ</span> Physis & Logos
+            </span>
+            <div class="flex space-x-6 text-sm font-medium">
+                <a href="#hero" class="hover:text-ocean transition-colors">Arkhé</a>
+                <a href="#escoles" class="hover:text-pyre transition-colors">Escoles</a>
+                <a href="#debat" class="hover:text-aurora transition-colors">El Gran Debat</a>
+                <a href="#evolucio" class="hover:text-ocean transition-colors">Evolució</a>
+                <a href="#repas" class="bg-cosmic-800 hover:bg-cosmic-700 px-3 py-1.5 rounded-lg transition-colors">Repàs</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECCIÓ HERO -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+        <!-- Fons cosmònic amb degradat -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(29,36,61,0.3)_0%,rgba(7,10,19,1)_70%)] z-0"></div>
+        
+        <div class="relative max-w-4xl mx-auto px-4 text-center z-10 space-y-6">
+            <div class="inline-flex items-center space-x-2 bg-cosmic-900 border border-cosmic-800 px-3 py-1 rounded-full text-xs text-ocean tracking-wide uppercase animate-pulse-slow">
+                <span>El pas del Mythos al Logos</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight shimmer-text">
+                Els Presocràtics
+            </h1>
+            <p class="text-xl md:text-2xl text-cosmic-100/70 font-light max-w-2xl mx-auto leading-relaxed">
+                Abans de Sòcrates, la ment humana va girar la mirada cap a la <span class="text-ocean font-medium">Physis</span> (naturalesa) per trobar l'<span class="text-pyre font-medium">Arkhé</span>: el principi material i unificador de tot l'univers.
+            </p>
+            <div class="pt-4 animate-float">
+                <a href="#escoles" class="inline-flex items-center justify-center bg-gradient-to-r from-ocean to-pyre text-cosmic-950 font-semibold px-6 py-3 rounded-xl shadow-lg shadow-ocean/20 hover:opacity-90 transition-opacity">
+                    Explorar el Kosmos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓ 1: LES ESCOLES PRIMORDIALS -->
+    <section id="escoles" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-cosmic-800/50">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl font-bold tracking-tight text-cosmic-100 sm:text-4xl">Les Primeres Rutes del Pensament</h2>
+            <p class="mt-4 text-lg text-cosmic-100/60">El trencament amb les explicacions mitològiques neix paral·lelament en dos focus geogràfics i conceptuals diferents.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Escola Jònica -->
+            <div class="bg-cosmic-900 border border-cosmic-800 rounded-2xl p-8 hover:border-ocean/40 transition-all duration-300 group">
+                <div class="w-12 h-12 bg-ocean/10 rounded-xl flex items-center justify-center mb-6 border border-ocean/20 group-hover:bg-ocean/20 transition-colors">
+                    <span class="text-ocean font-bold text-xl">~</span>
+                </div>
+                <h3 class="text-2xl font-semibold mb-4 text-cosmic-100 group-hover:text-ocean transition-colors">L'Escola Jònica (Monisme Material)</h3>
+                <p class="text-cosmic-100/70 leading-relaxed mb-6">
+                    Situada a les costes de l'Àsia Menor (Milet). Es caracteritza per cercar un únic principi material, observable i físic que expliqui la pluralitat de la realitat.
+                </p>
+                <ul class="space-y-3 text-sm text-cosmic-100/80">
+                    <li class="flex items-center space-x-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-ocean"></span>
+                        <span><strong>Tales de Milet:</strong> L'Aigua com a element primordial de la vida.</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-ocean"></span>
+                        <span><strong>Anaximandre:</strong> L'<em>Àpeiron</em>; allò indeterminat, indefinit i etern.</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-ocean"></span>
+                        <span><strong>Anaxímenes:</strong> L'Aire, mitjançant la condensació i la rarefacció.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Escola Itàlica -->
+            <div class="bg-cosmic-900 border border-cosmic-800 rounded-2xl p-8 hover:border-aurora/40 transition-all duration-300 group">
+                <div class="w-12 h-12 bg-aurora/10 rounded-xl flex items-center justify-center mb-6 border border-aurora/20 group-hover:bg-aurora/20 transition-colors">
+                    <span class="text-aurora font-bold text-xl">√</span>
+                </div>
+                <h3 class="text-2xl font-semibold mb-4 text-cosmic-100 group-hover:text-aurora transition-colors">L'Escola Itàlica (Misticisme Formal)</h3>
+                <p class="text-cosmic-100/70 leading-relaxed mb-6">
+                    Desenvolupada a la Magna Grècia (sud d'Itàlia). Allunya la mirada dels elements purament físics per centrar-se en l'estructura formal de l'univers.
+                </p>
+                <ul class="space-y-3 text-sm text-cosmic-100/80">
+                    <li class="flex items-center space-x-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-aurora"></span>
+                        <span><strong>Pitàgores de Samos:</strong> L'Arkhé és el <strong>Nombre</strong>.</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-aurora"></span>
+                        <span>L'univers està estructurat sota relacions i harmonies matemàtiques.</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-aurora"></span>
+                        <span>Introducció del misticisme òrfic i la transmigració de les ànimes.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓ 2: EL GRAN DEBAT METAFÍSIC -->
+    <section id="debat" class="py-24 bg-cosmic-900/40 border-t border-b border-cosmic-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold tracking-tight text-cosmic-100 sm:text-4xl">El Gran Xoc: Heràclit vs Parmènides</h2>
+                <p class="mt-4 text-lg text-cosmic-100/60">La màxima paradoxa de la metafísica presocràtica: és la realitat un canvi perpetu o una permanència absoluta?</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-stretch">
+                <!-- Heràclit -->
+                <div class="flex flex-col bg-cosmic-950 border border-cosmic-800 rounded-2xl p-8 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-pyre/5 rounded-full blur-2xl"></div>
+                    <span class="text-xs font-bold tracking-widest text-pyre uppercase mb-2">Efes</span>
+                    <h3 class="text-3xl font-bold text-cosmic-100 mb-4">Heràclit: El Devenir perpetu</h3>
+                    <p class="text-cosmic-100/70 leading-relaxed mb-6">
+                        "Tot flueix" (*Panta rei*). La realitat està en un estat de transformació constant. L'Arkhé és el <strong>Foc</strong>, símbol del canvi i de la destrucció/creació dinàmica.
+                    </p>
+                    <div class="mt-auto space-y-4 bg-cosmic-900/50 border border-cosmic-800/60 p-4 rounded-xl">
+                        <p class="text-sm italic text-pyre font-medium">"No ens podem banyar dues vegades en el mateix riu."</p>
+                        <p class="text-xs text-cosmic-100/50">El motor de la Physis és la <strong>lluita de contraris</strong> (la guerra o *Polemos* és el pare de totes les coses), regulada per una llei universal o mètrica intel·ligent: el <strong>Logos</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- Parmènides -->
+                <div class="flex flex-col bg-cosmic-950 border border-cosmic-800 rounded-2xl p-8 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-ocean/5 rounded-full blur-2xl"></div>
+                    <span class="text-xs font-bold tracking-widest text-ocean uppercase mb-2">Elea</span>
+                    <h3 class="text-3xl font-bold text-cosmic-100 mb-4">Parmènides: L'Immobilisme de l'Ésser</h3>
+                    <p class="text-cosmic-100/70 leading-relaxed mb-6">
+                        El canvi és lògicament impossible. Una cosa no pot passar de "no ser" a "ser". Per tant, el moviment i la multiplicitat que ens mostren els sentits són una pura <strong>il·lusió</strong>.
+                    </p>
+                    <div class="mt-auto space-y-4 bg-cosmic-900/50 border border-cosmic-800/60 p-4 rounded-xl">
+                        <p class="text-sm italic text-ocean font-medium">"L'Ésser és, i el No-Ésser no és i és impossible que sigui."</p>
+                        <p class="text-xs text-cosmic-100/50">L'Ésser és un, etern, immòbil, indivisible i esfèric. S'inaugura la <strong>Via de la Veritat</strong> (raó) en contraposició a la Via de l'Opinió (*Doxa*).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓ 3: EVOLUCIÓ CAP ALS PLURALISTES (SISTEMA DE PESTANYES) -->
+    <section id="evolucio" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold tracking-tight text-cosmic-100 sm:text-4xl">La Resposta Pluralista</h2>
+            <p class="mt-4 text-lg text-cosmic-100/60">Per salvar la paradoxa de Parmènides sense negar el món físic, els últims presocràtics proposen models basats en múltiples elements.</p>
+        </div>
+
+        <!-- Botons de les Pestanyes / Tabs -->
+        <div class="flex justify-center space-x-2 md:space-x-4 bg-cosmic-900 p-1.5 rounded-xl border border-cosmic-800 max-w-xl mx-auto mb-12">
+            <button onclick="switchTab('empedocles')" id="btn-empedocles" class="tab-btn w-full py-2.5 text-sm font-semibold rounded-lg transition-all bg-ocean text-cosmic-950 shadow-md">
+                Empèdocles
+            </button>
+            <button onclick="switchTab('anaxagores')" id="btn-anaxagores" class="tab-btn w-full py-2.5 text-sm font-semibold rounded-lg transition-all text-cosmic-100/60 hover:text-cosmic-100">
+                Anaxàgores
+            </button>
+            <button onclick="switchTab('democrit')" id="btn-democrit" class="tab-btn w-full py-2.5 text-sm font-semibold rounded-lg transition-all text-cosmic-100/60 hover:text-cosmic-100">
+                Demòcrit
+            </button>
+        </div>
+
+        <!-- Continguts de les Pestanyes -->
+        <div class="bg-cosmic-900 border border-cosmic-800 rounded-2xl p-8 max-w-4xl mx-auto min-h-[300px] flex items-center">
+            
+            <!-- Tab Empèdocles -->
+            <div id="tab-empedocles" class="tab-content w-full space-y-6">
+                <div class="flex items-center space-x-3">
+                    <h3 class="text-2xl font-bold text-cosmic-100">Les Quatre Arrels</h3>
+                    <span class="px-2 py-0.5 text-xs bg-ocean/20 text-ocean font-medium rounded">4 Elements</span>
+                </div>
+                <p class="text-cosmic-100/75 leading-relaxed">
+                    Empèdocles d'Agrigent postula que no hi ha un sol Arkhé, sinó quatre arrels indestructibles i eternes: **Aigua, Terra, Aire i Foc**. 
+                </p>
+                <p class="text-cosmic-100/75 leading-relaxed">
+                    Els objectes de l'univers canvien, neixen i moren no perquè l'ésser canviï, sinó per la barreja i separació d'aquestes quatre arrels sota l'acció de dues forces còsmiques ordonadores: **l'Amor** (*Philia*, que uneix els elements) i **l'Odi** (*Neikos*, que els separa).
+                </p>
+            </div>
+
+            <!-- Tab Anaxàgores (Ocult inicialment) -->
+            <div id="tab-anaxagores" class="tab-content w-full space-y-6 hidden">
+                <div class="flex items-center space-x-3">
+                    <h3 class="text-2xl font-bold text-cosmic-100">Les Homeomeries i el Nous</h3>
+                    <span class="px-2 py-0.5 text-xs bg-pyre/20 text-pyre font-medium rounded">Llavors</span>
+                </div>
+                <p class="text-cosmic-100/75 leading-relaxed">
+                    Anaxàgores de Clazòmenes afirma que "tot està en tot". La realitat està composta per infinites partícules o llavors diminutes anomenades **homeomeries**. En cada tros de matèria hi ha una porció de tota la resta de coses.
+                </p>
+                <p class="text-cosmic-100/75 leading-relaxed">
+                    El motor que posa en moviment i ordena aquestes infinites llavors és una Intel·ligència còsmica, externa i pura anomenada **Nous**, obrint el camí conceptual a futures teories teleològiques.
+                </p>
+            </div>
+
+            <!-- Tab Demòcrit (Ocult inicialment) -->
+            <div id="tab-democrit" class="tab-content w-full space-y-6 hidden">
+                <div class="flex items-center space-x-3">
+                    <h3 class="text-2xl font-bold text-cosmic-100">L'Atomisme Mecanicista</h3>
+                    <span class="px-2 py-0.5 text-xs bg-aurora/20 text-aurora font-medium rounded">Àtoms i Buit</span>
+                </div>
+                <p class="text-cosmic-100/75 leading-relaxed">
+                    Demòcrit d'Abdera (juntament amb Leucip) formula una explicació purament materialista i mecanicista de l'univers. La realitat està feta exclusivament de dues coses: **Àtoms** (partícules indivisibles, plenes, infinites i eternes) i **el Buit** (l'espai on els àtoms es mouen).
+                </p>
+                <p class="text-cosmic-100/75 leading-relaxed">
+                    No hi ha forces divines ni finalitats (no hi ha *Nous* ni *Amor*). Els àtoms col·lideixen i es reordenen per pur **atzar i necessitat mecànica**, anticipant la física moderna.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECCIÓ 4: EXERCICIS DE REPÀS COMPETENCIAL (2n BATXILLERAT) -->
+    <section id="repas" class="py-24 bg-cosmic-900/40 border-t border-cosmic-800/50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold tracking-tight text-cosmic-100 sm:text-4xl">Preparació de l'Examen Competencial</h2>
+                <p class="mt-4 text-lg text-cosmic-100/60">Preguntes crítiques orientades a les proves de 2n de Baccalaureate.</p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Pregunta 1 -->
+                <div class="bg-cosmic-950 border border-cosmic-800 rounded-xl p-6">
+                    <span class="text-xs font-semibold text-ocean uppercase">Exercici d'Anàlisi</span>
+                    <h4 class="text-lg font-semibold text-cosmic-100 mt-1 mb-3">1. Com resol l'atomisme de Demòcrit el veto de Parmènides a l'existència del moviment?</h4>
+                    <p class="text-sm text-cosmic-100/70 leading-relaxed">
+                        <strong>Clau de resposta:</strong> Demòcrit accepta que els àtoms són idèntics a l'Ésser de Parmènides (indivisibles, plens, immutables per dins), però introdueix una gran heretgia conceptual: l'existència de la modificació del No-Ésser en forma de <strong>Buit</strong>. El Buit permet que l'Ésser (els àtoms) es desplaci, solucionant lògicament el canvi.
+                    </p>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="bg-cosmic-950 border border-cosmic-800 rounded-xl p-6">
+                    <span class="text-xs font-semibold text-pyre uppercase">Dissertació Breu</span>
+                    <h4 class="text-lg font-semibold text-cosmic-100 mt-1 mb-3">2. Quina diferència conceptual hi ha entre l'origen del moviment en Anaxàgores (Nous) i en Demòcrit (Mecanicisme)?</h4>
+                    <p class="text-sm text-cosmic-100/70 leading-relaxed">
+                        <strong>Clau de resposta:</strong> Anaxàgores necessita una força intel·ligent, exterior i finalista (el *Nous*) per ordenar el caos de llavors. En canvi, Demòcrit rebutja qualsevol transcendència: el moviment és inherent a l'àtom, causat per xocs previs en el buit dins d'una cadena causal mecànica sense cap propòsit final.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-cosmic-950 border-t border-cosmic-800/60 py-8 text-center text-xs text-cosmic-100/40">
+        <p>© 2026 Història de la Filosofia — Quadern de Pràctiques Digitals.</p>
+    </footer>
+
+    <!-- SCRIPT LOGIC (BARRA PROGRÉS I PESTANYES) -->
+    <script>
+        // Control de la Barra de Progrés
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Control de les Pestanyes Dinàmiques (Tabs)
+        function switchTab(tabId) {
+            // Ocultar tots els continguts de tab
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+
+            // Treure estils actius de tots els botons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-ocean', 'text-cosmic-950', 'shadow-md');
+                btn.classList.add('text-cosmic-100/60');
+            });
+
+            // Mostrar el contingut seleccionat i activar el botó corresponent
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.remove('text-cosmic-100/60');
+            activeBtn.classList.add('bg-ocean', 'text-cosmic-950', 'shadow-md');
+        }
+    </script>
+</body>
+</html>
