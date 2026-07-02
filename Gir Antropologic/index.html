@@ -67,14 +67,14 @@
   /* Quote */
   .quote-block{
     border-left:3px solid var(--ember);
-    background:linear-gradient(90deg,rgba(140,59,26,.14) 0%,rgba(140,59,26,.04) 60%,transparent 100%);
+    background:linear-gradient(90deg,rgba(140,59,26,.14) 0%,rgba(137, 114, 104, 0.653) 60%,transparent 100%);
     font-style:italic;position:relative;
   }
   .quote-block.sage{border-left-color:var(--sage);background:linear-gradient(90deg,rgba(74,124,90,.14) 0%,transparent 80%);}
   .big-q{
     position:absolute;top:-12px;left:10px;
     font-family:'Playfair Display',serif;font-size:5rem;line-height:1;
-    color:rgba(180,90,40,.15);pointer-events:none;user-select:none;
+    color:rgba(180, 89, 40, 0.618);pointer-events:none;user-select:none;
   }
   .big-q.sage-q{color:rgba(74,124,90,.15);}
 
@@ -133,7 +133,7 @@
   body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-repeat:repeat;background-size:200px;opacity:.3;}
 
   /* Home btn */
-  .home-btn{padding:5px 12px;font-size:11px;border:1px solid rgba(180,90,40,.25);border-radius:20px;color:var(--amber);text-decoration:none;background:rgba(180,90,40,.06);transition:all .2s;font-family:'Cinzel',serif;letter-spacing:.04em;}
+  .home-btn{padding:5px 12px;font-size:13px;border:2px solid rgba(180,90,40,.25);border-radius:20px;color:var(--amber);text-decoration:none;background:rgba(180,90,40,.06);transition:all .2s;font-family:'Cinzel',serif;letter-spacing:.04em;}
   .home-btn:hover{background:rgba(180,90,40,.15);border-color:rgba(180,90,40,.5);transform:translateY(-1px);}
 
   /* Contrast boxes */
@@ -162,12 +162,12 @@
         </svg>
         <span class="font-cinzel text-base font-bold text-amber-600 group-hover:text-white transition" style="letter-spacing:.12em;">GIR ANTROPOLÒGIC</span>
       </a>
-      <div class="hidden md:flex space-x-5 items-center text-sm">
-        <a href="../index.html" class="home-btn">← Experience</a>
+      <div class="hidden md:flex space-x-5 items-center text-base">
+        <a href="../index.html" class="home-btn">← Inici Experience</a>
         <div class="relative group">
-          <a href="#context" class="nav-link flex items-center gap-1">Context <span class="text-xs">▼</span></a>
+          <a href="#segle pericles" class="nav-link flex items-center gap-1">Context <span class="text-xs">▼</span></a>
           <div class="absolute left-0 top-full mt-0 pt-2 w-52 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
-            <a href="#context"  class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">El Segle de Pèricles</a>
+            <a href="#segle pericles"  class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">El Segle de Pèricles</a>
             <a href="#nomosphy" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Nomos vs. Physis</a>
           </div>
         </div>
@@ -195,123 +195,208 @@
 </nav>
 
 <!-- HERO -->
-<section id="inici" class="relative min-h-screen flex items-center section-dark pt-16">
+<section id="inici" class="relative min-h-screen flex items-center section-dark pt-16 overflow-hidden">
+
+  <!-- Fons -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src="img/img2.jpg"
+      alt=""
+      class="w-full h-full object-cover mix-blend-screen opacity-50"
+    >
+    
+  </div>
+
   <!-- Orbs animats -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="orb1 absolute" style="top:15%;left:5%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(140,59,26,.14) 0%,transparent 70%);filter:blur(50px);"></div>
-    <div class="orb2 absolute" style="bottom:20%;right:5%;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(74,124,90,.12) 0%,transparent 70%);filter:blur(50px);"></div>
+    <div class="orb1 absolute"
+      style="top:15%;left:5%;width:420px;height:420px;border-radius:50%;
+      background:radial-gradient(circle,rgba(140,59,26,.14) 0%,transparent 70%);
+      filter:blur(50px);"></div>
+
+    <div class="orb2 absolute"
+      style="bottom:20%;right:5%;width:350px;height:350px;border-radius:50%;
+      background:radial-gradient(circle,rgba(74,124,90,.12) 0%,transparent 70%);
+      filter:blur(50px);"></div>
   </div>
+
   <!-- Grid -->
   <svg class="absolute inset-0 w-full h-full opacity-[0.035]" xmlns="http://www.w3.org/2000/svg">
-    <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#B85C28" stroke-width="0.5"/></pattern></defs>
+    <defs>
+      <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#B85C28" stroke-width="0.5"/>
+      </pattern>
+    </defs>
     <rect width="100%" height="100%" fill="url(#grid)"/>
   </svg>
 
+  <!-- CONTINGUT -->
   <div class="relative z-10 max-w-6xl mx-auto px-6 w-full">
+    
     <div class="grid lg:grid-cols-2 gap-14 items-center">
-      <!-- TEXT -->
+
+      <!-- ESQUERRA -->
       <div>
+
         <div class="mb-5 inline-block">
-          <span class="font-cinzel text-xs border border-amber-700/50 text-amber-600 px-5 py-2 rounded-full tracking-widest uppercase">Segle V a.C. · Atenes</span>
+          <span class="font-cinzel text-xs border border-amber-700/50 text-amber-400 px-5 py-2 rounded-full tracking-widest uppercase">
+            Segle V a.C. · Atenes
+          </span>
         </div>
-        <p class="font-cinzel text-2xl md:text-3xl text-amber-600 tracking-[0.18em] mb-3">EL GIR ANTROPOLÒGIC</p>
+
+        <p class="font-cinzel text-2xl md:text-3xl text-amber-200 tracking-[0.18em] mb-3">
+          EL GIR ANTROPOLÒGIC
+        </p>
+
         <h1 class="font-cinzel text-5xl md:text-6xl font-black mb-6 leading-tight shimmer-text">
           DE LA<br>PHYSIS<br>A L'HOME
         </h1>
+
         <p class="font-playfair text-lg text-gray-300 mb-8 italic leading-relaxed">
-          Al s.V a.C., la filosofia abandona l'estudi de la naturalesa i gira la mirada cap a l'ésser humà: la política, l'ètica, el llenguatge i la virtut. 
-          La democràcia atenesa transforma radicalment el que significa <strong class="text-amber-500 not-italic">saber</strong> i <strong class="text-amber-500 not-italic">ser virtuós</strong>.
+          Al s.V a.C., la filosofia abandona l'estudi de la naturalesa i gira la mirada cap a l'ésser humà:
+          la política, l'ètica, el llenguatge i la virtut.
+          La democràcia atenesa transforma radicalment el que significa
+          <strong class="text-amber-500 not-italic">saber</strong> i
+          <strong class="text-amber-500 not-italic">ser virtuós</strong>.
         </p>
-        <div class="flex flex-wrap gap-3 text-xs text-amber-700 font-cinzel tracking-wider mb-8">
-          <span class="border border-amber-700/25 px-3 py-1 rounded-full">NOMOS</span>
-          <span class="border border-amber-700/25 px-3 py-1 rounded-full">ARETÉ</span>
-          <span class="border border-amber-700/25 px-3 py-1 rounded-full">RETÒRICA</span>
-          <span class="border border-amber-700/25 px-3 py-1 rounded-full">MAIÈUTICA</span>
-          <span class="border border-amber-700/25 px-3 py-1 rounded-full">LOGOS</span>
-          <span class="border border-sage-light/25 px-3 py-1 rounded-full" style="border-color:rgba(74,124,90,.3);color:var(--sage-light)">UNIVERSALISME</span>
+
+        <div class="flex flex-wrap gap-3 text-xs text-amber-300 font-cinzel tracking-wider mb-8">
+          <span class="border border-amber-400/25 px-3 py-1 rounded-full">NOMOS</span>
+          <span class="border border-amber-400/25 px-3 py-1 rounded-full">ARETÉ</span>
+          <span class="border border-amber-400/25 px-3 py-1 rounded-full">RETÒRICA</span>
+          <span class="border border-amber-400/25 px-3 py-1 rounded-full">MAIÈUTICA</span>
+          <span class="border border-amber-400/25 px-3 py-1 rounded-full">LOGOS</span>
+          <span class="border border-sage-light/25 px-3 py-1 rounded-full"
+                style="border-color:rgba(74, 124, 90, 0.497);color:var(--sage-light)">
+            UNIVERSALISME
+          </span>
         </div>
-        <div class="quote-block p-4 rounded-r-lg max-w-sm" style="position:relative;">
-          <span class="big-q">"</span>
-          <p class="font-playfair text-base italic text-gray-300 leading-relaxed relative z-10">"L'home és la mesura de totes les coses." — Protàgores</p>
+
+      </div>
+
+      <!-- DRETA (només cita arraconada) -->
+      <div class="hidden lg:flex h-full">
+
+        <div class="w-full flex flex-col justify-between py-6 pr-6">
+
+          <!-- TIMELINE HERO -->
+<div class="mt-14">
+
+  <p class="font-cinzel uppercase tracking-[0.25em] text-[11px] text-amber-300 mb-6">
+      Cronologia del segle V a.C.
+  </p>
+
+  <div class="relative w-[125%]">
+
+      <!-- línia -->
+      <div class="absolute top-3 left-0 right-0 h-px bg-gradient-to-r
+                  from-transparent via-amber-700/60 to-transparent">
+      </div>
+
+      <div class="grid grid-cols-5 gap-6 relative">
+
+          <div>
+              <div class="w-2.5 h-2.5 rounded-full bg-amber-500 mb-5"></div>
+
+              <p class="font-cinzel text-amber-300 font-bold">
+                  ~500
+              </p>
+
+              <p class="text-gray-300 text-sm mt-2 leading-relaxed">
+                  Guerres Mèdiques.<br>
+                  Victòria atenesa sobre Pèrsia.
+              </p>
+          </div>
+
+          <div>
+              <div class="w-2.5 h-2.5 rounded-full bg-amber-500 mb-5"></div>
+
+              <p class="font-cinzel text-amber-300 font-bold">
+                  ~470
+              </p>
+
+              <p class="text-gray-300 text-sm mt-2">
+                  Neix Sòcrates.
+              </p>
+          </div>
+
+          <div>
+              <div class="w-2.5 h-2.5 rounded-full bg-amber-500 mb-5"></div>
+
+              <p class="font-cinzel text-amber-300 font-bold">
+                  ~461
+              </p>
+
+              <p class="text-gray-300 text-sm mt-2">
+                  Reformes democràtiques de Pèricles.
+              </p>
+          </div>
+
+          <div>
+              <div class="w-2.5 h-2.5 rounded-full bg-amber-500 mb-5"></div>
+
+              <p class="font-cinzel text-amber-300 font-bold">
+                  ~450
+              </p>
+
+              <p class="text-gray-300 text-sm mt-2">
+                  Arriben els Sofistes.<br>
+                  Comença el Gir Antropològic.
+              </p>
+          </div>
+
+          <div>
+              <div class="w-2.5 h-2.5 rounded-full bg-amber-500 mb-5"></div>
+
+              <p class="font-cinzel text-amber-300 font-bold">
+                  399
+              </p>
+
+              <p class="text-gray-300 text-sm mt-2">
+                  Mort de Sòcrates.<br>
+                  Plató continua el seu llegat.
+              </p>
+          </div>
+
+      </div>
+
+  </div>
+
+</div>
+
+           <!-- CITA -->
+      <div class="flex justify-end">
+
+          <div class="quote-block p-4 rounded-r-lg max-w-sm relative">
+
+            <span class="big-q">"</span>
+
+            <p class="font-playfair text-base italic text-gray-300 leading-relaxed relative z-10">
+              "L'home és la mesura de totes les coses." — Protàgores
+            </p>
+
+          </div>
+
         </div>
       </div>
-      <!-- DRETA: Contrast sofistes/Sòcrates + mini timeline -->
-      <div class="hidden lg:flex flex-col gap-4">
-        <!-- Contrast -->
-        <div class="concept-card p-5 rounded-xl no-anim" style="border:none;background:transparent;">
-          <div class="grid grid-cols-2 gap-3">
-            <div class="sofist-box p-4 rounded-xl">
-              <p class="font-cinzel text-xs text-amber-600 tracking-wider mb-2 uppercase">Sofistes</p>
-              <ul class="text-xs text-gray-300 space-y-1">
-                <li>• Relativisme · "tot val?"</li>
-                <li>• Virtut = èxit social</li>
-                <li>• Ensenyen a canvi de diners</li>
-                <li>• Retòrica i persuasió</li>
-                <li>• Monòleg</li>
-              </ul>
-            </div>
-            <div class="socrat-box p-4 rounded-xl">
-              <p class="font-cinzel text-xs tracking-wider mb-2 uppercase" style="color:var(--sage-light)">Sòcrates</p>
-              <ul class="text-xs text-gray-300 space-y-1">
-                <li>• Universalisme moral</li>
-                <li>• Virtut = saber</li>
-                <li>• No cobra mai</li>
-                <li>• Ironia i maièutica</li>
-                <li>• Diàleg</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!-- Mini timeline -->
-        <div class="concept-card p-5 rounded-xl no-anim">
-          <p class="eyebrow mb-4">Evolució del pensament al s. V a.C.</p>
-          <div class="space-y-3 text-xs">
-            <div class="flex gap-3 items-start">
-              <span class="text-amber-600 font-cinzel font-bold min-w-[65px]">~500 a.C.</span>
-              <span class="text-gray-400">Guerres Mèdiques. Victòria atenesa sobre Pèrsia.</span>
-            </div>
-            <div class="flex gap-3 items-start">
-              <span class="text-amber-600 font-cinzel font-bold min-w-[65px]">~461 a.C.</span>
-              <span class="text-gray-400">Pèricles lidera les reformes democràtiques.</span>
-            </div>
-            <div class="flex gap-3 items-start">
-              <span class="text-amber-600 font-cinzel font-bold min-w-[65px]">~450 a.C.</span>
-              <span class="text-gray-400">Els Sofistes arriben a Atenes. Gir Antropològic.</span>
-            </div>
-            <div class="flex gap-3 items-start">
-              <span class="text-amber-600 font-cinzel font-bold min-w-[65px]">~470 a.C.</span>
-              <span class="text-gray-400">Neix Sòcrates. Mètode dialèctic vs. sofístic.</span>
-            </div>
-            <div class="flex gap-3 items-start">
-              <span class="text-amber-600 font-cinzel font-bold min-w-[65px]">399 a.C.</span>
-              <span class="text-gray-400">Mort de Sòcrates. Plató hereta el seu llegat.</span>
-            </div>
-          </div>
-        </div>
-        <!-- Equació socràtica -->
-        <div class="concept-card p-4 rounded-xl no-anim" style="border-color:rgba(74,124,90,.3);">
-          <p class="eyebrow text-center mb-3" style="color:rgba(74,124,90,.7)">L'equació de Sòcrates</p>
-          <div class="eq-block">
-            <span class="eq-term">SABER</span>
-            <span class="eq-op">=</span>
-            <span class="eq-term">VIRTUT</span>
-            <span class="eq-op">=</span>
-            <span class="eq-term">FELICITAT</span>
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
 
+  <!-- scroll indicator -->
   <div class="absolute bottom-10 left-1/2 -translate-x-1/2 float-anim">
     <svg class="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
     </svg>
   </div>
+
 </section>
 
+
+
 <!-- CONTEXT: SEGLE DE PÈRICLES -->
-<section id="context" class="py-20 section-mid">
+<section id="segle pericles" class="py-20 section-mid">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="text-center mb-14">
       <p class="eyebrow mb-3">Context Històric · Atenes · s. V a.C.</p>
@@ -763,8 +848,8 @@
         </div>
 
         <!-- L'equació -->
-        <div class="concept-card p-6 rounded-xl text-center no-anim" style="border-color:rgba(74,124,90,.4);">
-          <p class="eyebrow mb-4" style="color:rgba(74,124,90,.7)">L'equació fonamental de Sòcrates</p>
+        <div class="concept-card p-6 rounded-xl text-center no-anim" style="border-color:rgba(74, 124, 90, 0.719);">
+          <p class="eyebrow mb-4" style="color:rgba(70, 212, 115, 0.86)">L'equació fonamental de Sòcrates</p>
           <div class="eq-block mb-4">
             <span class="eq-term">SABER</span>
             <span class="eq-op">=</span>

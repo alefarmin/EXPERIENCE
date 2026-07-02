@@ -391,7 +391,7 @@
           <div class="absolute left-0 top-full mt-0 pt-2 w-56 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-300">
             <a href="#heraclit" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Heràclit: Tot Flueix</a>
             <a href="#parmenides" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Parmènides: El Ser Immutable</a>
-            <a href="#dialektiki" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">Dialektikí: El Debat</a>
+            <a href="#dialektiki" class="nav-link block px-4 py-2 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition">El Debat</a>
           </div>
         </div>
         <div class="relative group">
@@ -409,82 +409,62 @@
 </nav>
 
 <section id="inici" class="relative min-h-screen flex items-center section-dark pt-16">
-  <!-- Orbs animats de fons -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="hero-orb-1 absolute" style="top:20%;left:10%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(196,112,42,.12) 0%,transparent 70%);filter:blur(40px);"></div>
-    <div class="hero-orb-2 absolute" style="top:40%;right:8%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(27,58,92,.2) 0%,transparent 70%);filter:blur(50px);"></div>
-    <div class="hero-orb-3 absolute" style="bottom:15%;left:40%;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(196,112,42,.08) 0%,transparent 70%);filter:blur(35px);"></div>
-  </div>
-  <!-- Grid de perspectiva -->
-  <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(ellipse at 20% 60%,rgba(196,112,42,.18) 0%,transparent 55%),radial-gradient(ellipse at 78% 25%,rgba(27,58,92,.25) 0%,transparent 45%)"></div>
-  <svg class="absolute inset-0 w-full h-full opacity-[0.035]" xmlns="http://www.w3.org/2000/svg">
+  <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(ellipse at 20% 60%,rgba(196,112,42,.18) 0%,transparent 55%),radial-gradient(ellipse at 78% 25%,rgba(27,58,92,.25) 0%,transparent 45%),radial-gradient(ellipse at 50% 100%,rgba(196,112,42,.06) 0%,transparent 40%)"></div>
+  <svg class="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
     <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#C4702A" stroke-width="0.5"/></pattern></defs>
     <rect width="100%" height="100%" fill="url(#grid)"/>
   </svg>
 
-  <div class="relative z-10 max-w-6xl mx-auto px-6 w-full">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
-      <!-- Columna esquerra: text -->
-      <div>
-        <div class="mb-6 inline-block">
-          <span class="font-cinzel text-xs border border-amber-600/50 text-amber-600 px-5 py-2 rounded-full tracking-widest uppercase">Del mite al logos · s. VI a.C.</span>
-        </div>
-        <h2 class="font-cinzel text-3xl md:text-4xl text-amber-600 tracking-[0.18em] mb-3">PRESOCRÀTICS</h2>
-        <h1 class="font-cinzel text-5xl md:text-6xl font-black mb-6 leading-tight shimmer-text">
-          ELS PRIMERS<br>FILÒSOFS<br>DE LA FISIS
-        </h1>
-        <p class="font-playfair text-lg text-gray-300 mb-8 italic leading-relaxed">
-          Del s.VI a.C., quan la raó va desplaçar els mites per explicar l'ordre del cosmos.
-          La recerca de l'<strong class="text-amber-500 not-italic">Arkhé</strong>: l'última causa darrere tota la multiplicitat.
-        </p>
-        <div class="flex flex-wrap gap-3 text-xs text-amber-600/70 font-cinzel tracking-wider mb-8">
-          <span class="border border-amber-600/20 px-3 py-1 rounded-full">FISIS</span>
-          <span class="border border-amber-600/20 px-3 py-1 rounded-full">ARKHÉ</span>
-          <span class="border border-amber-600/20 px-3 py-1 rounded-full">LOGOS</span>
-          <span class="border border-amber-600/20 px-3 py-1 rounded-full">COSMOS</span>
-          <span class="border border-amber-600/20 px-3 py-1 rounded-full">APEIRON</span>
-          <span class="border border-amber-600/20 px-3 py-1 rounded-full">ÀTOMS</span>
-        </div>
-        <div class="presocratic-quote p-4 rounded-r-lg max-w-sm" style="position:relative;">
-          <span class="big-quote">"</span>
-          <p class="font-playfair text-base italic text-gray-300 leading-relaxed relative z-10">"El món és un cosmos, no pas un caos."</p>
-        </div>
+  <div class="absolute inset-0">
+    <img src="img/academia.jpg"
+         class="w-full h-full object-cover opacity-60">
+</div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 w-full">
+    <div class="max-w-3xl">
+      <div class="mb-6 inline-block">
+        <span class="font-cinzel text-sm border border-amber-200/50 text-amber-300 px-5 py-2 rounded-full tracking-widest uppercase">Del mite al logos</span>
       </div>
-      <!-- Columna dreta: stat cards -->
-      <div class="hidden lg:grid grid-cols-2 gap-4">
-        <div class="stat-card">
-          <div class="stat-num">7</div>
-          <div class="stat-label">Filòsofs principals</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">s.VI</div>
-          <div class="stat-label">Inici, a.C.</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">3</div>
-          <div class="stat-label">Escoles / Tradicions</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">∞</div>
-          <div class="stat-label">Preguntes obertes</div>
-        </div>
-        <!-- Mini timeline vertical -->
-        <div class="col-span-2 concept-card p-5 rounded-xl">
-          <p class="font-cinzel text-xs text-amber-600 tracking-widest uppercase mb-4">Evolució de l'Arkhé</p>
-          <div class="space-y-2 text-xs">
-            <div class="flex items-center gap-3"><span class="text-lg">💧</span><span class="text-blue-400 font-cinzel">Tales</span><span class="text-gray-500">→ Aigua</span></div>
-            <div class="flex items-center gap-3"><span class="text-lg">∞</span><span class="text-gray-300 font-cinzel">Anaximandre</span><span class="text-gray-500">→ Apeiron</span></div>
-            <div class="flex items-center gap-3"><span class="text-lg">💨</span><span class="text-slate-300 font-cinzel">Anaxímenes</span><span class="text-gray-500">→ Aire</span></div>
-            <div class="flex items-center gap-3"><span class="text-lg">🔢</span><span class="text-amber-400 font-cinzel">Pitàgores</span><span class="text-gray-500">→ Números</span></div>
-            <div class="flex items-center gap-3"><span class="text-lg">🔥</span><span class="text-orange-400 font-cinzel">Heràclit</span><span class="text-gray-500">→ Foc / Logos</span></div>
-            <div class="flex items-center gap-3"><span class="text-lg">⚪</span><span class="text-gray-300 font-cinzel">Parmènides</span><span class="text-gray-500">→ El Ser</span></div>
-            <div class="flex items-center gap-3"><span class="text-lg">⚛️</span><span class="text-gray-300 font-cinzel">Demòcrit</span><span class="text-gray-500">→ Àtoms + Buit</span></div>
-          </div>
-        </div>
+      <h2 class="font-cinzel text-3xl md:text-4xl text-amber-400 tracking-[0.2em] mb-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">PRESOCRÀTICS</h2>
+      <h1 class="font-cinzel text-5xl md:text-7xl font-black mb-6 leading-tight shimmer-text drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+        ELS PRIMERS<br>FILÒSOFS DE LA FISIS
+      </h1>
+      <p class="font-playfair text-xl md:text-2xl text-gray-300 mb-8 italic">
+        Del s.VI a.C., quan la raó va desplaçar els mites per explicar l'ordre del cosmos. 
+        La recerca de l'Arkhé: l'última causa darrere tota la multiplicitat.
+      </p>
+      <div class="flex flex-wrap gap-4 text-sm text-amber-200/80 font-cinzel tracking-wider">
+        <span>• FISIS</span><span>• ARKHÉ</span><span>• LOGOS</span><span>• COSMOS</span><span>• APEIRON</span><span>• ÀTOMS</span>
       </div>
     </div>
   </div>
+  <div class="absolute right-8 bottom-20 max-w-xs text-right hidden lg:block">
+    
+    <div class="relative overflow-hidden rounded-md border border-white/10 shadow-lg">
 
+        <!-- Imatge de fons -->
+        <img
+            src="img/cosmos3.jpg"
+            alt=""
+            class="absolute inset-0 w-full h-full object-cover"
+        >
+
+        <!-- Capa fosca per garantir llegibilitat -->
+        <div class="absolute inset-0 bg-black/55 backdrop-blur-[1px]"></div>
+
+        <!-- Contingut -->
+        <div class="relative px-4 py-3">
+            <p class="font-playfair text-base italic text-white leading-relaxed">
+                «El món és un cosmos,<br>
+                no pas un caos.»
+            </p>
+
+            <div class="mt-2 h-px bg-gradient-to-l from-amber-400 via-blue-500 to-transparent"></div>
+        </div>
+
+    </div>
+
+</div>
   <div class="absolute bottom-10 left-1/2 -translate-x-1/2 float-anim">
     <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
@@ -628,10 +608,10 @@
           </div>
         </div>
         <div class="concept-card p-5 rounded-xl">
-          <h4 class="font-cinzel text-lg font-bold text-gray-300 mb-3">El Problema de l'Arkhé Concreta</h4>
+          <h4 class="font-cinzel text-lg font-bold text-gray-300 mb-3">El Problema de l'Arkhé Concret</h4>
           <p class="text-sm text-gray-300 mb-3">Anaximandre divergia del seu mestre, Tales. Pensava que el principi no podia ser un element concret:</p>
           <ul class="space-y-2 text-sm text-gray-400">
-            <li class="flex gap-2"><span class="text-amber-500">▸</span><span>L'aigua és massa específica i no és prou útil per donar raó de la <strong>diversitat i multiplicitat</strong>.</span></li>
+            <li class="flex gap-2"><span class="text-amber-500">▸</span><span>L'aigua és massa específica i no és prou útil per donar raó de la <strong>diversitat i multiplicitat</strong>. Per exemple,  com  explica allò humit i allò sec alhora?</span></li>
             <li class="flex gap-2"><span class="text-amber-500">▸</span><span>La multiplicitat de la Fisis es pot classificar des de l'<strong>oposició de contraris</strong> (jove/vell, gran/petit, calent/fred).</span></li>
             <li class="flex gap-2"><span class="text-amber-500">▸</span><span>Si l'Arkhé fos una part de la Fisis (com l'aigua), seria <strong>limitat per la seva pròpia definició</strong> i no podria explicar el seu contrari.</span></li>
           </ul>
@@ -787,12 +767,14 @@
   </div>
 </section>
 
+<div id="conflicte" class="h-0 overflow-hidden" aria-hidden="true"></div>
 <div class="py-16 text-center transition-block">
-  <p class="text-gray-400 uppercase tracking-widest text-sm mb-3">De l'Arkhé al conflicte fonamental...</p>
+  <p class="text-gray-300 uppercase tracking-widest text-sm mb-3">De l'Arkhé al conflicte fonamental...</p>
   <h3 class="text-2xl font-bold text-amber-100">El Gran Conflicte: Canvi vs. Permanència</h3>
+  <p class="text-gray-200 tracking-widest text-sm mb-3">-El debat fundacional de la metafísica grega-</p>
 </div>
 
-<div id="conflicte" class="h-0 overflow-hidden" aria-hidden="true"></div>
+
 <section id="heraclit" class="py-20 section-ember relative overflow-hidden">
   <div class="max-w-7xl mx-auto px-4 relative z-10">
     <div class="text-center mb-14">
@@ -943,7 +925,7 @@
 <section id="dialektiki" class="py-20 section-mid relative">
   <div class="max-w-7xl mx-auto px-4">
     <div class="text-center mb-14">
-      <h2 class="font-cinzel text-5xl font-black mb-4 text-amber-600">DIALEKTIKÍ</h2>
+      <h2 class="font-cinzel text-5xl font-black mb-4 text-amber-600">EL DEBAT</h2>
       <p class="text-xl text-gray-400 font-playfair italic">Heràclit vs. Parmènides: el debat que estructura tota la filosofia posterior</p>
     </div>
     <div class="max-w-4xl mx-auto mb-12">
@@ -1302,10 +1284,7 @@
       <span class="font-playfair italic text-gray-400 text-lg block mt-3">"Del mite al logos: el naixement de la filosofia"</span>
     </div>
     <p class="text-gray-600 text-xs uppercase tracking-wider mb-8">Fisis · Arkhé · Logos · Cosmos · Apeiron · Àtoms</p>
-    <div class="presocratic-quote p-8 rounded-xl text-center max-w-4xl mx-auto">
-      <p class="text-xl font-playfair italic text-gray-200 mb-4">"Mai et podràs banyar dues vegades al mateix riu."</p>
-      <p class="text-sm text-gray-500">— Heràclit d'Efes</p>
-    </div>
+    
     <div class="grid md:grid-cols-3 gap-6 mt-12 text-left">
       <div>
         <h4 class="font-cinzel text-amber-600 font-bold mb-3 text-sm">Escola de Milet</h4>

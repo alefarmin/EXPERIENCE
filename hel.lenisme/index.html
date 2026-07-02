@@ -79,7 +79,7 @@
   .quote-block.epicur{border-left-color:var(--epicur-l);background:linear-gradient(90deg,rgba(196,133,74,.12) 0%,transparent 80%);}
   .quote-block.stoic{border-left-color:var(--stoic-l);background:linear-gradient(90deg,rgba(74,158,196,.12) 0%,transparent 80%);}
   .quote-block.cynic{border-left-color:var(--cynic-l);background:linear-gradient(90deg,rgba(122,191,90,.12) 0%,transparent 80%);}
-  .big-q{position:absolute;top:-10px;left:8px;font-family:'Playfair Display',serif;font-size:4.5rem;line-height:1;color:rgba(201,168,76,.12);pointer-events:none;user-select:none;}
+  .big-q{position:absolute;top:-10px;left:8px;font-family:'Playfair Display',serif;font-size:4.5rem;line-height:1;color:rgba(201, 168, 76, 0.64);pointer-events:none;user-select:none;}
 
   /* ── Phil tabs ──────────── */
   .phil-tab{
@@ -168,7 +168,7 @@
         <span class="font-cinzel text-base font-bold text-yellow-600 tracking-widest group-hover:text-white transition">HEL·LENISME</span>
       </a>
       <div class="hidden md:flex items-center gap-5 text-sm">
-        <a href="../index.html" class="home-btn">← Experience</a>
+        <a href="../index.html" class="home-btn">← Inici Experience</a>
 
         <a href="#context" class="nav-link">Context</a>
 
@@ -193,6 +193,13 @@
      HERO
 ══════════════════════════════════════════════════ -->
 <section id="inici" class="relative min-h-screen flex items-center section-dark pt-16">
+  <div class="absolute inset-0 z-0">
+    <img
+      src="img/img2.jpg"
+      alt=""
+      class="w-full h-full object-cover opacity-30"
+    >
+  </div>
   <!-- Orbs -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
     <div class="orb1 absolute" style="top:15%;left:5%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(107,58,31,.18) 0%,transparent 70%);filter:blur(50px);"></div>
@@ -210,27 +217,27 @@
       <!-- TEXT -->
       <div>
         <div class="mb-5 inline-block">
-          <span class="font-cinzel text-xs border border-yellow-700/50 text-yellow-600 px-5 py-2 rounded-full tracking-widest uppercase">S. III a.C. · Món Hel·lenístic</span>
+          <span class="font-cinzel text-xs border border-yellow-700/50 text-yellow-200 px-5 py-2 rounded-full tracking-widest uppercase">S. III a.C. · Món Hel·lenístic</span>
         </div>
-        <p class="font-cinzel text-2xl text-yellow-600 tracking-[0.18em] mb-3">HEL·LENISME</p>
+        <p class="font-cinzel text-2xl text-yellow-400 tracking-[0.18em] mb-3">HEL·LENISME</p>
         <h1 class="font-cinzel text-5xl md:text-6xl font-black mb-6 leading-tight shimmer-text">
           FILOSOFIA<br>COM A<br>TERÀPIA
         </h1>
-        <p class="font-playfair text-lg text-gray-300 mb-8 italic leading-relaxed">
+        <p class="font-playfair text-lg text-gray-100 mb-8 italic leading-relaxed">
           Quan la polis va desaparèixer i l'individu es va quedar sol davant un món immens i incert, 
           la filosofia es va convertir en una <strong class="text-yellow-500 not-italic">taula de salvació</strong>: 
           tres escoles, tres camins cap a la felicitat.
         </p>
         <div class="flex flex-wrap gap-3 mb-8 text-xs font-cinzel tracking-wider">
-          <span class="border border-yellow-700/25 text-yellow-600/70 px-3 py-1 rounded-full">ATARÀXIA</span>
-          <span class="border border-yellow-700/25 text-yellow-600/70 px-3 py-1 rounded-full">APATHEIA</span>
-          <span class="border border-yellow-700/25 text-yellow-600/70 px-3 py-1 rounded-full">AUTARQUIA</span>
-          <span class="border border-yellow-700/25 text-yellow-600/70 px-3 py-1 rounded-full">AMOR FATI</span>
-          <span class="border border-yellow-700/25 text-yellow-600/70 px-3 py-1 rounded-full">LOGOS</span>
+          <span class="border border-yellow-700/25 text-yellow-300/70 px-3 py-1 rounded-full">ATARÀXIA</span>
+          <span class="border border-yellow-700/25 text-yellow-300/70 px-3 py-1 rounded-full">APATHEIA</span>
+          <span class="border border-yellow-700/25 text-yellow-300/70 px-3 py-1 rounded-full">AUTARQUIA</span>
+          <span class="border border-yellow-700/25 text-yellow-300/70 px-3 py-1 rounded-full">AMOR FATI</span>
+          <span class="border border-yellow-700/25 text-yellow-300/70 px-3 py-1 rounded-full">LOGOS</span>
         </div>
         <div class="quote-block p-4 rounded-r-lg max-w-md" style="position:relative;">
           <span class="big-q">"</span>
-          <p class="font-playfair italic text-base text-gray-300 relative z-10">"La mort no és res per a nosaltres. Mentre vivim, la mort no hi és; i quan la mort arriba, nosaltres ja no hi som." — Epicur</p>
+          <p class="font-playfair italic text-base text-gray-300 relative z-10">"La filosofia no ensenya a parlar, sinó a actuar" — Sèneca</p>
         </div>
       </div>
 
@@ -241,38 +248,38 @@
           <div class="concept-card card-epicur p-4 rounded-xl text-center no-anim">
             <div class="text-3xl mb-2">🍃</div>
             <p class="font-cinzel text-xs font-bold mb-1" style="color:var(--epicur-l)">EPICUREISME</p>
-            <p class="text-xs text-gray-400">Recerca intel·ligent del plaer</p>
-            <p class="text-xs text-gray-500 mt-1">Epicur · 341 aC</p>
+            <p class="text-xs text-gray-300">Recerca intel·ligent del plaer</p>
+            <p class="text-xs text-gray-400 mt-1">Epicur · 341 aC</p>
           </div>
           <div class="concept-card card-stoic p-4 rounded-xl text-center no-anim">
             <div class="text-3xl mb-2">⚖️</div>
             <p class="font-cinzel text-xs font-bold mb-1" style="color:var(--stoic-l)">ESTOÏCISME</p>
-            <p class="text-xs text-gray-400">Virtut i acceptació del destí</p>
-            <p class="text-xs text-gray-500 mt-1">Zenó · 300 aC</p>
+            <p class="text-xs text-gray-300">Virtut i acceptació del destí</p>
+            <p class="text-xs text-gray-400 mt-1">Zenó · 300 aC</p>
           </div>
           <div class="concept-card card-cynic p-4 rounded-xl text-center no-anim">
             <div class="text-3xl mb-2">🐕</div>
             <p class="font-cinzel text-xs font-bold mb-1" style="color:var(--cynic-l)">CINISME</p>
-            <p class="text-xs text-gray-400">Retorn a la vida natural</p>
-            <p class="text-xs text-gray-500 mt-1">Diògenes · 412 aC</p>
+            <p class="text-xs text-gray-300">Retorn a la vida natural i lliure</p>
+            <p class="text-xs text-gray-400 mt-1">Diògenes · 412 aC</p>
           </div>
         </div>
         <!-- La pregunta central -->
-        <div class="concept-card p-5 rounded-xl no-anim text-center" style="border-color:rgba(201,168,76,.25);">
-          <p class="eyebrow mb-3">La pregunta que les uneix</p>
+        <div class="concept-card p-5 rounded-xl no-anim text-center" style="border-color:rgba(189, 156, 64, 0.733);">
+          <p class="eyebrow mb-6">La pregunta que les uneix</p>
           <p class="font-cinzel text-2xl font-bold text-yellow-500 mb-3">Com ser feliç en un món que no controlem?</p>
           <div class="grid grid-cols-3 gap-2 text-xs mt-3">
             <div class="p-2 rounded" style="background:rgba(196,133,74,.1)">
               <p style="color:var(--epicur-l)" class="font-semibold mb-1">Epicur</p>
-              <p class="text-gray-400">Gestiona els plaers amb saviesa</p>
+              <p class="text-gray-300">Gestiona els plaers amb saviesa</p>
             </div>
             <div class="p-2 rounded" style="background:rgba(74,158,196,.1)">
               <p style="color:var(--stoic-l)" class="font-semibold mb-1">Zenó</p>
-              <p class="text-gray-400">Accepta el que no pots canviar</p>
+              <p class="text-gray-300">Accepta el que no pots canviar</p>
             </div>
             <div class="p-2 rounded" style="background:rgba(122,191,90,.1)">
               <p style="color:var(--cynic-l)" class="font-semibold mb-1">Diògenes</p>
-              <p class="text-gray-400">Desfés-te de tot el que és superflu</p>
+              <p class="text-gray-300">Desfés-te de tot el que és superflu</p>
             </div>
           </div>
         </div>
@@ -280,11 +287,11 @@
         <div class="concept-card p-5 rounded-xl no-anim">
           <p class="eyebrow mb-4">Cronologia</p>
           <div class="space-y-2 text-xs">
-            <div class="tl-item pb-2"><span class="text-yellow-500 font-cinzel font-bold">s. IV aC</span><span class="text-gray-400 ml-2">Alexandre el Gran. Fi de la polis.</span></div>
-            <div class="tl-item pb-2"><span class="text-yellow-500 font-cinzel font-bold">412 aC</span><span class="text-gray-400 ml-2">Neix Diògenes de Sinope (cinisme)</span></div>
-            <div class="tl-item pb-2"><span class="text-yellow-500 font-cinzel font-bold">341 aC</span><span class="text-gray-400 ml-2">Neix Epicur de Samos</span></div>
-            <div class="tl-item pb-2"><span class="text-yellow-500 font-cinzel font-bold">~300 aC</span><span class="text-gray-400 ml-2">Zenó funda l'estoïcisme</span></div>
-            <div class="tl-item"><span class="text-yellow-500 font-cinzel font-bold">s. I–II dC</span><span class="text-gray-400 ml-2">Estoïcisme a Roma: Sèneca, Epictet, Marc Aureli</span></div>
+            <div class="tl-item pb-2"><span class="text-yellow-400 font-cinzel font-bold">s. IV aC</span><span class="text-gray-300 ml-2">Alexandre el Gran. Fi de la polis.</span></div>
+            <div class="tl-item pb-2"><span class="text-yellow-400 font-cinzel font-bold">412 aC</span><span class="text-gray-300 ml-2">Neix Diògenes de Sinope (cinisme)</span></div>
+            <div class="tl-item pb-2"><span class="text-yellow-400 font-cinzel font-bold">341 aC</span><span class="text-gray-300 ml-2">Neix Epicur de Samos</span></div>
+            <div class="tl-item pb-2"><span class="text-yellow-400 font-cinzel font-bold">~300 aC</span><span class="text-gray-300 ml-2">Zenó funda l'estoïcisme</span></div>
+            <div class="tl-item"><span class="text-yellow-400 font-cinzel font-bold">s. I–II dC</span><span class="text-gray-300 ml-2">Estoïcisme a Roma: Sèneca, Epictet, Marc Aureli</span></div>
           </div>
         </div>
       </div>
@@ -870,9 +877,7 @@
   <div class="max-w-5xl mx-auto px-4 text-center">
     <span class="font-cinzel text-yellow-600 text-xl tracking-widest font-bold">HEL·LENISME Experience</span>
     <p class="font-playfair italic text-gray-400 text-lg block mt-3 mb-8">"Filosofia com a teràpia: tres escoles per a un món incert"</p>
-    <div class="quote-block p-8 rounded-xl text-center max-w-3xl mx-auto mb-10">
-      <p class="text-xl font-playfair italic text-gray-200 mb-4">"La filosofia no ensenya a parlar, sinó a actuar." — Sèneca</p>
-    </div>
+    
     <div class="grid md:grid-cols-3 gap-6 text-left">
       <div>
         <h4 class="font-cinzel font-bold mb-3 text-sm" style="color:var(--epicur-l)">Epicureisme</h4>
