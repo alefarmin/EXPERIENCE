@@ -352,6 +352,40 @@
     position:absolute; top:-20px; left:8px;
     pointer-events:none; user-select:none;
   }
+
+  /* ==========================================================
+   ADAPTACIÓ PER A PORTÀTILS
+   (pantalles d'uns 1920×1200)
+   ========================================================== */
+
+@media (max-width:1700px){
+
+/* Escala general */
+html{
+    font-size:94%;
+}
+
+/* Una mica més d'aire als costats */
+.max-w-7xl,
+.max-w-6xl,
+.max-w-5xl,
+.max-w-4xl,
+.max-w-3xl{
+
+    padding-left:2.5rem !important;
+    padding-right:2.5rem !important;
+
+}
+
+/* Menys espai vertical */
+section{
+
+    padding-top:4rem !important;
+    padding-bottom:4rem !important;
+
+}
+
+}
 </style>
 
 </head>
