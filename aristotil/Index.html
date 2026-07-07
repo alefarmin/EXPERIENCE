@@ -93,6 +93,92 @@
   /* Home btn */
   .home-btn { margin-left:10px;padding:5px 10px;font-size:12px;border:1px solid rgba(255,255,255,.2);border-radius:8px;color:var(--bronze);text-decoration:none;background:rgba(0,0,0,.3);backdrop-filter:blur(6px);transition:all .2s ease; }
   .home-btn:hover { background:rgba(169,124,53,.1);border-color:rgba(169,124,53,.4);transform:translateY(-1px); }
+
+  /* ==========================================================
+   ADAPTACIÓ PER A PORTÀTILS
+   (pantalles d'uns 1920×1200)
+   ========================================================== */
+
+   @media (max-width:1700px){
+
+/* Escala general */
+html{
+    font-size:94%;
+}
+
+/* Una mica més d'aire als costats */
+.max-w-7xl{
+
+max-width:1150px !important;
+padding-left:3.5rem !important;
+padding-right:3.5rem !important;
+
+}
+
+.max-w-6xl{
+
+max-width:1050px !important;
+padding-left:3.5rem !important;
+padding-right:3.5rem !important;
+
+}
+
+.max-w-5xl,
+.max-w-4xl,
+.max-w-3xl{
+
+padding-left:3.8rem !important;
+padding-right:3.8rem !important;
+
+}
+
+/* Menys espai vertical */
+section{
+
+    padding-top:4rem !important;
+    padding-bottom:4rem !important;
+
+}
+
+/* ← AQUÍ AFEGEIX AQUEST BLOC */
+
+.mb-16{
+        margin-bottom:3rem !important;
+    }
+
+    .mb-14{
+        margin-bottom:2.6rem !important;
+    }
+
+    .mb-12{
+        margin-bottom:2.3rem !important;
+    }
+
+}
+
+/* Targetes una mica més compactes */
+
+.p-8{
+    padding:1.6rem !important;
+}
+
+.p-6{
+    padding:1.2rem !important;
+}
+
+/* Graelles amb una mica menys d'espai */
+
+.gap-12{
+    gap:2rem !important;
+}
+
+.gap-10{
+    gap:1.75rem !important;
+}
+
+.gap-8{
+    gap:1.5rem !important;
+}
 </style>
 </head>
 <body class="antialiased">
