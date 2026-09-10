@@ -1,81 +1,83 @@
 body {
-    margin: 0;
-    font-family: 'Cormorant Garamond', serif;
-    color: #f2f2f2;
-  
-    /* FONS REAL */
-    background:
-      linear-gradient(rgba(0,0,0,0.50), rgba(0,0,0,0.65)),
-      url("img/fons.jpg");
-  
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-  }
-  
-  /* CENTRE */
-  .home {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /* CONTENIDOR */
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  color: #f2f2f2;
+
+  /* FONS REAL */
+  background:
+    linear-gradient(rgba(0,0,0,0.50), rgba(0,0,0,0.65)),
+    url("img/fons.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* CENTRE */
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* CONTENIDOR */
 .container {
   padding: 30px;
   transform: translateY(40px);
+  position: relative;
 }
-  
-  /* TITOL */
-  h1 {
-    font-size: 3.6rem;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    text-shadow: 0 10px 30px rgba(0,0,0,0.7);
-  }
-  
-  /* SUBTITOL */
-  .subtitle {
-    opacity: 0.75;
-    margin-bottom: 50px;
-    font-size: 1.2rem;
-  }
-  
-  /* GRID */
-  .grid {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  /* TARGETES */
-  .card {
-    padding: 25px 40px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 14px;
-    text-decoration: none;
-    color: white;
-    font-size: 1.3rem;
-  
-    backdrop-filter: blur(12px);
-    transition: all 0.35s ease;
-  }
-  
-  /* HOVER */
-  .card:hover {
-    transform: translateY(-10px) scale(1.08);
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.35);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-  }
 
-  body {
+/* TITOL */
+h1 {
+  font-size: 3.6rem;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.7);
+}
+
+/* SUBTITOL */
+.subtitle {
+  opacity: 0.75;
+  margin-bottom: 50px;
+  font-size: 1.2rem;
+}
+
+/* GRID */
+.grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* TARGETES */
+.card {
+  padding: 25px 40px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  text-decoration: none;
+  color: white;
+  font-size: 1.3rem;
+
+  backdrop-filter: blur(12px);
+  transition: all 0.35s ease;
+}
+
+/* HOVER */
+.card:hover {
+  transform: translateY(-10px) scale(1.08);
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.35);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+/* FADE IN */
+body {
   animation: fadeIn 2s ease-in-out;
 }
 
@@ -90,33 +92,31 @@ body {
   }
 }
 
-.container {
-  position: relative;
-}
-
+/* EXPERIENCE */
 .experience-title {
   position: absolute;
   top: clamp(-80px, -10vw, -30px);
   left: 50%;
   transform: translateX(-50%);
-  
+
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-size: clamp(2.5rem, 7vw, 6rem);
   font-weight: 600;
   letter-spacing: 0.25em;
-  
+
   text-transform: uppercase;
-  
+
   color: rgba(255, 255, 255, 0.32);
-  text-shadow: 
-  0 0 12px rgba(255,255,255,0.25),
-  0 0 40px rgba(255,255,255,0.15);
-  
+  text-shadow:
+    0 0 12px rgba(255,255,255,0.25),
+    0 0 40px rgba(255,255,255,0.15);
+
   white-space: nowrap;
   pointer-events: none;
 }
 
+/* MENU */
 .menu {
   position: fixed;
   top: 0;
@@ -143,8 +143,7 @@ body {
   transform: scale(1.1);
 }
 
-
-  
+/* BOTÓ INICI */
 .home-inline {
   position: fixed;
   top: 12px;
@@ -172,6 +171,7 @@ body {
   border-color: rgba(255,255,255,0.35);
 }
 
+/* BOTÓ NAVEGACIÓ INICI */
 .nav-home-btn {
   background: #fde68a !important;
   color: #78350f !important;
@@ -190,54 +190,49 @@ body {
   box-shadow: 0 12px 30px rgba(245, 158, 11, 0.5);
 }
 
-nav{
+nav {
   width: 100%;
   overflow-x: hidden;
 }
 
 /* =========================
-   NAV (VERSIÓ DEFINITIVA NETA)
+   NAV
    ========================= */
 
-   nav{
-    width: 100%;
-    overflow-x: hidden;
-  }
-  
-  .nav-inner{
-    max-width:1180px;
-    margin:0 auto;
-  
-    display:flex;
-    align-items:center;
-    gap:0.75rem;
-  
-    padding:0.5rem 1rem;
-  
-    overflow-x:auto;
-    overflow-y:hidden;
-  
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .nav-inner a{
-    white-space: nowrap;
-    flex-shrink: 0;
-  
-    text-decoration:none;
-    color: var(--muted);
-    padding: 14px 10px;
-    border-bottom: 2px solid transparent;
-    font-size: .95rem;
-  }
-  
-  .nav-inner a:hover{
-    color: var(--gold);
-    border-bottom-color:#d8b272;
-  }
-  
-  /* =========================
-   BOTÓ INICI EXPERIENCE (VERSIÓ NETA I POTENT)
+.nav-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  padding: 0.5rem 1rem;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-inner a {
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  text-decoration: none;
+  color: var(--muted);
+  padding: 14px 10px;
+  border-bottom: 2px solid transparent;
+  font-size: .95rem;
+}
+
+.nav-inner a:hover {
+  color: var(--gold);
+  border-bottom-color: #d8b272;
+}
+
+/* =========================
+   BOTÓ INICI EXPERIENCE
    ========================= */
 
 a.home-experience-btn {
@@ -267,16 +262,12 @@ a.home-experience-btn {
   z-index: 1;
 }
 
-/* hover base del botó */
 a.home-experience-btn:hover {
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 18px 50px rgba(245,158,11,0.95);
 }
 
-/* =========================
-   EFECTE RESSALTAT REAL (IMPORTANT)
-   ========================= */
-
+/* EFECTE RESSALTAT */
 a.home-experience-btn::after {
   content: "";
   position: absolute;
@@ -304,55 +295,153 @@ a.home-experience-btn:hover::after {
    CONSTEL·LACIONS
    ========================= */
 
-   .constellations {
-    margin-top: 85px;
-    text-align: center;
-  }
-  
-  .constellation-title {
-    font-size: 0.8rem;
-    letter-spacing: 0.3em;
-    opacity: 0.5;
-    margin-bottom: 24px;
-    text-transform: uppercase;
-  }
-  
-  .constellation-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 14px;
-  }
-  
-  .constellation {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  
-    padding: 8px 16px;
-  
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-  
-    text-decoration: none;
-    color: white;
-  
-    background: rgba(255,255,255,0.03);
-    backdrop-filter: blur(6px);
-  
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 22px;
-  
-    opacity: 0.6;
-  
-    transition: all 0.3s ease;
-  }
-  
-  .constellation:hover {
-    opacity: 1;
-    transform: translateY(-2px);
-  
-    background: rgba(255,255,255,0.07);
-    border-color: rgba(255,255,255,0.35);
+.constellations {
+  margin-top: 85px;
+  text-align: center;
+}
+
+.constellation-title {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  opacity: 0.5;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.constellation-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+.constellation {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 16px;
+
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+
+  text-decoration: none;
+  color: white;
+
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 22px;
+
+  opacity: 0.6;
+
+  transition: all 0.3s ease;
+}
+
+.constellation:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.35);
+}
+
+/* =========================
+   CRONOGRAMA
+   ========================= */
+
+.chronology-link {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+}
+
+.chronology-button {
+  display: block;
+
+  padding: 8px 20px;
+
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 22px;
+
+  color: inherit;
+  text-decoration: none;
+  text-align: center;
+
+  transition: all 0.25s ease;
+}
+
+.chronology-button:hover {
+  border-color: rgba(255,255,255,0.5);
+  transform: translateY(-1px);
+}
+
+.chronology-button strong {
+  display: block;
+
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.chronology-button small {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+/* =========================
+   PANTALLES DE POCA ALÇADA
+   ========================= */
+
+@media (max-height: 850px) {
+
+  .container {
+    padding: 15px;
+    transform: translateY(10px);
   }
 
+  h1 {
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    margin-bottom: 25px;
+  }
+
+  .grid {
+    gap: 12px;
+  }
+
+  .card {
+    padding: 18px 32px;
+  }
+
+  .constellations {
+    margin-top: 28px;
+  }
+
+  .constellation-title {
+    margin-bottom: 13px;
+  }
+
+  .constellation-grid {
+    gap: 10px;
+  }
+
+  .constellation {
+    padding: 6px 14px;
+  }
+
+  .chronology-link {
+    margin-top: 28px;
+  }
+
+  .chronology-button {
+    padding: 7px 18px;
+  }
+}

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La línia de la Història — Història de la Filosofia · 2n de Batxillerat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!--
+  ENLLAÇOS "ESTUDI COMPLET": els hrefs d'aquests botons són una suposició del nom
+  de fitxer de les teves pàgines monogràfiques ja existents (Presocràtics, Sofistes/
+  Sòcrates, Aristòtil, Hel·lenisme, Cristianisme/Edat Mitjana, Renaixement, Descartes).
+  Comprova'ls i ajusta'ls al nom real abans de publicar:
+    presocratics.html · sofistes-i-socrates.html · aristotil.html · hellenisme.html
+    cristianisme-edat-mitjana.html · renaixement.html · descartes.html
+-->
+<style>
+:root{
+  --bg:#f5f2ea; --ink:#1d252b; --muted:#5d676d; --line:#c9c3b7;
+  --anc:#8b5e3c; --med:#66508f; --mod:#3d6d63; --con:#3f668f;
+  --gold:#b58a3b; --card:#fffdf8;
+  --f-display:'Playfair Display',Georgia,serif;
+  --f-eyebrow:'Cinzel',Georgia,serif;
+  --f-body:'Inter',system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.5}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+header{padding:54px 6vw 42px;background:linear-gradient(135deg,#222d33,#3d474c);color:white}
+header .kicker{font-family:var(--f-eyebrow);letter-spacing:.14em;text-transform:uppercase;font-size:.76rem;opacity:.75}
+h1{font-family:var(--f-display);font-weight:600;font-size:clamp(2.3rem,5vw,4.6rem);line-height:1.02;margin:14px 0 18px;max-width:1000px}
+header p.lead{max-width:900px;font-size:1.07rem;color:#e7e7e3;margin:0}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.pill{border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 13px;font-size:.78rem;font-family:var(--f-eyebrow);letter-spacing:.03em}
+.legend-note{margin-top:16px;font-size:.85rem;color:#cfd0c9;max-width:780px}
+.legend-note .star{color:var(--gold)}
+nav{position:sticky;top:0;z-index:10;background:rgba(245,242,234,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:9px 5vw;display:flex;gap:6px;overflow:auto}
+nav a{white-space:nowrap;text-decoration:none;color:var(--ink);font-size:.8rem;padding:7px 11px;border-radius:8px;transition:background .2s,color .2s}
+nav a:hover{background:#e8e2d7}
+nav a.active{background:#e2dbc8;color:#4a3417;font-weight:700}
+main{max-width:1500px;margin:auto;padding:38px 5vw 80px}
+.intro{display:grid;grid-template-columns:1.25fr .75fr;gap:26px;margin-bottom:0}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
+.panel h2{font-family:var(--f-display);font-size:1.6rem;font-weight:600;margin:0 0 12px}
+.note{border-left:4px solid var(--gold);padding:13px 16px;background:#f3ead8;border-radius:0 10px 10px 0;font-size:.92rem}
+.note.wide{grid-column:1/-1;margin:22px 0 38px}
+.note.wide strong{font-family:var(--f-display)}
+
+.timeline{position:relative}
+.timeline:before{content:"";position:absolute;left:24px;top:0;bottom:0;width:3px;background:linear-gradient(var(--anc),var(--med),var(--mod),var(--con))}
+.era{position:relative;padding-left:66px;margin:0 0 46px;opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.era.visible{opacity:1;transform:none}
+.era:before{content:"";position:absolute;left:13px;top:23px;width:24px;height:24px;border-radius:50%;background:var(--bg);border:5px solid currentColor}
+.era.anc{color:var(--anc)} .era.med{color:var(--med)} .era.mod{color:var(--mod)} .era.con{color:var(--con)}
+.erahead{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;border-bottom:1px solid var(--line);padding-bottom:10px}
+.era h2{font-family:var(--f-display);font-weight:600;font-size:2rem;margin:0;color:var(--ink)}
+.date{font-weight:700;font-size:.8rem;color:var(--muted);white-space:nowrap;font-family:var(--f-eyebrow)}
+.subtitle{color:var(--muted);margin:8px 0 20px;max-width:920px}
+.band{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+.card{grid-column:span 3;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;color:var(--ink);box-shadow:0 3px 12px rgba(30,30,20,.035)}
+.card.wide{grid-column:span 6}
+.card.full{grid-column:1/-1}
+.card h3,.card h4{font-size:1.02rem;margin:0 0 8px;font-family:var(--f-display);font-weight:600}
+.card .period{font-family:var(--f-eyebrow);font-size:.7rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}
+.card p{margin:9px 0}
+.card ul{padding-left:18px;margin:9px 0 0}
+.card li{margin:4px 0}
+.tag{display:inline-block;margin:4px 4px 0 0;padding:3px 8px;border-radius:6px;background:#eee9df;font-size:.72rem;color:#475057}
+.tag.link{border:1px solid var(--gold);background:#fbf3e0;color:#7a5c22;text-decoration:none;font-weight:700;font-family:var(--f-eyebrow);letter-spacing:.03em;transition:background .2s,color .2s}
+.tag.link:hover{background:var(--gold);color:#fff}
+.star{color:var(--gold);font-size:.9em;margin-left:3px}
+.bridge{margin:18px 0 0;padding:16px 19px;border-radius:12px;background:#ece8df;border:1px dashed #aaa294;color:#3f474c}
+
+.subera{grid-column:1/-1;display:flex;align-items:baseline;flex-wrap:wrap;gap:14px;margin:8px 0 -2px;padding-bottom:9px;border-bottom:2px solid currentColor}
+.subera .num{font-family:var(--f-eyebrow);font-size:1.5rem;opacity:.45;font-weight:700}
+.subera h3{margin:0;font-family:var(--f-display);font-size:1.35rem;font-weight:600;color:var(--ink)}
+.subera .range{margin-left:auto;font-size:.76rem;color:var(--muted);font-family:var(--f-eyebrow);letter-spacing:.04em;white-space:nowrap}
+
+.contrapunt{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;margin-top:14px}
+.contrapunt .side{background:#faf7f0;border:1px solid var(--line);border-radius:12px;padding:17px}
+.contrapunt .side h4{margin:0 0 9px;display:flex;align-items:center}
+.contrapunt .vs{display:flex;align-items:center;justify-content:center;font-family:var(--f-eyebrow);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl}
+.contrapunt .closing{grid-column:1/-1;margin-top:4px;font-style:italic;color:var(--muted);font-size:.93rem}
+
+.quote{font-family:var(--f-display);font-size:1.06rem}
+.matrix{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.matrix .m{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px}
+.matrix b{display:block;margin-bottom:5px;font-family:var(--f-display)}
+footer{max-width:1500px;margin:auto;padding:0 5vw 60px;color:var(--muted);font-size:.82rem}
+
+@media(max-width:900px){
+ .intro{grid-template-columns:1fr}
+ .note.wide{grid-column:auto}
+ .band{grid-template-columns:1fr}
+ .card,.card.wide{grid-column:auto}
+ .matrix{grid-template-columns:1fr 1fr}
+ .era{padding-left:48px}
+ .timeline:before{left:16px}
+ .era:before{left:5px}
+ .erahead{display:block}
+ .date{margin-top:5px}
+ .contrapunt{grid-template-columns:1fr}
+ .contrapunt .vs{writing-mode:horizontal-tb;padding:2px 0}
+ .subera .range{margin-left:0}
+}
+@media(max-width:550px){.matrix{grid-template-columns:1fr}header{padding:38px 6vw}}
+@media print{
+ nav{display:none}
+ .era{opacity:1 !important;transform:none !important;break-inside:avoid}
+ .card,.panel{box-shadow:none}
+ body{background:#fff}
+}
+@media (prefers-reduced-motion: reduce){
+ html{scroll-behavior:auto}
+ .era{transition:none;opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">2n de Batxillerat · Història de la Filosofia</div>
+  <h1>La línia de la Història</h1>
+  <p class="lead">Un mapa general del curs: de l'aparició de la filosofia a Grècia a la crisi de la modernitat i les formes de pensament contemporani. No és una llista d'autors i dates: és la història de com han canviat les grans preguntes —què és real, com coneixem, com hem de viure, com hem de viure junts— i de per què cada resposta va néixer allà on ho va fer.</p>
+  <div class="legend">
+    <span class="pill">Edat Antiga · s. VI aC–V dC</span>
+    <span class="pill">Edat Mitjana · s. V–XV</span>
+    <span class="pill">Modernitat · s. XV–XVIII</span>
+    <span class="pill">Edat Contemporània · s. XIX–XXI</span>
+  </div>
+  <p class="legend-note"><span class="star">★</span> marca els set autors del programa de Selectivitat: Plató, Descartes, Hume, Kant, Mill, Nietzsche i Nussbaum. El botó <em>Estudi complet</em> porta a la pàgina monogràfica d'aquell tema o autor.</p>
+</header>
+
+<nav>
+  <a href="#antiga">Antiga</a><a href="#mitjana">Mitjana</a><a href="#transicio">Frontissa</a><a href="#moderna">Modernitat</a><a href="#ilustracio">Il·lustració</a><a href="#xix">S. XIX</a><a href="#xx">S. XX–XXI</a><a href="#fil">Fil conductor</a>
+</nav>
+
+<main>
+<section class="intro">
+  <div class="panel">
+    <h2>Com llegirem aquesta línia?</h2>
+    <p>La periodització serveix per orientar-nos, però la història de la filosofia no avança com una cadena en què una etapa desapareix i en comença una altra. <strong>Els problemes reapareixen, es transformen i entren en conflicte.</strong></p>
+    <p>La gran pregunta que travessa el curs serà: <em>com canvia la manera d'entendre el món, l'ésser humà, la veritat, la raó, la llibertat i la vida en comú?</em></p>
+    <p>Fixa't, a més, en un patró que es repeteix més d'un cop: el curs està travessat per grans <strong>contrapunts</strong> —Plató i Aristòtil a l'Antiguitat, racionalisme i empirisme a la Modernitat— en què dues respostes oposades a una mateixa pregunta no s'anul·len, sinó que obren pas, juntes, a la síntesi següent.</p>
+    <div class="note"><strong>Idea clau:</strong> cada canvi filosòfic està relacionat amb canvis en la ciència, la religió, la política, l'economia, les institucions i la manera d'entendre què és l'ésser humà.</div>
+  </div>
+  <div class="panel">
+    <h2>Quatre grans moviments</h2>
+    <div class="matrix" style="grid-template-columns:1fr">
+      <div class="m"><b>Antiga</b>Del mite al logos; natura, ésser, virtut, ciutat.</div>
+      <div class="m"><b>Mitjana</b>Fe i raó, en dues fases ben diferents: alta i baixa edat mitjana.</div>
+      <div class="m"><b>Moderna</b>Subjecte, ciència, mètode, autonomia i progrés.</div>
+      <div class="m"><b>Contemporània</b>Crisi, societat, llenguatge, poder, existència i emancipació.</div>
+    </div>
+  </div>
+  <div class="note wide"><strong>Com llegir les fitxes:</strong> cada targeta indica el període, els noms propis i els problemes centrals de l'etapa. Els noms amb <span class="star">★</span> pertanyen al temari de Selectivitat — hi dedicarem sessions senceres. La resta són el context imprescindible perquè aquests set autors s'entenguin en profunditat.</div>
+</section>
+
+<div class="timeline">
+
+<section class="era anc" id="antiga">
+ <div class="erahead"><div><h2>EDAT ANTIGA</h2><div class="subtitle">El naixement i desenvolupament de la filosofia grega, i la seva transformació en el món hel·lenístic i romà.</div></div><div class="date">c. s. VI aC — 476 dC</div></div>
+ <div class="band">
+
+  <div class="subera"><span class="num">01</span><h3>Presocràtics</h3><span class="range">s. VI–V aC</span></div>
+  <article class="card full"><div class="period">Del mite al logos</div><h3>La pregunta per la physis</h3><p>Als ports comercials de la costa jònica, entre ciutats obertes al mar i a l'intercanvi amb altres cultures, sorgeix una nova manera de preguntar: per explicar el món ja no n'hi ha prou amb els déus i els mites, cal recórrer a la raó (<em>logos</em>) i a l'observació. La pregunta es concentra en la <strong>physis</strong> —la natura—: quin és el principi (<em>arkhé</em>) que l'explica i com és possible que les coses canviïn i, alhora, segueixin sent el que són?</p><span class="tag">Tales</span><span class="tag">Anaximandre</span><span class="tag">Heràclit</span><span class="tag">Parmènides</span><span class="tag">Demòcrit</span><p><strong>Problemes:</strong> arkhé · canvi i permanència · ésser i no-ésser · cosmos · explicació racional.</p><a class="tag link" href="presocratics.html">Estudi complet</a></article>
+
+  <div class="subera"><span class="num">02</span><h3>Gir antropològic</h3><span class="range">s. V aC</span></div>
+  <article class="card full"><div class="period">Sofistes i Sòcrates</div><h3>De la natura a l'ésser humà</h3><p>A l'Atenes democràtica del segle V aC, saber parlar en públic i persuadir una assemblea esdevé una habilitat decisiva. Els <strong>sofistes</strong> es converteixen en els primers professionals de l'educació —ensenyen retòrica i argumentació, sovint des d'un relativisme moral i epistemològic ("l'home és la mesura de totes les coses"). <strong>Sòcrates</strong>, en canvi, hi busca definicions universals: identifica virtut amb saber i converteix l'examen de la pròpia vida en el primer deure filosòfic.</p><span class="tag">Protàgores</span><span class="tag">Gòrgies</span><span class="tag">Sòcrates</span><p><strong>Problemes:</strong> veritat i relativisme · retòrica i educació · virtut i justícia · mètode dialèctic.</p><a class="tag link" href="sofistes-i-socrates.html">Estudi complet</a></article>
+
+  <div class="subera"><span class="num">03</span><h3>Plató i Aristòtil</h3><span class="range">s. IV aC · la culminació del saber antic</span></div>
+  <article class="card full">
+    <p>Deixeble de Sòcrates, <strong>Plató</strong> busca una veritat estable més enllà d'un món sensible que canvia sense parar. <strong>Aristòtil</strong>, deixeble seu durant vint anys a l'Acadèmia, hi discrepa en el punt més decisiu: no cal buscar la realitat en un altre món, sinó en les coses mateixes, observades i analitzades amb mètode. Entre tots dos —idealisme i realisme, matemàtica i biologia, política ideal i política empírica— el pensament grec assoleix la seva sistematització més completa.</p>
+    <div class="contrapunt">
+      <div class="side"><h4>Plató <span class="star" title="Autor de Selectivitat">★</span></h4><ul><li>Teoria de les Idees o Formes</li><li>Dualisme ànima–cos</li><li>Coneixement com a reminiscència</li><li>El mite de la caverna</li><li>El filòsof-rei i la ciutat justa</li><li>La matemàtica com a model de saber</li></ul></div>
+      <div class="vs">front a</div>
+      <div class="side"><h4>Aristòtil</h4><ul><li>Hilemorfisme: matèria i forma</li><li>Coneixement per abstracció des dels sentits</li><li>Lògica i les categories</li><li>Ètica de la virtut i el terme mig</li><li>La política com a ciència empírica</li><li>Les quatre causes</li></ul><a class="tag link" href="aristotil.html">Estudi complet</a></div>
+      <p class="closing">Junts marquen el sostre del pensament grec clàssic — i, encara avui, dues maneres oposades d'entendre què és conèixer i què és real.</p>
+    </div>
+  </article>
+
+  <div class="subera"><span class="num">04</span><h3>Hel·lenisme</h3><span class="range">s. IV–II aC</span></div>
+  <article class="card full"><div class="period">La filosofia com a forma de vida</div><h3>Del cosmos a la vida bona</h3><p>Amb la mort d'Alexandre i la fi de la independència política de les ciutats gregues, l'individu perd el marc de referència que era la <em>polis</em>. La filosofia gira cap endins: ja no es tracta tant de fundar la ciutat justa com de trobar, cadascú, la serenitat (<em>ataràxia</em>) i l'autodomini en un món que ja no controla.</p><span class="tag">Epicureisme</span><span class="tag">Estoïcisme</span><span class="tag">Escepticisme</span><span class="tag">Cinisme</span><p><strong>Protagonistes:</strong> Epicur · Zenó de Cítion · Pirró.</p><a class="tag link" href="hellenisme.html">Estudi complet</a></article>
+  <article class="card full"><div class="period">Roma · s. II aC–V dC</div><h3>Herència grega i transformació religiosa</h3><p>Des de la victòria de Pidna (168 aC), que consagra l'hegemonia romana sobre el món grec, Roma adopta i reelabora les escoles gregues: el seu pensament filosòfic és, sobretot, recepció, síntesi i aplicació moral. Mentrestant, creix el cristianisme i canvia progressivament el marc intel·lectual de l'Imperi.</p><span class="tag">Ciceró</span><span class="tag">Sèneca</span><span class="tag">Epictet</span><span class="tag">Marc Aureli</span><span class="tag">Plotí</span><span class="tag">Cristianisme</span>
+  <div class="bridge"><strong>Gran frontissa:</strong> el cristianisme, en expansió per tot l'Imperi, introdueix una concepció de Déu, de la creació i de la persona radicalment nova — i es convertirà, durant més d'un mil·lenni, en el marc gairebé obligat de tot pensament occidental. La relació entre <strong>fe i raó</strong> serà, a partir d'ara, la gran qüestió.</div></article>
+
+ </div>
+</section>
+
+<section class="era med" id="mitjana">
+ <div class="erahead"><div><h2>EDAT MITJANA</h2><div class="subtitle">Amb el cristianisme com a nou horitzó de sentit, gairebé tota la filosofia es pensa, durant més d'un mil·lenni, des de la relació entre fe i raó — fins que la recuperació d'Aristòtil i el naixement de les universitats obren, a poc a poc, el camí cap a una raó més autònoma.</div></div><div class="date">476 — s. XV</div></div>
+ <div class="band">
+
+  <div class="subera"><span class="num">01</span><h3>Alta Edat Mitjana</h3><span class="range">s. V–XI</span></div>
+  <article class="card full"><div class="period">Patrística i agustinisme</div><h3>Creure per comprendre</h3><p>El cristianisme es converteix en el marc intel·lectual gairebé exclusiu d'Occident: la filosofia antiga és rellegida des de la fe, i la gran pregunta passa a ser com s'articulen fe, raó i salvació. <strong>Agustí d'Hipona</strong>, format en el platonisme, hi busca una resposta pròpia: la veritat es troba interioritzant-se ("no vagis fora, torna dins teu"), el temps és una experiència de l'ànima, i el mal no és una substància sinó una privació causada pel mal ús de la llibertat.</p><span class="tag">Sant Agustí</span><span class="tag">Platonisme cristià</span><span class="tag">Confessions</span><span class="tag">La Ciutat de Déu</span><p><em>La raó no desapareix, però queda integrada en un horitzó teològic.</em></p><a class="tag link" href="cristianisme-edat-mitjana.html">Estudi complet</a></article>
+
+  <div class="subera"><span class="num">02</span><h3>Baixa Edat Mitjana</h3><span class="range">s. XI–XV</span></div>
+  <article class="card wide"><div class="period">s. XI–XII</div><h3>Recuperació del saber i noves institucions</h3><p>El creixement urbà, noves rutes comercials i el contacte amb el món islàmic i jueu permeten que arribin a Occident, traduïts a Toledo i Sicília, els textos d'Aristòtil —en bona part perduts fins llavors. La seva entrada és un veritable <strong>element disruptor</strong>: un sistema de pensament complet i coherent, aliè al cristianisme, que la teologia no pot ignorar ni assimilar sense transformar-se. Neixen alhora les primeres <strong>universitats</strong>, on aquest Aristòtil redescobert es converteix en lectura obligada.</p><span class="tag">Avicenna</span><span class="tag">Averrois</span><span class="tag">Maimònides</span><span class="tag">Universitats</span><span class="tag">Element disruptor</span></article>
+  <article class="card wide"><div class="period">Escolàstica · s. XIII</div><h3>La síntesi de Sant Tomàs</h3><p><strong>Tomàs d'Aquino</strong> assumeix el repte: mostra que la filosofia aristotèlica i la fe cristiana no s'han de veure com a enemigues. Hi ha veritats que la raó natural pot demostrar per si mateixa —l'existència de Déu, la llei natural— i veritats que només accedim per revelació; totes dues, però, procedeixen en última instància de la mateixa font.</p><span class="tag">Sant Tomàs d'Aquino</span><span class="tag">Aristotelisme cristià</span><span class="tag">Les cinc vies</span><span class="tag">Llei natural</span></article>
+  <article class="card wide"><div class="period">Crisi de la síntesi · s. XIV</div><h3>Guillem d'Ockham</h3><p>La confiança en la gran construcció escolàstica es debilita. Ockham defensa reduir les explicacions al mínim necessari (la "navalla d'Ockham") i reforça la separació entre allò que la raó pot demostrar i allò que pertany només a la fe. Paradoxalment, aquest escepticisme metafísic allibera la investigació de la natura de la seva subordinació a la teologia.</p><span class="tag">Guillem d'Ockham</span><span class="tag">Nominalisme</span><span class="tag">Parsimònia</span></article>
+  <article class="card wide"><div class="period">Efecte a llarg termini</div><h3>Cap a l'autonomia de la raó</h3><p>Entre la recuperació d'Aristòtil, les universitats i la crisi nominalista, es va obrint —sense que ningú ho busqués com a projecte— un camí que farà possible, segles després, una investigació de la natura menys subordinada a la teologia.</p><span class="tag">Autonomia progressiva</span><span class="tag">Institucions</span></article>
+
+  <article class="card full"><div class="bridge"><strong>Cap a la modernitat:</strong> humanisme, noves formes de coneixement, canvis econòmics i polítics, impremta, descobriments geogràfics i transformacions religioses alteraran el marc medieval. La pregunta ja no serà només <em>com harmonitzar fe i raó?</em>, sinó també <em>com pot la raó conèixer per si mateixa?</em></div></article>
+ </div>
+</section>
+
+<section class="era mod" id="transicio">
+ <div class="erahead"><div><h2>LA FRONTISSA · RENAIXEMENT I REVOLUCIÓ CIENTÍFICA</h2><div class="subtitle">Ni ja plenament medieval ni encara modern: una zona d'intercanvi on el vell ordre es desplaça i apareixen, a poc a poc, les condicions de possibilitat de la modernitat.</div></div><div class="date">s. XV–XVI · amb projecció al s. XVII</div></div>
+ <div class="band">
+  <article class="card"><div class="period">Humanisme · s. XV–XVI</div><h3>Retorn als clàssics</h3><p>Nova confiança en les capacitats humanes, en l'educació i en els textos antics.</p><span class="tag">Pico della Mirandola</span><span class="tag">Erasme</span><span class="tag">Humanisme</span></article>
+  <article class="card"><div class="period">Reforma · s. XVI</div><h3>Crisi de la unitat religiosa</h3><p>La Reforma protestant trenca la unitat religiosa occidental i transforma profundament la cultura europea.</p><span class="tag">Luter</span><span class="tag">Calví</span></article>
+  <article class="card"><div class="period">Nova ciència</div><h3>Un nou cosmos</h3><p>El model geocèntric és qüestionat i la natura comença a estudiar-se amb matemàtica, observació i experimentació.</p><span class="tag">Copèrnic</span><span class="tag">Kepler</span><span class="tag">Galileu</span></article>
+  <article class="card"><div class="period">Conseqüència</div><h3>Canvi de paradigma</h3><p>La ciència moderna no és només una nova física: transforma la idea de <strong>mètode, coneixement i naturalesa</strong>.</p><span class="tag">Matematització</span><span class="tag">Experiment</span><span class="tag">Lleis naturals</span></article>
+  <article class="card full"><div class="bridge"><strong>Renaixement, zona d'intercanvi:</strong> és en aquest espai de trànsit —no ja medieval, encara no modern— on humanisme, nova ciència i crisi religiosa creuen els seus efectes i preparen, entre tots, un nou punt de partida per a la filosofia.</div></article>
+ </div>
+</section>
+
+<section class="era mod" id="moderna">
+ <div class="erahead"><div><h2>EDAT MODERNA</h2><div class="subtitle">La raó, el subjecte i la ciència es converteixen en nous centres de gravetat de la filosofia.</div></div><div class="date">s. XVII</div></div>
+ <div class="band">
+  <article class="card full"><div class="period">Racionalisme</div><h3>Descartes i el nou punt de partida <span class="star" title="Autor de Selectivitat">★</span></h3><p>Davant la incertesa que deixa la crisi de l'escolàstica, Descartes busca un fonament del tot segur per al coneixement. Amb el <strong>dubte metòdic</strong> arriba a una primera certesa indubtable —"penso, doncs existeixo"— i, a partir d'aquí, reconstrueix el saber amb un mètode inspirat en la certesa de la matemàtica. És ell qui funda, de manera definitiva, el nou <strong>paradigma físico-matemàtic</strong> de la Nova Ciència: la natura es pot conèixer perquè es pot mesurar.</p><span class="tag">Dubte metòdic</span><span class="tag">Cogito</span><span class="tag">Res cogitans / res extensa</span><span class="tag">Mètode</span><a class="tag link" href="descartes.html">Estudi complet</a></article>
+
+  <article class="card full">
+    <div class="period">Dues vies epistemològiques</div>
+    <p>El mateix paradigma científic —una natura intel·ligible i mesurable— obre, tanmateix, dues respostes diferents a la pregunta de com hi accedim: confiar en la raó i les seves idees, o confiar en l'experiència.</p>
+    <div class="contrapunt">
+      <div class="side"><h4>Racionalisme</h4><ul><li>Idees innates</li><li>Deducció <em>more geometrico</em></li><li>La substància com a punt de partida</li><li>Veritats necessàries i universals</li></ul><p style="margin-top:8px"><span class="tag">Descartes</span><span class="tag">Spinoza</span><span class="tag">Leibniz</span></p></div>
+      <div class="vs">front a</div>
+      <div class="side"><h4>Empirisme</h4><ul><li>La ment com a <em>tabula rasa</em></li><li>Inducció des de l'experiència</li><li>Els sentits com a única font de coneixement</li><li>Mètode experimental</li></ul><p style="margin-top:8px"><span class="tag">Bacon</span><span class="tag">Locke</span></p></div>
+      <p class="closing">El debat entre totes dues vies no es resoldrà fins al segle XVIII: primer amb l'escepticisme de Hume, i després amb la síntesi crítica de Kant.</p>
+    </div>
+  </article>
+ </div>
+</section>
+
+<section class="era mod" id="ilustracio">
+ <div class="erahead"><div><h2>IL·LUSTRACIÓ</h2><div class="subtitle">La raó es converteix en projecte d'autonomia individual i de transformació social, en ple triomf de la ciència newtoniana.</div></div><div class="date">s. XVIII</div></div>
+ <div class="band">
+  <article class="card wide"><div class="period">Ciència i llei natural</div><h3>Newton i el triomf del nou model físic</h3><p>La física newtoniana esdevé paradigma d'una natura governada per lleis universals i cognoscibles — l'horitzó sobre el qual pensaran tots els il·lustrats.</p><span class="tag">Newton</span><span class="tag">Lleis de la natura</span><span class="tag">Mecanicisme</span></article>
+  <article class="card wide"><div class="period">Empirisme radical</div><h3>Hume <span class="star" title="Autor de Selectivitat">★</span></h3><p>Hume porta l'empirisme fins a les seves últimes conseqüències. Res del que sabem —ni tan sols la relació causa-efecte— es pot demostrar per raó pura: només l'hàbit, la repetició de l'experiència, ens fa esperar que el sol sortirà demà. Fins i tot el jo es dissol en un simple "feix de percepcions" sense una substància que les uneixi.</p><span class="tag">Impressions i idees</span><span class="tag">Causalitat i costum</span><span class="tag">Feix de percepcions</span><span class="tag">Escepticisme moderat</span></article>
+  <article class="card wide"><div class="period">Síntesi crítica</div><h3>Kant <span class="star" title="Autor de Selectivitat">★</span></h3><p>Kant desperta del "son dogmàtic" gràcies a Hume i busca una sortida a l'enfrontament entre racionalisme i empirisme: no és la ment la que s'ajusta als objectes, sinó els objectes, tal com els coneixem, els que s'ajusten a les formes de la nostra ment —la "revolució copernicana". Coneixem els fenòmens, mai les coses en si (noümens): això marca alhora els límits i la dignitat de la raó humana.</p><p>Aquesta mateixa autonomia és, per a Kant, el nucli de la seva filosofia moral. A la <em>Fonamentació de la metafísica dels costums</em> —el text que treballarem a fons de cara a la Selectivitat— distingeix la <strong>raó pràctica</strong> de la teòrica: actuar moralment és actuar per deure, seguint un <strong>imperatiu categòric</strong> ("actua només segons una màxima que puguis voler que esdevingui llei universal"), no per inclinació ni per càlcul d'utilitat. És la bona voluntat, no les conseqüències, el que fa bona una acció.</p><span class="tag">Revolució copernicana</span><span class="tag">Fenomen / noümen</span><span class="tag">Imperatiu categòric</span><span class="tag">Autonomia de la voluntat</span></article>
+  <article class="card wide"><div class="period">Projecte il·lustrat</div><h3>Progrés i emancipació</h3><p>La raó es vincula a l'educació, la llibertat, la crítica de l'autoritat i la reforma de les institucions. <em>Sapere aude</em>: atreveix-te a pensar pel teu compte.</p><span class="tag">Drets</span><span class="tag">Autonomia</span><span class="tag">Progrés</span></article>
+ </div>
+</section>
+
+<section class="era con" id="xix">
+ <div class="erahead"><div><h2>SEGLE XIX</h2><div class="subtitle">La modernitat s'estén: industrialització, ciència, tècnica, capitalisme, masses i noves formes de crítica.</div></div><div class="date">1800–1900</div></div>
+ <div class="band">
+  <article class="card"><div class="period">Idealisme</div><h3>Hegel</h3><p>La història és pensada com un procés de desenvolupament i conflicte de la racionalitat.</p><span class="tag">Dialèctica</span><span class="tag">Història</span></article>
+  <article class="card"><div class="period">Crítica social</div><h3>Marx</h3><p>La filosofia es relaciona amb les estructures materials, el treball, les classes i la transformació social.</p><span class="tag">Capital</span><span class="tag">Alienació</span><span class="tag">Ideologia</span></article>
+  <article class="card"><div class="period">Utilitarisme i llibertat</div><h3>Mill <span class="star" title="Autor de Selectivitat">★</span></h3><p>Distingeix plaers superiors i inferiors ("val més ser un Sòcrates insatisfet que un porc satisfet") i vincula l'utilitarisme a una defensa aferrissada de la llibertat individual: l'única raó legítima per limitar-la és evitar dany a altri. Va defensar, a més, els drets polítics i civils de les dones.</p><span class="tag">Utilitarisme</span><span class="tag">Principi de dany</span><span class="tag">Drets de les dones</span></article>
+  <article class="card"><div class="period">Crisi de la modernitat</div><h3>Nietzsche <span class="star" title="Autor de Selectivitat">★</span></h3><p>Declara la "mort de Déu" —la pèrdua del fonament últim que donava sentit als valors— i emprèn una genealogia de la moral: els valors que semblaven eterns tenen una història i sovint neixen del ressentiment. Proposa afirmar la vida tal com és, sense consols metafísics.</p><span class="tag">Mort de Déu</span><span class="tag">Genealogia</span><span class="tag">Voluntat de poder</span></article>
+  <article class="card full"><div class="bridge"><strong>La paradoxa del segle XIX:</strong> el projecte modern sembla triomfar amb la ciència, la indústria i la tècnica, però alhora apareixen les seves grans contradiccions: desigualtat, explotació, massificació, crisi dels valors i qüestionament de la idea de progrés.</div></article>
+ </div>
+</section>
+
+<section class="era con" id="xx">
+ <div class="erahead"><div><h2>SEGLES XX–XXI</h2><div class="subtitle">La crisi de les certeses modernes i la pluralització de les formes de pensar l'ésser humà, la societat i la veritat.</div></div><div class="date">1900 — actualitat</div></div>
+ <div class="band">
+  <article class="card wide"><div class="period">Crisi i existència</div><h3>De la sospita a la crisi del subjecte</h3><p>Les guerres, els totalitarismes, la crisi de la raó i les transformacions científiques qüestionen la imatge optimista de la modernitat.</p><span class="tag">Freud</span><span class="tag">Existencialisme</span><span class="tag">Fenomenologia</span><span class="tag">Escola de Frankfurt</span></article>
+  <article class="card wide"><div class="period">Llenguatge i societat</div><h3>Nous centres de la filosofia</h3><p>La filosofia gira també cap al llenguatge, les estructures socials, el poder i les condicions que fan possible el coneixement.</p><span class="tag">Wittgenstein</span><span class="tag">Heidegger</span><span class="tag">Arendt</span><span class="tag">Foucault</span></article>
+  <article class="card wide"><div class="period">Ètica i política contemporànies</div><h3>Nussbaum <span class="star" title="Autor de Selectivitat">★</span></h3><p>En diàleg amb Amartya Sen, proposa mesurar la justícia d'una societat no per la riquesa mitjana sinó per un conjunt de <strong>capacitats centrals</strong> que tota vida humana digna hauria de poder exercir: salut, imaginació, afectes, relacions polítiques, control sobre el propi entorn. És una reversió ètica, política i econòmica de gran abast, que desplaça l'atenció de la utilitat agregada a la dignitat de cada persona i estableix un nou estàndard de justícia global.</p><span class="tag">Enfocament de les capacitats</span><span class="tag">Dignitat humana</span><span class="tag">Justícia global</span></article>
+  <article class="card wide"><div class="period">Possible postmodernitat</div><h3>Després del gran relat modern?</h3><p>Es qüestionen els relats universals de progrés i les pretensions d'una raó única. Però més que una ruptura definitiva, convé entendre-ho com una <strong>crisi i pluralització</strong> de la modernitat.</p><span class="tag">Postmodernitat</span><span class="tag">Pluralisme</span><span class="tag">Crítica</span></article>
+ </div>
+</section>
+</div>
+
+<section id="fil" class="panel" style="margin-top:8px">
+<h2>El fil conductor del curs</h2>
+<p class="quote">«No estudiarem només què va dir cada filòsof. Intentarem entendre <strong>per què aquella pregunta va esdevenir urgent en aquell moment</strong> i què va canviar en la manera d'entendre el món.»</p>
+<p>Un mateix patró es repeteix més d'una vegada al llarg del curs: dues respostes oposades a una mateixa pregunta —Plató i Aristòtil, racionalisme i empirisme— que, lluny d'anul·lar-se, obren pas a la síntesi següent. Els set autors marcats amb <span class="star">★</span> —Plató, Descartes, Hume, Kant, Mill, Nietzsche i Nussbaum— són els que treballarem en profunditat de cara a la Selectivitat; la resta és el mapa que en fa possible la comprensió.</p>
+<div class="matrix">
+ <div class="m"><b>1. Què és la realitat?</b>Physis → ésser → Déu → natura → subjecte → món i existència.</div>
+ <div class="m"><b>2. Com coneixem?</b>Logos → reminiscència/demostració → fe i raó → mètode → experiència → crítica.</div>
+ <div class="m"><b>3. Com hem de viure?</b>Virtut → felicitat → salvació → autonomia → utilitat → dignitat i capacitats.</div>
+ <div class="m"><b>4. Com hem de viure junts?</b>Polis → ciutat cristiana → estat modern → societat industrial → democràcia, justícia i poder.</div>
+</div>
+</section>
+</div>
+</main>
+
+<footer>
+<strong>Nota de rigor històric:</strong> les dates i fronteres entre períodes són convencionals. Galileu és una figura de transició que desenvolupa la seva obra principal entre finals del s. XVI i el s. XVII; per això apareix a la frontissa. Mill i Nietzsche pertanyen al segle XIX, mentre que Nussbaum és una autora contemporània dels segles XX–XXI. La divisió entre Alta i Baixa Edat Mitjana varia segons les perioditzacions; aquí s'utilitza de manera orientativa (Alta: s. V–XI, patrística; Baixa: s. XI–XV, escolàstica i universitats) per facilitar la lectura del curs.
+</footer>
+
+<script>
+(function(){
+  var reveals = document.querySelectorAll('.era');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.1, rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('visible'); });
+  }
+
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav a[href^="#"]'));
+  var sections = navLinks
+    .map(function(a){ return document.querySelector(a.getAttribute('href')); })
+    .filter(Boolean);
+  if('IntersectionObserver' in window && sections.length){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var link = document.querySelector('nav a[href="#' + entry.target.id + '"]');
+        if(!link) return;
+        if(entry.isIntersecting){
+          navLinks.forEach(function(l){ l.classList.remove('active'); });
+          link.classList.add('active');
+        }
+      });
+    }, {rootMargin:'-40% 0px -50% 0px', threshold:0});
+    sections.forEach(function(s){ spy.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

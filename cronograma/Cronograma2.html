@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La línia de la Història — Cronograma · 2n de Batxillerat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f2ea; --ink:#1d252b; --muted:#5d676d; --line:#c9c3b7;
+  --anc:#8b5e3c; --med:#66508f; --ren:#a8572f; --mod:#3d6d63; --con:#3f668f;
+  --gold:#b58a3b; --card:#fffdf8; --alert:#a33d3d; --med-soft:#efe9f5;
+  --f-display:'Playfair Display',Georgia,serif;
+  --f-eyebrow:'Cinzel',Georgia,serif;
+  --f-body:'Inter',system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.4}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+header{
+  padding:34px max(5vw, calc((100vw - 1500px)/2 + 5vw)) 24px;
+  background:linear-gradient(135deg,#222d33,#3d474c);
+  color:#fff;
+}
+header .kicker{font-family:var(--f-eyebrow);letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;opacity:.75}
+h1{font-family:var(--f-display);font-weight:600;font-size:clamp(1.7rem,3.6vw,2.6rem);margin:8px 0 10px}
+header p.lead{max-width:860px;font-size:.95rem;color:#dcdcd6;margin:0 0 14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-size:.78rem;color:#e4e4de}
+.legend .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.legend .star{color:var(--gold);font-weight:700}
+.legend a{color:#f0e6cf}
+
+/* =========================
+   NAVEGACIÓ DEL CRONOGRAMA
+   ========================= */
+
+   .pillnav{
+  display:flex;
+  align-items:center;
+  gap:7px;
+
+  overflow-x:auto;
+
+  padding:11px max(5vw, calc((100vw - 1500px)/2 + 5vw));
+
+  background:rgba(245,242,234,.95);
+  border-bottom:1px solid var(--line);
+
+  position:sticky;
+  top:0;
+  z-index:5;
+
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+
+.pillnav::-webkit-scrollbar{
+  display:none;
+}
+
+/* BOTONS DE LES ETAPES */
+
+.pillnav > a:not(.home-experience-btn){
+  flex:0 0 auto;
+
+  border:1px solid var(--line);
+  background:#fff;
+
+  color:var(--ink);
+  text-decoration:none;
+
+  font-family:var(--f-eyebrow);
+  font-size:.72rem;
+  letter-spacing:.03em;
+
+  padding:6px 12px;
+  border-radius:999px;
+
+  white-space:nowrap;
+
+  transition:all .2s ease;
+}
+
+.pillnav > a:not(.home-experience-btn):hover{
+  background:#efe9db;
+}
+
+/* SEPARACIÓ ENTRE EXPERIENCE I LA RESTA */
+
+.nav-separator{
+  flex:0 0 8px;
+}
+
+/* BOTÓ EXPERIENCE */
+
+a.home-experience-btn{
+  position:relative;
+
+  flex:0 0 auto;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:7px 16px;
+
+  border-radius:9999px;
+
+  font-family:var(--f-eyebrow);
+  font-size:.74rem;
+  font-weight:700;
+  letter-spacing:.08em;
+
+  text-decoration:none;
+
+  background:#facc15;
+  color:#78350f;
+
+  border:1px solid #f59e0b;
+
+  box-shadow:
+    0 7px 18px rgba(245,158,11,.38);
+
+  transition:all .25s ease;
+
+  z-index:1;
+}
+
+a.home-experience-btn::before{
+  content:"←";
+  margin-right:8px;
+  font-family:Arial,sans-serif;
+  font-size:1.1rem;
+  font-weight:400;
+}
+
+a.home-experience-btn:hover{
+  transform:translateY(-2px) scale(1.04);
+
+  background:#fcd34d;
+
+  box-shadow:
+    0 10px 26px rgba(245,158,11,.55);
+}
+
+/* HALO DEL BOTÓ EXPERIENCE */
+
+a.home-experience-btn::after{
+  content:"";
+
+  position:absolute;
+  inset:-5px;
+
+  border-radius:9999px;
+
+  background:radial-gradient(
+    circle,
+    rgba(245,158,11,.28),
+    transparent 70%
+  );
+
+  opacity:0;
+
+  transition:opacity .25s ease;
+
+  z-index:-1;
+}
+
+a.home-experience-btn:hover::after{
+  opacity:1;
+}
+
+main{max-width:1500px;margin:auto;padding:28px 5vw 70px}
+
+.era-row{margin-bottom:40px;scroll-margin-top:60px}
+.era-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px;border-bottom:2px solid var(--c);padding-bottom:6px}
+.era-head h2{font-family:var(--f-display);font-weight:600;font-size:1.5rem;margin:0;color:var(--c)}
+.era-head .span{font-family:var(--f-eyebrow);font-size:.78rem;color:var(--muted);letter-spacing:.03em}
+
+.axisrow{position:relative;display:flex;align-items:flex-end;margin-bottom:14px}
+.seg{flex:var(--w) 0 0%;min-width:0;padding-right:4px;overflow:visible}
+.seg .yr{display:block;font-family:var(--f-eyebrow);font-size:.63rem;color:var(--muted);white-space:nowrap;margin-bottom:3px}
+.seg .barchunk{height:13px;background:var(--c);border-radius:3px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.seg .barchunk b{color:#fff;font-size:.62rem;font-family:var(--f-eyebrow);font-weight:700;opacity:.95}
+.seg.endcap{flex:0 0 auto;padding-left:6px;border-left:2px solid var(--c)}
+.seg.endcap .yr{margin-bottom:0}
+
+.cards{display:flex;flex-wrap:wrap;gap:12px}
+.mc{flex:1 1 210px;max-width:280px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 13px;box-shadow:0 2px 8px rgba(30,30,20,.03)}
+.mc .top{display:flex;align-items:center;gap:7px;margin-bottom:2px}
+.mc .num{flex:0 0 auto;width:19px;height:19px;border-radius:50%;background:var(--c);color:#fff;font-family:var(--f-eyebrow);font-size:.66rem;display:flex;align-items:center;justify-content:center;font-weight:700}
+.mc h4{margin:0;font-family:var(--f-display);font-size:.97rem;font-weight:700}
+.mc .yrs{font-size:.68rem;color:var(--muted);font-family:var(--f-eyebrow)}
+.chiprow{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.chip{background:#eee9df;color:#475057;padding:3px 8px;border-radius:6px;font-size:.76rem}
+.chip.theme{background:transparent;border:1px solid var(--line);color:#5d676d;font-style:italic}
+.spot{margin-top:8px;background:#fbf3e0;border:1.5px solid var(--gold);border-radius:9px;padding:7px 9px}
+.spot .name{font-family:var(--f-display);font-weight:700;font-size:.9rem;display:flex;align-items:center;gap:5px;margin:0 0 5px}
+.spot .name .star{color:var(--gold)}
+.spot .chip.theme{border-color:#d8b876;color:#7a5c22;background:#fff9ec}
+
+.seg.macro{display:flex;flex-direction:column;gap:4px}
+.seg.macro .macrolabel{font-family:var(--f-eyebrow);font-size:.58rem;letter-spacing:.03em;color:var(--med);text-transform:uppercase;font-weight:700;white-space:nowrap}
+.nested{display:flex;gap:2px;border:2px solid var(--med);border-radius:6px;padding:3px;background:var(--med-soft)}
+.microseg{min-width:0}
+.microbar{height:9px;background:var(--med);border-radius:2px;display:flex;align-items:center;justify-content:center;opacity:.88}
+.microbar b{color:#fff;font-size:.55rem;font-family:var(--f-eyebrow)}
+
+.macro-card{flex:1 1 0;min-width:0;border:2px solid var(--med);border-radius:14px;padding:12px;background:var(--med-soft)}
+.macro-card-head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.macro-card-head h4{margin:0;font-family:var(--f-display);font-size:1.02rem;color:var(--med)}
+.macro-card-head .yrs{font-size:.7rem;color:var(--muted);font-family:var(--f-eyebrow)}
+.macro-card-body{display:flex;flex-wrap:wrap;gap:10px}
+.macro-card-body .mc{flex:1 1 0;max-width:none}
+.chip.alert{background:#f7e6e6;border:1px solid var(--alert);color:#7a2b2b;font-weight:700;font-style:normal}
+
+footer{max-width:1500px;margin:auto;padding:0 5vw 50px;color:var(--muted);font-size:.8rem}
+
+@media(max-width:700px){
+  .axisrow{overflow-x:auto}
+  .mc{flex-basis:100%;max-width:none}
+}
+@media print{
+  .pillnav{display:none}
+  .mc{break-inside:avoid;box-shadow:none}
+  body{background:#fff}
+}
+
+.mc .century{
+  margin-left:auto;
+  font-family:var(--f-eyebrow);
+  font-size:.85rem;
+  color:var(--gold);
+  font-weight:700;
+  white-space:nowrap;
+}
+
+#r-moderna .mc{
+  max-width:360px;
+}
+
+.spot.secondary{
+  background:transparent;
+  border:1px solid var(--line);
+}
+
+@media (max-width: 1100px){
+  header{
+    padding:28px 3vw 20px;
+  }
+
+  .pillnav{
+    padding-left:3vw;
+    padding-right:3vw;
+  }
+
+  main{
+    padding-left:3vw;
+    padding-right:3vw;
+  }
+
+  footer{
+    padding-left:3vw;
+    padding-right:3vw;
+  }
+}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">2n de Batxillerat · Història de la Filosofia</div>
+  <h1>Cronograma: cinc etapes, a escala real</h1>
+  <p class="lead">Una línia horitzontal per etapa. L'amplada de cada tram és proporcional als segles que realment ocupa —així es veu d'un cop d'ull que l'Hel·lenisme dura gairebé tres segles 
+    i el Gir antropològic prou menys d'un. Consulta també la <a href="linia-historia.html" style="color:#f0e6cf">versió narrativa</a>.</p>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--anc)"></span>Antiga</span>
+    <span><span class="dot" style="background:var(--med)"></span>Edat Mitjana</span>
+    <span><span class="dot" style="background:var(--ren)"></span>Renaixement</span>
+    <span><span class="dot" style="background:var(--mod)"></span>Moderna</span>
+    <span><span class="dot" style="background:var(--con)"></span>Contemporània</span>
+    <span><span class="star">★</span> Autor de Selectivitat</span>
+  </div>
+</header>
+
+<nav class="pillnav">
+
+  <a href="../index.html" class="home-experience-btn">
+    EXPERIENCE
+  </a>
+
+  <span class="nav-separator"></span>
+
+  <a href="#r-antiga">Antiga</a>
+  <a href="#r-mitjana">Edat Mitjana</a>
+  <a href="#r-renaixement">Renaixement</a>
+  <a href="#r-moderna">Moderna</a>
+  <a href="#r-contemporania">Contemporània</a>
+
+</nav>
+
+<main>
+
+<section class="era-row" id="r-antiga" style="--c:var(--anc)">
+  <div class="era-head"><h2>Edat Antiga</h2><span class="span">625 aC – 476 dC · ~1100 anys</span></div>
+  <div class="axisrow">
+    <div class="seg" style="--w:175"><span class="yr">625 aC</span><div class="barchunk"><b>1</b></div></div>
+    <div class="seg" style="--w:51"><span class="yr">450 aC</span><div class="barchunk"><b>2</b></div></div>
+    <div class="seg" style="--w:77"><span class="yr">399 aC</span><div class="barchunk"><b>3</b></div></div>
+    <div class="seg" style="--w:154"><span class="yr">322 aC</span><div class="barchunk"><b>4</b></div></div>
+    <div class="seg" style="--w:644"><span class="yr">168 aC</span><div class="barchunk"><b>5</b></div></div>
+    <div class="seg endcap"><span class="yr">476 dC</span></div>
+  </div>
+  <div class="cards">
+    <div class="mc">
+      <div class="top">
+        <span class="num">1</span>
+        <h4>Presocràtics</h4>
+        <span class="century">s. VI aC</span>
+      </div>
+      <div class="yrs">625–450 aC</div>
+      <div class="chiprow"><span class="chip">Tales</span><span class="chip">Anaximandre</span><span class="chip">Pitagorisme</span><span class="chip">Heràclit</span><span class="chip">Parmènides</span><span class="chip">Demòcrit</span></div>
+      <p style="font-size:.78rem;margin:6px 0 0">El pas del mite al logos. Apareix la filosofia a Gècia aproximant-se a la Fisis des de la idea de "necessitat", en el sentit de que tot té una causa, la qual cal indagar.</p>
+      <div class="chiprow"><span class="chip theme">Arkhé</span><span class="chip theme">Physis</span><span class="chip theme">Logos</span></div>
+    </div>
+    <div class="mc"><div class="top"><span class="num">2</span><h4>Gir antropològic</h4><span class="century">s. V aC</span></div><div class="yrs">450–399 aC</div>
+      <div class="chiprow"><span class="chip">Protàgores</span><span class="chip">Gòrgies</span><span class="chip">Sòcrates</span></div>
+      <p style="font-size:.78rem;margin:6px 0 0">El protagonisme passa a Atenes i la seva democràcia, que esgotada la investigació sobre la Fisis, s'obra a la reflexió entorn l'hámbit d'allò humà: la política, l'ètica etc.</p>
+      <div class="chiprow"><span class="chip theme">Democràcia Atenes</span><span class="chip theme">Relativisme</span><span class="chip theme">Retòrica</span><span class="chip theme">Doble discurs</span><span class="chip theme">Definicions universals</span><span class="chip theme">Maièutica</span><span class="chip theme">Virtut=saber</span></div>
+    </div>
+    <div class="mc">
+      <div class="top">
+        <span class="num">3</span>
+        <h4>Plató i Aristòtil</h4>
+        <span class="century">s. IV aC</span>
+      </div>
+    
+      <div class="yrs">399–322 aC</div>
+    
+      <p style="font-size:.78rem;margin:6px 0 0">
+        La culminació del saber antic i fonament de tot el posterior pensament occidental
+      </p>
+    
+      <div class="spot">
+        <p class="name">Plató <span class="star">★</span></p>
+        <div class="chiprow">
+          <span class="chip theme">Idealisme</span>
+          <span class="chip theme">Dualisme</span>
+          <span class="chip theme">Reminiscència</span>
+        </div>
+      </div>
+    
+      <div class="spot secondary">
+        <p class="name">Aristòtil</p>
+        <div class="chiprow">
+          <span class="chip">Realisme</span>
+          <span class="chip">Substància</span>
+          <span class="chip">Hilemorfisme</span>
+          <span class="chip">Terme mig</span>
+        </div>
+      </div>
+    </div>
+    <div class="mc"><div class="top"><span class="num">4</span><h4>Hel·lenisme</h4><span class="century">s. III aC</span></div><div class="yrs">322–168 aC</div>
+      <div class="chiprow"><span class="chip">Epicur</span><span class="chip">Estoïcisme</span><span class="chip">Diògenes</span></div>
+      <p style="font-size:.78rem;margin:6px 0 0">Alexandre el Gran suposarà el final d'una etapa molt vinculada a l'esperit de la polis i el projecte colectiu de felicitat, generant un estat de desorientació i pèrdua de sentit de la vida, 
+        amb una atomització a la que cal respondre des d'un punt de vista pràctic, tot oferint un camí individual de felicitat i de "salvació"</p>
+      <div class="chiprow"><span class="chip theme">Ataràxia</span><span class="chip theme">Autodomini</span><span class="chip theme">Taula de salvació</span><span class="chip theme">Destí</span></div>
+    </div>
+    <div class="mc"><div class="top"><span class="num">5</span><h4>Roma</h4><span class="century">s. II aC–V dC</span></div><div class="yrs">168 aC–476 dC</div>
+      <div class="chiprow"><span class="chip">Ciceró</span><span class="chip">Sèneca</span><span class="chip">Epictet</span></div>
+      <p style="font-size:.78rem;margin:6px 0 0">Roma no aportarà res de genuí. En conquerir territorialment Grècia, quedarà totament seduida i meravellada per la seva cultura i el seu saber, mantenint tot el seu llegat al llarg de molts segles d'hegemonia.</p>
+      <div class="chiprow"><span class="chip theme">Hegemonia des de Pidna (168 aC)</span><span class="chip theme">Transmissió i síntesi greco-romana</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="era-row" id="r-mitjana" style="--c:var(--med)">
+  <div class="era-head"><h2>Edat Mitjana</h2><span class="span">476 – 1450 · ~975 anys</span></div>
+  <div class="axisrow">
+    <div class="seg" style="--w:524"><span class="yr">476</span><div class="barchunk"><b>1 · Alta</b></div></div>
+    <div class="seg macro" style="--w:450">
+      <span class="yr">1000</span>
+      <div class="macrolabel">Baixa Edat Mitjana</div>
+      <div class="nested">
+        <div class="microseg" style="flex-grow:200"><div class="microbar"><b>2</b></div></div>
+        <div class="microseg" style="flex-grow:100"><div class="microbar"><b>3</b></div></div>
+        <div class="microseg" style="flex-grow:150"><div class="microbar"><b>4</b></div></div>
+      </div>
+    </div>
+    <div class="seg endcap"><span class="yr">1450</span></div>
+  </div>
+  <div class="cards">
+    <div class="mc"><div class="top"><span class="num">1</span><h4>Alta Edat Mitjana</h4><span class="century">s. V–X dC</span></div><div class="yrs">476–1000</div>
+    <h4>El poder de la religió</h4><div class="chiprow"><span class="chip">Sant Agustí</span><span class="chip">Cristianisme platonitzat</span></div>
+      <p style="font-size:.78rem;margin:6px 0 0">La caiguda de l’Imperi romà d’Occident dona pas a l'Europa feudal, fragmentada i profundament cristianitzada.
+        Amb sant Agustí i la Patrística, la fe es converteix en el marc fonamental del coneixement.
+        La raó queda subordinada a la revelació.
+        Els monestirs i l’Església preserven el saber antic, però també en controlen la transmissió i els límits.</p>
+      <div class="chiprow"><span class="chip theme">Fe i raó</span><span class="chip theme">Interioritat</span></div>
+    </div>
+
+    <div class="macro-card">
+      <div class="macro-card-head"><h4>Baixa Edat Mitjana</h4><span class="century">s. X–XV dC</span><span class="yrs">1000–1450</span></div>
+      <div class="macro-card-body">
+        <div class="mc"><div class="top"><span class="num">2</span><h4>Recuperació d'Aristòtil</h4><span class="century">s. XII</span></div><div class="yrs">1000–1200</div>
+          <div class="chiprow"><span class="chip">Avicenna</span><span class="chip">Averrois</span><span class="chip">Maimònides</span></div>
+          <p style="font-size:.78rem;margin:6px 0 0">Bizanci i el món islàmic → Europa llatina: el corpus aristotèlic, perdut a Occident, hi entra traduït i trasbalsa el marc teològic establert.</p>
+          <div class="chiprow"><span class="chip alert">⚡ Element disruptor</span></div>
+          <div class="chiprow"><span class="chip theme">Traduccions</span><span class="chip theme">Universitats</span></div>
+        </div>
+        <div class="mc"><div class="top"><span class="num">3</span><h4>Escolàstica</h4><span class="century">s. XIII</span></div><div class="yrs">1200–1300</div>
+          <div class="chiprow"><span class="chip">Sant Tomàs d'Aquino</span><span class="chip">Cristianisme aristotelitzat</span></div>
+          <p style="font-size:.78rem;margin:6px 0 0">La resposta al xoc: absorbir l'Aristòtil disruptiu dins la teologia cristiana, sense que cap dels dos en surti intacte.</p>
+          <div class="chiprow"><span class="chip theme">Síntesi fe/raó</span><span class="chip theme">Llei natural</span></div>
+        </div>
+        <div class="mc"><div class="top"><span class="num">4</span><h4>Crisi nominalista</h4><span class="century">s. XIV</span></div><div class="yrs">1300–1450</div>
+          <div class="chiprow"><span class="chip">Guillem d'Ockham</span></div>
+          <p style="font-size:.78rem;margin:6px 0 0">Es qüestiona la capacitat de la raó per demostrar les veritats de la fe: la teologia i la filosofia se separen progressivament.
+            La raó comença així a alliberar-se de la tutela de la teologia i a centrar-se en allò que pot conèixer per si mateixa,
+           afavorint una nova actitud intel·lectual, més atenta a l’experiència, la natura i l’observació.
+            Es prepara així el terreny per a l’humanisme renaixentista i, posteriorment, per a la ciència moderna.
+            La filosofia inicia el llarg camí cap a una raó autònoma, que culminarà amb la modernitat.</p>
+          <div class="chiprow"><span class="chip theme">Navalla d'Ockham</span><span class="chip theme">Separació fe/raó</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="era-row" id="r-renaixement" style="--c:var(--ren)">
+  <div class="era-head"><h2>Renaixement</h2><span class="span">1450 – 1650 · zona d'intercanvi</span></div>
+  <div class="axisrow">
+    <div class="seg" style="--w:110"><span class="yr">1450</span><div class="barchunk"><b>1</b></div></div>
+    <div class="seg" style="--w:90"><span class="yr">1550</span><div class="barchunk"><b>2</b></div></div>
+    <div class="seg endcap"><span class="yr">1650</span></div>
+  </div>
+  <div class="cards">
+    <div class="mc"><div class="top"><span class="num">1</span><h4>Humanisme i Reforma</h4><span class="century">s. XV</span></div><div class="yrs">1450–1550</div>
+      <div class="chiprow"><span class="chip">Erasme</span><span class="chip">Pico della Mirandola</span><span class="chip">Luter</span></div>
+      <p style="font-size:.78rem;margin:6px 0 0">Es recupera la centralitat i la confiança en el ser humà i les seves potencialitats. La reforma també vindrà a questionar l'autoritat que ha exercit el cristianisme durant segles.</p>
+      <div class="chiprow"><span class="chip theme">Humanisme</span><span class="chip theme">Reforma</span></div>
+    </div>
+    <div class="mc"><div class="top"><span class="num">2</span><h4>Nova Ciència</h4><span class="century">s. XVI</span></div><div class="yrs">1550–1650</div>
+      <div class="chiprow"><span class="chip">Copèrnic</span><span class="chip">Kepler</span><span class="chip">Galileu</span></div>
+      <p style="font-size:.78rem;margin:6px 0 0">L'emancipació progresiva de la raó permet configurar un nou paradigma espistemològic que canviarà la manera d'entendre i indagar sobre la Fisis ue culminarà en la modernitat</p>
+      <div class="chiprow"><span class="chip theme">Matematització</span><span class="chip theme">Experiment</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="era-row" id="r-moderna" style="--c:var(--mod)">
+  <div class="era-head"><h2>Edat Moderna</h2><span class="span">1600 – 1800 · ~200 anys</span></div>
+  <div class="axisrow">
+    <div class="seg" style="--w:100"><span class="yr">1600</span><div class="barchunk"><b>1</b></div></div>
+    <div class="seg" style="--w:100"><span class="yr">1700</span><div class="barchunk"><b>2</b></div></div>
+    <div class="seg endcap"><span class="yr">1800</span></div>
+  </div>
+  <div class="cards">
+    <div class="mc" style="flex-basis:260px"><div class="top"><span class="num">1</span><h4>Racionalisme i Empirisme</h4><span class="century">s. XVII</span></div>
+      <div class="spot"><p class="name">Descartes <span class="star">★</span></p><div class="chiprow"><span class="chip theme">Cogito</span><span class="chip theme">Dubte metòdic</span><span class="chip theme">Mètode</span></div></div>
+      <p style="font-size:.78rem;margin:6px 0 0">La natura passa a ser concebuda com una realitat explicable racionalment i sotmesa a lleis, que la ciència pot descobrir.
+        El coneixement deixa de dependre de l’autoritat i es fonamenta progressivament en la raó, l’experiència i el mètode científic.
+        Així neix la filosofia moderna: la raó i l'experiència es converteixen en criteri d’autonomia, coneixement i progrés.
+      <div class="chiprow" style="margin-top:6px"><span class="chip">Spinoza</span><span class="chip">Leibniz</span><span class="chip">Bacon</span><span class="chip">Locke</span></div>
+    </div>
+    <div class="mc" style="flex-basis:260px"><div class="top"><span class="num">2</span><h4>Il·lustració</h4><span class="century">s. XVIII</span></div>
+      <div class="chiprow"><span class="chip">Newton</span></div>
+      <div class="spot"><p class="name">Hume <span class="star">★</span></p><div class="chiprow"><span class="chip theme">Costum</span><span class="chip theme">Causalitat</span></div></div>
+      <div class="spot"><p class="name">Kant <span class="star">★</span></p><div class="chiprow"><span class="chip theme">Imperatiu categòric</span><span class="chip theme">Raó pràctica</span><span class="chip theme">Autonomia de la voluntat</span></div></div>
+      <p style="font-size:.78rem;margin:6px 0 0">L'emancipació humana passa per extendre el coneixement i l'esperit crític. El lema de Kant: "Sàpere aude"</p>
+    </div>
+  </div>
+</section>
+
+<section class="era-row" id="r-contemporania" style="--c:var(--con)">
+  <div class="era-head"><h2>Edat Contemporània</h2><span class="span">1800 – actualitat · ~226 anys</span></div>
+  <div class="axisrow">
+    <div class="seg" style="--w:100"><span class="yr">1800</span><div class="barchunk"><b>1</b></div></div>
+    <div class="seg" style="--w:126"><span class="yr">1900</span><div class="barchunk"><b>2</b></div></div>
+    <div class="seg endcap"><span class="yr">2026</span></div>
+  </div>
+  <div class="cards">
+    <div class="mc" style="flex-basis:260px"><div class="top"><span class="num">1</span><h4>Positivisme científic</h4><span class="century">s. XIX</span></div><div class="yrs">1800–1900</div>
+      <div class="chiprow"><span class="chip">Hegel</span><span class="chip">Marx</span></div>
+      <div class="spot"><p class="name">Mill <span class="star">★</span></p><div class="chiprow"><span class="chip theme">Utilitarisme</span><span class="chip theme">Llibertat</span></div></div>
+      <div class="spot"><p class="name">Nietzsche <span class="star">★</span></p><div class="chiprow"><span class="chip theme">Mort de Déu</span><span class="chip theme">Genealogia</span></div></div>
+    </div>
+    <div class="mc" style="flex-basis:260px"><div class="top"><span class="num">2</span><h4>Final Modernitat?</h4><span class="century">s. XX i XXI</span></div><div class="yrs">1900–actualitat</div>
+      <div class="chiprow"><span class="chip">Freud</span><span class="chip">Wittgenstein</span><span class="chip">Heidegger</span><span class="chip">Arendt</span><span class="chip">Foucault</span><span class="chip">Postmodernitat</span></div>
+      <div class="spot"><p class="name">Nussbaum <span class="star">★</span></p><div class="chiprow"><span class="chip theme">Capacitats</span><span class="chip theme">Dignitat</span><span class="chip theme">Justícia global</span></div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>Els anys de cada tram són aproximats i orientatius (el Renaixement i l'inici de la Modernitat se solapen uns cinquanta anys, 
+  tal com passa realment amb figures de transició com Galileu o Descartes). L'inici de "Roma" s'ha situat a la victòria de Pidna (168 aC), que consagra la seva hegemonia sobre el món grec, 
+  en comptes del 31 aC (Principat d'August): és el tall més acertat des del punt de vista històric, social i cultural. 
+</footer>
+
+</body>
+</html>
