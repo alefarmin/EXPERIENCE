@@ -27,7 +27,7 @@ body {
 /* CONTENIDOR */
 .container {
   padding: 30px;
-  transform: translateY(40px);
+  transform: translateY(50px);
   position: relative;
 }
 
@@ -402,7 +402,7 @@ a.home-experience-btn:hover::after {
 
   .container {
     padding: 15px;
-    transform: translateY(10px);
+    transform: translateY(20px);
   }
 
   h1 {
